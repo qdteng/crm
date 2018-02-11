@@ -1,0 +1,16 @@
+<!-- 一级菜单 -->
+<div th:fragment="menu_level_one">
+	<div class="yl-sidebar" id="mainSidebar">
+	   <ul class="sidebar-list" th:if="${#lists.size(session.SESSION_MENUS) > 0}">
+	       <li class="treeview" th:each="menu,menuStat:${session.SESSION_MENUS}">
+	           <a href="javascript:" class="treetitle">
+	               <i class="icon iconfont">&#xe62d;</i>
+	               <span th:text="${menu.name}"></span>
+	           </a>
+	           <ul class="treemenu" style="display:none;" >
+	               <li th:each="cmenu,cmenuStat:${menu.childrens}" ><a th:href="${cmenu.url}"><span class="dot">•</span>&nbsp;<span class="idx" th:attr="idx=${cmenuStat.index}" th:text="${cmenu.name}"></span></a></li>
+	           </ul>
+	       </li>
+	    </ul>
+	</div>
+</div>

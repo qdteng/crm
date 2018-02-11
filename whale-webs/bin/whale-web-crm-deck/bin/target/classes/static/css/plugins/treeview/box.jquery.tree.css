@@ -1,0 +1,4 @@
+﻿/*  解决：树型资源样式冲突问题   */
+.box-pop .content-list .bbit-tree ul{margin: 0;  padding-top: 0;border-top: none; }
+.box-pop .content-list .bbit-tree ul li{padding-bottom:0; }
+.box-pop .content-list .bbit-tree ul li span{float: none;padding-right:0;  width: inherit;text-align: left;  line-height: 18px;}

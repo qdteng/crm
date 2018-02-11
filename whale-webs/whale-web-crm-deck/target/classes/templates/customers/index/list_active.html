@@ -1,0 +1,165 @@
+<!DOCTYPE html>  
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layouts/dialog" >  
+    <head>
+    	<meta charset="utf-8"></meta>
+        <title>会员体系-会员活跃</title>
+        <style>
+			.db{display:block;}
+			.consumption{border:1px solid #eee;}
+			.consumption h3{height:30px;width:100%;background:#f8f8f8;line-height:30px;font-size:14px;padding-left:10px;}
+			.consumption .centent{padding:10px;}
+			.consumption .centent label{width:90px;display:block; height:30px;line-height:30px;}
+		 </style>
+    </head>  
+    <body>
+	    <div layout:fragment="content">
+	    	
+			<div class="container">
+			    <section class="col-lg-12 ui-content ui-shadow">
+				    <!-- 列表主体 -->
+					<div class="cl mt15 mb10" style="overflow-x:none;height:475px;overflow:auto;">
+                	<form action="/customers/index/saveOrUpdateActive" method="post" id="detafilForm" class="form-horizontal">
+						<div class="consumption">
+							<h3>签到<b class="fr mr10"><input class="mr5" type="radio" name="isEnable1" value="1" th:checked="${#null != isEnable1 ? 1 == isEnable1 : false}" />开<input class="ml10 mr5" type="radio" name="isEnable1" value="0" th:checked="${#null != isEnable1 ? 0 == isEnable1 : false}" />关</b></h3>
+							<div class="centent">
+								<div class="cl">
+									<label class="fl">基本规则：</label>
+									<p class="fl">
+										<span>
+											每日签到增加<input type="text" name="aindex1" value="" th:value="${searchParam['aindex1']}" class="c_positive" readOnly="true" />成长值
+										</span>
+									</p>
+								</div>
+								<div class="cl mt10">
+									<label class="fl">额外奖励规则：</label>
+									<p class="fl" th:if="${#lists.size(list2) == 0}">
+										<span class="db"><input type="button" name="" value="添加奖励规则" class="yl-btn yl-btn-blue-shadow xfbtn add-reward mr5" />注：最多设置5个额外奖励规则，多个奖励不叠加</span>
+										<span class="db mt10">连续签到满<input type="text" name="aindexs" value="" class="c_positive" readOnly="true" />次，额外加
+										<input type="text" name="anums" value="" class="c_positive" />成长值&nbsp;&nbsp;<a href="###" class="remove-reward" >删除</a></span>
+									</p>
+									<p class="fl" th:if="${#lists.size(list2) > 0}">
+										<span class="db"><input type="button" name="" value="添加奖励规则" class="yl-btn yl-btn-blue-shadow xfbtn add-reward mr5" />注：最多设置5个额外奖励规则，多个奖励不叠加</span>
+										<span class="db mt10" th:each="obj, indexStat:${list2}">连续签到满<input type="text" name="aindexs" value="" th:value="${obj.aindex}" class="c_positive" readOnly="true" />次，额外加
+										<input type="text" name="anums" value="" th:value="${obj.anum}" class="c_positive" readOnly="true" />成长值&nbsp;&nbsp;<a href="###" class="remove-reward" >删除</a></span>
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="consumption mt10">
+							<h3>分享<b class="fr mr10"><input class="mr5" type="radio" name="isEnable2" value="1" th:checked="${#null != isEnable2 ? 1 == isEnable2 : false}" />开<input class="ml10 mr5" type="radio" name="isEnable2" value="0" th:checked="${#null != isEnable2 ? 0 == isEnable2 : false}" />关</b></h3>
+							<div class="centent">
+								<div class="cl">
+									<label class="fl">基本规则：</label>
+									<p class="fl">
+										<span>每次分享增加<input type="text" name="aindex3" value="" th:value="${searchParam['aindex3']}" class="c_positive" readOnly="true" />成长值</span>
+									</p>
+								</div>
+								<div class="cl mt10">
+									<label class="fl">限制规则：</label>
+									<p class="fl">
+										<span>每人每天最多可获得<input type="text" name="aindex4" value="" th:value="${searchParam['aindex4']}" class="c_positive" readOnly="true" />次分享成长值</span>
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="consumption mt10">
+							<h3>订阅<b class="fr mr10"><input class="mr5" type="radio" name="isEnable3" value="1" th:checked="${#null != isEnable3 ? 1 == isEnable3 : false}" />开<input class="ml10 mr5" type="radio" name="isEnable3" value="0" th:checked="${#null != isEnable3 ? 0 == isEnable3 : false}" />关</b></h3>
+							<div class="centent">
+								<div class="cl">
+									<label class="fl">基本规则：</label>
+									<p class="fl">
+										<span>每次订阅增加<input type="text" name="aindex5" value="" th:value="${searchParam['aindex5']}" class="c_positive" readOnly="true" />成长值</span>
+									</p>
+								</div>
+								<div class="cl mt10">
+									<label class="fl">限制规则：</label>
+									<p class="fl">
+										<span>每人每天最多可获得<input type="text" name="aindex6" value="" th:value="${searchParam['aindex6']}" class="c_positive" readOnly="true" />次订阅成长值</span>
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="consumption mt10">
+							<h3>领卡<b class="fr mr10"><input class="mr5" type="radio" name="isEnable4" value="1" th:checked="${#null != isEnable4 ? 1 == isEnable4 : false}" />开<input class="ml10 mr5" type="radio" name="isEnable4" value="0" th:checked="${#null != isEnable4 ? 0 == isEnable4 : false}" />关</b></h3>
+							<div class="centent">
+								<div class="cl">
+									<label class="fl">基本规则：</label>
+									<p class="fl">
+										<span>基本规则：领卡成功，增加<input type="text" name="aindex7" value="" th:value="${searchParam['aindex7']}" class="c_positive" readOnly="true" />成长值</span>
+									</p>
+								</div>
+							</div>
+						</div>
+						
+					</form>
+					</div>
+			    </section>
+			</div>
+	    	
+	    	
+	    </div> 
+	</body>
+	
+	<!-- 脚本区域（弹框、脚本） -->
+	<div layout:fragment="javascript">
+	    
+	    <script type="text/javascript">
+	    function updateFun (){
+        	//$('input').removeAttr("readonly");
+        	var inputs = $("input[type='text']");
+    		$.each(inputs, function(index,val) {
+			    val.removeAttribute("readOnly"); 
+    		});
+        }
+	    
+	    $(function (){
+	        $(".addtr").on('click','.removetr',function(){
+	        	$(this).parent().parent().remove();
+	        
+	        });
+	        
+	        var  reward = '<span class="db mt10">连续签到满<input type="text" name="aindexs" value="" class="c_positive" readOnly="true" />次，额外加<input type="text" name="anums" value="" class="c_positive" readOnly="true" />成长值&nbsp;&nbsp;<a href="###" class="remove-reward">删除</a></span>'
+	    	$(".add-reward").click(function(){
+	    		
+	    		if($(this).parent().siblings().length > 4){}else{
+	    			$(this).parent().parent().append(reward);}
+	    	});
+	    	
+	    	$(".consumption .centent").on('click','.remove-reward',function(){
+	    		$(this).parent().remove();
+	    	});
+	    });
+	    
+	    //重复提交
+   		var repeat =  true ;
+    	function subForm(parentWin){
+    		if (!repeat){
+    			return ;
+    		}
+    		$frm = $("#detafilForm");
+		    var validateWidget = $frm.validate();
+    		//1.启用表单验证。
+    		if (!validateWidget.check()) {//1.基础样式校验。
+    			return false;
+    		}
+    		
+    		repeat = false; 
+    		//提交表单
+       		$frm.ajaxSubmit({success: function(entry, statusText, xhr, $form){
+       			
+       			if(entry.code=="success"){
+       				$(parentWin).find("#searchForm").submit();
+       			}
+      				repeat=true; 
+      				
+       			layer.msg(entry.message,{time: 2000} ,function (){
+       				
+       			}); 
+       			 
+			}});
+    	}
+	    </script>
+    </div>
+    
+</html>

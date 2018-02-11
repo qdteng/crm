@@ -1,0 +1,89 @@
+<!DOCTYPE html>  
+<html xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layouts/dialog" >  
+	
+    <head>
+    	<meta charset="utf-8"></meta>
+        <title>访客管理</title>
+    </head>  
+    <body style="text-align:center;" >
+		<div layout:fragment="content" >
+    		<div style="margin-top: 20px; text-align:left;">
+			     <form id="subForm" action="/guest/save" method="post" class="form-horizontal">
+			     	<input id="id" name="id" type="hidden"  th:value="${entity}?${entity.id}:''"  />
+			     	 <div class="cl mb5 addhy">
+			     		<p>
+			     			<label><i class="f-red">* </i>姓名:</label>
+			     			<span>
+				     			<input class="w200 c_required c_maxlength_32"
+				     			id="name" name="name"   
+							     th:value="${entity}?${entity.name}:''" 
+							      type='text'  placeholder="请输入" />
+			     			</span>
+			     		</p>
+			     	 </div>
+			     	 <div class="cl mb5 addhy">
+			     		<p>
+			     			<label><i class="f-red">* </i>性别:</label>
+			     			<span>
+				     			<input class="w200 c_required c_maxlength_32"
+				     			id="sex" name="sex"   
+							     th:value="${entity}?${entity.sex}:''" 
+							      datatype="n" type='text'  placeholder="请输入" />
+			     			</span>
+			     		</p>
+			     	 </div>
+			     	 <div class="cl mb5 addhy">
+			     		<p>
+			     			<label><i class="f-red">* </i>账户金额:</label>
+			     			<span>
+				     			<input class="w200 c_required c_maxlength_32"
+				     			id="mon" name="mon"   
+							     th:value="${entity}?${entity.mon}:''" 
+							      datatype="d" type='text'  placeholder="请输入" />
+			     			</span>
+			     		</p>
+			     	 </div>
+		    	</form>
+			</div>
+		</div>
+		    <!-- 脚本区域（弹框、脚本） -->
+			<div layout:fragment="javascript">
+			    <script type="text/javascript">
+			  	//<![CDATA[
+			    	//重复提交
+			   		var repeat =  true ;
+			    	function subForm(parentWin){
+			    		if (!repeat){
+			    			return ;
+			    		}
+			    		$frm = $("#subForm");
+					    var validateWidget = $frm.validate();
+			    		//1.启用表单验证。
+			    		if (!validateWidget.check()) {//1.基础样式校验。
+			    			repeat=true; 
+			    			return false;
+			    		}
+			    		repeat = false;
+			    		//提交表单
+		        		$frm.ajaxSubmit({success: function(entry, statusText, xhr, $form){
+		        			
+		        			if(entry.code=="success"){
+		        				$(parentWin).find("#searchForm").submit();
+		        			}
+		        			
+	        				repeat=true; 
+	        				
+		        			layer.msg(entry.message,{time: 2000} ,function (){
+		        			}); 
+						}});
+			    	}
+			    //]]>
+			    </script>
+		    </div>
+		    
+	</body>
+	
+	
+</html>

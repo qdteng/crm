@@ -1,0 +1,98 @@
+<!DOCTYPE html>  
+<html xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layouts/dialog" >  
+	
+	
+    <head>
+    	<meta charset="utf-8"></meta>
+        <title>详情</title>
+    </head>  
+    <body style="text-align:center;" >
+    	 <div layout:fragment="content">
+		    	<!-- 添加用户 -->
+				<div  style="margin-top: 10px;"     id="addOrUpdateDialog"  >
+			    	<form action="/dictionarie/saveOrUpdate" method="post" id="detafilForm" class="form-horizontal">
+			    	<input   name="id" th:value="${detail}? ${detail.id} : ''"   value="" type="hidden"  />
+			    	<input   name="pid" th:value="${parent}? ${parent.id}: ''"   value="" type="hidden"  />
+			        <div class="box-content content-list pb30">
+						<div class="cl mb20">
+			        		<p>
+			        			<span>所属目录：</span>
+			        			<span th:text="${parent}? ${parent.name} : '无'"   >所属目录：</span>
+			        			
+			        		</p>
+			        	</div>
+						<div class="cl mb20">
+			        		<p>
+			        			<span>名称：</span>
+			        			<input id="name" class="w200 c_required c_minlength_1 c_maxlength_20 " name="name" th:value="${detail}? ${detail.name} : ''"   type="text" placeholder="请输入字典名称" />
+			        		</p>
+			        	</div>
+			        	<div class="cl mb20">
+			        		<p>
+			        			<span>编码：</span>
+			        			<input class="w200 c_required c_minlength_1 c_maxlength_20 " id="code" th:value="${detail}? ${detail.code} : ''" name="code" type="text" placeholder="请输入字典编号" />
+			        		</p>
+			        	</div>
+			        	<div class="cl mb20">
+			        		<p>
+			        			<span>排序：</span>
+			        			<input class="w200" id="orderNum"  name="orderNum" type="text" th:value="${detail}? ${detail.orderNum} : ''"  placeholder="请输入字典排序" />
+			        		</p>
+			        	</div>
+			        	<div class="cl mb20">
+			        		<p>
+			        			<span>描述：</span>
+			        			<input class="w200 c_maxlength_500" id="remark"  name="remark" type="text" th:value="${detail}? ${detail.remark} : ''"  placeholder="请输入字典描述" />
+			        		</p>
+			        	</div>
+			        </div>
+			       <!--  <input type="button" value="111" onclick="subForm()" /> -->
+			         <br/>
+				    <br/>
+				    <br/>
+				    <div style="height: 100px;"></div>
+			        </form>
+			    </div>
+		    </div>
+		  
+		    <!-- 脚本区域（弹框、脚本） -->
+			<div layout:fragment="javascript">
+			    <script type="text/javascript">
+			    	//重复提交
+			   		var repeat =  true ;
+			    	function subForm(parentWin){
+			    		if (!repeat){
+			    			return ;
+			    		}
+			    		$frm = $("#detafilForm");
+					    var validateWidget = $frm.validate();
+			    		//1.启用表单验证。
+			    		if (!validateWidget.check()) {//1.基础样式校验。
+			    			return false;
+			    		}
+			    		
+			    		repeat = false; 
+			    		//提交表单
+		        		$frm.ajaxSubmit({success: function(entry, statusText, xhr, $form){
+		        			
+		        			if(entry.code=="success"){
+		        				$(parentWin).find("#searchForm").submit();
+		        			}
+	        				repeat=true; 
+	        				
+		        			layer.msg(entry.message,{time: 2000} ,function (){
+		        				
+		        			}); 
+		        			 
+						}});
+			    	}
+			    
+			    </script>
+		    </div>
+		    
+	</body>
+	
+	
+</html>

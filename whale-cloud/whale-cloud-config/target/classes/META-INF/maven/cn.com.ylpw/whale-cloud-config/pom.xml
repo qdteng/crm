@@ -1,0 +1,142 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>whale-cloud-config</artifactId>
+  <packaging>jar</packaging>
+
+  <name>whale-cloud-config</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <parent>
+  	<groupId>cn.com.ylpw</groupId>
+  	<artifactId>whale-cloud</artifactId>
+  	<version>0.0.1</version>
+  	<relativePath>../pom.xml</relativePath>
+  </parent>
+
+  <dependencies>
+  
+		<!-- <dependency>
+			<groupId>cn.com.ylpw</groupId>
+			<artifactId>whale-core-health</artifactId>
+			<version>0.0.1</version>
+		</dependency> -->
+		
+		
+   		<dependency>
+			    <groupId>org.springframework.cloud</groupId>
+			    <artifactId>spring-cloud-netflix-eureka-server</artifactId>
+		</dependency>
+		
+		  <dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-config-server</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+
+ </dependencies>
+	
+	
+  <build>
+        <!-- 指定下面的目录为资源文件 -->
+        <resources>
+            <!-- 设置自动替换 -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                   <!--  <include>**/*.properties</include> 
+                   <include>**/*-${build.profile.id}.properties</include>-->
+                   <include>**/*-${build.profile.id}.xml</include>
+		           <include>**/*.tld</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+		          <exclude>**/*.xml</exclude>
+		          <exclude>**/*.tld</exclude>
+                </excludes>
+                <filtering>false</filtering>
+            </resource>
+            
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+		          <include>**/*.properties</include>
+		          <include>**/*.xml</include>
+		          <include>**/*.tld</include>
+		        </includes>
+		        <filtering>false</filtering>
+            </resource>
+            
+        </resources>
+		
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>cn.com.ylpw.web.crm.CrmConfigServerApplication</mainClass>
+				</configuration>
+			</plugin>
+			
+			  <plugin> 
+                <groupId>org.apache.maven.plugins</groupId> 
+                <artifactId>maven-jar-plugin</artifactId> 
+                <version>2.6</version> 
+                <configuration> 
+                    <excludes> 
+                        <exclude>configs/*</exclude> 
+                    </excludes> 
+                </configuration> 
+            </plugin> 
+		</plugins>
+		
+	</build>
+	
+	<profiles>  
+        <!-- 开发环境 -->  
+        <profile>  
+            <id>dev</id>  
+            <activation>  
+                <activeByDefault>true</activeByDefault>  
+            </activation>
+           <properties>
+               <build.profile.id>dev</build.profile.id>  
+           </properties>
+        </profile>
+  
+        <!-- 测试环境 -->  
+        <profile>  
+            <id>test</id>  
+            <properties>  
+                <build.profile.id>test</build.profile.id>  
+            </properties>  
+        </profile>  
+  
+        <!-- 生产环境 -->  
+        <profile>  
+            <id>product</id>  
+            <properties>  
+                <build.profile.id>product</build.profile.id>  
+            </properties>  
+        </profile>  
+    </profiles>
+	
+	
+</project>

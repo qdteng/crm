@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.ylpw.web.crm.mapper.sys.SysDictionarieMapper">
+
+<cache eviction="LRU" size="10240" readOnly="true" />
+
+  <resultMap id="BaseResultMap" type="cn.com.ylpw.web.crm.entity.sys.SysDictionarie">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="CODE" jdbcType="VARCHAR" property="code" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="IS_DEL"  property="isDel" typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler"  />
+    <result column="CREATE_ID" jdbcType="DECIMAL" property="createId" />
+    <result column="CREATE_NAME" jdbcType="VARCHAR" property="createName" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="UPDATE_ID" jdbcType="DECIMAL" property="updateId" />
+    <result column="UPDATE_NAME" jdbcType="VARCHAR" property="updateName" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="ORDER_NUM"    property="orderNum" />
+    <result column="PID" property="pid" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, CODE, NAME, REMARK, IS_DEL, CREATE_ID, CREATE_NAME, CREATE_TIME, UPDATE_ID, UPDATE_NAME, 
+    UPDATE_TIME, PID,ORDER_NUM
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_dictionarie
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+   
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" flushCache="true">
+    delete from sys_dictionarie
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.com.ylpw.web.crm.entity.sys.SysDictionarie" flushCache="true">
+    insert into sys_dictionarie (ID, CODE, NAME, 
+      REMARK, IS_DEL, CREATE_ID, 
+      CREATE_NAME, CREATE_TIME, UPDATE_ID, 
+      UPDATE_NAME, UPDATE_TIME , PID
+      )
+    values (#{id,jdbcType=BIGINT}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{isDel,typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler}, #{createId,jdbcType=DECIMAL}, 
+      #{createName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateId,jdbcType=DECIMAL}, 
+      #{updateName,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{pid,jdbcType=BIGINT}
+      )
+  </insert>
+  
+  <insert id="insertSelective"  parameterType="cn.com.ylpw.web.crm.entity.sys.SysDictionarie" flushCache="true" useGeneratedKeys="true" >
+    insert into sys_dictionarie
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="code != null">
+        CODE,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="isDel != null">
+        IS_DEL,
+      </if>
+      <if test="createId != null">
+        CREATE_ID,
+      </if>
+      <if test="createName != null">
+        CREATE_NAME,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateId != null">
+        UPDATE_ID,
+      </if>
+      <if test="updateName != null">
+        UPDATE_NAME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+       <if test="pid != null" >
+        PID,
+      </if>
+       <if test="orderNum != null" >
+        ORDER_NUM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null">
+        #{isDel,typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler},
+      </if>
+      <if test="createId != null">
+        #{createId,jdbcType=DECIMAL},
+      </if>
+      <if test="createName != null">
+        #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateId != null">
+        #{updateId,jdbcType=DECIMAL},
+      </if>
+      <if test="updateName != null">
+        #{updateName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+       <if test="pid != null" >
+        #{pid,jdbcType=BIGINT},
+      </if>
+       <if test="orderNum != null" >
+        #{orderNum},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.ylpw.web.crm.entity.sys.SysDictionarie" flushCache="true">
+    update sys_dictionarie
+    <set>
+      <if test="code != null">
+        CODE = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null">
+        IS_DEL = #{isDel,typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler},
+      </if>
+      <if test="createId != null">
+        CREATE_ID = #{createId,jdbcType=DECIMAL},
+      </if>
+      <if test="createName != null">
+        CREATE_NAME = #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateId != null">
+        UPDATE_ID = #{updateId,jdbcType=DECIMAL},
+      </if>
+      <if test="updateName != null">
+        UPDATE_NAME = #{updateName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+       <if test="pid != null" >
+        PID = #{pid,jdbcType=BIGINT},
+      </if>
+      <if test="orderNum != null" >
+        ORDER_NUM = #{orderNum},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.ylpw.web.crm.entity.sys.SysDictionarie" flushCache="true">
+    update sys_dictionarie
+    set CODE = #{code,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      IS_DEL = #{isDel,typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler},
+      CREATE_ID = #{createId,jdbcType=DECIMAL},
+      CREATE_NAME = #{createName,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_ID = #{updateId,jdbcType=DECIMAL},
+      UPDATE_NAME = #{updateName,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      PID = #{pid,jdbcType=BIGINT}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  
+  
+  	<select id="findAllParent" parameterType="cn.com.ylpw.web.crm.entity.sys.SysDictionarie" resultType="java.util.HashMap" >
+		SELECT * FROM  SYS_DICTIONARIE 
+		WHERE 1=1  and  pid =0 
+		<if test="code != null  and code !=''" >
+	    	and code = #{code,jdbcType=VARCHAR} 
+	    </if>
+	    <if test="name != null and name !=''" >
+	    	and name like '%${name}%'
+	    </if> order by id desc 
+	</select>
+	
+  	<select id="findAll" parameterType="cn.com.ylpw.web.crm.entity.sys.SysDictionarie" resultType="java.util.HashMap" useCache="false" >
+		SELECT * FROM  SYS_DICTIONARIE 
+		WHERE 1=1  
+		<if test="code != null  and code !=''" >
+	    	and code = #{code,jdbcType=VARCHAR} 
+	    </if>
+		<if test="id != null  and id !=''" >
+	    	and id = #{id} 
+	    </if>
+	    <if test="name != null and name !=''" >
+	    	and name  like  '%${name}%' 
+	    </if>
+	    order by  order_num asc  , id desc 
+	</select>
+	
+	<select id="findByPid" parameterType="cn.com.ylpw.web.crm.entity.sys.SysDictionarie" resultType="java.util.HashMap" >
+		SELECT * FROM  SYS_DICTIONARIE 
+		WHERE pid  IN 
+		<foreach collection="list" item="i"    open="(" separator="," close=")" >
+				#{i}
+		</foreach>  order by order_num asc  , id desc 
+	</select>
+	
+   
+  	<select id="findByExist" parameterType="cn.com.ylpw.web.crm.entity.sys.SysDictionarie" resultType="java.util.HashMap" >
+		SELECT  id  FROM  SYS_DICTIONARIE 
+		WHERE (  code = #{code,jdbcType=VARCHAR} 
+    	or name = #{name,jdbcType=VARCHAR}) and PID = #{pid,jdbcType=BIGINT}
+    	<if test="id != null  and id !=''" >
+	    	and id != #{id} 
+	    </if>
+    	
+	</select>
+	
+	
+	<delete id="deleteBatch" parameterType="long" flushCache="true" >
+        delete from SYS_DICTIONARIE where id in
+        <foreach item="id" collection="ids" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        or pid in
+        <foreach item="id" collection="ids" open="(" separator="," close=")">
+            #{id}
+        </foreach> 
+    </delete>
+	
+	
+	<select id="findCityIdsByProvCode"   parameterType="java.util.Map" resultType="java.util.HashMap" >
+	
+		SELECT  citys.CODE  FROM  SYS_DICTIONARIE  citys   where citys.PID  in (
+			SELECT  id  FROM  SYS_DICTIONARIE  sd where sd.CODE =#{parentCode}
+		) and  citys.code  !=-1
+    	
+	</select>
+   
+   
+   <select id="findProTypebByTypea"   parameterType="java.util.Map" resultType="java.util.HashMap" >
+	
+		SELECT  dic.NAME  FROM  SYS_DICTIONARIE  dic   where dic.PID  in (
+			SELECT  id  FROM  SYS_DICTIONARIE  sd where sd.CODE =#{parentCode}
+		) and  dic.code  !=-1
+    	
+	</select>
+	
+	
+	
+	<select id="findCityNamesByCityIds"   parameterType="java.util.Map" resultType="java.util.HashMap" >
+		SELECT  citys.NAME  FROM  SYS_DICTIONARIE  citys   where citys.CODE
+		 in
+        <foreach item="id" collection="ids" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+   
+</mapper>

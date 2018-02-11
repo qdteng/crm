@@ -1,0 +1,111 @@
+<!DOCTYPE html>  
+<html xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  >  
+    <head>
+    	<meta charset="utf-8"></meta>
+        <title>查看会员交易记录</title>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}"></link>
+	    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"></link>
+	    <link rel="stylesheet" type="text/css" th:href="@{/css/validate.default.css}"></link>
+	    <script th:src="@{/js/plugins/jquery/jquery-1.7.min.js}"></script>
+	    <script th:src="@{/js/plugins/validate/jquery.form.js}"></script>
+	    <script th:src="@{/js/plugins/validate/validate.js}"></script>
+	    <script th:src="@{/js/plugins/layer/layer.js}"></script>
+	    
+	    <!-- 核心方法 -->
+	    <script th:src="@{/js/system/core.js}"></script>
+	    <script th:src="@{/js/system/index.js}"></script>
+	    <script th:src="@{/js/system/minBox.js}"></script>
+	    <script th:src="@{/js/system/accordion.js}"></script>
+    </head>  
+    <body>
+				
+			<div class="container">
+			    <section class="ui-content ui-shadow">
+			      
+				    <!-- 列表主体 -->
+					<div class="search-form cl mt15 mb10" style="height:500px;overflow:auto;" >
+						<!-- 列表主体（查询区域） -->
+						<form name="searchForm" id="searchForm" th:action="@{'/customers/orders/list/' + ${customerid}}" action="/customers/orders/list/1" method="post">
+							<input  type="hidden"  id="pageNo" name="pageNo"  th:value="${page.pageNo}" value=""  />
+							<input  type="hidden" name="pageSize"  id="pageSize" th:value="${page.pageSize}" value=""  />
+						</form>
+						
+						<div th:if="${#lists.size(dateList) > 0}">
+							<!-- 列表主体（搜索结果） -->
+							<table class="table table-bordered mt15">
+								<tr>
+								  <th width="20" style="text-align:left;">序号</th>
+								  <th width="20" style="text-align:center;">订单号</th>
+								  <th style="text-align:center;">订单来源</th>
+								  <th style="text-align:center;">订单状态</th>
+								  <th style="text-align:center;">支付状态</th>
+								  <th style="text-align:center;">订单金额</th>
+								  <th style="text-align:center;">订单商品</th>
+								  <th style="text-align:center;">商品数量</th>
+								  <th style="text-align:center;">涉及品类</th>
+								  <th style="text-align:center;">演出城市</th>
+								  <th style="text-align:center;">涉及艺人团体</th>
+								  <th style="text-align:center;">购买方式</th>
+								  <th style="text-align:center;">下单时间</th>
+								  <th style="text-align:center;">支付时间</th>
+								  <th style="text-align:center;">物流到达时间</th>
+								</tr>
+								<tr th:each="obj,indexStat:${dateList}">
+									<td th:text="${indexStat.index+1}"  ></td>
+									<td style="text-align:center;" th:text="${obj.ID}">...</td>
+									<td style="text-align:center;" th:text="${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('ORDER_SOURCE_TRADE').get(obj.ORDER_SOURCE+'').getName() } ">...</td>
+									<td style="text-align:center;" th:text="${obj.ORDER_STATUS}">...</td>
+									<td style="text-align:center;" th:text="${obj.PAY_STATUS}">...</td>
+									<td style="text-align:center;" th:text="${obj.ORDER_SUMPRICE}">...</td>
+									<td style="text-align:center;" th:text="${obj.PROS}">...</td>
+									<td style="text-align:center;" th:text="${obj.PROS_NUM}">...</td>
+									<td style="text-align:center;" th:text="${obj.PRO_TYPES}">...</td>
+									<td style="text-align:center;" th:text="${obj.PRO_CITY}">...</td>
+									<td style="text-align:center;" th:text="${obj.ARTISTSINTRODUCED}">...</td>
+									<td style="text-align:center;" th:text="${obj.SHOPING_TYPE}">...</td>
+									<td style="text-align:center;" th:text="${null!=obj.CREATE_TIME?#dates.format(obj.CREATE_TIME,'yyyy-MM-dd HH:mm:ss') :''}">...</td>
+									<td style="text-align:center;" th:text="${null!=obj.PAY_TIME?#dates.format(obj.PAY_TIME,'yyyy-MM-dd HH:mm:ss') :''}">...</td>
+									<td style="text-align:center;" >...</td>
+								</tr>
+								<tr>
+									<td>
+										订单数：
+									</td>
+									<td th:text="${totals.ORDERCOUNT}" >
+										11
+									</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td th:text="${'¥'+totals.ORDERSUMPRICE}" >
+										11
+									</td>
+									<td colspan="9" ></td>
+								</tr>
+							</table>
+						</div>
+						<div style="text-align: center;" th:if="${#lists.isEmpty(dateList)}">
+							无相关信息
+						</div>
+						
+			 		</div>
+			 		<!-- 分页 -->
+			 		<div style="overflow-x:auto;" th:if="${#lists.size(dateList) > 0}"  th:include="layouts/page:: page" th:attr="pageFormId=searchForm,pageNo=${page.pageNo},pageSize=${page.pageSize},total=${page.total}">...</div>
+					
+			    </section>
+			</div>
+	    				
+				
+
+
+	</body>
+	
+	<!-- 脚本区域（弹框、脚本） -->
+    <script type="text/javascript">
+	    $(function() {
+	
+	      });
+    </script>
+	    
+</html>

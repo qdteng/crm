@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layouts/index">
+<head>
+	<meta charset="utf-8"></meta>
+	<title>会员信息-成长值设置</title>
+	
+	<style>
+		h1, h2, h3, h4, h5, h6 { font-size: 100%; }
+		.red{color:red;}
+		.db{display:block;}
+		p10{padding:10px;}
+		.growth-vule{width:100%;border:1px solid #ddd}
+		.growth-vule h4{height:30px;line-height:30px;background:#eee;padding-left:10px;}
+		.line-height{line-height:72px;}
+		.growth-list{padding:10px 20px;overflow:hidden;width:100%; }
+		.growth-l{width:150px;height:117px;background:#abcdef;}
+		.growth-r{width:calc(100% - 151px);height:117px;border:1px solid #ddd;border-left:none;padding:10px 20px 10px;}
+		.growth-r p span{width:60%;display:block;}
+		.growth-r p .off-on{width:20px;height:20px;background:#abcdef;cursor:pointer;text-align: center;}
+		.growth-r p .off-on.active{background:#eee;}
+		.setup{color:#3C6E31;}
+		a.setup:hover{color:#3C6E31 !important;text-decoration:none;}
+	</style>
+	
+</head>
+<body>
+	  <div layout:fragment="content">
+	    	
+			<div class="container">
+			    <section class="col-lg-12 ui-content ui-shadow">
+			      
+					<!-- 列表页头（标题、操作按钮） -->
+					<h3>
+						等级成长值设置
+					</h3>
+					
+				    <div class="growth-vule">
+				    	<h4>成长值计算规则</h4>
+				    	<div class="growth-centent p10">
+				    		<p>成长值是根据不同的成长策略的计算分值和其对应的分值比例计算出的综合分值，成长值等于各策略分值乘以分值比例的总和。</p>
+				    		<p>
+				    			<b class="db">当前成长值为:</b>
+				    			<span class="db ml10"><i class="red">成长值</i> =<span th:if="${rfmvalIsOpen == '1'}"><span th:text="${rfmvalScale}"></span> x RFM值</span><span th:if="${rfmvalIsOpen == '1'}"> + </span><span th:if="${recencyvalIsOpen=='1'}"><span th:text="${recencyvalScale}"></span> x 消费激励值  </span><span th:if="${activevalIsOpen == '1'}"> + </span><span th:if="${activevalIsOpen=='1'}"><span th:text="${activevalScale}"></span> x 会员活跃值  </span></span>
+				    		</p>
+				    	</div>
+				    </div>
+				    
+				    <form action="/customers/indexPanel" id ="searchForm">
+				    </form>
+				 
+				    <div class="growth-vule mt20">
+				    	<h4>成长值策略设置</h4>
+			    		<tr th:each="obj,indexStat:${list}">
+			    			<div class="growth-list cl">
+				    			<img class="fl growth-l" th:attr="src=${obj.MTYPE==1?'/images/rfm.png':(obj.MTYPE==2?'/images/xfjl.png':'/images/hyhy.png')}" />
+				    			<div class="fl growth-r">
+				    				<h5>简单介绍：</h5>
+				    				<p class="cl">
+				    					<span class="fl" th:text="${obj.REMARK}"></span>
+				    					<b class="fr">
+				    						<span class="fl mt5 off-on ml20 upOpen" th:text="${obj.IS_OPEN==1?'开':'关'}" th:attr="obj_id=${obj.ID}" ></span>
+				    						<input th:attr="class=${obj.MTYPE==1?'fl ml20 c_num rfmcss':(obj.MTYPE==2?'fl ml20 c_num recencycss':'fl ml20 c_num activecss')},obj_open=${obj.IS_OPEN},obj_id=${obj.ID}" type="text" placeholder="输入分值比例" th:value="${obj.SCALE}" />
+				    						<a th:attr="class=${obj.MTYPE==1?'setup fl mt5 ml20 rfmbtn':(obj.MTYPE==2?'setup fl mt5 ml20 recencybtn':'setup fl mt5 ml20 activebtn')}" href="###">去设置</a>
+				    					</b>
+				    				</p>
+				    			</div>
+				    		</div>
+			    		</tr>
+				    </div>
+			    </section>
+			</div>
+	    </div> 
+</body>
+<!-- 脚本区域（弹框、脚本） -->
+<div layout:fragment="javascript">
+	<script type="text/javascript">
+		//<![CDATA[ 
+		$(function (){
+			//设置RFM木星
+			$(".rfmbtn").click(function(){
+				 layer.open({
+		    		 title:"RFM模型策略设置",
+		    		  type: 2, 
+		    		  btn: ['保存','修改', '增加策略','取消'],
+		    		  area:['850px','600px'],
+		    		  yes: function(index, layero){
+		    			  var body = layer.getChildFrame('body', index);
+                          var iframeWin = window[layero.find('iframe')[0]['name']];
+                          iframeWin.subForm(document);
+	    			  },
+	    			  btn2: function(index, layero){
+		    			  $(layero).find("iframe")[0].contentWindow.updateFun();
+		    			  //var inputs = layer.getChildFrame('input', index);//这人也能达到这个效果
+			    		  //$.each(inputs, function(index,val) {
+						  //  val.removeAttribute("readOnly"); 
+			    		  //});
+		    			  return false ;
+	    			  },
+	    			  btn3: function(index, layero){
+		    			  $(layero).find("iframe")[0].contentWindow.addIndex();
+	    				  return false ;
+	    			  },
+	    			  btn4: function(index, layero){
+	    			  },
+		    		  content: '/customers/index/indexManager/1'
+		    		}); 
+				 
+			});
+			
+			//设置消费激励策略
+			$(".recencybtn").click(function(){
+				 layer.open({
+		    		 title:"消费激励模型策略设置",
+		    		  type: 2, 
+		    		  btn: ['保存','修改'],
+		    		  area:['800px','600px'],
+		    		  yes: function(index, layero){
+		    			  var body = layer.getChildFrame('body', index);
+                          var iframeWin = window[layero.find('iframe')[0]['name']];
+                          iframeWin.subForm(document);
+	    			  },
+	    			  btn2: function(index, layero){
+		    			  $(layero).find("iframe")[0].contentWindow.updateFun();
+		    			  return false ;
+	    			  },
+		    		  content: '/customers/index/indexManager/2'
+		    		}); 
+				 
+			});
+			
+			//设置会员活跃策略
+			$(".activebtn").click(function(){
+				 layer.open({
+		    		 title:"会员活跃模型策略设置",
+		    		  type: 2, 
+		    		  btn: ['保存','修改'],
+		    		  area:['800px','600px'],
+		    		  yes: function(index, layero){
+		    			  var body = layer.getChildFrame('body', index);
+                          var iframeWin = window[layero.find('iframe')[0]['name']];
+                          iframeWin.subForm(document);
+	    			  },
+	    			  btn2: function(index, layero){
+		    			  $(layero).find("iframe")[0].contentWindow.updateFun();
+		    			  return false ;
+	    			  },
+		    		  content: '/customers/index/indexManager/3'
+		    		}); 
+				 
+			});
+			
+			//开/关
+			$('.upOpen').click(function(){
+				var id = $(this).attr("obj_id");
+				//验证开关状态为开的策略之和是否为1
+				var b = 0;
+				var rfmcss = null == $('.rfmcss').val() || '' == $('.rfmcss').val() ? 0 : $('.rfmcss').val(), recencycss = null == $('.recencycss').val() || '' == $('.recencycss').val() ? 0 : $('.recencycss').val(), activecss = null == $('.activecss').val() || '' == $('.activecss').val() ? 0 : $('.activecss').val();
+				
+				if((id != $('.rfmcss').attr("obj_id") && $('.rfmcss').attr("obj_open")==1) ||
+				   (id == $('.rfmcss').attr("obj_id") && $('.rfmcss').attr("obj_open")==0)
+				){
+					b = b  + Number(rfmcss);
+				}
+				if((id != $('.recencycss').attr("obj_id") && $('.recencycss').attr("obj_open")==1) ||
+				   (id == $('.recencycss').attr("obj_id") && $('.recencycss').attr("obj_open")==0)
+				){
+					b = b  + Number(recencycss);
+				}
+				if((id != $('.activecss').attr("obj_id") && $('.activecss').attr("obj_open")==1) ||
+				   (id == $('.activecss').attr("obj_id") && $('.activecss').attr("obj_open")==0)
+				){
+					b = b  + Number(activecss);
+				}
+				
+				if(1 != b){
+					//alert('开关开启的策略和值必须为1！');
+					layer.alert('开关开启的策略和值必须为1！');
+					return false;
+				}
+				if(!$(document).find("#searchForm").validate().check()){
+					return false;
+				}
+				confirm(function(){
+					$.getJSON("/customers/index/upOpen",{id: id, rfmval: rfmcss, recencyval: recencycss, activeval: activecss}, function(entry){
+	        			  if(entry.code=="success"){
+	        					//layer.load(2);
+		        				$(document).find("#searchForm").submit();
+		        			}
+	        			 
+							layer.msg(entry.message,{time: 2000} ,function (){
+		        			}); 
+							
+						});
+				});
+				
+			});
+		});
+		//]]>
+	</script>
+</div>
+
+</html>

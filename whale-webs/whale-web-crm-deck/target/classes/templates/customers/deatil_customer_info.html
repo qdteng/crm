@@ -1,0 +1,223 @@
+<!DOCTYPE html>  
+<html xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  >  
+    <head>
+    	<meta charset="utf-8"></meta>
+        <title>查看会员信息</title>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}"></link>
+	    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"></link>
+	    <link rel="stylesheet" type="text/css" th:href="@{/css/validate.default.css}"></link>
+	    <script th:src="@{/js/plugins/jquery/jquery-1.7.min.js}"></script>
+	    <script th:src="@{/js/plugins/validate/jquery.form.js}"></script>
+	    <script th:src="@{/js/plugins/validate/validate.js}"></script>
+	    <script th:src="@{/js/plugins/layer/layer.js}"></script>
+	    
+	    <!-- 核心方法 -->
+	    <script th:src="@{/js/system/core.js}"></script>
+	    <script th:src="@{/js/system/index.js}"></script>
+	    <script th:src="@{/js/system/minBox.js}"></script>
+	    <script th:src="@{/js/system/accordion.js}"></script>
+	    <style type="text/css">
+			*{margin: 0;padding: 0;}
+			body{font:normal 12px/1.5  "微软雅黑", 'arial', 'Tahoma','simsun','Verdana';}
+			.p20{padding: 20px;}
+			.mt10{margin-top: 10px;}
+			.fl{float: left;}
+			
+			.clearfloat:after{display:block;clear:both;content:"";visibility:hidden;height:0}.clearfloat{zoom:1}.clear{*zoom:1;}.clear:after{content:'\20';display:block;height:0;clear:both;}
+			.member h3{border-bottom: 1px solid #CCCCCC;line-height: 40px;font-size: 16px;font-weight: normal;}
+			.content h4{font-size: 14px;font-weight: normal;margin-top: 15px;}
+			.content p{overflow: hidden;border-bottom: 1px solid #CCCCCC;padding-bottom: 10px;}
+			.content p span{height: 30px;line-height: 30px;margin: 5px 0;width: 300px;}
+			.content p span  b{width:120px;font-weight: normal; margin-right:5px ;}
+			.content p span  i{font-style: normal;}
+			
+			.labels label{display: block;float: left;background: #f4f4f4;margin:0 5px;padding: 5px 10px;}
+			.labels label b{font-weight: normal;margin-left: 10px;}
+			.labels a{background: #fff;border: 1px dashed #ccc;border-radius: 3px;color:#6fb6e0;padding: 4px 9px;float: left;margin-left: 5px;text-decoration: none;}
+			input { background: #fff;
+				    border: 1px dashed #ccc;
+				    border-radius: 3px;
+				    color: #6fb6e0;
+				    padding: 4px 9px;
+				    float: left;
+				    margin-left: 5px;
+				    text-decoration: none; }	
+		
+	    </style>
+    </head>  
+    <body>
+		<div class="member p20">
+			<h3>会员信息</h3>
+			<div class="content mt10">
+				<h4>会员信息</h4>
+				<p class="mt10">
+					<span class="fl">
+						<b class="fl" >会员ID：</b>
+						<i class="fl" th:text="${customers.PWSYSID}"  >20170012</i>						
+					</span>
+					<span class="fl">
+						<b class="fl">会员级别：</b>
+						<i class="fl" th:text="${customers.GRADE_NAME}" >大众会员</i>						
+					</span>
+					<span class="fl">
+						<b class="fl">现有积分：</b>
+						<i class="fl" th:text="${customers.INTEGRAL}" >10000</i>						
+					</span>
+					<span class="fl">
+						<b class="fl">会员来源：</b>
+						<i class="fl" th:text="${customers.SYS_SOURCE}"  >票务</i>						
+					</span>
+					<span class="fl">
+						<b class="fl">最后交易时间：</b>
+						<i class="fl" th:text="${customers.LAST_PAY_TIME}" >2017-01-22</i>						
+					</span>
+					<span class="fl">
+						<b class="fl">本年度交易金额：</b>
+						<i class="fl" th:text="${customers.SJZF_YEAR}" >12000.00</i>						
+					</span>
+					<span class="fl">
+						<b class="fl">交易总次数：</b>
+						<i class="fl" th:text="${customers.PAY_COUNT}" >15</i>						
+					</span>
+					<span class="fl">
+						<b class="fl">累计交易金额：</b>
+						<i class="fl" th:text="${customers.SJZF_TOTAL}" >125800.00</i>						
+					</span>
+					<span class="fl">
+						<b class="fl">购买票品总次数：</b>
+						<i class="fl" th:text="${customers.PRO_TOTAL}" >15</i>						
+					</span>
+					<span class="fl">
+						<b class="fl">交易关闭金额：</b>
+						<i class="fl" th:text="${customers.NOT_PAY_TOTAL}" >12000.00</i>						
+					</span>
+					<span class="fl">
+						<b class="fl">成长值：</b>
+						<i class="fl" th:text="${customers.CINDEX}">2000</i>						
+					</span>
+					<span class="fl">
+						<b class="fl">上一次升降级时间：</b>
+						<i class="fl">***</i>						
+					</span>
+				</p>
+				<h4>活跃信息</h4>
+				<p class="mt10">
+					<span class="fl">
+						<b class="fl">签到总次数：</b>
+						<i class="fl">***</i>						
+					</span>
+					<span class="fl">
+						<b class="fl">最近一次签到时间：</b>
+						<i class="fl">***</i>						
+					</span>
+					<span class="fl">
+						<b class="fl">分享总次数：</b>
+						<i class="fl">***</i>						
+					</span>
+					<span class="fl">
+						<b class="fl">最近一次分享时间：</b>
+						<i class="fl">***</i>						
+					</span>
+					<span class="fl">
+						<b class="fl">订阅总次数：</b>
+						<i class="fl">***</i>						
+					</span>
+					<span class="fl">
+						<b class="fl">最近一次订阅时间：</b>
+						<i class="fl">***</i>						
+					</span>
+					<span class="fl">
+						<b class="fl">充值次数：</b>
+						<i class="fl" th:text="${customers.RECHARGE_COUNT}" >15</i>						
+					</span>
+					<span class="fl">
+						<b class="fl">充值总金额：</b>
+						<i class="fl" th:text="${customers.RECHARGE_SUMPRICE}" >125800.00</i>						
+					</span>
+				</p>
+				<h4>标签信息</h4>
+				<div class="labels">
+					<label  th:each="obj,indexStat:${customers.NOTE}"  >
+						<span th:text="${obj}" >戏剧迷</span>
+						<b  class="delCustomerNode" th:attr="JOIN_NOTEID=${customers.JOIN_NOTEID[indexStat.index]}" style="cursor: pointer;" >X</b>
+					</label>
+					
+					<label class="addNodeLabel"  style="display: none"   >
+						<form id="addNodeFrm" name="addNodeFrm"   action="/customers/addNode" >
+							<input type="hidden"  name="customerId" id="customerId" th:value="${customers.ID}" value=""  /> 
+							<input type="text" class="c_required"   name="cusNodeName" id="cusNodeName"  />  <input type="button" id="saveNodeBtn"  value="保存" /> 
+							<input class="cancelCustomerNodeBtn"   type="button" value="取消" />
+						</form>
+					</label>
+					
+					<a class="addCustomerNodeBtn" style="margin-top: 5px" href="###"> + 添加标签</a>
+				</div>
+			</div>
+		</div>
+	</body>
+	
+	<!-- 脚本区域（弹框、脚本） -->
+    <script type="text/javascript">
+	    $(function() {
+			$(".delCustomerNode").click(function (){
+				var id = $(this).attr("JOIN_NOTEID");
+				if(id){
+					confirm(function (){
+						 $.getJSON("/customers/delnode/"+id, function(entry){
+							  if(entry.code=="success"){
+		        					//layer.load(2);
+		        					window.location.reload();
+			        			}
+								layer.msg(entry.message,{time: 2000} ,function (){
+			        			}); 
+							});
+					});
+				}
+			});
+			
+			$(".addCustomerNodeBtn").click(function (){
+				$(".addNodeLabel").show();
+				$(this).hide();
+			});
+			
+			
+			$(".cancelCustomerNodeBtn").click(function (){
+				$(".addCustomerNodeBtn").show();
+				$(".addNodeLabel").hide();
+			});
+			
+			//重复提交
+	   		var repeat =  true ;
+			$("#saveNodeBtn").click(function (){
+				if (!repeat){
+	    			return ;
+	    		}
+	    		$frm = $("#addNodeFrm");
+			    var validateWidget = $frm.validate();
+	    		//1.启用表单验证。
+	    		if (!validateWidget.check()) {//1.基础样式校验。
+	    			return false;
+	    		}
+	    		repeat = false; 
+	    		//提交表单
+        		$frm.ajaxSubmit({success: function(entry, statusText, xhr, $form){
+        			
+        			if(entry.code=="success"){
+    					//layer.load(2);
+    					window.location.reload();
+        			}
+    				repeat=true; 
+    				
+        			layer.msg(entry.message,{time: 2000} ,function (){
+        			}); 
+        			 
+				}});
+	    		
+			});
+			
+	      });
+	    
+    </script>
+	    
+</html>

@@ -1,0 +1,56 @@
+.undi{display:inline-block;}
+.w120{width: 210px;}
+.h1{height:1px;}
+i{font-style:normal;}
+.mt4{margin-top:4px;}
+.mt8{margin-top:8px;}
+input[type=checkbox]{width:auto!important;}
+.text-blue{color:#35c8e6;}
+.calendar{width: 150px;border:1px solid #edf0f2;border-radius: 20px;padding:0 16px;height: 35px;line-height: 35px;cursor: pointer;display:inline-block;}
+.calendar:hover{background-color: #f7f9fa;}
+
+.title-double{overflow: hidden;border-bottom:1px solid #e1e6eb;height: 50px;line-height: 50px;}
+.title-double>span{float:right;margin:0 5px;color:#06C;}
+/*.yl-content .ui-content h3{font-size: 16px!important;}*/
+.addclassesbox{width: 400px;}
+
+.change-span{color:#ccc;}
+.change-span span{cursor: pointer;}
+.change-span span.on{color:#666;}
+
+.pay-nav{width: 160px;}
+.pay-nav ul{width:100%;}
+.pay-nav ul li{width:100%;padding:6px 10px;}
+.pay-nav ul li.on{background-color: #0095ea;color:#fff;border-radius: 2px;}
+
+.change-tab-ul{height: 60px;line-height: 60px;border-bottom: 1px solid #edf0f2;}
+.change-tab-ul li.on span{border-bottom:4px solid #000;height: 60px;}
+.change-tab-ul li span{display:inline-block;}
+.change-tab-ul li{height: 59px;cursor: pointer;padding:0 20px;}
+.change-tab-ul li:hover{background-color: #f7f9fa;}
+
+/* .search-form{border-bottom:1px solid #edf0f2;} */
+.conditions-wp{display:inline-block;position:relative;}
+.conditions{display:inline-block;border:1px solid #edf0f2;border-radius:6px;padding:6px 20px 6px 12px;background: url(../images/arrow.png) no-repeat;background-position:65px 11px;cursor: pointer;}
+.conditions:hover{background-color:#f7f9fa;}
+
+.search-form > ol{overflow:hidden;}
+.search-form > ol li{width:24%;}
+.form-label{overflow: hidden;}
+.form-label label{width: 220px;font-weight: bold;float: left;line-height: 32px;}
+.form-label span{float: left; width: 760px; }
+
+.a{width:450px;border:1px solid #edf0f2;box-shadow:0 0 2px #ccc;position:absolute;background-color: #fff; z-index: 10;}
+.a-header{height:40px;border-bottom:1px solid #edf0f2;}
+.all-sel{width:200px;}
+.all-sel>div{margin-bottom:5px;}
+.fl-status{width:115px;}
+.fl-status>div{margin-bottom:5px;}
+.a-main-wp{overflow:hidden;}
+.a-foot{height:40px;border-top:1px solid #edf0f2;}
+.search-button{padding:6px 15px;background-color: #0095ea;border:1px solid #0083ce;color:#fff;border-radius:3px;}
+
+
+
+
+

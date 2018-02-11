@@ -1,0 +1,36 @@
+<!-- 页头 -->
+<div th:fragment="header">
+	<div class="yl-wrapper">
+		<div class="yl-main-header cl">
+		    <a href="/" class="logo">
+		        <span class="logo-lg lg-max">CRM系统</span>
+		        <span class="logo-lg lg-min undb">CRM</span>
+		    </a>
+		    <div class="yl-navbar">
+		        <a href="/" class="sidebar-toggle">
+		            <span class="side-min"><i class="icon iconfont">&#xe605;</i></span>
+		            <span class="nav-peop" style="background-position: 0px -457px;"></span>
+		        </a>
+		        <div class="navbar-custom-menu">
+		            <ul class="nav yl-navbar-nav">
+		                <li class="nav-dropdown">
+		                    <a href="#">
+		                        <img src="/images/person.png" alt="" class="user-image" data-pin-nopin="true" />
+		                        <span style="padding-left: 10px;" th:text="${session.SESSION_USER.accCode}"></span>
+		                        <span class="nav-peop">&nbsp;</span>
+		                    </a>
+		                    <ul class="dropdown-menu tc">
+		                        <li onclick="editPwd();">修改密码</li>
+		                        <li onclick="exit();">退出系统</li>
+		                    </ul>
+		                </li>
+		            </ul>
+		            <script type="text/javascript">
+		            	function editPwd() { window.location.href="/toEditPwd.do"; }
+						function exit() {  window.location.href="/exit.do"; }
+					</script>
+		        </div>
+		    </div>
+		</div>
+	</div>
+</div>

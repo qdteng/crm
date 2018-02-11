@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layouts/dialog"  >
+<head>
+<meta charset="utf-8"></meta>
+<title>会员信息-标签分组</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/zTreeStyle/zTreeStyle.css}"></link>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/zTreeStyle/demo.css}"></link>
+
+<style>
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font: normal 12px/1.5 "微软雅黑", 'arial', 'Tahoma', 'simsun', 'Verdana';
+}
+
+.p20 {
+	padding: 20px;
+}
+
+.mt10 {
+	margin-top: 10px;
+}
+
+.fl {
+	float: left;
+}
+
+.clearfloat:after {
+	display: block;
+	clear: both;
+	content: "";
+	visibility: hidden;
+	height: 0
+}
+
+.clearfloat {
+	zoom: 1
+}
+
+.clear {
+	*zoom: 1;
+}
+
+.clear:after {
+	content: '\20';
+	display: block;
+	height: 0;
+	clear: both;
+}
+
+.member h3 {
+	border-bottom: 1px solid #CCCCCC;
+	line-height: 40px;
+	font-size: 16px;
+	font-weight: normal;
+}
+
+.content h4 {
+	font-size: 14px;
+	font-weight: normal;
+	margin-top: 15px;
+}
+
+.content p {
+	overflow: hidden;
+	border-bottom: 1px solid #CCCCCC;
+	padding-bottom: 10px;
+}
+
+.content p span {
+	height: 30px;
+	line-height: 30px;
+	margin: 5px 0;
+	width: 300px;
+}
+
+.content p span  b {
+	width: 120px;
+	font-weight: normal;
+	margin-right: 5px;
+}
+
+.content p span  i {
+	font-style: normal;
+}
+
+.labels label {
+	display: block;
+	float: left;
+	background: #f4f4f4;
+	margin: 0 5px;
+	padding: 5px 10px;
+}
+
+.labels label b {
+	font-weight: normal;
+	margin-left: 10px;
+}
+
+.labels a {
+	background: #fff;
+	border: 1px dashed #ccc;
+	border-radius: 3px;
+	color: #6fb6e0;
+	padding: 4px 9px;
+	float: left;
+	margin-left: 5px;
+	text-decoration: none;
+}
+.w80{width:80px}
+.tab-centent p{line-height: 30px;}
+.tab-centent p b{font-weight:normal;width:120px;}
+.tab-centent p span{width:80%;}
+</style>
+								
+</head>
+<body>
+	<div class="cl" style="height:450px;overflow:auto;" layout:fragment="content">
+		<form action="/customers/group/labledetail/saveOrUpdate" id="sub_frm">
+			<input type="hidden" name="groupId" th:value="${cGroup?.id}" value="" /> 
+			<div class="cl" style="margin:10px 50px 0" >
+				<div class="fl centent-l"
+					style="width: 278px; border: 1px solid #e1e6eb; margin-right: 10px; height: 500px;">
+					<br />
+						<input style="margin-left: 10px;" type="text" placeholder="请输入"
+							name="searchName" id="searchName" class="fl " /> <input
+							class="fl yl-btn yl-btn-blue-shadow query query-btn ml10 search_btn "
+							type="button" value="搜索" />
+					<!--/*  主节点参数  */-->
+					<input id="parentParam"
+						th:attr="vname=${customerLable.name},vid=${customerLable.id},hasChildren=${customerLable.hasChildren},"
+						type="hidden" /> <br /> <br />
+					<ul id="tree"
+						th:attr="vname=${customerLable.name},vid=${customerLable.id}"
+						class="ztree" style="width: 220px; overflow: auto;"></ul>
+				</div>
+				<div class="fl centent-l leftToRight"
+				style="width: 80px; border: 1px solid #e1e6eb; margin-right: 10px; height: 52px; text-align: center; margin-top: 15%;cursor: pointer;">
+						<br/>
+						>>
+				</div>
+			
+				<div class="fl centent-l"
+					style="width: 278px; border: 1px solid #e1e6eb; margin-right: 10px; height: 500px;">
+					<br />
+					
+						 <input
+							class="fl yl-btn yl-btn-blue-shadow query query-btn ml10  deleteBtn  "
+							type="button" value="删除" />
+					  <br /> <br />
+					<ul  
+						class="ztree" style="width: 220px; overflow: auto; border: none;">
+						<select class="c_required" multiple="multiple" id="rightSel" name="lableIds" style="width: 100%;height: 100%;" >
+							<option th:each="obj,lable:${selectLable}" 
+											th:text="${obj['name']}"
+											th:value="${obj['id']}"  value="0" >请选择</option>
+						</select>	
+					</ul>
+				</div>
+			</div>
+			<p class="tc mt10 cl"><span class="fl w80" >分组名称：</span><input type="text" name="name"    th:value="${cGroup?.name}" id="name" class="c_maxlength_32 c_required fl"  ></input></p>
+			<p class="tc mt10 cl"><span class="fl w80" >分组说明：</span><input type="text" name="remark"   th:value="${cGroup?.remark}" id="remark" class="c_maxlength_64 fl"   ></input></p>
+			<p class="tc mt10 cl"><span class="fl w80" >分组类型：</span>
+				<select class="fl" name="type" id="type">
+						<option value="1"  th:selected="${cGroup?.type == '1'}"  >动态分组</option>
+						<option value="2"  th:selected="${cGroup?.type == '2'}"  selected="selected">静态分组</option>
+				</select>
+			</p>
+		</form>
+</div>
+
+
+
+</body>
+<!-- 脚本区域（弹框、脚本） -->
+<div layout:fragment="javascript">
+	<script th:src="@{/js/plugins/ztree/jquery.ztree.all.js}"></script>
+	<script th:src="@{/js/customers/lable.group.js}"></script>
+	<!-- 脚本区域（弹框、脚本） -->
+	<script type="text/javascript" th:inline="javascript">
+		$(function() {
+			
+		});
+	</script>
+
+</div>
+
+</html>

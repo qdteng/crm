@@ -1,0 +1,16 @@
+server:
+  port: 8000
+  
+hostname: 0.0.0.0
+  
+eureka:
+  instance:
+    hostname: ${hostname}
+  server:
+#   enable-self-preservation: false           # \u5173\u95ed\u81ea\u6211\u4fdd\u62a4\u6a21\u5f0f\uff08\u7f3a\u7701\u4e3a\u6253\u5f00\uff09
+   eviction-interval-timer-in-ms: 5000       # \u7eed\u671f\u65f6\u95f4\uff0c\u5373\u626b\u63cf\u5931\u6548\u670d\u52a1\u7684\u95f4\u9694\u65f6\u95f4\uff08\u7f3a\u7701\u4e3a60*1000ms\uff09
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${hostname}:${server.port}/eureka/

@@ -1,0 +1,219 @@
+<!DOCTYPE html>  
+<html xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorator="layouts/index">  
+<head>
+ <meta charset="utf-8"></meta>
+ <title>系统管理-菜单管理页</title>
+ <script type="text/javascript">
+ /*<![CDATA[*/
+            
+    //重复提交
+	var repeat =  true ;
+ 
+ 	function menuSubmitHander() {
+ 		if (!repeat){
+			return ;
+		}
+ 		$frm = $("#menuForm");
+		//1.启用表单验证。
+		var validateWidget = $frm.validate({ parentPromptWinId:"menuForm" });
+		if (!validateWidget.check()) {//1.基础样式校验。
+			return false;
+		}
+		
+		repeat = false;
+		
+		//提交表单
+		$frm.ajaxSubmit({success: function(entry, statusText, xhr, $form){
+			if(entry.code=="success"){
+				$(document).find("#queryMenuForm").submit();
+			}
+			repeat=true; 
+			layer.msg(entry.message,{time: 2000} ,function (){
+			}); 
+		}});
+		
+	}
+ 	
+	jQuery(document).ready(function() {
+		
+		//添加窗口
+		$("#addMenu").click(function() {
+		  $("#menuForm").attr("action", "/sysmenu/save.do");
+		  $("#menuForm")[0].reset();
+	      $("#menuFormWin").minInBox({
+	      		"boxHeight": 360,
+	            "boxWidth": 550,
+	            "boxName": "添加菜单",
+	            "iSubmitHander": menuSubmitHander,
+	            "iCancelHander":function(){
+	            	//取消
+	            },
+	            "iCloseHander": function(){
+	            	//右上角
+	            },   
+	            "isubmit":true,
+	            "iCancel":true
+	      });
+	    });
+	    
+	    //显示/隐藏 操作
+	    $(".editStatus").click(function() {
+       	   var url = "/sysmenu/editStatus.do?id="+$(this).attr("id")+"&type="+$(this).attr("type");
+       	   var msg = "你确定要执行【"+($(this).attr("type")==2?"显示":"隐藏")+"】操作？";
+	       confirm(msg,function(){
+	     		document.location.href = url;
+	       });
+	    });
+	    
+	    //编辑窗口
+	  	$(".editMenu").click(function() {
+	  		var _boxName = "编辑菜单【"+$(this).attr("name")+"】";
+		  	$("#menuFormWin").minInBox({
+	      		"boxHeight": 360,
+	            "boxWidth": 550,
+	            "boxName": _boxName,
+	            "iSubmitHander": menuSubmitHander,
+	            "iCancelHander":function(){
+	            	//取消
+	            },
+	            "iCloseHander": function(){
+	            	//右上角
+	            }
+	      	});
+	      	$("#menuForm").attr("action","/sysmenu/edit.do");
+		  	$("#menuForm_id").val($(this).attr("id"));
+		  	$("#menuForm_pid").val($(this).attr("pid"));
+		  	$("#menuForm_name").val($(this).attr("name"));
+		  	$("#menuForm_url").val($(this).attr("url"));
+		  	$("#menuForm_ord").val($(this).attr("ord"));
+		  	$("input[type='radio'][name='status'][value="+$(this).attr("status")+"]").prop("checked", true);
+	     });
+	     
+	     //删除
+	     $(".deleteMenu").click(function() {
+	     	var $this = $(this);
+	     	if (parseInt($this.attr("childrenNum"))>0) {
+	     		layer.alert("存在子级节点,请先逐级进行删除！");return;
+	     	}
+	     	confirm("你确定要执行【删除】操作？",function(){
+	     		//document.location.href = "/sysmenu/del.do?id=" + ;
+	     		var delid =$this.attr("id");
+	     		 $.getJSON("/sysmenu/del.do",{ id:delid  }, function(entry){
+       			  if(entry.code=="success"){
+	        				$(document).find("#queryMenuForm").submit();
+	        			}
+						layer.msg(entry.message,{time: 2000} ,function (){
+							layer.close(layer.load());
+	        			}); 
+					});
+	     		 
+	        });
+	     });
+	
+	});
+	
+/*]]>*/	
+</script>
+</head>
+<body>
+<div layout:fragment="content">
+	<div class="container">
+	    <section class="col-lg-12 ui-content ui-shadow">
+		<!-- 列表页头（标题、操作按钮） -->
+		<h3>
+			菜单管理
+		</h3>
+	    <!-- 列表主体 -->
+		<div class="search-form cl mt15 mb10" style="overflow-x:auto;">
+			<!-- 列表主体（查询区域）-->
+			<form id="queryMenuForm" name="queryMenuForm" action="/sysmenu/show.do" method="post">
+				<input  type="hidden"  id="pageNo" name="pageNo"  th:value="${page.pageNo}" value=""  />
+				<input  type="hidden" name="pageSize"  id="pageSize" th:value="${page.pageSize}" value=""  />
+			</form>
+			<div th:if="${#lists.size(page.data) > 0}">
+				<div class="pt10">
+					<input type="button" class="yl-btn yl-btn-blue-shadow" id="addMenu" value="添加" />
+				</div>
+				<!-- 列表主体（搜索结果） -->
+				<table class="table table-bordered mt15">
+					<tr>
+					  <!-- <th width="20" style="text-align:left;"><input type="checkbox" id="table_checkall" style=" width:20px;" /></th> -->
+					  <th width="20" style="text-align:center;">编号</th>
+					  <th style="text-align:center;">父级名称</th>
+					  <th style="text-align:center;">菜单名称</th>
+					  <th style="text-align:left;">链接地址</th>
+					  <th style="text-align:center;">状态</th>
+					  <th style="text-align:center;">排序</th>
+					  <th width="200" style="text-align:center;">操作</th>
+					</tr>
+					<tr th:each="menu,menuStat:${page.data}">
+						<!-- <td><input name="table_check" type="checkbox" value="${menu.id}" style="width: 20px" /></td> -->
+						<td style="text-align:center;" th:text="${(page.pageNo-1)*page.pageSize+menuStat.index+1}">...</td>
+						<td style="text-align:center;" th:text="${menu.pname}">...</td>
+						<td style="text-align:center;" th:text="${menu.name}">...</td>
+						<td style="text-align:left;" th:text="${menu.url}">...</td>
+						<td style="text-align:center;" th:text="${menu.statusShow}">...</td>
+						<td style="text-align:center;" th:text="${menu.ord}">...</td>
+						<td style="text-align:center;" >
+							<span th:if="${menu.status == 1}"><a href="###" class="a-view mr10 editStatus" th:attr="id=${menu.id},type=1">隐藏</a>|&nbsp;</span>
+							<span th:if="${menu.status == 0}"><a href="###" class="a-view mr10 editStatus" th:attr="id=${menu.id},type=2">显示</a>|&nbsp;</span>
+							<a href="###" class="a-view mr10 editMenu" th:attr="id=${menu.id},pid=${menu.pid},name=${menu.name},url=${menu.url},ord=${menu.ord},status=${menu.status}">修改</a>|&nbsp;
+							<a href="###" class="a-view mr10 deleteMenu" th:attr="id=${menu.id},childrenNum=${menu.childrenNum}">删除</a>
+						</td>
+					</tr>
+				 </table>
+			 </div>
+			 <!-- 分页 -->
+			 <div th:include="layouts/page:: page" th:attr="pageFormId=queryMenuForm,pageNo=${page.pageNo},pageSize=${page.pageSize},total=${page.total}">...</div>
+		 </div>
+	   </section>
+	</div>
+</div>
+</body>
+<!-- 脚本区域（弹框、脚本） -->
+<div layout:fragment="javascript">
+<!-- 添加/编辑菜单窗口 -->
+<div class="undb" id="menuFormWin">
+ 	<div>
+	     <form id="menuForm" action="/sysmenu/save.do" method="post" class="form-horizontal">
+	     	<input id="menuForm_id" name="id" type="hidden" value="" />
+			<div class="cl mb10">
+	     		<p>
+	     			<span>父级名称：</span>
+	     			<select id="menuForm_pid" name="pid">
+	     				<option th:each="topMenu,topMenuStat:${topMenus}" th:value="${topMenu.id}" th:text="${topMenu.name}">--</option>
+	     			</select>
+	     		</p>
+	     	</div>
+	     	<div class="cl mb10">
+	     		<p>
+	     			<span><i class="f-red">* </i>菜单名称：</span>
+	     			<input class="w200 c_required c_minlength_4 c_maxlength_15" id="menuForm_name" name="name" type="text" placeholder="菜单名称" />
+	     		</p>
+	     	</div>
+	     	<div class="cl mb10">
+	     		<p>
+	     			<span>链接地址：</span>
+	     			<input class="w200" id="menuForm_url" name="url" type="text" placeholder="链接地址" />
+	     		</p>
+	     	</div>
+	     	<div class="cl mb10">
+	     		<p>
+	     			<span>排序：</span>
+	     			<input class="w200 c_positiveInteger" id="menuForm_ord" name="ord" type="text" placeholder="排序" />
+	     		</p>
+	     	</div>
+	     	<div class="cl">
+	     		<p>
+	     			<span><i class="f-red">* </i>状态：</span>
+	     			<input type="radio" class="menuForm_status" name="status" value="1" checked="checked" />&nbsp;显示&nbsp;&nbsp;
+	     			<input type="radio" class="menuForm_status" name="status" value="0" />&nbsp;隐藏
+	     		</p>
+	     	</div>
+    	</form>
+	</div>
+</div>
+</div>
+</html>

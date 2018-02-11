@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.ylpw.web.crm.mapper.order.TAddressMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.ylpw.web.crm.entity.order.TAddress" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="CUSTOMERSID" property="customersid" jdbcType="BIGINT" />
+    <result column="NAME" property="name" 
+	typeHandler="cn.com.ylpw.web.crm.util.ConvertBlobTypeHandler"   />
+    <result column="ADDRESS" property="address" 
+    typeHandler="cn.com.ylpw.web.crm.util.ConvertBlobTypeHandler"   />
+    <result column="ZIP" property="zip" jdbcType="VARCHAR" />
+    <result column="TEL" property="tel" jdbcType="VARCHAR" />
+    <result column="PHONE" property="phone" jdbcType="VARCHAR" />
+    <result column="PSNUM" property="psnum" jdbcType="INTEGER" />
+    <result column="LAST_PSTIME" property="lastPstime" jdbcType="TIMESTAMP" />
+    <result column="ID_DEFAULT" property="idDefault" jdbcType="INTEGER" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    
+    <result column="CITYID"      property="cityid" jdbcType="BIGINT" />
+    <result column="AREAID"      property="areaid" jdbcType="BIGINT" />
+    <result column="PROVINCEID"  property="provinceid" jdbcType="BIGINT" />
+    
+    <result column="CITY_NAME"   property="cityName" jdbcType="VARCHAR" />
+    <result column="PROV_NAME"   property="provName" jdbcType="VARCHAR" />
+    <result column="AREA_NAME"   property="areaName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, CUSTOMERSID, NAME, ADDRESS, ZIP, TEL, PHONE, PSNUM, LAST_PSTIME, ID_DEFAULT, 
+    CREATE_TIME,CITYID,CITY_NAME,PROV_NAME,AREA_NAME,AREAID,PROVINCEID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_address
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_address
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.com.ylpw.web.crm.entity.order.TAddress" >
+    insert into t_address (ID, CUSTOMERSID, NAME, 
+      ADDRESS, ZIP, TEL, 
+      PHONE, PSNUM, LAST_PSTIME, 
+      ID_DEFAULT, CREATE_TIME)
+    values (#{id,jdbcType=BIGINT}, #{customersid,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{zip,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{psnum,jdbcType=INTEGER}, #{lastPstime,jdbcType=TIMESTAMP}, 
+      #{idDefault,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.ylpw.web.crm.entity.order.TAddress" >
+    insert into t_address
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="customersid != null" >
+        CUSTOMERSID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="zip != null" >
+        ZIP,
+      </if>
+      <if test="tel != null" >
+        TEL,
+      </if>
+      <if test="phone != null" >
+        PHONE,
+      </if>
+      <if test="psnum != null" >
+        PSNUM,
+      </if>
+      <if test="lastPstime != null" >
+        LAST_PSTIME,
+      </if>
+      <if test="idDefault != null" >
+        ID_DEFAULT,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="customersid != null" >
+        #{customersid,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="zip != null" >
+        #{zip,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="psnum != null" >
+        #{psnum,jdbcType=INTEGER},
+      </if>
+      <if test="lastPstime != null" >
+        #{lastPstime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="idDefault != null" >
+        #{idDefault,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.ylpw.web.crm.entity.order.TAddress" >
+    update t_address
+    <set >
+      <if test="customersid != null" >
+        CUSTOMERSID = #{customersid,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="zip != null" >
+        ZIP = #{zip,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        TEL = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="psnum != null" >
+        PSNUM = #{psnum,jdbcType=INTEGER},
+      </if>
+      <if test="lastPstime != null" >
+        LAST_PSTIME = #{lastPstime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="idDefault != null" >
+        ID_DEFAULT = #{idDefault,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.ylpw.web.crm.entity.order.TAddress" >
+    update t_address
+    set CUSTOMERSID = #{customersid,jdbcType=BIGINT},
+      NAME = #{name,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      ZIP = #{zip,jdbcType=VARCHAR},
+      TEL = #{tel,jdbcType=VARCHAR},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      PSNUM = #{psnum,jdbcType=INTEGER},
+      LAST_PSTIME = #{lastPstime,jdbcType=TIMESTAMP},
+      ID_DEFAULT = #{idDefault,jdbcType=INTEGER},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <insert id="insertBatchSelective" parameterType="java.util.List" >
+  	  insert into t_address (ID, CUSTOMERSID, NAME, 
+      ADDRESS, ZIP, TEL, 
+      PHONE, PSNUM, LAST_PSTIME, 
+      ID_DEFAULT, CREATE_TIME,CITYID,AREAID,PROVINCEID,CITY_NAME,PROV_NAME,AREA_NAME)
+      values 
+     <foreach collection ="list" item="addr" index= "index" separator ="," >
+     	(
+	     	#{addr.id,jdbcType=BIGINT}, #{addr.customersid,jdbcType=BIGINT}, #{addr.name,jdbcType=VARCHAR}, 
+			#{addr.address,jdbcType=VARCHAR}, #{addr.zip,jdbcType=VARCHAR}, #{addr.tel,jdbcType=VARCHAR}, 
+			#{addr.phone,jdbcType=VARCHAR}, #{addr.psnum,jdbcType=INTEGER}, #{addr.lastPstime,jdbcType=TIMESTAMP}, 
+			#{addr.idDefault,jdbcType=INTEGER}
+			,#{addr.createTime,jdbcType=TIMESTAMP}
+			,#{addr.cityid,jdbcType=BIGINT}
+			,#{addr.areaid,jdbcType=BIGINT}
+			,#{addr.provinceid,jdbcType=BIGINT}
+			,#{addr.cityName }
+			,#{addr.provName }
+			,#{addr.areaName }
+     	)
+     </foreach>
+  </insert>
+  
+   <select id="findAll" parameterType="java.util.HashMap" resultType="java.util.HashMap" >
+		SELECT
+			MAX(LAST_PSTIME) AS LAST_PSTIME,
+			(
+				SELECT
+					ID_DEFAULT
+				FROM
+					T_ADDRESS a
+				WHERE
+					a.CUSTOMERSID = 61713444
+				ORDER BY
+					a.LAST_PSTIME DESC
+				LIMIT 0,
+				1
+			) AS ID_DEFAULT,
+			CONVERT (NAME USING utf8) AS NAME,
+			CONCAT(
+				IFNULL(PROV_NAME, ''),
+				IFNULL(city_name, ''),
+				IFNULL(area_name, ''),
+				CONVERT (ADDRESS USING utf8)
+			) AS ADDRESS,
+			ZIP,
+			TEL,
+			PHONE,
+			SUM(1) AS PSNUM
+		FROM
+			T_ADDRESS
+		WHERE
+			CUSTOMERSID = #{customerid }
+		GROUP BY
+			CONCAT(
+				IFNULL(PROV_NAME, ''),
+				IFNULL(city_name, ''),
+				IFNULL(area_name, ''),
+				CONVERT (ADDRESS USING utf8)
+			),
+			ZIP,
+			TEL,
+			PHONE,
+			CITYID,
+			AREAID,
+			PROVINCEID,
+			CONVERT (NAME USING utf8)
+   </select>
+  
+  
+</mapper>

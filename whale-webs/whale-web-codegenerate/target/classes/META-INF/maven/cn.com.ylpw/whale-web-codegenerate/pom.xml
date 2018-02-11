@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>whale-webs</artifactId>
+		<groupId>cn.com.ylpw</groupId>
+		<version>0.0.1</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+
+	<artifactId>whale-web-codegenerate</artifactId>
+	<packaging>jar</packaging>
+
+	<name>whale-web-codegenerate</name>
+	<url>http://maven.apache.org</url>
+
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<freemarker.version>2.3.19</freemarker.version>
+		<hibernate-validator.version>4.2.0.Final</hibernate-validator.version>
+		<!-- 主要依赖库的版本定义 -->
+		<spring.version>4.0.9.RELEASE</spring.version>
+		<hibernate.version>4.1.0.Final</hibernate.version>
+		<hibernate-common-annotations.version>4.0.2.Final</hibernate-common-annotations.version>
+		<hibernate-jpa.version>1.0.1.Final</hibernate-jpa.version>
+	</properties>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>cn.com.ylpw</groupId>
+			<artifactId>whale-core-tools</artifactId>
+			<version>0.0.1</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<!-- freemarker -->
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<version>${freemarker.version}</version>
+		</dependency>
+		
+		<!-- JSR303 Bean Validator -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>${hibernate-validator.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator-annotation-processor</artifactId>
+			<version>${hibernate-validator.version}</version>
+		</dependency>
+		
+		
+		<!-- hibernate -->
+		<dependency>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.0-api</artifactId>
+			<version>${hibernate-jpa.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+		
+	</dependencies>
+	
+	 <build>
+        <!-- 指定下面的目录为资源文件 -->
+        <resources>
+            <!-- 设置自动替换 -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                  <include>**/*.properties</include>
+		          <include>**/*.xml</include>
+		          <include>**/*.tld</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                  <exclude>**/*.properties</exclude>
+		          <exclude>**/*.xml</exclude>
+		          <exclude>**/*.tld</exclude>
+                </excludes>
+                <filtering>false</filtering>
+            </resource>
+            
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+		          <include>**/*.properties</include>
+		          <include>**/*.xml</include>
+		          <include>**/*.tld</include>
+		        </includes>
+		        <filtering>false</filtering>
+            </resource>
+            
+        </resources>
+        
+	</build>
+  
+
+
+</project>

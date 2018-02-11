@@ -1,0 +1,1449 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.ylpw.web.crm.mapper.customer.TCustomerPropertysMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.ylpw.web.crm.entity.customer.TCustomerPropertys" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="LABLE_ID" property="lableId" jdbcType="BIGINT" />
+    <result column="BA_SEX" property="baSex" jdbcType="VARCHAR" />
+    <result column="BA_EDUCATION" property="baEducation" jdbcType="VARCHAR" />
+    <result column="BA_AGE" property="baAge" jdbcType="VARCHAR" />
+    <result column="BA_CONSTELLATION" property="baConstellation" jdbcType="VARCHAR" />
+    <result column="BA_PROVINCE" property="baProvince" jdbcType="VARCHAR" />
+    <result column="BA_CITY" property="baCity" jdbcType="VARCHAR" />
+    <result column="BA_INCOME_LEVEL" property="baIncomeLevel" jdbcType="VARCHAR" />
+    <result column="BA_MARITAL_STATUS" property="baMaritalStatus" jdbcType="VARCHAR" />
+    <result column="BA_CHILDREN" property="baChildren" jdbcType="VARCHAR" />
+    <result column="BA_IP_PROVINCE" property="baIpProvince" jdbcType="VARCHAR" />
+    <result column="BA_IP_CITY" property="baIpCity" jdbcType="VARCHAR" />
+    <result column="BA_REG_TIME_START" property="baRegTimeStart" jdbcType="TIMESTAMP" />
+    <result column="BA_REG_TIME_END" property="baRegTimeEnd" jdbcType="TIMESTAMP" />
+    <result column="BA_REG_SOURCE_CHANNEL" property="baRegSourceChannel" jdbcType="VARCHAR" />
+    <result column="BA_REGISTRATION_PLATFORM" property="baRegistrationPlatform" jdbcType="VARCHAR" />
+    <result column="PA_ORDER_SOURCE" property="paOrderSource" jdbcType="VARCHAR" />
+    <result column="PA_TRADE_NAME" property="paTradeName" jdbcType="VARCHAR" />
+    <result column="PA_COMMODITY_CLASSA" property="paCommodityClassa" jdbcType="VARCHAR" />
+    <result column="PA_COMMODITY_CLASSB" property="paCommodityClassb" jdbcType="VARCHAR" />
+    <result column="PA_PER_IN_PROVINCE" property="paPerInProvince" jdbcType="VARCHAR" />
+    <result column="PA_PER_IN_CITY" property="paPerInCity" jdbcType="VARCHAR" />
+    <result column="PA_INVOLVING_ARTIST_GROUPS" property="paInvolvingArtistGroups" jdbcType="VARCHAR" />
+    <result column="PA_ORDER_STATUS" property="paOrderStatus" jdbcType="VARCHAR" />
+    <result column="PA_ABNORMAL_STATE" property="paAbnormalState" jdbcType="VARCHAR" />
+    <result column="PA_ABNORMAL_CAUSE" property="paAbnormalCause" jdbcType="VARCHAR" />
+    <result column="PA_PAYMENT_METHOD" property="paPaymentMethod" jdbcType="VARCHAR" />
+    <result column="PA_PAYMENT_START_TIME" property="paPaymentStartTime" jdbcType="TIMESTAMP" />
+    <result column="PA_PAYMENT_END_TIME" property="paPaymentEndTime" jdbcType="TIMESTAMP" />
+    <result column="PA_TOTAL_PAYMENT" property="paTotalPayment" jdbcType="VARCHAR" />
+    <result column="PA_MALICIOUS_REFUND" property="paMaliciousRefund" jdbcType="VARCHAR" />
+    <result column="PA_NUMBER_REFUNDS" property="paNumberRefunds" jdbcType="VARCHAR" />
+    <result column="PA_DIS_PROVINCE" property="paDisProvince" jdbcType="VARCHAR" />
+    <result column="PA_DIS_CITY" property="paDisCity" jdbcType="VARCHAR" />
+    <result column="PA_DIS_COUNT" property="paDisCount" jdbcType="VARCHAR" />
+    <result column="PA_EWALLET_RECHARGE_AMOUNT" property="paEwalletRechargeAmount" jdbcType="VARCHAR" />
+    <result column="PA_EWALLET_RECHARGE_START" property="paEwalletRechargeStart" jdbcType="TIMESTAMP" />
+    <result column="PA_EWALLET_RECHARGE_END" property="paEwalletRechargeEnd" jdbcType="TIMESTAMP" />
+    <result column="ME_MEMBERSHIP_LEVEL" property="meMembershipLevel" jdbcType="VARCHAR" />
+    <result column="ME_MEMBER_STATUS" property="meMemberStatus" jdbcType="VARCHAR" />
+    <result column="ME_MEMBER_SOURCE" property="meMemberSource" jdbcType="VARCHAR" />
+    <result column="ME_EXISTING_INTEGRAL" property="meExistingIntegral" jdbcType="VARCHAR" />
+    <result column="ME_LAST_TRADING_START" property="meLastTradingStart" jdbcType="TIMESTAMP" />
+    <result column="ME_LAST_TRADING_END" property="meLastTradingEnd" jdbcType="TIMESTAMP" />
+    <result column="ME_YEAR_TOTAL_VOLUME" property="meYearTotalVolume" jdbcType="VARCHAR" />
+    <result column="ME_YEAR_TOTAL_NUMBER" property="meYearTotalNumber" jdbcType="VARCHAR" />
+    <result column="ME_TRANSACTION_TOTAL" property="meTransactionTotal" jdbcType="VARCHAR" />
+    <result column="ME_BUY_TOTAL" property="meBuyTotal" jdbcType="VARCHAR" />
+    <result column="ME_CLOSING_AMOUNT" property="meClosingAmount" jdbcType="VARCHAR" />
+    <result column="ME_GROWTH_VALUE" property="meGrowthValue" jdbcType="VARCHAR" />
+    <result column="ME_UPGRADE_TIME_START" property="meUpgradeTimeStart" jdbcType="TIMESTAMP" />
+    <result column="ME_UPGRADE_TIME_END" property="meUpgradeTimeEnd" jdbcType="TIMESTAMP" />
+    <result column="ME_SIGN_IN_TOTAL" property="meSignInTotal" jdbcType="VARCHAR" />
+    <result column="ME_LAST_SIGN_START" property="meLastSignStart" jdbcType="TIMESTAMP" />
+    <result column="ME_LAST_SIGN_END" property="meLastSignEnd" jdbcType="TIMESTAMP" />
+    <result column="ME_SHARE_TOTAL_NUMBER" property="meShareTotalNumber" jdbcType="VARCHAR" />
+    <result column="ME_LAST_TIME_SHARE_SATRT" property="meLastTimeShareSatrt" jdbcType="TIMESTAMP" />
+    <result column="ME_LAST_TIME_SHARE_END" property="meLastTimeShareEnd" jdbcType="TIMESTAMP" />
+    <result column="ME_SUBSCRIPTION_TOTAL" property="meSubscriptionTotal" jdbcType="VARCHAR" />
+    <result column="ME_LAST_SUBSCRIPTION_START" property="meLastSubscriptionStart" jdbcType="TIMESTAMP" />
+    <result column="ME_LAST_SUBSCRIPTION_END" property="meLastSubscriptionEnd" jdbcType="TIMESTAMP" />
+    <result column="BE_BROWSER_TERMINAL" property="beBrowserTerminal" jdbcType="VARCHAR" />
+    <result column="BE_TRACKING_PRO_NAME" property="beTrackingProName" jdbcType="VARCHAR" />
+    <result column="BE_TRA_PRO_CLASSA" property="beTraProClassa" jdbcType="VARCHAR" />
+    <result column="BE_TRA_PRO_CLASSB" property="beTraProClassb" jdbcType="VARCHAR" />
+    <result column="BE_BROWSE_PROVINCE" property="beBrowseProvince" jdbcType="VARCHAR" />
+    <result column="BE_BROWSE_CITY" property="beBrowseCity" jdbcType="VARCHAR" />
+    <result column="BE_BROWSE_GROUPS_ACTOR" property="beBrowseGroupsActor" jdbcType="VARCHAR" />
+    <result column="BE_BROWSE_PRO_NAME" property="beBrowseProName" jdbcType="VARCHAR" />
+    <result column="BE_TRACKING_ORDER_SOURCE" property="beTrackingOrderSource" jdbcType="VARCHAR" />
+    <result column="BE_TRA_ORDER_SUB_INTERVALS" property="beTraOrderSubIntervals" jdbcType="TIMESTAMP" />
+    <result column="BE_TRA_ORDER_SUB_INTERVALE" property="beTraOrderSubIntervale" jdbcType="TIMESTAMP" />
+    <result column="BE_TRA_DELIVERY_MODE" property="beTraDeliveryMode" jdbcType="VARCHAR" />
+    <result column="BE_PAYMENT_LINK" property="bePaymentLink" jdbcType="VARCHAR" />
+    <result column="BE_EWALLET_USEING" property="beEwalletUseing" jdbcType="VARCHAR" />
+    <result column="BE_TRA_PAYMENT_MODE" property="beTraPaymentMode" jdbcType="VARCHAR" />
+    <result column="BE_PAYMENT_SUCCESS" property="bePaymentSuccess" jdbcType="VARCHAR" />
+    <result column="BE_SUB_TIMES" property="beSubTimes" jdbcType="TIMESTAMP" />
+    <result column="BE_SUB_TIMEE" property="beSubTimee" jdbcType="TIMESTAMP" />
+    <result column="BE_KEYWORD_SEARCH" property="beKeywordSearch" jdbcType="VARCHAR" />
+    <result column="BE_INSIDE_SEARCH_PAGE" property="beInsideSearchPage" jdbcType="VARCHAR" />
+    <result column="BE_LANDING_PAGE" property="beLandingPage" jdbcType="VARCHAR" />
+    <result column="BE_ACCESS_STIME" property="beAccessStime" jdbcType="TIMESTAMP" />
+    <result column="BE_IN_OUT_STATION" property="beInOutStation" jdbcType="VARCHAR" />
+    <result column="BE_EXOTIC_SOURCE" property="beExoticSource" jdbcType="VARCHAR" />
+    <result column="BE_AD_KEYWORD" property="beAdKeyword" jdbcType="VARCHAR" />
+    <result column="BE_SHARE_STIME" property="beShareStime" jdbcType="TIMESTAMP" />
+    <result column="BE_COMMODITY_NAME" property="beCommodityName" jdbcType="VARCHAR" />
+    <result column="BE_SHARING_CHANNELS" property="beSharingChannels" jdbcType="VARCHAR" />
+    <result column="BE_REGISTRATION_TIMES" property="beRegistrationTimes" jdbcType="VARCHAR" />
+    <result column="BE_REGISTRATION_TIMEE" property="beRegistrationTimee" jdbcType="VARCHAR" />
+    <result column="BE_REGISTERED_GOODS" property="beRegisteredGoods" jdbcType="VARCHAR" />
+    <result column="BE_REGISTERED_QUANTITY" property="beRegisteredQuantity" jdbcType="VARCHAR" />
+    <result column="BE_COMMODITY_CLASSA" property="beCommodityClassa" jdbcType="VARCHAR" />
+    <result column="BE_COMMODITY_CLASSB" property="beCommodityClassb" jdbcType="VARCHAR" />
+    <result column="BE_OUT_STOCK_PROVINCE" property="beOutStockProvince" jdbcType="VARCHAR" />
+    <result column="BE_OUT_STOCK_CITY" property="beOutStockCity" jdbcType="VARCHAR" />
+    <result column="BE_OUT_OF_STOCK_GROUPS" property="beOutOfStockGroups" jdbcType="VARCHAR" />
+    <result column="CO_COMMUNICATION_TYPE" property="coCommunicationType" jdbcType="VARCHAR" />
+    <result column="CO_TIME_START" property="coTimeStart" jdbcType="TIMESTAMP" />
+    <result column="CO_TIME_END" property="coTimeEnd" jdbcType="TIMESTAMP" />
+    <result column="CO_COUNT" property="coCount" jdbcType="VARCHAR" />
+    <result column="CO_RESULT" property="coResult" jdbcType="VARCHAR" />
+    <result column="CO_FREQUENCY" property="coFrequency" jdbcType="VARCHAR" />
+    <result column="CO_CLICK_RATE" property="coClickRate" jdbcType="VARCHAR" />
+    <result column="CO_ORDER_CONVERSION_RATE" property="coOrderConversionRate" jdbcType="VARCHAR" />
+    <result column="CO_COM_KEYWORDS" property="coComKeywords" jdbcType="VARCHAR" />
+    <result column="CREATE_ID" property="createId" jdbcType="BIGINT" />
+    <result column="CREATE_NAME" property="createName" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_ID" property="updateId" jdbcType="BIGINT" />
+    <result column="UPDATE_NAME" property="updateName" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="BE_ACCESS_ETIME" property="beAccessEtime" jdbcType="TIMESTAMP" />
+    <result column="BE_SHARE_ETIME" property="beShareEtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, LABLE_ID, BA_SEX, BA_EDUCATION, BA_AGE, BA_CONSTELLATION, BA_PROVINCE, BA_CITY, 
+    BA_INCOME_LEVEL, BA_MARITAL_STATUS, BA_CHILDREN, BA_IP_PROVINCE, BA_IP_CITY, BA_REG_TIME_START, 
+    BA_REG_TIME_END, BA_REG_SOURCE_CHANNEL, BA_REGISTRATION_PLATFORM, PA_ORDER_SOURCE, 
+    PA_TRADE_NAME, PA_COMMODITY_CLASSA, PA_COMMODITY_CLASSB, PA_PER_IN_PROVINCE, PA_PER_IN_CITY, 
+    PA_INVOLVING_ARTIST_GROUPS, PA_ORDER_STATUS, PA_ABNORMAL_STATE, PA_ABNORMAL_CAUSE, 
+    PA_PAYMENT_METHOD, PA_PAYMENT_START_TIME, PA_PAYMENT_END_TIME, PA_TOTAL_PAYMENT, 
+    PA_MALICIOUS_REFUND, PA_NUMBER_REFUNDS, PA_DIS_PROVINCE, PA_DIS_CITY, PA_DIS_COUNT, 
+    PA_EWALLET_RECHARGE_AMOUNT, PA_EWALLET_RECHARGE_START, PA_EWALLET_RECHARGE_END, ME_MEMBERSHIP_LEVEL, 
+    ME_MEMBER_STATUS, ME_MEMBER_SOURCE, ME_EXISTING_INTEGRAL, ME_LAST_TRADING_START, 
+    ME_LAST_TRADING_END, ME_YEAR_TOTAL_VOLUME, ME_YEAR_TOTAL_NUMBER, ME_TRANSACTION_TOTAL, 
+    ME_BUY_TOTAL, ME_CLOSING_AMOUNT, ME_GROWTH_VALUE, ME_UPGRADE_TIME_START, ME_UPGRADE_TIME_END, 
+    ME_SIGN_IN_TOTAL, ME_LAST_SIGN_START, ME_LAST_SIGN_END, ME_SHARE_TOTAL_NUMBER, ME_LAST_TIME_SHARE_SATRT, 
+    ME_LAST_TIME_SHARE_END, ME_SUBSCRIPTION_TOTAL, ME_LAST_SUBSCRIPTION_START, ME_LAST_SUBSCRIPTION_END, 
+    BE_BROWSER_TERMINAL, BE_TRACKING_PRO_NAME, BE_TRA_PRO_CLASSA, BE_TRA_PRO_CLASSB, 
+    BE_BROWSE_PROVINCE, BE_BROWSE_CITY, BE_BROWSE_GROUPS_ACTOR, BE_BROWSE_PRO_NAME, BE_TRACKING_ORDER_SOURCE, 
+    BE_TRA_ORDER_SUB_INTERVALS, BE_TRA_ORDER_SUB_INTERVALE, BE_TRA_DELIVERY_MODE, BE_PAYMENT_LINK, 
+    BE_EWALLET_USEING, BE_TRA_PAYMENT_MODE, BE_PAYMENT_SUCCESS, BE_SUB_TIMES, BE_SUB_TIMEE, 
+    BE_KEYWORD_SEARCH, BE_INSIDE_SEARCH_PAGE, BE_LANDING_PAGE, BE_ACCESS_STIME, BE_IN_OUT_STATION, 
+    BE_EXOTIC_SOURCE, BE_AD_KEYWORD, BE_SHARE_STIME, BE_COMMODITY_NAME, BE_SHARING_CHANNELS, 
+    BE_REGISTRATION_TIMES, BE_REGISTRATION_TIMEE, BE_REGISTERED_GOODS, BE_REGISTERED_QUANTITY, 
+    BE_COMMODITY_CLASSA, BE_COMMODITY_CLASSB, BE_OUT_STOCK_PROVINCE, BE_OUT_STOCK_CITY, 
+    BE_OUT_OF_STOCK_GROUPS, CO_COMMUNICATION_TYPE, CO_TIME_START, CO_TIME_END, CO_COUNT, 
+    CO_RESULT, CO_FREQUENCY, CO_CLICK_RATE, CO_ORDER_CONVERSION_RATE, CO_COM_KEYWORDS, 
+    CREATE_ID, CREATE_NAME, CREATE_TIME, UPDATE_ID, UPDATE_NAME, UPDATE_TIME, BE_ACCESS_ETIME, 
+    BE_SHARE_ETIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_customer_propertys
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_customer_propertys
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.com.ylpw.web.crm.entity.customer.TCustomerPropertys" >
+    insert into t_customer_propertys (ID, LABLE_ID, BA_SEX, 
+      BA_EDUCATION, BA_AGE, BA_CONSTELLATION, 
+      BA_PROVINCE, BA_CITY, BA_INCOME_LEVEL, 
+      BA_MARITAL_STATUS, BA_CHILDREN, BA_IP_PROVINCE, 
+      BA_IP_CITY, BA_REG_TIME_START, BA_REG_TIME_END, 
+      BA_REG_SOURCE_CHANNEL, BA_REGISTRATION_PLATFORM, 
+      PA_ORDER_SOURCE, PA_TRADE_NAME, PA_COMMODITY_CLASSA, 
+      PA_COMMODITY_CLASSB, PA_PER_IN_PROVINCE, PA_PER_IN_CITY, 
+      PA_INVOLVING_ARTIST_GROUPS, PA_ORDER_STATUS, 
+      PA_ABNORMAL_STATE, PA_ABNORMAL_CAUSE, PA_PAYMENT_METHOD, 
+      PA_PAYMENT_START_TIME, PA_PAYMENT_END_TIME, 
+      PA_TOTAL_PAYMENT, PA_MALICIOUS_REFUND, PA_NUMBER_REFUNDS, 
+      PA_DIS_PROVINCE, PA_DIS_CITY, PA_DIS_COUNT, 
+      PA_EWALLET_RECHARGE_AMOUNT, PA_EWALLET_RECHARGE_START, 
+      PA_EWALLET_RECHARGE_END, ME_MEMBERSHIP_LEVEL, 
+      ME_MEMBER_STATUS, ME_MEMBER_SOURCE, ME_EXISTING_INTEGRAL, 
+      ME_LAST_TRADING_START, ME_LAST_TRADING_END, 
+      ME_YEAR_TOTAL_VOLUME, ME_YEAR_TOTAL_NUMBER, ME_TRANSACTION_TOTAL, 
+      ME_BUY_TOTAL, ME_CLOSING_AMOUNT, ME_GROWTH_VALUE, 
+      ME_UPGRADE_TIME_START, ME_UPGRADE_TIME_END, 
+      ME_SIGN_IN_TOTAL, ME_LAST_SIGN_START, ME_LAST_SIGN_END, 
+      ME_SHARE_TOTAL_NUMBER, ME_LAST_TIME_SHARE_SATRT, 
+      ME_LAST_TIME_SHARE_END, ME_SUBSCRIPTION_TOTAL, 
+      ME_LAST_SUBSCRIPTION_START, ME_LAST_SUBSCRIPTION_END, 
+      BE_BROWSER_TERMINAL, BE_TRACKING_PRO_NAME, BE_TRA_PRO_CLASSA, 
+      BE_TRA_PRO_CLASSB, BE_BROWSE_PROVINCE, BE_BROWSE_CITY, 
+      BE_BROWSE_GROUPS_ACTOR, BE_BROWSE_PRO_NAME, BE_TRACKING_ORDER_SOURCE, 
+      BE_TRA_ORDER_SUB_INTERVALS, BE_TRA_ORDER_SUB_INTERVALE, 
+      BE_TRA_DELIVERY_MODE, BE_PAYMENT_LINK, BE_EWALLET_USEING, 
+      BE_TRA_PAYMENT_MODE, BE_PAYMENT_SUCCESS, BE_SUB_TIMES, 
+      BE_SUB_TIMEE, BE_KEYWORD_SEARCH, BE_INSIDE_SEARCH_PAGE, 
+      BE_LANDING_PAGE, BE_ACCESS_STIME, BE_IN_OUT_STATION, 
+      BE_EXOTIC_SOURCE, BE_AD_KEYWORD, BE_SHARE_STIME, 
+      BE_COMMODITY_NAME, BE_SHARING_CHANNELS, BE_REGISTRATION_TIMES, 
+      BE_REGISTRATION_TIMEE, BE_REGISTERED_GOODS, 
+      BE_REGISTERED_QUANTITY, BE_COMMODITY_CLASSA, 
+      BE_COMMODITY_CLASSB, BE_OUT_STOCK_PROVINCE, 
+      BE_OUT_STOCK_CITY, BE_OUT_OF_STOCK_GROUPS, CO_COMMUNICATION_TYPE, 
+      CO_TIME_START, CO_TIME_END, CO_COUNT, 
+      CO_RESULT, CO_FREQUENCY, CO_CLICK_RATE, 
+      CO_ORDER_CONVERSION_RATE, CO_COM_KEYWORDS, CREATE_ID, 
+      CREATE_NAME, CREATE_TIME, UPDATE_ID, 
+      UPDATE_NAME, UPDATE_TIME, BE_ACCESS_ETIME, 
+      BE_SHARE_ETIME)
+    values (#{id,jdbcType=BIGINT}, #{lableId,jdbcType=BIGINT}, #{baSex,jdbcType=VARCHAR}, 
+      #{baEducation,jdbcType=VARCHAR}, #{baAge,jdbcType=VARCHAR}, #{baConstellation,jdbcType=VARCHAR}, 
+      #{baProvince,jdbcType=VARCHAR}, #{baCity,jdbcType=VARCHAR}, #{baIncomeLevel,jdbcType=VARCHAR}, 
+      #{baMaritalStatus,jdbcType=VARCHAR}, #{baChildren,jdbcType=VARCHAR}, #{baIpProvince,jdbcType=VARCHAR}, 
+      #{baIpCity,jdbcType=VARCHAR}, #{baRegTimeStart,jdbcType=TIMESTAMP}, #{baRegTimeEnd,jdbcType=TIMESTAMP}, 
+      #{baRegSourceChannel,jdbcType=VARCHAR}, #{baRegistrationPlatform,jdbcType=VARCHAR}, 
+      #{paOrderSource,jdbcType=VARCHAR}, #{paTradeName,jdbcType=VARCHAR}, #{paCommodityClassa,jdbcType=VARCHAR}, 
+      #{paCommodityClassb,jdbcType=VARCHAR}, #{paPerInProvince,jdbcType=VARCHAR}, #{paPerInCity,jdbcType=VARCHAR}, 
+      #{paInvolvingArtistGroups,jdbcType=VARCHAR}, #{paOrderStatus,jdbcType=VARCHAR}, 
+      #{paAbnormalState,jdbcType=VARCHAR}, #{paAbnormalCause,jdbcType=VARCHAR}, #{paPaymentMethod,jdbcType=VARCHAR}, 
+      #{paPaymentStartTime,jdbcType=TIMESTAMP}, #{paPaymentEndTime,jdbcType=TIMESTAMP}, 
+      #{paTotalPayment,jdbcType=VARCHAR}, #{paMaliciousRefund,jdbcType=VARCHAR}, #{paNumberRefunds,jdbcType=VARCHAR}, 
+      #{paDisProvince,jdbcType=VARCHAR}, #{paDisCity,jdbcType=VARCHAR}, #{paDisCount,jdbcType=VARCHAR}, 
+      #{paEwalletRechargeAmount,jdbcType=VARCHAR}, #{paEwalletRechargeStart,jdbcType=TIMESTAMP}, 
+      #{paEwalletRechargeEnd,jdbcType=TIMESTAMP}, #{meMembershipLevel,jdbcType=VARCHAR}, 
+      #{meMemberStatus,jdbcType=VARCHAR}, #{meMemberSource,jdbcType=VARCHAR}, #{meExistingIntegral,jdbcType=VARCHAR}, 
+      #{meLastTradingStart,jdbcType=TIMESTAMP}, #{meLastTradingEnd,jdbcType=TIMESTAMP}, 
+      #{meYearTotalVolume,jdbcType=VARCHAR}, #{meYearTotalNumber,jdbcType=VARCHAR}, #{meTransactionTotal,jdbcType=VARCHAR}, 
+      #{meBuyTotal,jdbcType=VARCHAR}, #{meClosingAmount,jdbcType=VARCHAR}, #{meGrowthValue,jdbcType=VARCHAR}, 
+      #{meUpgradeTimeStart,jdbcType=TIMESTAMP}, #{meUpgradeTimeEnd,jdbcType=TIMESTAMP}, 
+      #{meSignInTotal,jdbcType=VARCHAR}, #{meLastSignStart,jdbcType=TIMESTAMP}, #{meLastSignEnd,jdbcType=TIMESTAMP}, 
+      #{meShareTotalNumber,jdbcType=VARCHAR}, #{meLastTimeShareSatrt,jdbcType=TIMESTAMP}, 
+      #{meLastTimeShareEnd,jdbcType=TIMESTAMP}, #{meSubscriptionTotal,jdbcType=VARCHAR}, 
+      #{meLastSubscriptionStart,jdbcType=TIMESTAMP}, #{meLastSubscriptionEnd,jdbcType=TIMESTAMP}, 
+      #{beBrowserTerminal,jdbcType=VARCHAR}, #{beTrackingProName,jdbcType=VARCHAR}, #{beTraProClassa,jdbcType=VARCHAR}, 
+      #{beTraProClassb,jdbcType=VARCHAR}, #{beBrowseProvince,jdbcType=VARCHAR}, #{beBrowseCity,jdbcType=VARCHAR}, 
+      #{beBrowseGroupsActor,jdbcType=VARCHAR}, #{beBrowseProName,jdbcType=VARCHAR}, #{beTrackingOrderSource,jdbcType=VARCHAR}, 
+      #{beTraOrderSubIntervals,jdbcType=TIMESTAMP}, #{beTraOrderSubIntervale,jdbcType=TIMESTAMP}, 
+      #{beTraDeliveryMode,jdbcType=VARCHAR}, #{bePaymentLink,jdbcType=VARCHAR}, #{beEwalletUseing,jdbcType=VARCHAR}, 
+      #{beTraPaymentMode,jdbcType=VARCHAR}, #{bePaymentSuccess,jdbcType=VARCHAR}, #{beSubTimes,jdbcType=TIMESTAMP}, 
+      #{beSubTimee,jdbcType=TIMESTAMP}, #{beKeywordSearch,jdbcType=VARCHAR}, #{beInsideSearchPage,jdbcType=VARCHAR}, 
+      #{beLandingPage,jdbcType=VARCHAR}, #{beAccessStime,jdbcType=TIMESTAMP}, #{beInOutStation,jdbcType=VARCHAR}, 
+      #{beExoticSource,jdbcType=VARCHAR}, #{beAdKeyword,jdbcType=VARCHAR}, #{beShareStime,jdbcType=TIMESTAMP}, 
+      #{beCommodityName,jdbcType=VARCHAR}, #{beSharingChannels,jdbcType=VARCHAR}, #{beRegistrationTimes,jdbcType=VARCHAR}, 
+      #{beRegistrationTimee,jdbcType=VARCHAR}, #{beRegisteredGoods,jdbcType=VARCHAR}, 
+      #{beRegisteredQuantity,jdbcType=VARCHAR}, #{beCommodityClassa,jdbcType=VARCHAR}, 
+      #{beCommodityClassb,jdbcType=VARCHAR}, #{beOutStockProvince,jdbcType=VARCHAR}, 
+      #{beOutStockCity,jdbcType=VARCHAR}, #{beOutOfStockGroups,jdbcType=VARCHAR}, #{coCommunicationType,jdbcType=VARCHAR}, 
+      #{coTimeStart,jdbcType=TIMESTAMP}, #{coTimeEnd,jdbcType=TIMESTAMP}, #{coCount,jdbcType=VARCHAR}, 
+      #{coResult,jdbcType=VARCHAR}, #{coFrequency,jdbcType=VARCHAR}, #{coClickRate,jdbcType=VARCHAR}, 
+      #{coOrderConversionRate,jdbcType=VARCHAR}, #{coComKeywords,jdbcType=VARCHAR}, #{createId,jdbcType=BIGINT}, 
+      #{createName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateId,jdbcType=BIGINT}, 
+      #{updateName,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{beAccessEtime,jdbcType=TIMESTAMP}, 
+      #{beShareEtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.ylpw.web.crm.entity.customer.TCustomerPropertys"  useGeneratedKeys="true" keyProperty="id"  >
+    insert into t_customer_propertys
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="lableId != null" >
+        LABLE_ID,
+      </if>
+      <if test="baSex != null" >
+        BA_SEX,
+      </if>
+      <if test="baEducation != null" >
+        BA_EDUCATION,
+      </if>
+      <if test="baAge != null" >
+        BA_AGE,
+      </if>
+      <if test="baConstellation != null" >
+        BA_CONSTELLATION,
+      </if>
+      <if test="baProvince != null" >
+        BA_PROVINCE,
+      </if>
+      <if test="baCity != null" >
+        BA_CITY,
+      </if>
+      <if test="baIncomeLevel != null" >
+        BA_INCOME_LEVEL,
+      </if>
+      <if test="baMaritalStatus != null" >
+        BA_MARITAL_STATUS,
+      </if>
+      <if test="baChildren != null" >
+        BA_CHILDREN,
+      </if>
+      <if test="baIpProvince != null" >
+        BA_IP_PROVINCE,
+      </if>
+      <if test="baIpCity != null" >
+        BA_IP_CITY,
+      </if>
+      <if test="baRegTimeStart != null" >
+        BA_REG_TIME_START,
+      </if>
+      <if test="baRegTimeEnd != null" >
+        BA_REG_TIME_END,
+      </if>
+      <if test="baRegSourceChannel != null" >
+        BA_REG_SOURCE_CHANNEL,
+      </if>
+      <if test="baRegistrationPlatform != null" >
+        BA_REGISTRATION_PLATFORM,
+      </if>
+      <if test="paOrderSource != null" >
+        PA_ORDER_SOURCE,
+      </if>
+      <if test="paTradeName != null" >
+        PA_TRADE_NAME,
+      </if>
+      <if test="paCommodityClassa != null" >
+        PA_COMMODITY_CLASSA,
+      </if>
+      <if test="paCommodityClassb != null" >
+        PA_COMMODITY_CLASSB,
+      </if>
+      <if test="paPerInProvince != null" >
+        PA_PER_IN_PROVINCE,
+      </if>
+      <if test="paPerInCity != null" >
+        PA_PER_IN_CITY,
+      </if>
+      <if test="paInvolvingArtistGroups != null" >
+        PA_INVOLVING_ARTIST_GROUPS,
+      </if>
+      <if test="paOrderStatus != null" >
+        PA_ORDER_STATUS,
+      </if>
+      <if test="paAbnormalState != null" >
+        PA_ABNORMAL_STATE,
+      </if>
+      <if test="paAbnormalCause != null" >
+        PA_ABNORMAL_CAUSE,
+      </if>
+      <if test="paPaymentMethod != null" >
+        PA_PAYMENT_METHOD,
+      </if>
+      <if test="paPaymentStartTime != null" >
+        PA_PAYMENT_START_TIME,
+      </if>
+      <if test="paPaymentEndTime != null" >
+        PA_PAYMENT_END_TIME,
+      </if>
+      <if test="paTotalPayment != null" >
+        PA_TOTAL_PAYMENT,
+      </if>
+      <if test="paMaliciousRefund != null" >
+        PA_MALICIOUS_REFUND,
+      </if>
+      <if test="paNumberRefunds != null" >
+        PA_NUMBER_REFUNDS,
+      </if>
+      <if test="paDisProvince != null" >
+        PA_DIS_PROVINCE,
+      </if>
+      <if test="paDisCity != null" >
+        PA_DIS_CITY,
+      </if>
+      <if test="paDisCount != null" >
+        PA_DIS_COUNT,
+      </if>
+      <if test="paEwalletRechargeAmount != null" >
+        PA_EWALLET_RECHARGE_AMOUNT,
+      </if>
+      <if test="paEwalletRechargeStart != null" >
+        PA_EWALLET_RECHARGE_START,
+      </if>
+      <if test="paEwalletRechargeEnd != null" >
+        PA_EWALLET_RECHARGE_END,
+      </if>
+      <if test="meMembershipLevel != null" >
+        ME_MEMBERSHIP_LEVEL,
+      </if>
+      <if test="meMemberStatus != null" >
+        ME_MEMBER_STATUS,
+      </if>
+      <if test="meMemberSource != null" >
+        ME_MEMBER_SOURCE,
+      </if>
+      <if test="meExistingIntegral != null" >
+        ME_EXISTING_INTEGRAL,
+      </if>
+      <if test="meLastTradingStart != null" >
+        ME_LAST_TRADING_START,
+      </if>
+      <if test="meLastTradingEnd != null" >
+        ME_LAST_TRADING_END,
+      </if>
+      <if test="meYearTotalVolume != null" >
+        ME_YEAR_TOTAL_VOLUME,
+      </if>
+      <if test="meYearTotalNumber != null" >
+        ME_YEAR_TOTAL_NUMBER,
+      </if>
+      <if test="meTransactionTotal != null" >
+        ME_TRANSACTION_TOTAL,
+      </if>
+      <if test="meBuyTotal != null" >
+        ME_BUY_TOTAL,
+      </if>
+      <if test="meClosingAmount != null" >
+        ME_CLOSING_AMOUNT,
+      </if>
+      <if test="meGrowthValue != null" >
+        ME_GROWTH_VALUE,
+      </if>
+      <if test="meUpgradeTimeStart != null" >
+        ME_UPGRADE_TIME_START,
+      </if>
+      <if test="meUpgradeTimeEnd != null" >
+        ME_UPGRADE_TIME_END,
+      </if>
+      <if test="meSignInTotal != null" >
+        ME_SIGN_IN_TOTAL,
+      </if>
+      <if test="meLastSignStart != null" >
+        ME_LAST_SIGN_START,
+      </if>
+      <if test="meLastSignEnd != null" >
+        ME_LAST_SIGN_END,
+      </if>
+      <if test="meShareTotalNumber != null" >
+        ME_SHARE_TOTAL_NUMBER,
+      </if>
+      <if test="meLastTimeShareSatrt != null" >
+        ME_LAST_TIME_SHARE_SATRT,
+      </if>
+      <if test="meLastTimeShareEnd != null" >
+        ME_LAST_TIME_SHARE_END,
+      </if>
+      <if test="meSubscriptionTotal != null" >
+        ME_SUBSCRIPTION_TOTAL,
+      </if>
+      <if test="meLastSubscriptionStart != null" >
+        ME_LAST_SUBSCRIPTION_START,
+      </if>
+      <if test="meLastSubscriptionEnd != null" >
+        ME_LAST_SUBSCRIPTION_END,
+      </if>
+      <if test="beBrowserTerminal != null" >
+        BE_BROWSER_TERMINAL,
+      </if>
+      <if test="beTrackingProName != null" >
+        BE_TRACKING_PRO_NAME,
+      </if>
+      <if test="beTraProClassa != null" >
+        BE_TRA_PRO_CLASSA,
+      </if>
+      <if test="beTraProClassb != null" >
+        BE_TRA_PRO_CLASSB,
+      </if>
+      <if test="beBrowseProvince != null" >
+        BE_BROWSE_PROVINCE,
+      </if>
+      <if test="beBrowseCity != null" >
+        BE_BROWSE_CITY,
+      </if>
+      <if test="beBrowseGroupsActor != null" >
+        BE_BROWSE_GROUPS_ACTOR,
+      </if>
+      <if test="beBrowseProName != null" >
+        BE_BROWSE_PRO_NAME,
+      </if>
+      <if test="beTrackingOrderSource != null" >
+        BE_TRACKING_ORDER_SOURCE,
+      </if>
+      <if test="beTraOrderSubIntervals != null" >
+        BE_TRA_ORDER_SUB_INTERVALS,
+      </if>
+      <if test="beTraOrderSubIntervale != null" >
+        BE_TRA_ORDER_SUB_INTERVALE,
+      </if>
+      <if test="beTraDeliveryMode != null" >
+        BE_TRA_DELIVERY_MODE,
+      </if>
+      <if test="bePaymentLink != null" >
+        BE_PAYMENT_LINK,
+      </if>
+      <if test="beEwalletUseing != null" >
+        BE_EWALLET_USEING,
+      </if>
+      <if test="beTraPaymentMode != null" >
+        BE_TRA_PAYMENT_MODE,
+      </if>
+      <if test="bePaymentSuccess != null" >
+        BE_PAYMENT_SUCCESS,
+      </if>
+      <if test="beSubTimes != null" >
+        BE_SUB_TIMES,
+      </if>
+      <if test="beSubTimee != null" >
+        BE_SUB_TIMEE,
+      </if>
+      <if test="beKeywordSearch != null" >
+        BE_KEYWORD_SEARCH,
+      </if>
+      <if test="beInsideSearchPage != null" >
+        BE_INSIDE_SEARCH_PAGE,
+      </if>
+      <if test="beLandingPage != null" >
+        BE_LANDING_PAGE,
+      </if>
+      <if test="beAccessStime != null" >
+        BE_ACCESS_STIME,
+      </if>
+      <if test="beInOutStation != null" >
+        BE_IN_OUT_STATION,
+      </if>
+      <if test="beExoticSource != null" >
+        BE_EXOTIC_SOURCE,
+      </if>
+      <if test="beAdKeyword != null" >
+        BE_AD_KEYWORD,
+      </if>
+      <if test="beShareStime != null" >
+        BE_SHARE_STIME,
+      </if>
+      <if test="beCommodityName != null" >
+        BE_COMMODITY_NAME,
+      </if>
+      <if test="beSharingChannels != null" >
+        BE_SHARING_CHANNELS,
+      </if>
+      <if test="beRegistrationTimes != null" >
+        BE_REGISTRATION_TIMES,
+      </if>
+      <if test="beRegistrationTimee != null" >
+        BE_REGISTRATION_TIMEE,
+      </if>
+      <if test="beRegisteredGoods != null" >
+        BE_REGISTERED_GOODS,
+      </if>
+      <if test="beRegisteredQuantity != null" >
+        BE_REGISTERED_QUANTITY,
+      </if>
+      <if test="beCommodityClassa != null" >
+        BE_COMMODITY_CLASSA,
+      </if>
+      <if test="beCommodityClassb != null" >
+        BE_COMMODITY_CLASSB,
+      </if>
+      <if test="beOutStockProvince != null" >
+        BE_OUT_STOCK_PROVINCE,
+      </if>
+      <if test="beOutStockCity != null" >
+        BE_OUT_STOCK_CITY,
+      </if>
+      <if test="beOutOfStockGroups != null" >
+        BE_OUT_OF_STOCK_GROUPS,
+      </if>
+      <if test="coCommunicationType != null" >
+        CO_COMMUNICATION_TYPE,
+      </if>
+      <if test="coTimeStart != null" >
+        CO_TIME_START,
+      </if>
+      <if test="coTimeEnd != null" >
+        CO_TIME_END,
+      </if>
+      <if test="coCount != null" >
+        CO_COUNT,
+      </if>
+      <if test="coResult != null" >
+        CO_RESULT,
+      </if>
+      <if test="coFrequency != null" >
+        CO_FREQUENCY,
+      </if>
+      <if test="coClickRate != null" >
+        CO_CLICK_RATE,
+      </if>
+      <if test="coOrderConversionRate != null" >
+        CO_ORDER_CONVERSION_RATE,
+      </if>
+      <if test="coComKeywords != null" >
+        CO_COM_KEYWORDS,
+      </if>
+      <if test="createId != null" >
+        CREATE_ID,
+      </if>
+      <if test="createName != null" >
+        CREATE_NAME,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="updateId != null" >
+        UPDATE_ID,
+      </if>
+      <if test="updateName != null" >
+        UPDATE_NAME,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="beAccessEtime != null" >
+        BE_ACCESS_ETIME,
+      </if>
+      <if test="beShareEtime != null" >
+        BE_SHARE_ETIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="lableId != null" >
+        #{lableId,jdbcType=BIGINT},
+      </if>
+      <if test="baSex != null" >
+        #{baSex,jdbcType=VARCHAR},
+      </if>
+      <if test="baEducation != null" >
+        #{baEducation,jdbcType=VARCHAR},
+      </if>
+      <if test="baAge != null" >
+        #{baAge,jdbcType=VARCHAR},
+      </if>
+      <if test="baConstellation != null" >
+        #{baConstellation,jdbcType=VARCHAR},
+      </if>
+      <if test="baProvince != null" >
+        #{baProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="baCity != null" >
+        #{baCity,jdbcType=VARCHAR},
+      </if>
+      <if test="baIncomeLevel != null" >
+        #{baIncomeLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="baMaritalStatus != null" >
+        #{baMaritalStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="baChildren != null" >
+        #{baChildren,jdbcType=VARCHAR},
+      </if>
+      <if test="baIpProvince != null" >
+        #{baIpProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="baIpCity != null" >
+        #{baIpCity,jdbcType=VARCHAR},
+      </if>
+      <if test="baRegTimeStart != null" >
+        #{baRegTimeStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="baRegTimeEnd != null" >
+        #{baRegTimeEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="baRegSourceChannel != null" >
+        #{baRegSourceChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="baRegistrationPlatform != null" >
+        #{baRegistrationPlatform,jdbcType=VARCHAR},
+      </if>
+      <if test="paOrderSource != null" >
+        #{paOrderSource,jdbcType=VARCHAR},
+      </if>
+      <if test="paTradeName != null" >
+        #{paTradeName,jdbcType=VARCHAR},
+      </if>
+      <if test="paCommodityClassa != null" >
+        #{paCommodityClassa,jdbcType=VARCHAR},
+      </if>
+      <if test="paCommodityClassb != null" >
+        #{paCommodityClassb,jdbcType=VARCHAR},
+      </if>
+      <if test="paPerInProvince != null" >
+        #{paPerInProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="paPerInCity != null" >
+        #{paPerInCity,jdbcType=VARCHAR},
+      </if>
+      <if test="paInvolvingArtistGroups != null" >
+        #{paInvolvingArtistGroups,jdbcType=VARCHAR},
+      </if>
+      <if test="paOrderStatus != null" >
+        #{paOrderStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="paAbnormalState != null" >
+        #{paAbnormalState,jdbcType=VARCHAR},
+      </if>
+      <if test="paAbnormalCause != null" >
+        #{paAbnormalCause,jdbcType=VARCHAR},
+      </if>
+      <if test="paPaymentMethod != null" >
+        #{paPaymentMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="paPaymentStartTime != null" >
+        #{paPaymentStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paPaymentEndTime != null" >
+        #{paPaymentEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paTotalPayment != null" >
+        #{paTotalPayment,jdbcType=VARCHAR},
+      </if>
+      <if test="paMaliciousRefund != null" >
+        #{paMaliciousRefund,jdbcType=VARCHAR},
+      </if>
+      <if test="paNumberRefunds != null" >
+        #{paNumberRefunds,jdbcType=VARCHAR},
+      </if>
+      <if test="paDisProvince != null" >
+        #{paDisProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="paDisCity != null" >
+        #{paDisCity,jdbcType=VARCHAR},
+      </if>
+      <if test="paDisCount != null" >
+        #{paDisCount,jdbcType=VARCHAR},
+      </if>
+      <if test="paEwalletRechargeAmount != null" >
+        #{paEwalletRechargeAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="paEwalletRechargeStart != null" >
+        #{paEwalletRechargeStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paEwalletRechargeEnd != null" >
+        #{paEwalletRechargeEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="meMembershipLevel != null" >
+        #{meMembershipLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="meMemberStatus != null" >
+        #{meMemberStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="meMemberSource != null" >
+        #{meMemberSource,jdbcType=VARCHAR},
+      </if>
+      <if test="meExistingIntegral != null" >
+        #{meExistingIntegral,jdbcType=VARCHAR},
+      </if>
+      <if test="meLastTradingStart != null" >
+        #{meLastTradingStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="meLastTradingEnd != null" >
+        #{meLastTradingEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="meYearTotalVolume != null" >
+        #{meYearTotalVolume,jdbcType=VARCHAR},
+      </if>
+      <if test="meYearTotalNumber != null" >
+        #{meYearTotalNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="meTransactionTotal != null" >
+        #{meTransactionTotal,jdbcType=VARCHAR},
+      </if>
+      <if test="meBuyTotal != null" >
+        #{meBuyTotal,jdbcType=VARCHAR},
+      </if>
+      <if test="meClosingAmount != null" >
+        #{meClosingAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="meGrowthValue != null" >
+        #{meGrowthValue,jdbcType=VARCHAR},
+      </if>
+      <if test="meUpgradeTimeStart != null" >
+        #{meUpgradeTimeStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="meUpgradeTimeEnd != null" >
+        #{meUpgradeTimeEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="meSignInTotal != null" >
+        #{meSignInTotal,jdbcType=VARCHAR},
+      </if>
+      <if test="meLastSignStart != null" >
+        #{meLastSignStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="meLastSignEnd != null" >
+        #{meLastSignEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="meShareTotalNumber != null" >
+        #{meShareTotalNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="meLastTimeShareSatrt != null" >
+        #{meLastTimeShareSatrt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="meLastTimeShareEnd != null" >
+        #{meLastTimeShareEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="meSubscriptionTotal != null" >
+        #{meSubscriptionTotal,jdbcType=VARCHAR},
+      </if>
+      <if test="meLastSubscriptionStart != null" >
+        #{meLastSubscriptionStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="meLastSubscriptionEnd != null" >
+        #{meLastSubscriptionEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="beBrowserTerminal != null" >
+        #{beBrowserTerminal,jdbcType=VARCHAR},
+      </if>
+      <if test="beTrackingProName != null" >
+        #{beTrackingProName,jdbcType=VARCHAR},
+      </if>
+      <if test="beTraProClassa != null" >
+        #{beTraProClassa,jdbcType=VARCHAR},
+      </if>
+      <if test="beTraProClassb != null" >
+        #{beTraProClassb,jdbcType=VARCHAR},
+      </if>
+      <if test="beBrowseProvince != null" >
+        #{beBrowseProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="beBrowseCity != null" >
+        #{beBrowseCity,jdbcType=VARCHAR},
+      </if>
+      <if test="beBrowseGroupsActor != null" >
+        #{beBrowseGroupsActor,jdbcType=VARCHAR},
+      </if>
+      <if test="beBrowseProName != null" >
+        #{beBrowseProName,jdbcType=VARCHAR},
+      </if>
+      <if test="beTrackingOrderSource != null" >
+        #{beTrackingOrderSource,jdbcType=VARCHAR},
+      </if>
+      <if test="beTraOrderSubIntervals != null" >
+        #{beTraOrderSubIntervals,jdbcType=TIMESTAMP},
+      </if>
+      <if test="beTraOrderSubIntervale != null" >
+        #{beTraOrderSubIntervale,jdbcType=TIMESTAMP},
+      </if>
+      <if test="beTraDeliveryMode != null" >
+        #{beTraDeliveryMode,jdbcType=VARCHAR},
+      </if>
+      <if test="bePaymentLink != null" >
+        #{bePaymentLink,jdbcType=VARCHAR},
+      </if>
+      <if test="beEwalletUseing != null" >
+        #{beEwalletUseing,jdbcType=VARCHAR},
+      </if>
+      <if test="beTraPaymentMode != null" >
+        #{beTraPaymentMode,jdbcType=VARCHAR},
+      </if>
+      <if test="bePaymentSuccess != null" >
+        #{bePaymentSuccess,jdbcType=VARCHAR},
+      </if>
+      <if test="beSubTimes != null" >
+        #{beSubTimes,jdbcType=TIMESTAMP},
+      </if>
+      <if test="beSubTimee != null" >
+        #{beSubTimee,jdbcType=TIMESTAMP},
+      </if>
+      <if test="beKeywordSearch != null" >
+        #{beKeywordSearch,jdbcType=VARCHAR},
+      </if>
+      <if test="beInsideSearchPage != null" >
+        #{beInsideSearchPage,jdbcType=VARCHAR},
+      </if>
+      <if test="beLandingPage != null" >
+        #{beLandingPage,jdbcType=VARCHAR},
+      </if>
+      <if test="beAccessStime != null" >
+        #{beAccessStime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="beInOutStation != null" >
+        #{beInOutStation,jdbcType=VARCHAR},
+      </if>
+      <if test="beExoticSource != null" >
+        #{beExoticSource,jdbcType=VARCHAR},
+      </if>
+      <if test="beAdKeyword != null" >
+        #{beAdKeyword,jdbcType=VARCHAR},
+      </if>
+      <if test="beShareStime != null" >
+        #{beShareStime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="beCommodityName != null" >
+        #{beCommodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="beSharingChannels != null" >
+        #{beSharingChannels,jdbcType=VARCHAR},
+      </if>
+      <if test="beRegistrationTimes != null" >
+        #{beRegistrationTimes,jdbcType=VARCHAR},
+      </if>
+      <if test="beRegistrationTimee != null" >
+        #{beRegistrationTimee,jdbcType=VARCHAR},
+      </if>
+      <if test="beRegisteredGoods != null" >
+        #{beRegisteredGoods,jdbcType=VARCHAR},
+      </if>
+      <if test="beRegisteredQuantity != null" >
+        #{beRegisteredQuantity,jdbcType=VARCHAR},
+      </if>
+      <if test="beCommodityClassa != null" >
+        #{beCommodityClassa,jdbcType=VARCHAR},
+      </if>
+      <if test="beCommodityClassb != null" >
+        #{beCommodityClassb,jdbcType=VARCHAR},
+      </if>
+      <if test="beOutStockProvince != null" >
+        #{beOutStockProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="beOutStockCity != null" >
+        #{beOutStockCity,jdbcType=VARCHAR},
+      </if>
+      <if test="beOutOfStockGroups != null" >
+        #{beOutOfStockGroups,jdbcType=VARCHAR},
+      </if>
+      <if test="coCommunicationType != null" >
+        #{coCommunicationType,jdbcType=VARCHAR},
+      </if>
+      <if test="coTimeStart != null" >
+        #{coTimeStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="coTimeEnd != null" >
+        #{coTimeEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="coCount != null" >
+        #{coCount,jdbcType=VARCHAR},
+      </if>
+      <if test="coResult != null" >
+        #{coResult,jdbcType=VARCHAR},
+      </if>
+      <if test="coFrequency != null" >
+        #{coFrequency,jdbcType=VARCHAR},
+      </if>
+      <if test="coClickRate != null" >
+        #{coClickRate,jdbcType=VARCHAR},
+      </if>
+      <if test="coOrderConversionRate != null" >
+        #{coOrderConversionRate,jdbcType=VARCHAR},
+      </if>
+      <if test="coComKeywords != null" >
+        #{coComKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null" >
+        #{createId,jdbcType=BIGINT},
+      </if>
+      <if test="createName != null" >
+        #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateId != null" >
+        #{updateId,jdbcType=BIGINT},
+      </if>
+      <if test="updateName != null" >
+        #{updateName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="beAccessEtime != null" >
+        #{beAccessEtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="beShareEtime != null" >
+        #{beShareEtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.ylpw.web.crm.entity.customer.TCustomerPropertys" >
+    update t_customer_propertys
+    <set >
+      <if test="lableId != null" >
+        LABLE_ID = #{lableId,jdbcType=BIGINT},
+      </if>
+      <if test="baSex != null" >
+        BA_SEX = #{baSex,jdbcType=VARCHAR},
+      </if>
+      <if test="baEducation != null" >
+        BA_EDUCATION = #{baEducation,jdbcType=VARCHAR},
+      </if>
+      <if test="baAge != null" >
+        BA_AGE = #{baAge,jdbcType=VARCHAR},
+      </if>
+      <if test="baConstellation != null" >
+        BA_CONSTELLATION = #{baConstellation,jdbcType=VARCHAR},
+      </if>
+      <if test="baProvince != null" >
+        BA_PROVINCE = #{baProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="baCity != null" >
+        BA_CITY = #{baCity,jdbcType=VARCHAR},
+      </if>
+      <if test="baIncomeLevel != null" >
+        BA_INCOME_LEVEL = #{baIncomeLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="baMaritalStatus != null" >
+        BA_MARITAL_STATUS = #{baMaritalStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="baChildren != null" >
+        BA_CHILDREN = #{baChildren,jdbcType=VARCHAR},
+      </if>
+      <if test="baIpProvince != null" >
+        BA_IP_PROVINCE = #{baIpProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="baIpCity != null" >
+        BA_IP_CITY = #{baIpCity,jdbcType=VARCHAR},
+      </if>
+      <if test="baRegTimeStart != null" >
+        BA_REG_TIME_START = #{baRegTimeStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="baRegTimeEnd != null" >
+        BA_REG_TIME_END = #{baRegTimeEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="baRegSourceChannel != null" >
+        BA_REG_SOURCE_CHANNEL = #{baRegSourceChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="baRegistrationPlatform != null" >
+        BA_REGISTRATION_PLATFORM = #{baRegistrationPlatform,jdbcType=VARCHAR},
+      </if>
+      <if test="paOrderSource != null" >
+        PA_ORDER_SOURCE = #{paOrderSource,jdbcType=VARCHAR},
+      </if>
+      <if test="paTradeName != null" >
+        PA_TRADE_NAME = #{paTradeName,jdbcType=VARCHAR},
+      </if>
+      <if test="paCommodityClassa != null" >
+        PA_COMMODITY_CLASSA = #{paCommodityClassa,jdbcType=VARCHAR},
+      </if>
+      <if test="paCommodityClassb != null" >
+        PA_COMMODITY_CLASSB = #{paCommodityClassb,jdbcType=VARCHAR},
+      </if>
+      <if test="paPerInProvince != null" >
+        PA_PER_IN_PROVINCE = #{paPerInProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="paPerInCity != null" >
+        PA_PER_IN_CITY = #{paPerInCity,jdbcType=VARCHAR},
+      </if>
+      <if test="paInvolvingArtistGroups != null" >
+        PA_INVOLVING_ARTIST_GROUPS = #{paInvolvingArtistGroups,jdbcType=VARCHAR},
+      </if>
+      <if test="paOrderStatus != null" >
+        PA_ORDER_STATUS = #{paOrderStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="paAbnormalState != null" >
+        PA_ABNORMAL_STATE = #{paAbnormalState,jdbcType=VARCHAR},
+      </if>
+      <if test="paAbnormalCause != null" >
+        PA_ABNORMAL_CAUSE = #{paAbnormalCause,jdbcType=VARCHAR},
+      </if>
+      <if test="paPaymentMethod != null" >
+        PA_PAYMENT_METHOD = #{paPaymentMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="paPaymentStartTime != null" >
+        PA_PAYMENT_START_TIME = #{paPaymentStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paPaymentEndTime != null" >
+        PA_PAYMENT_END_TIME = #{paPaymentEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paTotalPayment != null" >
+        PA_TOTAL_PAYMENT = #{paTotalPayment,jdbcType=VARCHAR},
+      </if>
+      <if test="paMaliciousRefund != null" >
+        PA_MALICIOUS_REFUND = #{paMaliciousRefund,jdbcType=VARCHAR},
+      </if>
+      <if test="paNumberRefunds != null" >
+        PA_NUMBER_REFUNDS = #{paNumberRefunds,jdbcType=VARCHAR},
+      </if>
+      <if test="paDisProvince != null" >
+        PA_DIS_PROVINCE = #{paDisProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="paDisCity != null" >
+        PA_DIS_CITY = #{paDisCity,jdbcType=VARCHAR},
+      </if>
+      <if test="paDisCount != null" >
+        PA_DIS_COUNT = #{paDisCount,jdbcType=VARCHAR},
+      </if>
+      <if test="paEwalletRechargeAmount != null" >
+        PA_EWALLET_RECHARGE_AMOUNT = #{paEwalletRechargeAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="paEwalletRechargeStart != null" >
+        PA_EWALLET_RECHARGE_START = #{paEwalletRechargeStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paEwalletRechargeEnd != null" >
+        PA_EWALLET_RECHARGE_END = #{paEwalletRechargeEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="meMembershipLevel != null" >
+        ME_MEMBERSHIP_LEVEL = #{meMembershipLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="meMemberStatus != null" >
+        ME_MEMBER_STATUS = #{meMemberStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="meMemberSource != null" >
+        ME_MEMBER_SOURCE = #{meMemberSource,jdbcType=VARCHAR},
+      </if>
+      <if test="meExistingIntegral != null" >
+        ME_EXISTING_INTEGRAL = #{meExistingIntegral,jdbcType=VARCHAR},
+      </if>
+      <if test="meLastTradingStart != null" >
+        ME_LAST_TRADING_START = #{meLastTradingStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="meLastTradingEnd != null" >
+        ME_LAST_TRADING_END = #{meLastTradingEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="meYearTotalVolume != null" >
+        ME_YEAR_TOTAL_VOLUME = #{meYearTotalVolume,jdbcType=VARCHAR},
+      </if>
+      <if test="meYearTotalNumber != null" >
+        ME_YEAR_TOTAL_NUMBER = #{meYearTotalNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="meTransactionTotal != null" >
+        ME_TRANSACTION_TOTAL = #{meTransactionTotal,jdbcType=VARCHAR},
+      </if>
+      <if test="meBuyTotal != null" >
+        ME_BUY_TOTAL = #{meBuyTotal,jdbcType=VARCHAR},
+      </if>
+      <if test="meClosingAmount != null" >
+        ME_CLOSING_AMOUNT = #{meClosingAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="meGrowthValue != null" >
+        ME_GROWTH_VALUE = #{meGrowthValue,jdbcType=VARCHAR},
+      </if>
+      <if test="meUpgradeTimeStart != null" >
+        ME_UPGRADE_TIME_START = #{meUpgradeTimeStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="meUpgradeTimeEnd != null" >
+        ME_UPGRADE_TIME_END = #{meUpgradeTimeEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="meSignInTotal != null" >
+        ME_SIGN_IN_TOTAL = #{meSignInTotal,jdbcType=VARCHAR},
+      </if>
+      <if test="meLastSignStart != null" >
+        ME_LAST_SIGN_START = #{meLastSignStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="meLastSignEnd != null" >
+        ME_LAST_SIGN_END = #{meLastSignEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="meShareTotalNumber != null" >
+        ME_SHARE_TOTAL_NUMBER = #{meShareTotalNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="meLastTimeShareSatrt != null" >
+        ME_LAST_TIME_SHARE_SATRT = #{meLastTimeShareSatrt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="meLastTimeShareEnd != null" >
+        ME_LAST_TIME_SHARE_END = #{meLastTimeShareEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="meSubscriptionTotal != null" >
+        ME_SUBSCRIPTION_TOTAL = #{meSubscriptionTotal,jdbcType=VARCHAR},
+      </if>
+      <if test="meLastSubscriptionStart != null" >
+        ME_LAST_SUBSCRIPTION_START = #{meLastSubscriptionStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="meLastSubscriptionEnd != null" >
+        ME_LAST_SUBSCRIPTION_END = #{meLastSubscriptionEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="beBrowserTerminal != null" >
+        BE_BROWSER_TERMINAL = #{beBrowserTerminal,jdbcType=VARCHAR},
+      </if>
+      <if test="beTrackingProName != null" >
+        BE_TRACKING_PRO_NAME = #{beTrackingProName,jdbcType=VARCHAR},
+      </if>
+      <if test="beTraProClassa != null" >
+        BE_TRA_PRO_CLASSA = #{beTraProClassa,jdbcType=VARCHAR},
+      </if>
+      <if test="beTraProClassb != null" >
+        BE_TRA_PRO_CLASSB = #{beTraProClassb,jdbcType=VARCHAR},
+      </if>
+      <if test="beBrowseProvince != null" >
+        BE_BROWSE_PROVINCE = #{beBrowseProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="beBrowseCity != null" >
+        BE_BROWSE_CITY = #{beBrowseCity,jdbcType=VARCHAR},
+      </if>
+      <if test="beBrowseGroupsActor != null" >
+        BE_BROWSE_GROUPS_ACTOR = #{beBrowseGroupsActor,jdbcType=VARCHAR},
+      </if>
+      <if test="beBrowseProName != null" >
+        BE_BROWSE_PRO_NAME = #{beBrowseProName,jdbcType=VARCHAR},
+      </if>
+      <if test="beTrackingOrderSource != null" >
+        BE_TRACKING_ORDER_SOURCE = #{beTrackingOrderSource,jdbcType=VARCHAR},
+      </if>
+      <if test="beTraOrderSubIntervals != null" >
+        BE_TRA_ORDER_SUB_INTERVALS = #{beTraOrderSubIntervals,jdbcType=TIMESTAMP},
+      </if>
+      <if test="beTraOrderSubIntervale != null" >
+        BE_TRA_ORDER_SUB_INTERVALE = #{beTraOrderSubIntervale,jdbcType=TIMESTAMP},
+      </if>
+      <if test="beTraDeliveryMode != null" >
+        BE_TRA_DELIVERY_MODE = #{beTraDeliveryMode,jdbcType=VARCHAR},
+      </if>
+      <if test="bePaymentLink != null" >
+        BE_PAYMENT_LINK = #{bePaymentLink,jdbcType=VARCHAR},
+      </if>
+      <if test="beEwalletUseing != null" >
+        BE_EWALLET_USEING = #{beEwalletUseing,jdbcType=VARCHAR},
+      </if>
+      <if test="beTraPaymentMode != null" >
+        BE_TRA_PAYMENT_MODE = #{beTraPaymentMode,jdbcType=VARCHAR},
+      </if>
+      <if test="bePaymentSuccess != null" >
+        BE_PAYMENT_SUCCESS = #{bePaymentSuccess,jdbcType=VARCHAR},
+      </if>
+      <if test="beSubTimes != null" >
+        BE_SUB_TIMES = #{beSubTimes,jdbcType=TIMESTAMP},
+      </if>
+      <if test="beSubTimee != null" >
+        BE_SUB_TIMEE = #{beSubTimee,jdbcType=TIMESTAMP},
+      </if>
+      <if test="beKeywordSearch != null" >
+        BE_KEYWORD_SEARCH = #{beKeywordSearch,jdbcType=VARCHAR},
+      </if>
+      <if test="beInsideSearchPage != null" >
+        BE_INSIDE_SEARCH_PAGE = #{beInsideSearchPage,jdbcType=VARCHAR},
+      </if>
+      <if test="beLandingPage != null" >
+        BE_LANDING_PAGE = #{beLandingPage,jdbcType=VARCHAR},
+      </if>
+      <if test="beAccessStime != null" >
+        BE_ACCESS_STIME = #{beAccessStime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="beInOutStation != null" >
+        BE_IN_OUT_STATION = #{beInOutStation,jdbcType=VARCHAR},
+      </if>
+      <if test="beExoticSource != null" >
+        BE_EXOTIC_SOURCE = #{beExoticSource,jdbcType=VARCHAR},
+      </if>
+      <if test="beAdKeyword != null" >
+        BE_AD_KEYWORD = #{beAdKeyword,jdbcType=VARCHAR},
+      </if>
+      <if test="beShareStime != null" >
+        BE_SHARE_STIME = #{beShareStime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="beCommodityName != null" >
+        BE_COMMODITY_NAME = #{beCommodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="beSharingChannels != null" >
+        BE_SHARING_CHANNELS = #{beSharingChannels,jdbcType=VARCHAR},
+      </if>
+      <if test="beRegistrationTimes != null" >
+        BE_REGISTRATION_TIMES = #{beRegistrationTimes,jdbcType=VARCHAR},
+      </if>
+      <if test="beRegistrationTimee != null" >
+        BE_REGISTRATION_TIMEE = #{beRegistrationTimee,jdbcType=VARCHAR},
+      </if>
+      <if test="beRegisteredGoods != null" >
+        BE_REGISTERED_GOODS = #{beRegisteredGoods,jdbcType=VARCHAR},
+      </if>
+      <if test="beRegisteredQuantity != null" >
+        BE_REGISTERED_QUANTITY = #{beRegisteredQuantity,jdbcType=VARCHAR},
+      </if>
+      <if test="beCommodityClassa != null" >
+        BE_COMMODITY_CLASSA = #{beCommodityClassa,jdbcType=VARCHAR},
+      </if>
+      <if test="beCommodityClassb != null" >
+        BE_COMMODITY_CLASSB = #{beCommodityClassb,jdbcType=VARCHAR},
+      </if>
+      <if test="beOutStockProvince != null" >
+        BE_OUT_STOCK_PROVINCE = #{beOutStockProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="beOutStockCity != null" >
+        BE_OUT_STOCK_CITY = #{beOutStockCity,jdbcType=VARCHAR},
+      </if>
+      <if test="beOutOfStockGroups != null" >
+        BE_OUT_OF_STOCK_GROUPS = #{beOutOfStockGroups,jdbcType=VARCHAR},
+      </if>
+      <if test="coCommunicationType != null" >
+        CO_COMMUNICATION_TYPE = #{coCommunicationType,jdbcType=VARCHAR},
+      </if>
+      <if test="coTimeStart != null" >
+        CO_TIME_START = #{coTimeStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="coTimeEnd != null" >
+        CO_TIME_END = #{coTimeEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="coCount != null" >
+        CO_COUNT = #{coCount,jdbcType=VARCHAR},
+      </if>
+      <if test="coResult != null" >
+        CO_RESULT = #{coResult,jdbcType=VARCHAR},
+      </if>
+      <if test="coFrequency != null" >
+        CO_FREQUENCY = #{coFrequency,jdbcType=VARCHAR},
+      </if>
+      <if test="coClickRate != null" >
+        CO_CLICK_RATE = #{coClickRate,jdbcType=VARCHAR},
+      </if>
+      <if test="coOrderConversionRate != null" >
+        CO_ORDER_CONVERSION_RATE = #{coOrderConversionRate,jdbcType=VARCHAR},
+      </if>
+      <if test="coComKeywords != null" >
+        CO_COM_KEYWORDS = #{coComKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null" >
+        CREATE_ID = #{createId,jdbcType=BIGINT},
+      </if>
+      <if test="createName != null" >
+        CREATE_NAME = #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateId != null" >
+        UPDATE_ID = #{updateId,jdbcType=BIGINT},
+      </if>
+      <if test="updateName != null" >
+        UPDATE_NAME = #{updateName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="beAccessEtime != null" >
+        BE_ACCESS_ETIME = #{beAccessEtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="beShareEtime != null" >
+        BE_SHARE_ETIME = #{beShareEtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.ylpw.web.crm.entity.customer.TCustomerPropertys" >
+    update t_customer_propertys
+    set LABLE_ID = #{lableId,jdbcType=BIGINT},
+      BA_SEX = #{baSex,jdbcType=VARCHAR},
+      BA_EDUCATION = #{baEducation,jdbcType=VARCHAR},
+      BA_AGE = #{baAge,jdbcType=VARCHAR},
+      BA_CONSTELLATION = #{baConstellation,jdbcType=VARCHAR},
+      BA_PROVINCE = #{baProvince,jdbcType=VARCHAR},
+      BA_CITY = #{baCity,jdbcType=VARCHAR},
+      BA_INCOME_LEVEL = #{baIncomeLevel,jdbcType=VARCHAR},
+      BA_MARITAL_STATUS = #{baMaritalStatus,jdbcType=VARCHAR},
+      BA_CHILDREN = #{baChildren,jdbcType=VARCHAR},
+      BA_IP_PROVINCE = #{baIpProvince,jdbcType=VARCHAR},
+      BA_IP_CITY = #{baIpCity,jdbcType=VARCHAR},
+      BA_REG_TIME_START = #{baRegTimeStart,jdbcType=TIMESTAMP},
+      BA_REG_TIME_END = #{baRegTimeEnd,jdbcType=TIMESTAMP},
+      BA_REG_SOURCE_CHANNEL = #{baRegSourceChannel,jdbcType=VARCHAR},
+      BA_REGISTRATION_PLATFORM = #{baRegistrationPlatform,jdbcType=VARCHAR},
+      PA_ORDER_SOURCE = #{paOrderSource,jdbcType=VARCHAR},
+      PA_TRADE_NAME = #{paTradeName,jdbcType=VARCHAR},
+      PA_COMMODITY_CLASSA = #{paCommodityClassa,jdbcType=VARCHAR},
+      PA_COMMODITY_CLASSB = #{paCommodityClassb,jdbcType=VARCHAR},
+      PA_PER_IN_PROVINCE = #{paPerInProvince,jdbcType=VARCHAR},
+      PA_PER_IN_CITY = #{paPerInCity,jdbcType=VARCHAR},
+      PA_INVOLVING_ARTIST_GROUPS = #{paInvolvingArtistGroups,jdbcType=VARCHAR},
+      PA_ORDER_STATUS = #{paOrderStatus,jdbcType=VARCHAR},
+      PA_ABNORMAL_STATE = #{paAbnormalState,jdbcType=VARCHAR},
+      PA_ABNORMAL_CAUSE = #{paAbnormalCause,jdbcType=VARCHAR},
+      PA_PAYMENT_METHOD = #{paPaymentMethod,jdbcType=VARCHAR},
+      PA_PAYMENT_START_TIME = #{paPaymentStartTime,jdbcType=TIMESTAMP},
+      PA_PAYMENT_END_TIME = #{paPaymentEndTime,jdbcType=TIMESTAMP},
+      PA_TOTAL_PAYMENT = #{paTotalPayment,jdbcType=VARCHAR},
+      PA_MALICIOUS_REFUND = #{paMaliciousRefund,jdbcType=VARCHAR},
+      PA_NUMBER_REFUNDS = #{paNumberRefunds,jdbcType=VARCHAR},
+      PA_DIS_PROVINCE = #{paDisProvince,jdbcType=VARCHAR},
+      PA_DIS_CITY = #{paDisCity,jdbcType=VARCHAR},
+      PA_DIS_COUNT = #{paDisCount,jdbcType=VARCHAR},
+      PA_EWALLET_RECHARGE_AMOUNT = #{paEwalletRechargeAmount,jdbcType=VARCHAR},
+      PA_EWALLET_RECHARGE_START = #{paEwalletRechargeStart,jdbcType=TIMESTAMP},
+      PA_EWALLET_RECHARGE_END = #{paEwalletRechargeEnd,jdbcType=TIMESTAMP},
+      ME_MEMBERSHIP_LEVEL = #{meMembershipLevel,jdbcType=VARCHAR},
+      ME_MEMBER_STATUS = #{meMemberStatus,jdbcType=VARCHAR},
+      ME_MEMBER_SOURCE = #{meMemberSource,jdbcType=VARCHAR},
+      ME_EXISTING_INTEGRAL = #{meExistingIntegral,jdbcType=VARCHAR},
+      ME_LAST_TRADING_START = #{meLastTradingStart,jdbcType=TIMESTAMP},
+      ME_LAST_TRADING_END = #{meLastTradingEnd,jdbcType=TIMESTAMP},
+      ME_YEAR_TOTAL_VOLUME = #{meYearTotalVolume,jdbcType=VARCHAR},
+      ME_YEAR_TOTAL_NUMBER = #{meYearTotalNumber,jdbcType=VARCHAR},
+      ME_TRANSACTION_TOTAL = #{meTransactionTotal,jdbcType=VARCHAR},
+      ME_BUY_TOTAL = #{meBuyTotal,jdbcType=VARCHAR},
+      ME_CLOSING_AMOUNT = #{meClosingAmount,jdbcType=VARCHAR},
+      ME_GROWTH_VALUE = #{meGrowthValue,jdbcType=VARCHAR},
+      ME_UPGRADE_TIME_START = #{meUpgradeTimeStart,jdbcType=TIMESTAMP},
+      ME_UPGRADE_TIME_END = #{meUpgradeTimeEnd,jdbcType=TIMESTAMP},
+      ME_SIGN_IN_TOTAL = #{meSignInTotal,jdbcType=VARCHAR},
+      ME_LAST_SIGN_START = #{meLastSignStart,jdbcType=TIMESTAMP},
+      ME_LAST_SIGN_END = #{meLastSignEnd,jdbcType=TIMESTAMP},
+      ME_SHARE_TOTAL_NUMBER = #{meShareTotalNumber,jdbcType=VARCHAR},
+      ME_LAST_TIME_SHARE_SATRT = #{meLastTimeShareSatrt,jdbcType=TIMESTAMP},
+      ME_LAST_TIME_SHARE_END = #{meLastTimeShareEnd,jdbcType=TIMESTAMP},
+      ME_SUBSCRIPTION_TOTAL = #{meSubscriptionTotal,jdbcType=VARCHAR},
+      ME_LAST_SUBSCRIPTION_START = #{meLastSubscriptionStart,jdbcType=TIMESTAMP},
+      ME_LAST_SUBSCRIPTION_END = #{meLastSubscriptionEnd,jdbcType=TIMESTAMP},
+      BE_BROWSER_TERMINAL = #{beBrowserTerminal,jdbcType=VARCHAR},
+      BE_TRACKING_PRO_NAME = #{beTrackingProName,jdbcType=VARCHAR},
+      BE_TRA_PRO_CLASSA = #{beTraProClassa,jdbcType=VARCHAR},
+      BE_TRA_PRO_CLASSB = #{beTraProClassb,jdbcType=VARCHAR},
+      BE_BROWSE_PROVINCE = #{beBrowseProvince,jdbcType=VARCHAR},
+      BE_BROWSE_CITY = #{beBrowseCity,jdbcType=VARCHAR},
+      BE_BROWSE_GROUPS_ACTOR = #{beBrowseGroupsActor,jdbcType=VARCHAR},
+      BE_BROWSE_PRO_NAME = #{beBrowseProName,jdbcType=VARCHAR},
+      BE_TRACKING_ORDER_SOURCE = #{beTrackingOrderSource,jdbcType=VARCHAR},
+      BE_TRA_ORDER_SUB_INTERVALS = #{beTraOrderSubIntervals,jdbcType=TIMESTAMP},
+      BE_TRA_ORDER_SUB_INTERVALE = #{beTraOrderSubIntervale,jdbcType=TIMESTAMP},
+      BE_TRA_DELIVERY_MODE = #{beTraDeliveryMode,jdbcType=VARCHAR},
+      BE_PAYMENT_LINK = #{bePaymentLink,jdbcType=VARCHAR},
+      BE_EWALLET_USEING = #{beEwalletUseing,jdbcType=VARCHAR},
+      BE_TRA_PAYMENT_MODE = #{beTraPaymentMode,jdbcType=VARCHAR},
+      BE_PAYMENT_SUCCESS = #{bePaymentSuccess,jdbcType=VARCHAR},
+      BE_SUB_TIMES = #{beSubTimes,jdbcType=TIMESTAMP},
+      BE_SUB_TIMEE = #{beSubTimee,jdbcType=TIMESTAMP},
+      BE_KEYWORD_SEARCH = #{beKeywordSearch,jdbcType=VARCHAR},
+      BE_INSIDE_SEARCH_PAGE = #{beInsideSearchPage,jdbcType=VARCHAR},
+      BE_LANDING_PAGE = #{beLandingPage,jdbcType=VARCHAR},
+      BE_ACCESS_STIME = #{beAccessStime,jdbcType=TIMESTAMP},
+      BE_IN_OUT_STATION = #{beInOutStation,jdbcType=VARCHAR},
+      BE_EXOTIC_SOURCE = #{beExoticSource,jdbcType=VARCHAR},
+      BE_AD_KEYWORD = #{beAdKeyword,jdbcType=VARCHAR},
+      BE_SHARE_STIME = #{beShareStime,jdbcType=TIMESTAMP},
+      BE_COMMODITY_NAME = #{beCommodityName,jdbcType=VARCHAR},
+      BE_SHARING_CHANNELS = #{beSharingChannels,jdbcType=VARCHAR},
+      BE_REGISTRATION_TIMES = #{beRegistrationTimes,jdbcType=VARCHAR},
+      BE_REGISTRATION_TIMEE = #{beRegistrationTimee,jdbcType=VARCHAR},
+      BE_REGISTERED_GOODS = #{beRegisteredGoods,jdbcType=VARCHAR},
+      BE_REGISTERED_QUANTITY = #{beRegisteredQuantity,jdbcType=VARCHAR},
+      BE_COMMODITY_CLASSA = #{beCommodityClassa,jdbcType=VARCHAR},
+      BE_COMMODITY_CLASSB = #{beCommodityClassb,jdbcType=VARCHAR},
+      BE_OUT_STOCK_PROVINCE = #{beOutStockProvince,jdbcType=VARCHAR},
+      BE_OUT_STOCK_CITY = #{beOutStockCity,jdbcType=VARCHAR},
+      BE_OUT_OF_STOCK_GROUPS = #{beOutOfStockGroups,jdbcType=VARCHAR},
+      CO_COMMUNICATION_TYPE = #{coCommunicationType,jdbcType=VARCHAR},
+      CO_TIME_START = #{coTimeStart,jdbcType=TIMESTAMP},
+      CO_TIME_END = #{coTimeEnd,jdbcType=TIMESTAMP},
+      CO_COUNT = #{coCount,jdbcType=VARCHAR},
+      CO_RESULT = #{coResult,jdbcType=VARCHAR},
+      CO_FREQUENCY = #{coFrequency,jdbcType=VARCHAR},
+      CO_CLICK_RATE = #{coClickRate,jdbcType=VARCHAR},
+      CO_ORDER_CONVERSION_RATE = #{coOrderConversionRate,jdbcType=VARCHAR},
+      CO_COM_KEYWORDS = #{coComKeywords,jdbcType=VARCHAR},
+      CREATE_ID = #{createId,jdbcType=BIGINT},
+      CREATE_NAME = #{createName,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_ID = #{updateId,jdbcType=BIGINT},
+      UPDATE_NAME = #{updateName,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      BE_ACCESS_ETIME = #{beAccessEtime,jdbcType=TIMESTAMP},
+      BE_SHARE_ETIME = #{beShareEtime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  
+   <delete id="deleteByLableId" parameterType="java.lang.Long" >
+    delete from t_customer_propertys
+    where LABLE_ID = #{id,jdbcType=BIGINT}
+  </delete>
+  
+  
+   <select id="getPropertysByLableId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+	    select 
+	    <include refid="Base_Column_List" />
+	    from t_customer_propertys
+	    where LABLE_ID = #{lableId}
+   </select>
+   
+   
+   <select id="findProperytsByGroupId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+	    select 
+			<include refid="Base_Column_List" />
+		from t_customer_propertys prop   where prop.LABLE_ID in 
+		(
+			select id from t_customer_lable   clable  where clable.ID in (
+				select  glable.LABLE_ID from t_customer_group_lable glable  where  glable.GROUP_ID = #{groupid}
+			)
+		)
+   </select>
+  
+  
+</mapper>

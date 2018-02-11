@@ -1,0 +1,169 @@
+<!DOCTYPE html>  
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layouts/dialog" >  
+    <head>
+    	<meta charset="utf-8"></meta>
+        <title>会员体系-RFM</title>
+        <script src="/js/plugins/jquery/jquery-ui.js"></script>
+  		<link rel="stylesheet" href="/css/plugins/treeview/jquery-ui.css" />
+    </head>  
+    <body>
+	    <div layout:fragment="content">
+	    	
+			<div class="container">
+			    <section class="col-lg-12 ui-content ui-shadow">
+				    <!-- 列表主体 -->
+					<div class="cl mt15 mb10" style="height:480px;overflow:auto;">
+                	<form action="/customers/index/saveOrUpdateRfm" method="post" id="detafilForm" class="form-horizontal">
+						<div >
+							<!-- 列表主体（搜索结果） -->
+							<table class="table table-bordered mt15 addtr" style="width: 100%">
+								<tr>
+								  <th width="20" style="text-align:center;" id="show-option" title="最近一次消费指上一次购买的时候，通过订单中客户的买单、代金券核销记录，判断用户最近一次消费时间与当前时间间隔，以天为单位划分到不同层级中。">最近一次消费(Recency)</th>
+								  <th width="20" style="text-align:center;">对应成长值</th>
+								  <th style="text-align:center;" id="show-option" title="消费频率是顾客在限定期间内所购买的次数。客户在线买单、核销代金券均算为消费，以天为单位计算两次购买时间间距。">消费频率(Frequency)</th>
+								  <th style="text-align:center;">对应成长值</th>
+								  <th style="text-align:center;" id="show-option" title="消费金额是客户在一个会员等级周期内所支付的金额，以元为单位进行汇总。">消费金额(Monetary)</th>
+								  <th style="text-align:center;">对应成长值</th>
+								  <th class="tc">操作</th>
+								</tr>
+								<div th:if="${#null != plusList and #lists.size(plusList) > 0}">
+									<tr th:each="obj,indexStat:${plusList}" >
+										<td style="text-align:center;"  > <input style="width: 50px;" type="text" value="" th:value="${obj.RECENCY}" name="recency" readOnly="true" class="c_num" />天以内 </td>
+										<td style="text-align:center;"  > <input style="width: 50px;" type="text" value="" th:value="${obj.RINDEX}" name="rindex" readOnly="true" class="c_num" /> </td>
+										<td style="text-align:center;"  > <input style="width: 50px;" type="text" value="" th:value="${obj.FREQUENCY}" name="frequency" readOnly="true" class="c_num" />次以上 </td>
+										<td style="text-align:center;"  > <input style="width: 50px;" type="text" value="" th:value="${obj.FINDEX}" name="findex" readOnly="true" class="c_num" /> </td>
+										<td style="text-align:center;"  > <input style="width: 50px;" type="text" value="" th:value="${obj.MONETARY}" name="monetary" readOnly="true" class="c_num" />元以上 </td>
+										<td style="text-align:center;"  >
+											<input style="width: 50px;" type="text" value="" th:value="${obj.MINDEX}" name="mindex" readOnly="true" class="c_num" />
+											<input type="hidden" value="" th:value="${obj.ID}" name="id" readOnly="true" />
+											<input type="hidden" value="" th:value="${obj.IS_LOSS}" name="isLoss" readOnly="true" /> 
+										</td>
+										<td><a class="removetr" href="###">删除</a></td>
+									</tr>
+								</div>
+								<div th:if="${#lists.size(plusList) == 0}">
+									<tr>
+										<td style="text-align:center;"  > <input style="width: 50px;" type="text" value="" name="recency" readOnly="true" class="c_num" />天以内 </td>
+										<td style="text-align:center;"  > <input style="width: 50px;" type="text" value="" name="rindex" readOnly="true" class="c_num" /> </td>
+										<td style="text-align:center;"  > <input style="width: 50px;" type="text" value="" name="frequency" readOnly="true" class="c_num" />次以上 </td>
+										<td style="text-align:center;"  > <input style="width: 50px;" type="text" value="" name="findex" readOnly="true" class="c_num" /> </td>
+										<td style="text-align:center;"  > <input style="width: 50px;" type="text" value="" name="monetary" readOnly="true" class="c_num" />元以上 </td>
+										<td style="text-align:center;"  >
+											<input style="width: 50px;" type="text" value="" name="mindex" readOnly="true" class="c_num" />
+											<input type="hidden" value="" name="id" readOnly="true" />
+											<input type="hidden" value="0" name="isLoss" readOnly="true" />
+										</td>
+										<td><a class="removetr" href="###">删除</a></td>
+									</tr>
+								</div>
+								<div th:if="${#null != negiList and #lists.size(negiList) > 0}">
+									<tr th:each="obj,indexStat:${negiList}" >
+										<td style="text-align:center;"  > 超过<input style="width: 50px;" type="text" value="" th:value="${obj.RECENCY}" name="recency" readOnly="true" class="c_num" />天 </td>
+										<td style="text-align:center;"  > <input style="width: 50px;" type="text" value="" th:value="${obj.RINDEX}" name="rindex" readOnly="true" class="c_num" /> </td>
+										<td style="text-align:center;"  > <input style="width: 50px;" type="text" value="" th:value="${obj.FREQUENCY}" name="frequency" readOnly="true" class="c_num" />次 </td>
+										<td style="text-align:center;"  > <input style="width: 50px;" type="text" value="" th:value="${obj.FINDEX}" name="findex" readOnly="true" class="c_num" /> </td>
+										<td style="text-align:center;"  > <input style="width: 50px;" type="text" value="" th:value="${obj.MONETARY}" name="monetary" readOnly="true" class="c_num" />元以上 </td>
+										<td style="text-align:center;"  > 
+											<input style="width: 50px;" type="text" value="" th:value="${obj.MINDEX}" name="mindex" readOnly="true" class="c_num" />
+											<input type="hidden" value="" th:value="${obj.ID}" name="id" readOnly="true" />
+											<input type="hidden" value="" th:value="${obj.IS_LOSS}" name="isLoss" readOnly="true" /> 
+										</td>
+										<!-- <td><a class="removetr" href="###">删除</a></td> -->
+									</tr>
+								</div>
+								<div th:if="${#lists.size(negiList) == 0}" >
+									<tr>
+										<td style="text-align:center;"  > 超过<input style="width: 50px;" type="text" value="" name="recency" readOnly="true" class="c_num" />天 </td>
+										<td style="text-align:center;"  > <input style="width: 50px;" type="text" value="" name="rindex" readOnly="true" class="c_num" /> </td>
+										<td style="text-align:center;"  > <input style="width: 50px;" type="text" value="" name="frequency" readOnly="true" class="c_num" />次 </td>
+										<td style="text-align:center;"  > <input style="width: 50px;" type="text" value="" name="findex" readOnly="true" class="c_num" /> </td>
+										<td style="text-align:center;"  > <input style="width: 50px;" type="text" value="" name="monetary" readOnly="true" class="c_num" />元以上 </td>
+										<td style="text-align:center;"  > 
+											<input style="width: 50px;" type="text" value="" name="mindex" readOnly="true" class="c_num"  />
+											<input type="hidden" value="" name="id" readOnly="true" />
+											<input type="hidden" value="1" name="isLoss" readOnly="true" />
+										</td>
+										<!-- <td><a class="removetr" href="###">删除</a></td> -->
+									</tr>
+								</div>
+							</table>
+						</div>
+					</form>
+					</div>
+			    </section>
+			</div>
+	    	
+	    	
+	    </div> 
+	</body>
+	
+	<!-- 脚本区域（弹框、脚本） -->
+	<div layout:fragment="javascript">
+	    
+	    <script type="text/javascript">
+	    function updateFun (){
+        	//$('input').removeAttr("readonly");
+        	var inputs = $("input[type='text']");
+    		$.each(inputs, function(index,val) {
+			    val.removeAttribute("readOnly"); 
+    		});
+        }
+	    function addIndex (){
+        	//增加策略
+        	var trtd= 	'				<tr>'+
+						'					<td style="text-align:center;"  > <input style="width: 50px;" type="text" value="" name="recency" class="c_num" />天以内 </td>'+
+						'					<td style="text-align:center;"  > <input style="width: 50px;" type="text" value="" name="rindex" class="c_num" /> </td>'+
+						'					<td style="text-align:center;"  > <input style="width: 50px;" type="text" value="" name="frequency" class="c_num" />次以上 </td>'+
+						'					<td style="text-align:center;"  > <input style="width: 50px;" type="text" value="" name="findex" class="c_num" /> </td>'+
+						'					<td style="text-align:center;"  > <input style="width: 50px;" type="text" value="" name="monetary" class="c_num" />元以上 </td>'+
+						'					<td style="text-align:center;"  >'+
+						'					<input style="width: 50px;" type="text" value="" name="mindex" class="c_num" />'+
+						'					<input type="hidden" value="" name="id" />'+
+						'					<input type="hidden" value="0" name="isLoss" />'+
+						'					</td>'+
+						'					<td><a class="removetr" href="###">删除</a></td>'	
+						'				</tr>'	;
+			$(".addtr tr:first").after(trtd);			
+        	
+        	
+        }
+	    
+	    $(function (){
+	        $(".addtr").on('click','.removetr',function(){
+	        	$(this).parent().parent().remove();
+	        });
+	    });
+	    
+	    //重复提交
+   		var repeat =  true ;
+    	function subForm(parentWin){
+    		if (!repeat){
+    			return ;
+    		}
+    		$frm = $("#detafilForm");
+		    var validateWidget = $frm.validate();
+    		//1.启用表单验证。
+    		if (!validateWidget.check()) {//1.基础样式校验。
+    			return false;
+    		}
+    		
+    		repeat = false; 
+    		//提交表单
+       		$frm.ajaxSubmit({success: function(entry, statusText, xhr, $form){
+       			
+       			if(entry.code=="success"){
+       				$(parentWin).find("#searchForm").submit();
+       			}
+      				repeat=true; 
+      				
+       			layer.msg(entry.message,{time: 2000} ,function (){
+       				
+       			}); 
+       			 
+			}});
+    	}
+	    </script>
+    </div>
+    
+</html>

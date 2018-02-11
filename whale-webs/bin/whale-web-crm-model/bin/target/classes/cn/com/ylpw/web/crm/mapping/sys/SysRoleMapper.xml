@@ -1,0 +1,126 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.ylpw.web.crm.mapper.sys.SysRoleMapper">
+
+	<cache eviction="LRU" size="10240" readOnly="true" />
+	
+	<resultMap id="BaseResultMap" type="cn.com.ylpw.web.crm.entity.sys.SysRole" >
+    	<id column="ID" property="id" jdbcType="BIGINT" />
+    	<result column="NAME" property="name" jdbcType="VARCHAR" />
+	    <result column="ORD" property="ord" jdbcType="INTEGER" />
+	    <result column="IS_DEL"  property="isDel" typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler"  />
+	    <result column="CREATE_ID" property="createId" jdbcType="BIGINT" />
+	    <result column="CREATE_NAME" property="createName" jdbcType="VARCHAR" />
+	    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+	    <result column="UPDATE_ID" property="updateId" jdbcType="BIGINT" />
+	    <result column="UPDATE_NAME" property="updateName" jdbcType="VARCHAR" />
+	    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+   </resultMap>
+	
+	<insert id="save" parameterType="cn.com.ylpw.web.crm.entity.sys.SysRole">
+		INSERT INTO SYS_ROLE(  NAME, ORD, CREATE_ID, CREATE_NAME, CREATE_TIME)
+  		VALUES(  #{name,jdbcType=VARCHAR}, #{ord,jdbcType=INTEGER}, #{createId,jdbcType=BIGINT}, #{createName,jdbcType=VARCHAR}, SYSDATE())
+	</insert>
+	
+	<update id="update" parameterType="cn.com.ylpw.web.crm.entity.sys.SysRole">
+		UPDATE SYS_ROLE 
+		<set>
+			<if test="name != null and name !=''" >
+	    		NAME = #{name,jdbcType=VARCHAR},
+		    </if>
+		    <if test="ord != null" >
+		    	ORD = #{ord,jdbcType=INTEGER},
+		    </if>
+		    <if test="updateId != null" >
+		    	UPDATE_ID = #{updateId,jdbcType=VARCHAR},
+		    </if>
+		    <if test="updateName != null and updateName !=''" >
+		    	UPDATE_NAME = #{updateName,jdbcType=VARCHAR},
+		    </if>
+		    <if test="1 == 1" >
+		    	UPDATE_TIME = SYSDATE
+		    </if>
+		</set>
+		WHERE ID = #{id,jdbcType=BIGINT}
+	</update>
+	
+	<update id="delete" parameterType="cn.com.ylpw.web.crm.entity.sys.SysRole">
+		UPDATE SYS_ROLE SET IS_DEL=0 WHERE ID = #{id,jdbcType=BIGINT}
+	</update>
+  
+	<select id="findById" resultMap="BaseResultMap">
+		SELECT * FROM SYS_ROLE WHERE ID = #{id,jdbcType=BIGINT}
+	</select>
+	
+	<select id="countRoleByName" resultType="int">
+		SELECT COUNT(1) FROM SYS_ROLE WHERE IS_DEL=1 AND NAME = #{name,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="findAll" parameterType="cn.com.ylpw.web.crm.entity.sys.SysRole" resultType="cn.com.ylpw.web.crm.model.sys.SysRoleGrid">
+		SELECT
+			r.id , r.NAME , r.ORD , r.CREATE_ID , r.CREATE_NAME , r.CREATE_TIME , r.UPDATE_NAME , r.UPDATE_TIME , (
+				CASE
+				WHEN r.id = 1 THEN
+					'全部'
+				ELSE
+					(
+						SELECT
+							(
+								  group_concat(m. NAME)
+							) AS wmMenus
+						FROM
+							SYS_role_menu rm left join  SYS_menu m   on  rm.sys_menu_id =m.id
+						WHERE
+							 rm.sys_role_id =r.id
+						AND rm.isvalid = 1
+						AND m.id IS NOT NULL   
+					)
+				END
+			) AS wmMenus
+		FROM
+			SYS_ROLE r
+		WHERE
+			IS_DEL = 1
+		ORDER BY
+			ORD ASC,
+			ID ASC
+	</select>
+	
+	<select id="findAllTFconfig" resultType="java.util.Map">
+		SELECT L.ID, L.NAME, FI.FILIALE_ID, FI.FILIALE_NAME, F.FCONFIGID, C.CITYNAME FROM T_FCONFIG F, T_CITY C, T_LARGEAREA L, T_FILIALE FI WHERE F.CITYID = C.CITYID AND F.FILIALE_ID = FI.FILIALE_ID(+) AND FI.LARGEAREA_ID = L.ID(+) AND F.APPLY=1 ORDER BY L.ID, FI.FILIALE_ID, F.ORDERS
+	</select>
+	
+	<select id="findNewRolePerms" resultType="long">
+		<![CDATA[
+			SELECT PE.ID FROM (SELECT ${perm.permTableCol} FROM ${perm.permTable} WHERE SYS_ROLE_ID = #{sysRoleId,jdbcType=BIGINT}) RX, (SELECT REGEXP_SUBSTR(ID, '[^|]+', 1, ROWNUM) AS ID FROM (SELECT '|${permIds}' AS ID FROM DUAL) CONNECT BY ROWNUM <= LENGTH(REGEXP_REPLACE(ID, '[^|]+'))) PE WHERE PE.ID = RX.${perm.permTableCol}(+) AND RX.${perm.permTableCol} IS NULL
+		]]>
+	</select>
+	
+	<update id="updateRolePerms" flushCache="true">
+		UPDATE ${perm.permTable} SET ISVALID=#{isValid} WHERE SYS_ROLE_ID=#{sysRoleId,jdbcType=BIGINT}
+		 AND ${perm.permTableCol} IN (
+		 	select ${perm.permTableCol}  from  (
+			 SELECT ${perm.permTableCol} FROM ${perm.permTable} 
+			 WHERE SYS_ROLE_ID=#{sysRoleId,jdbcType=BIGINT} AND ${perm.permTableCol} 
+			<if test='permIds == "-1"'>
+			   NOT
+			</if>
+			IN (${permIds})) tmpa 
+		)
+			
+	</update>
+	
+	<!-- 删除角色的权限 -->	
+	<update id="deletePermsByRoleId" flushCache="true">
+		delete  from ${perm.permTable} where SYS_ROLE_ID  =#{sysRoleId,jdbcType=BIGINT}
+	</update>
+	
+	<insert id="saveNewPerm" flushCache="true">
+		INSERT INTO ${perm.permTable}(SYS_ROLE_ID, ISVALID, ${perm.permTableCol})
+  		VALUES(#{sysRoleId,jdbcType=BIGINT}, #{isValid}, #{permId,jdbcType=BIGINT})
+	</insert>
+	
+	<select id="findRolePerm" resultType="object" useCache="true">
+		SELECT ${perm.permTableCol} FROM ${perm.permTable} WHERE SYS_ROLE_ID = #{sysRoleId,jdbcType=BIGINT} AND ISVALID=#{isValid}
+	</select>
+	
+</mapper>

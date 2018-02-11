@@ -1,0 +1,437 @@
+<!DOCTYPE html>  
+<html xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  >  
+    <head>
+    	<meta charset="utf-8"></meta>
+        <title>查看会员信息</title>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}"></link>
+	    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"></link>
+	    <link rel="stylesheet" type="text/css" th:href="@{/css/validate.default.css}"></link>
+	    <link rel="stylesheet" type="text/css" th:href="@{/js/plugins/datetimepicker/jquery.datetimepicker.css}"></link>
+	    <script th:src="@{/js/plugins/jquery/jquery-1.7.min.js}"></script>
+	    <script th:src="@{/js/plugins/validate/jquery.form.js}"></script>
+	    <script th:src="@{/js/plugins/validate/validate.js}"></script>
+	    <script th:src="@{/js/plugins/layer/layer.js}"></script>
+	    <script th:src="@{/js/plugins/datetimepicker/jquery.datetimepicker.full.min.js}"></script>
+	    
+	    <!-- 核心方法 -->
+	    <script th:src="@{/js/system/core.js}"></script>
+	    <script th:src="@{/js/system/index.js}"></script>
+	    <script th:src="@{/js/system/minBox.js}"></script>
+	    <script th:src="@{/js/system/accordion.js}"></script>
+	    <style>
+			*{margin: 0;padding: 0;}
+			body{font:normal 12px/1.5  "微软雅黑", 'arial', 'Tahoma','simsun','Verdana';}
+			.p20{padding: 20px;}
+			.mt10{margin-top: 10px;}
+			.fl{float: left;}
+			
+			.clearfloat:after{display:block;clear:both;content:"";visibility:hidden;height:0}.clearfloat{zoom:1}.clear{*zoom:1;}.clear:after{content:'\20';display:block;height:0;clear:both;}
+			.member h3{border-bottom: 1px solid #CCCCCC;line-height: 40px;font-size: 16px;font-weight: normal;}
+			.content h4{font-size: 14px;font-weight: normal;margin-top: 15px;}
+			.content p{overflow: hidden;border-bottom: 1px solid #CCCCCC;padding-bottom: 10px;}
+			.content p span{height: 30px;line-height: 30px;margin: 5px 0;width: 300px;}
+			.content p span  b{width:120px;font-weight: normal; margin-right:5px ;}
+			.content p span  i{font-style: normal;}
+			
+			.labels label{display: block;float: left;background: #f4f4f4;margin:0 5px;padding: 5px 10px;}
+			.labels label b{font-weight: normal;margin-left: 10px;}
+			.labels a{background: #fff;border: 1px dashed #ccc;border-radius: 3px;color:#6fb6e0;padding: 4px 9px;float: left;margin-left: 5px;text-decoration: none;}
+		
+			.form-horizontal  input[type=text]{background:#fff;border:none;}
+			.form-horizontal .grinfor.active input[type=text]{border:2px solid #ddd;background:#fff;}
+			.birthdays{ padding-left:10px;font-size: 12px;color: #000; font-family: "Helvetica Neue",Arial,Helvetica,sans-serif;}
+		</style>
+    </head>  
+    <body>
+		<div class="member p20">
+			<h3>基本信息</h3>
+			<form action="/customers/update" method="post" id="detafilForm" class="form-horizontal">
+				<div class="content mt10">
+					<div class="fr">
+						<a href="javascript:void(0);"><span id="modifyC" class="text" style="visibility: visible;">修改</span></a>
+		            	<a href="javascript:void(0);"><span id="saveC" class="text" style="visibility: hidden;">保存</span></a>
+		            	<a href="javascript:void(0);"><span id="cancelC" class="text" style="visibility: hidden;">取消</span></a>
+					</div>
+					<h4>个人信息：</h4>
+					<p class="mt10 grinfor">
+						<span class="fl">
+							<b class="fl">昵称：</b>
+							<i class="fl">
+								<input id="nickname" name="nickname" type="text" th:value="${customers.nickname}" readOnly="true" rel="1" style="border:none" />
+								<input id="nicknamehidden" name="nicknamehidden" type="hidden" th:value="${customers.nickname}" />
+							</i>						
+						</span>
+						<span class="fl">
+							<b class="fl">姓名：</b>
+							<i class="fl">
+								<input  id="truename" name="truename" type="text" th:value="${customers.truename}" readOnly="true" rel="1" style="border:none" />
+								<input  id="truenamehidden" name="truenamehidden" type="hidden" th:value="${customers.truename}" />
+							</i>						
+						</span>
+						<span class="fl">
+							<b class="fl">性别：</b>
+							<i class="fl">
+								<select name="sex" id="sex" class="select" disabled="disabled" rel="1" style="border:none">
+									<option value="">请选择</option>
+									<option value="1" th:selected="${'1' == customers.sex}">男</option>
+									<option value="2" th:selected="${'2' == customers.sex}">女</option>
+								</select>
+							</i>						
+						</span>
+						<span class="fl">
+							<b class="fl">手机号：</b>
+							<i class="fl">
+								<input  id="phone" name="phone" type="text" th:value="${customers.phone}" readOnly="true" class="c_mobile" rel="1" style="border:none" />
+								<input  id="phonehidden" name="phonehidden" type="hidden" th:value="${customers.phone}" />
+							</i>						
+						</span>
+						<span class="fl">
+							<b class="fl">邮箱：</b>
+							<i class="fl">
+								<input  id="email" name="email" type="text" th:value="${customers.email}" readOnly="true" class="c_email" rel="1" style="border:none" />
+								<input  id="emailhidden" name="emailhidden" type="hidden" th:value="${customers.email}" readOnly="true" />
+							</i>						
+						</span>
+						<span class="fl">
+							<b class="fl">QQ：</b>
+							<i class="fl">
+								<input  id="qq" name="qqNum" type="text"  readOnly="true" rel="1" style="border:none" th:value="${customers.qqNum}" /><!-- th:value="${customers.qq}" -->
+								<input  id="qqhidden" name="qqhidden" th:value="${customers.qqNum}" readOnly="true" type="hidden" />
+							</i>						
+						</span>
+						<span class="fl">
+							<b class="fl">微信号：</b>
+							<i class="fl">
+								<input  id="weixinNo" name="weixinNo" type="text" th:value="${customers.weixinNo}" readOnly="true" rel="1" style="border:none" />
+								<input  id="weixinNohidden" name="weixinNohidden" type="hidden" th:value="${customers.weixinNo}" />
+							</i>						
+						</span>
+						<span class="fl">
+							<b class="fl">星座：</b>
+							<i class="fl">
+								<input  id="constellation" name="constellation" type="text" th:value="${customers.constellation}" readOnly="true" rel="1" style="border:none" /><!-- th:value="${customers.constellation}" -->
+								<input  id="constellationhidden" name="constellationhidden" type="hidden" />
+							</i>
+						</span>
+						<span class="fl">
+							<b class="fl">证件号：</b>
+							<i class="fl">
+								<input  id="card" name="card" type="text" th:value="${customers.card}" readOnly="true" rel="1" style="border:none" />
+								<input  id="cardhidden" name="cardhidden" type="hidden" th:value="${customers.card}" />
+							</i>
+						</span>
+						<span class="fl">
+							<b class="fl">籍贯：</b>
+							<i class="fl">
+								<input  id="nativeplace" name="nativeplace" type="text" th:value="${customers.nativeplace}" readOnly="true" rel="1" style="border:none" />
+								<input  id="nativeplacehidden" name="nativeplacehidden" type="hidden" th:value="${customers.nativeplace}" />
+							</i>
+						</span>
+						<span class="fl">
+							<b class="fl">居住城市：</b>
+							<i class="fl">
+								<input  id="customercity" name="customercity" type="text" th:value="${customers.customercity}" readOnly="true" rel="1" style="border:none" />
+								<input  id="customercityhidden" name="customercityhidden" type="hidden" th:value="${customers.customercity}" />
+							</i>
+						</span>
+						<span class="fl">
+							<b class="fl">行业：</b>
+							<i class="fl">
+								<input  id="industry" name="industry" type="text" th:value="${customers.industry}" readOnly="true" rel="1" style="border:none" />
+								<input  id="industryhidden" name="industryhidden" type="hidden" th:value="${customers.industry}" />
+							</i>
+						</span>
+						<span class="fl">
+							<b class="fl">职位：</b>
+							<i class="fl">
+								<input  id="position" name="position" type="text" th:value="${customers.position}" readOnly="true" rel="1" style="border:none" />
+								<input  id="positionhidden" name="positionhidden" type="hidden" th:value="${customers.position}" />
+							</i>
+						</span>
+						<span class="fl">
+							<b class="fl">学历：</b>
+							<i class="fl">
+								<input  id="education" name="education" type="text" th:value="${customers.education}" readOnly="true" rel="1" style="border:none" />
+								<input  id="educationhidden" name="educationhidden" type="hidden" th:value="${customers.education}" />
+							</i>
+						</span>
+						<span class="fl">
+							<b class="fl">生日：</b>
+							<i class="fl">
+								<input  id="birthday" name="birthday" type="text" th:value="${customers.birthday}" readOnly="true" rel="1" style="border:none" />
+								<input  id="birthdayhidden" name="birthdayhidden" type="hidden" th:value="${customers.birthday}" />
+							</i>
+						</span>
+						<span class="fl">
+							<b class="fl">收入水平：</b>
+							<i class="fl">
+								<input  id="incomelevels" name="incomelevels" type="text" th:value="${customers.incomelevels}" readOnly="true" rel="1" style="border:none" />
+								<input  id="incomelevelshidden" name="incomelevelshidden" type="hidden" th:value="${customers.incomelevels}" />
+							</i>						
+						</span>
+						<span class="fl">
+							<b class="fl">婚姻状况：</b>
+							<i class="fl">
+								<select name="maritalstatus" id="maritalstatus" class="select" disabled="disabled" rel="1" style="border:none">
+									<option value="">请选择</option>
+									<option value="1" th:selected="${1 == customers.maritalstatus}">已婚</option>
+									<option value="2" th:selected="${2 == customers.maritalstatus}">未婚</option>
+								</select>
+							</i>						
+						</span>
+						<span class="fl">
+							<b class="fl">有无子女：</b>
+							<i class="fl">
+								<select name="ischildren" id="ischildren" class="select" disabled="disabled" rel="1" style="border:none">
+									<option value="">请选择</option>
+									<option value="1" th:selected="${1 == customers.ischildren}">有</option>
+									<option value="2" th:selected="${2 == customers.ischildren}">无</option>
+								</select>
+							</i>						
+						</span>
+					</p>
+				</div>
+				<div class="content mt10">
+					<h4>注册信息</h4>
+					<p class="mt10">
+						<span class="fl">
+							<b class="fl">注册ID：</b>
+							<i class="fl">
+								<input  id="pwsysId" name="pwsysId" type="text" th:value="${customers.pwsysId}" readOnly="true" />
+								<input  id="idhidden" name="idhidden" type="hidden" th:value="${customers.pwsysId}" />
+								<input  id="id" name="id" type="hidden" th:value="${customers.id}" />
+							</i>						
+						</span>
+						<span class="fl">
+							<b class="fl">用户名：</b>
+							<i class="fl">
+								<input  id="username" name="username" type="text" th:value="${customers.username}" readOnly="true" />
+								<input  id="usernamehidden" name="usernamehidden" type="hidden" th:value="${customers.username}" />
+							</i>						
+						</span>
+						<span class="fl">
+							<b class="fl">注册IP区域：</b>
+							<i class="fl">
+								<input  id="ip" name="ip" type="text" th:value="${customers.ip}" readOnly="true" />
+								<input  id="iphidden" name="iphidden" type="hidden" th:value="${customers.ip}" />
+							</i>						
+						</span>
+						<span class="fl">
+							<b class="fl">注册时间：</b>
+							<i class="fl">
+								<input  id="createtime" name="createtime" type="text" th:value="${#null != customers.createtime ? #calendars.format(customers.createtime,'yyyy-MM-dd') : ''}" readOnly="true" />
+								<input  id="createtimehidden" name="createtimehidden" type="hidden" th:value="${customers.createtime}" />
+							</i>						
+						</span>
+						<span class="fl">
+							<b class="fl">注册来源渠道：</b>
+							<i class="fl"><!-- 10：web，20：后台电话注册，30:wap， 40：安卓， 50：ios， 60：WEB联盟 70:WAP联盟 -->
+								<input  id="registeredsource" name="registeredsource" type="text" th:value="${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('REGISTEREDSOURCE').get(customers.registeredsource+'') eq null ? '无':T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('REGISTEREDSOURCE').get(customers.registeredsource+'').getName()}" readOnly="true" />
+								<input  id="registeredsourcehidden" name="registeredsourcehidden" type="hidden" th:value="${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('REGISTEREDSOURCE').get(customers.registeredsource+'') eq null ? '无':T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('REGISTEREDSOURCE').get(customers.registeredsource+'').getName()}" />
+							</i>
+						</span>
+						<span class="fl">
+							<b class="fl">注册平台：</b>
+							<i class="fl">
+								<input  id="channelId" name="channelId" type="text" th:value="${customers.channelId}" readOnly="true" />
+								<input  id="channelIdhidden" name="channelIdhidden" type="hidden" th:value="${customers.channelId}" />
+							</i>						
+						</span>
+					</p>
+				</div>
+			</form>
+				<!-- <input  id="registeredsource" name="registeredsource" type="text" th:if="${customers.registeredsource eq 10}" value="web" readOnly="true" />
+				<input  id="registeredsource" name="registeredsource" type="text" th:if="${customers.registeredsource eq 20}" value="后台电话注册" readOnly="true" />
+				<input  id="registeredsource" name="registeredsource" type="text" th:if="${customers.registeredsource eq 30}" value="wap" readOnly="true" />
+				<input  id="registeredsource" name="registeredsource" type="text" th:if="${customers.registeredsource eq 40}" value="安卓" readOnly="true" />
+				<input  id="registeredsource" name="registeredsource" type="text" th:if="${customers.registeredsource eq 50}" value="ios" readOnly="true" />
+				<input  id="registeredsource" name="registeredsource" type="text" th:if="${customers.registeredsource eq 60}" value="WEB联盟" readOnly="true" />
+				<input  id="registeredsource" name="registeredsource" type="text" th:if="${customers.registeredsource eq 70}" value="WAP联盟" readOnly="true" />
+				<input  id="registeredsource" name="registeredsource" type="text" th:unless="${not #lists.isEmpty(customers.registeredsource) }" value="无" readOnly="true" /> -->
+		</div>
+	</body>
+	
+	<!-- 脚本区域（弹框、脚本） -->
+    <script type="text/javascript">
+    //<![CDATA[
+	    $(function() {
+			//timeCalender2('#regdate',null);
+			//创建一个当前日期对象
+			if(null != $('#birthday').val()){
+				if('' != $('#birthday').val()){
+					var birthday = new Date($('#birthday').val());
+					if(isNaN(birthday.getFullYear())){
+						birthday = null;
+						$('#birthday').val("");
+					}
+				
+					if(null != birthday){
+						//格式化日，如果小于9，前面补0
+						var birthdayday = ("0" + birthday.getDate()).slice(-2);
+						
+						//格式化月，如果小于9，前面补0
+						
+						var birthdaymonth = ("0" + (birthday.getMonth() + 1)).slice(-2);
+						
+						//拼装完整日期格式
+						var birthdaytoday = birthday.getFullYear()+"-"+(birthdaymonth)+"-"+(birthdayday) ;
+						
+						//完成赋值
+						$('#birthday').val(birthdaytoday);
+						$('#birthdayhidden').val(birthdaytoday);
+					}
+				}
+			}
+			
+			if(null != $('#createtime').val()){
+				if('' != $('#createtime').val()){
+					var regdate = new Date($('#createtime').val());
+			
+					//格式化日，如果小于9，前面补0
+					var regdateday = ("0" + regdate.getDate()).slice(-2);
+					
+					//格式化月，如果小于9，前面补0
+					
+					var regdatemonth = ("0" + (regdate.getMonth() + 1)).slice(-2);
+					
+					//拼装完整日期格式
+					var regdatetoday = regdate.getFullYear()+"-"+(regdatemonth)+"-"+(regdateday) ;
+					
+					//完成赋值
+					$('#createtime').val(regdatetoday);
+					$('#createtimehidden').val(regdatetoday);
+				}
+			}
+			
+			//点击‘修改’
+	    	$("#modifyC").click(function(){
+	    		//修改按钮隐藏，保存、取消显示
+	    		//$("#birthday").val($(".birthdays").html());
+	    		$(".birthdays").before('<input  id="birthday" name="birthday" type="text" th:value="${customers.birthday}" readOnly="true" rel="1" style="border:none" />');
+	    		$(".birthdays").remove();
+
+	    		dateCalender2('#birthday',true);
+	    		var modifyC = document.getElementById("modifyC");
+	    		var saveC = document.getElementById("saveC");
+	    		var cancelC = document.getElementById("cancelC");
+	    		modifyC.style.visibility='hidden';  
+	    		saveC.style.visibility='visible'; 
+	    		cancelC.style.visibility='visible';
+	    		$(".form-horizontal .grinfor").addClass('active');
+	    		
+	    		//文本可编辑
+	    		//var input = document.getElementsByTagName("input");
+	    		var inputs = $("input[type='text']");
+	    		$.each(inputs, function(index,val) {
+				    if(val.getAttribute('rel') > 0){
+				    	val.removeAttribute("readOnly");
+				    	val.setAttribute('style','border:2px solid #ddd');
+				    }
+	    		});
+	    		
+	    		var selects = $(".select");
+	    		$.each(selects, function(index,val) {
+	    			$(this).removeAttr("disabled"); 
+	    		});
+	    	});
+	    	
+			var sex = $('#sex').val();
+			var maritalstatus = $('#maritalstatus').val();
+			var ischildren = $('#ischildren').val();
+	    	//点击‘取消’
+	    	$("#cancelC").click(function(){
+	    		//修改按钮隐藏，保存、取消显示
+	    		//dateCalender2('#birthday',false);
+	    		//$('.c_required').removePrompt();
+	    		$(".formErrorContent").remove();
+	    		$("#birthday").before('<pre class="birthdays"></pre>')
+	    		$(".birthdays").html($("#birthdayhidden").val());
+	    		$("#birthday").remove();
+	    		
+	    		var modifyC = document.getElementById("modifyC");
+	    		var saveC = document.getElementById("saveC");
+	    		var cancelC = document.getElementById("cancelC");
+	    		modifyC.style.visibility='visible';  
+	    		saveC.style.visibility='hidden'; 
+	    		cancelC.style.visibility='hidden';
+	    		//文本只读
+	    		var inputs = $("input[type='text']");
+	    		var hiddens = $("input[type='hidden']");
+	    		$.each(inputs, function(index,val) {
+				    if(val.getAttribute('rel') > 0){
+				    	if(null != hiddens[index] || '' == hiddens[index]){
+					    	val.value=hiddens[index].value;
+					    }else{
+					    	val.value='';
+					    }
+					    val.setAttribute("readOnly","true");
+				    	val.setAttribute('style','border:none');
+				    }
+				    
+				    
+	    		});
+	    		$(".form-horizontal .grinfor").removeClass('active');
+	    		var selects = $(".select");
+	    		$.each(selects, function(index,val) {
+	    			$(this).attr("disabled",true); 
+	    			if(val.id == 'sex'){
+	    				val.value = sex;
+	    			}
+	    			if(val.id == 'maritalstatus'){
+	    				val.value = maritalstatus;
+	    			}
+	    			if(val.id == 'ischildren'){
+	    				val.value = ischildren;
+	    			}
+	    			//console.log(val.value);
+	    		});
+	    	});
+	    	
+	    	//点击‘保存’
+	    	$("#saveC").click(function(){
+	    		//更新
+	    		$frm = $("#detafilForm");
+			    var validateWidget = $frm.validate();
+	    		//1.启用表单验证。
+	    		if (!validateWidget.check()) {//1.基础样式校验。
+	    			return false;
+	    		}
+	    		//验证证件号
+	    		var cardNumber = $('#card').val();
+	    		if(null != cardNumber && '' != cardNumber){
+	    			console.log(null != cardNumber);
+	    			console.log('' != cardNumber);
+	    			var b = true;
+	    			var filter = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;	//身份证
+	    			
+					if (filter.test( cardNumber )==true) {
+						b = false;
+					}
+					filter = /(P\d{7})|(G\d{8})/;	//护照 	
+					if (filter.test( cardNumber )==true) {
+						b = false;
+					}
+					
+	    			if(b){
+	    				layer.alert("证件号不规范");
+	    				//alert("证件号不规范");
+						return false;
+	    			}
+	    		}
+	    		//提交表单
+        		$frm.ajaxSubmit({success: function(entry, statusText, xhr, $form){
+        			if(entry.code=="success"){
+        				layer.msg(entry.message,{time: 2000} ,function (){
+        					document.location.reload();
+        				}); 
+        			}else{
+        				layer.msg(entry.message);
+        			}
+				}});
+	    	});
+	    });
+    //]]>
+    </script>
+	    
+</html>

@@ -1,0 +1,90 @@
+<!-- 分页插件ZhaoHb20170320 -->
+<div th:fragment="page">
+		<ul class="pagination"></ul>
+		<div style="clear:both;"></div>
+	<script type="text/javascript">
+	/*<![CDATA[*/
+		
+	    //$(".pagination").parent().width($(".table-bordered").width()+2);
+		function page(pageNo, pageSize, pageFormId) {
+			if ($("#"+pageFormId)) {
+				
+				$("#"+pageFormId).find("#pageNo").remove();
+				$("#"+pageFormId).find("#pageSize").remove();
+				$("#"+pageFormId).append("<input type=\"hidden\" id=\"pageNo\"   name=\"pageNo\"value=\""+pageNo+"\" />");
+				$("#"+pageFormId).append("<input type=\"hidden\" id=\"pageSize\" name=\"pageSize\" value=\""+pageSize+"\" />");
+				$("#"+pageFormId).submit();
+			}
+		}
+		
+		jQuery(document).ready(function() {
+		
+			var _page = $(".pagination");
+			var _pageNo = parseInt(_page.parent().attr("pageNo"), 10);//当前页数
+			var _pageSize = parseInt(_page.parent().attr("pageSize"), 10);//每页条数
+			var _total = parseInt(_page.parent().attr("total"), 10);//总条数
+			var _pageTotal = Math.ceil(_total/_pageSize);//总页数
+			
+			_page.parent().css({'background':'#E7EAEE','border':'1px solid #ccc','border-top':'none'});
+			
+			
+			_pageTotal = (_pageTotal==0)?1:_pageTotal;
+			_pageNo=_total < _pageSize ?1 : _pageNo;
+			var _pageFormId = _page.parent().attr("pageFormId");//表单ID（必填）
+			var _pageHtml = "<li class=\""+((_pageNo > 1)?"active index":"disabled")+"\" no=\""+((_pageNo > 1)?(_pageNo-1):1)+"\"><a href=\"javascript:\">&#171;&nbsp;上一页</a></li>";
+			if (_pageTotal>5 && (_pageNo-2)>1) {
+				_pageHtml += "<li class=\"disabled\"><a href=\"javascript:\">...</a></li>";
+			}
+			if (_pageTotal>5) {
+				var start = ((_pageNo-2)<=0)?1:((_pageNo+2)>_pageTotal)?(_pageTotal-5+1):(_pageNo-2);
+				for (var i=start;i<(start+5);i++) {
+					_pageHtml += "<li class=\""+((i!=_pageNo)?"active index":"disabled")+"\" no=\""+i+"\"><a href=\"javascript:\">"+i+"</a></li>";
+				}
+			} else {
+				for (var i=1;i<=_pageTotal;i++) {
+					_pageHtml += "<li class=\""+((i!=_pageNo)?"active index":"disabled")+"\" no=\""+i+"\"><a href=\"javascript:\">"+i+"</a></li>";
+				}
+			}
+			if (_pageTotal>5 && (_pageNo+2)<_pageTotal) {
+				_pageHtml += "<li class=\"disabled\"><a href=\"javascript:\">...</a></li>";
+			}
+			_pageHtml += "<li class=\""+((_pageNo!=_pageTotal)?"active index":"disabled")+"\" no=\""+(((_pageNo+1)>_pageTotal)?_pageTotal:(_pageNo+1))+"\"><a href=\"javascript:\">下一页&nbsp;&#187;</a></li>";
+			_pageHtml += "<li class=\"disabled controls\">";
+			_pageHtml += "当前&nbsp;<input class=\"input_pageno\" type=\"text\" value=\""+_pageNo+"\"   onclick=\"this.select();\" />&nbsp;/&nbsp;<span>"+_pageTotal+"</span>&nbsp;页，共&nbsp;<span>"+_total+"</span>&nbsp;条";
+			_pageHtml += "</li>";
+			_page.html(_pageHtml);
+			
+			function changePage(src){
+				
+				if (/^\d+$/.test(src.value)) {
+					if (src.value==0 || src.value>_pageTotal) {
+						//alert("超出范围！");
+						layer.alert('超出范围！');
+					} else {
+						page(src.value, _pageSize, _pageFormId);
+					}
+				} else {
+					//alert("格式错误！");
+					layer.alert('格式错误！');
+				}
+			}
+			$(".pagination .input_pageno").keypress(function(event){
+				//var e = window.event||this;
+				//var c = e.keyCode || e.which;
+				//if (c == 13) {
+				if (event.keyCode == 13) {
+					changePage(this);
+				}
+			}).change(function (){
+				
+				changePage(this);
+			});
+		
+			$(".pagination .index").click(function(){
+				page($(this).attr("no"), _pageSize, _pageFormId);
+			});
+			
+		});
+	/*]]>*/
+    </script>
+</div>

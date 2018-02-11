@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layouts/tabs_index">
+<head>
+<meta charset="utf-8"></meta>
+<title>会员信息-标签管理</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/zTreeStyle/zTreeStyle.css}"></link>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/zTreeStyle/demo.css}"></link>
+	
+<script th:src="@{/js/plugins/datetime/jquery.datetimepicker.full.js}"></script>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/js/plugins/datetime/jquery.datetimepicker.css}"></link>
+	
+<style type="text/css">
+div#rMenu {
+	position: absolute;
+	visibility: hidden;
+	top: 0;
+	background-color: #555;
+	text-align: left;
+	background-color: #0083ce;
+	border: 1px solid #0083ce;
+	border-top:none;
+	border-bottom:none;
+}
+
+div#rMenu ul li {
+	margin: 1px 0;
+	padding: 0 5px;
+	cursor: pointer;
+	list-style: none outside none;
+    background-color: #0095ea;
+    color: #fff;
+}
+</style>
+
+<style>
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font: normal 12px/1.5 "微软雅黑", 'arial', 'Tahoma', 'simsun', 'Verdana';
+}
+
+.p20 {
+	padding: 20px;
+}
+
+.mt10 {
+	margin-top: 10px;
+}
+
+.fl {
+	float: left;
+}
+
+.clearfloat:after {
+	display: block;
+	clear: both;
+	content: "";
+	visibility: hidden;
+	height: 0
+}
+
+.clearfloat {
+	zoom: 1
+}
+
+.clear {
+	*zoom: 1;
+}
+
+.clear:after {
+	content: '\20';
+	display: block;
+	height: 0;
+	clear: both;
+}
+
+.member h3 {
+	border-bottom: 1px solid #CCCCCC;
+	line-height: 40px;
+	font-size: 16px;
+	font-weight: normal;
+}
+
+.content h4 {
+	font-size: 14px;
+	font-weight: normal;
+	margin-top: 15px;
+}
+
+.content p {
+	overflow: hidden;
+	border-bottom: 1px solid #CCCCCC;
+	padding-bottom: 10px;
+}
+
+.content p span {
+	height: 30px;
+	line-height: 30px;
+	margin: 5px 0;
+	width: 300px;
+}
+
+.content p span  b {
+	width: 120px;
+	font-weight: normal;
+	margin-right: 5px;
+}
+
+.content p span  i {
+	font-style: normal;
+}
+
+.labels label {
+	display: block;
+	float: left;
+	background: #f4f4f4;
+	margin: 0 5px;
+	padding: 5px 10px;
+}
+
+.labels label b {
+	font-weight: normal;
+	margin-left: 10px;
+}
+
+.labels a {
+	background: #fff;
+	border: 1px dashed #ccc;
+	border-radius: 3px;
+	color: #6fb6e0;
+	padding: 4px 9px;
+	float: left;
+	margin-left: 5px;
+	text-decoration: none;
+}
+
+.tab-centent p{line-height: 30px;}
+.tab-centent p b{font-weight:normal;width:120px;}
+.tab-centent p span{width:80%;}
+
+#box-pop2{
+	position:relative;
+}
+#box-pop2 .aui-accord-ul{
+	position:relative;
+	z-index:2;
+}
+#tab-child{
+	position:absolute;
+	z-index:1;
+	top:36px;
+}
+#tab-child .aui-accord-box{
+	height:450px;
+	overflow:auto;
+}
+ul.ztree{
+height:374px;
+}
+</style>
+								
+</head>
+<body>
+	<div class=" mt10 mb10 ml10 mr10 cl" layout:fragment="content">
+		<h3 style="height:50px;line-height:50px;font-size:14px;font-weight:700;color:#4a5b68;border-bottom:1px solid #e1e6eb;padding-left:10px;">标签管理：根据会员属性设定不同的标签</h3>
+		<div id="box" class="cl">
+			<div class="fl mb10 mt10">
+				<input type="button" value="生成标签"
+					class="fl yl-btn yl-btn-blue-shadow query= query-btn yl-btn-disabled createLable"   />
+						
+					<input
+				type="button" value="修改标签属性"
+				class="fl yl-btn yl-btn-blue-shadow query= query-btn ml10 yl-btn-disabled editLable" />
+			</div>
+		</div>
+		<div class="fl centent-l" style="width: 278px; border: 1px solid #e1e6eb; margin-right: 10px;">
+			<br />
+			<form action="" id="search_frm">
+				<input style="margin-left: 10px;" type="text" placeholder="请输入"
+					name="searchName" id="searchName" class="fl c_required" /> <input
+					class="fl yl-btn yl-btn-blue-shadow query query-btn ml10 search_btn "
+					type="button" value="搜索" />
+			</form>
+			<!--/*  主节点参数  */-->
+			<input id="parentParam"
+				th:attr="vname=${customerLable.name},vid=${customerLable.id},hasChildren=${customerLable.hasChildren},"
+				type="hidden" /> <br /> <br />
+			<img src="/images/lablemsg.png" />
+			<ul id="tree"
+				th:attr="vname=${customerLable.name},vid=${customerLable.id}"
+				class="ztree" style="  overflow: auto;width: auto; "></ul>
+		</div>
+		<div class="fl centent-r" style="width: calc(100% - 300px)">
+			<div id="box-pop2" class="">
+				<form      id="propFrm">
+				<input type="hidden" name="id" id="id"   value="1" />
+				<input type="hidden" name="isEdit" id="isEdit"   value="1" />
+				<ul class="aui-accord-ul tab cl" id="tab">
+					<li><span>基本属性</span></li>
+					<li><span>交易属性</span></li>
+					<li><span>会员属性</span></li>
+					<li><span>[*]行为属性</span></li>
+					<li><span>[*]沟通属性</span></li>
+				</ul>
+				<div id="tab-child" class="mb20">
+					<div class="aui-accord-box">
+						<ul class="accord-ul accord-ul-nowrap tab cl" id="tab-1">
+						</ul>
+						<div id="tab-child-1" class="mt10 pl10 pr10 pb10 pm10">
+							<div>
+								<h3>基本信息</h3>
+								<div class="tab-centent">
+									<p class="cl">
+										<b class="fl tr">性别：</b>
+										<span class="fl">
+											<label th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('SEX')}"
+											 class="mr10"><input class="mr5"   name="baSex" id="baSex"   type="checkbox"  th:value="${obj.value.code}" /><span th:text="${obj.value.name}"  >不限</span></label>
+										</span>
+										
+									</p>
+									<p class="cl">
+										<b class="fl tr">学历：</b>
+										<span class="fl">
+											<label   th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('XUELI')}" 
+											class="mr10"><input class="mr5" name="baEducation" id="baEducation"  type="checkbox"  th:value="${obj.value.code}" /><span th:text="${obj.value.name}" >不限</span></label>
+										</span>
+									</p>
+									<p class="cl">
+										<b class="fl tr">年龄：</b>
+										<span class="fl">
+											<label   th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('age')}" 
+											class="mr10"><input class="mr5" name="baAge" id="baAge"  type="checkbox"  th:value="${obj.value.code}" /><span th:text="${obj.value.name}" >不限</span></label>
+										</span>
+									</p>
+									<p class="cl">
+										<b class="fl tr">[*]星座：</b>
+										<span class="fl">
+											<label   th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('CONSTELLATION')}" 
+											class="mr10"><input class="mr5" name="baConstellation" id="baConstellation"  type="checkbox"  th:value="${obj.value.code}" /><span th:text="${obj.value.name}" >不限</span></label>
+										</span>
+									</p>
+									<p class="cl">
+										<b class="fl tr">区域：</b>
+										<span class="fl">
+											<select class="provincesel"  target="citysel" name="baProvince"  >
+												<option th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('PROVINCE')}" 
+												th:text="${obj.value.name}"
+												th:value="${obj.value.code}"  value="0" >请选择</option>
+											</select>
+											<select class="citysel" name="baCity" >
+												<option value="-1" >请选择</option>
+											</select>
+										</span>
+									</p>
+									<p class="cl">
+										<b class="fl tr">收入水平：</b>
+										<span class="fl">
+											<span class="fl">
+												<label   th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('INCOMELEVELS')}" 
+												class="mr10"><input class="mr5" name="baIncomeLevel" id="baIncomeLevel"  type="checkbox"  th:value="${obj.value.code}" />
+												<span th:text="${obj.value.name}" >不限</span>
+												</label>
+											</span>
+										</span>
+									</p>
+									<p class="cl">
+										<b class="fl tr">婚姻状况：</b>
+										<span class="fl">
+											<label   th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('MARITALSTATUS')}" 
+												class="mr10"><input class="mr5" name="baMaritalStatus" id="baMaritalStatus"  type="checkbox"  th:value="${obj.value.code}" />
+												<span th:text="${obj.value.name}" >不限</span>
+											</label>
+										</span>
+									</p>
+									<p class="cl">
+										<b class="fl tr">有无子女：</b>
+										<span class="fl">
+											<label   th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('ISCHILDREN')}" 
+												class="mr10"><input class="mr5" name="baChildren" id="baChildren"  type="checkbox"  th:value="${obj.value.code}" />
+												<span th:text="${obj.value.name}" >不限</span>
+											</label>
+										</span>
+									</p>
+								</div>
+								
+								<h3>注册信息</h3>
+								<div class="tab-centent">
+									<p class="cl mt10">
+										<b class="fl tr">[*]注册IP区域：</b>
+										<span class="fl">
+											<select class="provincesel"  target="citysel_2" name="baIpProvince"  >
+												<option th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('PROVINCE')}" 
+												th:text="${obj.value.name}"
+												th:value="${obj.value.code}"  value="0" >请选择</option>
+											</select>
+											<select class="citysel_2" name="baIpCity" >
+												<option value="-1" >请选择</option>
+											</select>
+										</span>
+									</p>
+									<p class="cl mt10">
+										<b class="fl tr">注册时间：</b>
+										<span class="fl">
+											<input type="text" class="start" id="baRegTimeStart" style="width:151px;" 
+												name="baRegTimeStart"   value="" />
+					                            <span>至</span>
+					                            <input type="text" class="end" id="baRegTimeEnd" style="width:151px;" 
+					                               name="baRegTimeEnd" value="" />
+										</span>
+									</p>
+									<p class="cl">
+										<b class="fl tr">注册来源渠道：</b>
+										<span class="fl">
+											<label   th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('REGSOURCECHANNEL')}" 
+												class="mr10"><input class="mr5" name="baRegSourceChannel" id="baRegSourceChannel" 
+												 type="checkbox"  th:value="${obj.value.code}" />
+												<span th:text="${obj.value.name}" >不限</span>
+											</label>
+										</span>
+									</p>
+									<p class="cl">
+										<b class="fl tr">注册平台：</b>
+										<span class="fl">
+											<label   th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('REGPLATFORM')}" 
+												class="mr10"><input class="mr5" name="baRegistrationPlatform" id="baRegistrationPlatform" 
+												 type="checkbox"  th:value="${obj.value.code}" />
+												<span th:text="${obj.value.name}" >不限</span>
+											</label>
+										</span>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div  class="aui-accord-box undb">
+						<ul class="accord-ul accord-ul-nowrap tab cl" id="tab-2">
+						</ul>
+						<div id="tab-child-2" class="mt10">
+							<div>
+								<h3>交易信息</h3>
+								<div class="tab-centent">
+									<p class="cl">
+										<b class="fl tr">订单来源：</b>
+										<span class="fl">
+											<label   th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('ORDER_SOURCE_TRADE')}" 
+												class="mr10"><input class="mr5" name="paOrderSource" id="paOrderSource" 
+												 type="checkbox"  th:value="${obj.value.code}" />
+												<span th:text="${obj.value.name}" >不限</span>
+											</label>
+										</span>
+									</p>
+									<p class="cl">
+										<b class="fl tr">商品名称：</b>
+										<span class="fl">
+											<label class="mr10"><input class="mr5" name="paTradeName" id="paTradeName" type="text" /></label>
+										</span>
+									</p>
+									<p class="cl mt10">
+										<b class="fl tr">商品类别：</b>
+										<span class="fl">
+											<select class="proClassA"  target="proClassB" name="paCommodityClassa"  >
+												<option th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('P_CATEGORY')}" 
+												th:text="${obj.value.name}"
+												th:value="${obj.value.code}"  value="0" >请选择</option>
+											</select>
+											<select class="proClassB" name="paCommodityClassb" >
+												<option value="-1" >请选择</option>
+											</select>
+										</span>
+									</p>
+									<p class="cl mt10">
+										<b class="fl tr">演出城市：</b>
+										<span class="fl">
+											<select class="provincesel"  target="citysel_3" name="paPerInProvince"  >
+												<option th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('PROVINCE')}" 
+												th:text="${obj.value.name}"
+												th:value="${obj.value.code}"  value="0" >请选择</option>
+											</select>
+											<select class="citysel_3" name="paPerInCity" >
+												<option value="-1" >请选择</option>
+											</select>
+										</span>
+									</p>
+									<p class="cl mt10">
+										<b class="fl tr">涉及艺人及团体：</b>
+										<span class="fl">
+											<label class="mr10"><input class="mr5" name="paInvolvingArtistGroups" id="paInvolvingArtistGroups" type="text" /></label>
+										</span>
+									</p>
+									<p class="cl">
+										<b class="fl tr">订单状态：</b>
+										<span class="fl">
+											<label   th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('ORDERSTATUS')}" 
+												class="mr10"><input class="mr5" name="paOrderStatus" id="paOrderStatus" 
+												 type="checkbox"  th:value="${obj.value.code}" />
+												<span th:text="${obj.value.name}" >不限</span>
+											</label>
+										</span>
+									</p>
+									<p class="cl">
+										<b class="fl tr">异常状态：</b>
+										<span class="fl">
+											<label   th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('ABNORMALSTATUS')}" 
+												class="mr10"><input class="mr5" name="paAbnormalState" id="paAbnormalState" 
+												 type="checkbox"  th:value="${obj.value.code}" />
+												<span th:text="${obj.value.name}" >不限</span>
+											</label>
+										</span>
+									</p>
+									<p class="cl">
+										<b class="fl tr">[*]异常原因：</b>
+										<span class="fl">
+											<label   th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('ABNORMALREASON')}" 
+												class="mr10"><input class="mr5" name="paAbnormalCause" id="paAbnormalCause" 
+												 type="checkbox"  th:value="${obj.value.code}" />
+												<span th:text="${obj.value.name}" >不限</span>
+											</label>
+										</span>
+									</p>
+								</div>
+								
+								<h3>支付信息</h3>
+								<div class="tab-centent">
+									<p class="cl">
+										<b class="fl tr">支付方式：</b>
+										<span class="fl">
+											<label   th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('PAYMETHOD')}" 
+												class="mr10"><input class="mr5" name="paPaymentMethod" id="paPaymentMethod" 
+												 type="checkbox"  th:value="${obj.value.code}" />
+												<span th:text="${obj.value.name}" >不限</span>
+											</label>
+										</span>
+									</p>
+									<p class="cl">
+										<b class="fl tr">支付时间：</b>
+										<span class="fl">
+											<input type="text" class="start" id="paPaymentStartTime" style="width:151px;" 
+												name="paPaymentStartTime"  value="" />
+					                            <span>至</span>
+					                            <input type="text" class="end" id="paPaymentEndTime" style="width:151px;" 
+					                               name="paPaymentEndTime" value="" />
+										</span>
+									</p>
+									<p class="cl">
+										<b class="fl tr">支付总金额：</b>
+										<span class="fl">
+											<label   th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('PAYTOTAL')}" 
+												class="mr10"><input class="mr5" name="paTotalPayment" id="paTotalPayment" 
+												 type="checkbox"  th:value="${obj.value.code}" />
+												<span th:text="${obj.value.name}" >不限</span>
+											</label>
+										</span>
+									</p>
+								</div>
+								<h3>退票信息</h3>
+								<div class="tab-centent">
+									<p class="cl">
+										<b class="fl tr">是否恶意退票：</b>
+										<span class="fl">
+											<label   th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('ISMALICEREFUND')}" 
+												class="mr10"><input class="mr5" name="paMaliciousRefund" id="paMaliciousRefund" 
+												 type="checkbox"  th:value="${obj.value.code}" />
+												<span th:text="${obj.value.name}" >不限</span>
+											</label>
+										</span>
+									</p>
+									<p class="cl">
+										<b class="fl tr">退票次数：</b>
+										<span class="fl">
+											<label   th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('RTCOUNTS')}" 
+												class="mr10"><input class="mr5" name="paNumberRefunds" id="paNumberRefunds" 
+												 type="checkbox"  th:value="${obj.value.code}" />
+												<span th:text="${obj.value.name}" >不限</span>
+											</label>
+										</span>
+									</p>
+								</div>
+								<h3>配送信息</h3>
+								<div class="tab-centent">
+									<p class="cl mt10">
+										<b class="fl tr">配送地址：</b>
+										<span class="fl">
+											<select class="provincesel"  target="citysel_3_1" name="paDisProvince"  >
+												<option th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('PROVINCE')}" 
+												th:text="${obj.value.name}" 
+												th:value="${obj.value.code}"  value="0" >请选择</option>
+											</select>
+											<select class="citysel_3_1" name="paDisCity" >
+												<option value="-1" >请选择</option>
+											</select>
+										</span>
+									</p>
+									<p class="cl">
+										<b class="fl tr">配送地累计次数：</b>
+										<span class="fl">
+											<label   th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('DCCOUNTS')}" 
+												class="mr10"><input class="mr5" name="paDisCount" id="paDisCount" 
+												 type="checkbox"  th:value="${obj.value.code}" />
+												<span th:text="${obj.value.name}" >不限</span>
+											</label>
+										</span>
+									</p>
+								</div>
+								<h3>电子钱包充值信息</h3>
+								<div class="tab-centent">
+									<p class="cl">
+										<b class="fl tr">电子钱包充值金额：</b>
+										<span class="fl">
+											<label   th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('DZQBRECHARGETOTAL')}" 
+												class="mr10"><input class="mr5" name="paEwalletRechargeAmount" id="paEwalletRechargeAmount" 
+												 type="checkbox"  th:value="${obj.value.code}" />
+												<span th:text="${obj.value.name}" >不限</span>
+											</label>
+										</span>
+									</p>
+									<p class="cl">
+										<b class="fl tr">电子钱包充值时间：</b>
+										<span class="fl">
+											<input type="text" class="start" id="paEwalletRechargeStart" style="width:151px;" 
+												name="paEwalletRechargeStart"  value="" />
+											    <span>至</span>
+											    <input type="text" class="end" id="paEwalletRechargeEnd" style="width:151px;" 
+											       name="paEwalletRechargeEnd" value="" />
+										</span>
+									</p>
+								</div>
+						</div>
+						</div>
+					</div>
+					<div class="aui-accord-box undb">
+						<ul class="accord-ul accord-ul-nowrap tab cl" id="tab-2">
+						</ul>
+						<div id="tab-child-2" class="mt10">
+							<div>	
+								<h3>会员基本信息</h3>
+								<div class="tab-centent">
+									<p class="cl">
+										<b class="fl tr">会员等级：</b>
+										<span class="fl">
+											<label   th:each="obj,indexStat:${customerGrades}" 
+												class="mr10"><input class="mr5" name="meMembershipLevel" id="meMembershipLevel" 
+												 type="checkbox"  th:value="${obj.ID}" />
+												<span th:text="${obj.GNAME}" >不限</span>
+											</label>
+									
+										</span>
+									</p>
+									<p class="cl">
+										<b class="fl tr">会员状态：</b>
+										<span class="fl">
+											<label   th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('VIP_STATUS')}" 
+												class="mr10"><input class="mr5" name="meMemberStatus" id="meMemberStatus" 
+												 type="checkbox"  th:value="${obj.value.code}" />
+												<span th:text="${obj.value.name}" >不限</span>
+											</label>
+										</span>
+									</p>
+									<p class="cl">
+										<b class="fl tr">会员来源：</b>
+										<span class="fl">
+											<label   th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('CUSTOMER_SYS_SOURCE')}" 
+												class="mr10"><input class="mr5" name="meMemberSource" id="meMemberSource" 
+												 type="checkbox"  th:value="${obj.value.code}" />
+												<span th:text="${obj.value.name}" >不限</span>
+											</label>
+										</span>
+									</p>
+									<p class="cl">
+										<b class="fl tr">系统可用积分：</b>
+										<span class="fl">
+											<label   th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('NOWINTEGRAL')}" 
+												class="mr10"><input class="mr5" name="meExistingIntegral" id="meExistingIntegral" 
+												 type="checkbox"  th:value="${obj.value.code}" />
+												<span th:text="${obj.value.name}" >不限</span>
+											</label>
+										</span>
+									</p>
+									<p class="cl">
+										<b class="fl tr">最近一次交易时间：</b>
+										<span class="fl">
+											<input type="text" class="start" id="meLastTradingStart" style="width:151px;" 
+												name="meLastTradingStart"  value="" />
+											    <span>至</span>
+											    <input type="text" class="end" id="meLastTradingEnd" style="width:151px;" 
+											       name="meLastTradingEnd" value="" />
+										</span>
+									</p>
+									<p class="cl">
+										<b class="fl tr">本年度交易总金额：</b>
+										<span class="fl">
+											<label   th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('THISYEARTRADETOTAL')}" 
+												class="mr10"><input class="mr5" name="meYearTotalVolume" id="meYearTotalVolume" 
+												 type="checkbox"  th:value="${obj.value.code}" />
+												<span th:text="${obj.value.name}" >不限</span>
+											</label>
+										</span>
+									</p>
+									<p class="cl">
+										<b class="fl tr">本年度交易总次数：</b>
+										<span class="fl">
+											<label   th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('THISYEARTRADECOUNT')}" 
+												class="mr10"><input class="mr5" name="meYearTotalNumber" id="meYearTotalNumber" 
+												 type="checkbox"  th:value="${obj.value.code}" />
+												<span th:text="${obj.value.name}" >不限</span>
+											</label>
+										</span>
+									</p>
+									<p class="cl">
+										<b class="fl tr">累计交易总金额：</b>
+										<span class="fl">
+											<label   th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('TRADETOTAL')}" 
+												class="mr10"><input class="mr5" name="meTransactionTotal" id="meTransactionTotal" 
+												 type="checkbox"  th:value="${obj.value.code}" />
+												<span th:text="${obj.value.name}" >不限</span>
+											</label>
+										</span>
+									</p>
+									<p class="cl">
+										<b class="fl tr">购买票品总数：</b>
+										<span class="fl">
+											<label   th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('BUYPRODUCTCOUNT')}" 
+												class="mr10"><input class="mr5" name="meBuyTotal" id="meBuyTotal" 
+												 type="checkbox"  th:value="${obj.value.code}" />
+												<span th:text="${obj.value.name}" >不限</span>
+											</label>
+										</span>
+									</p>
+									<p class="cl">
+										<b class="fl tr">交易关闭金额：</b>
+										<span class="fl">
+											<label   th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('TRADECLOSETOTAL')}" 
+												class="mr10"><input class="mr5" name="meClosingAmount" id="meClosingAmount" 
+												 type="checkbox"  th:value="${obj.value.code}" />
+												<span th:text="${obj.value.name}" >不限</span>
+											</label>
+										</span>
+									</p>
+									<p class="cl">
+										<b class="fl tr">成长值：</b>
+										<span class="fl">
+											<label   th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('GROWVAL')}" 
+												class="mr10"><input class="mr5" name="meGrowthValue" id="meGrowthValue"  
+												 type="checkbox"  th:value="${obj.value.code}" />
+												<span th:text="${obj.value.name}" >不限</span>
+											</label>
+										</span>
+									</p>
+									<p class="cl">
+										<b class="fl tr">上一次升级时间：</b>
+										<span class="fl">
+											<input type="text" class="start" id="meUpgradeTimeStart" style="width:151px;" 
+												name="meUpgradeTimeStart"  value="" />
+											    <span>至</span>
+											    <input type="text" class="end" id="meUpgradeTimeEnd" style="width:151px;" 
+											       name="meUpgradeTimeEnd" value="" />
+										</span>
+									</p>
+								</div>
+								<h3>[*]会员活跃信息</h3>
+								<div class="tab-centent">
+									<p class="cl">
+										<b class="fl tr">签到总次数：</b>
+										<span class="fl">
+											<label   th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('SIGNEDCOUNT')}" 
+												class="mr10"><input class="mr5" name="meSignInTotal" id="meSignInTotal"  
+												 type="checkbox"  th:value="${obj.value.code}" />
+												<span th:text="${obj.value.name}" >不限</span>
+											</label>
+										</span>
+									</p>
+									<p class="cl">
+										<b class="fl tr">最后一次签到时间：</b>
+										<span class="fl">
+											<input type="text" class="start" id="meLastSignStart" style="width:151px;" 
+												name="meLastSignStart"  value="" />
+											    <span>至</span>
+											    <input type="text" class="end" id="meLastSignEnd" style="width:151px;" 
+											       name="meLastSignEnd" value="" />
+										</span>
+									</p>
+									<p class="cl">
+										<b class="fl tr">分享总次数：</b>
+										<span class="fl">
+											<label   th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('SHARECOUNT')}" 
+												class="mr10"><input class="mr5" name="meShareTotalNumber" id="meShareTotalNumber"  
+												 type="checkbox"  th:value="${obj.value.code}" />
+												<span th:text="${obj.value.name}" >不限</span>
+											</label>
+										</span>
+									</p>
+									<p class="cl">
+										<b class="fl tr">最后一次分享时间：</b>
+										<span class="fl">
+											<input type="text" class="start" id="meLastTimeShareSatrt" style="width:151px;" 
+												name="meLastTimeShareSatrt"  value="" />
+											    <span>至</span>
+											    <input type="text" class="end" id="meLastTimeShareEnd" style="width:151px;" 
+											       name="meLastTimeShareEnd" value="" />
+										</span>
+									</p>
+									<p class="cl">
+										<b class="fl tr">订阅总次数：</b>
+										<span class="fl">
+											<label   th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('PUBLISHCOUNT')}" 
+												class="mr10"><input class="mr5" name="meSubscriptionTotal" id="meSubscriptionTotal"  
+												 type="checkbox"  th:value="${obj.value.code}" />
+												<span th:text="${obj.value.name}" >不限</span>
+											</label>
+										</span>
+									</p>
+									<p class="cl">
+										<b class="fl tr">最后一次订阅时间：</b>
+										<span class="fl">
+											<input type="text" class="start" id="meLastSubscriptionStart" style="width:151px;" 
+												name="meLastSubscriptionStart"  value="" />
+											    <span>至</span>
+											    <input type="text" class="end" id="meLastSubscriptionEnd" style="width:151px;" 
+											       name="meLastSubscriptionEnd" value="" />
+										</span>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div  class="aui-accord-box undb">
+						<ul class="accord-ul accord-ul-nowrap tab cl" id="tab-2">
+						</ul>
+						<div id="tab-child-2" class="mt10">
+							<div>
+								<h3>商品浏览记录信息</h3>
+								<div class="tab-centent">
+									<p class="cl">
+										<b class="fl tr">浏览终端：</b>
+										<span class="fl">
+											<label   th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('BROWSECLIENT')}" 
+												class="mr10"><input class="mr5" name="beBrowserTerminal" id="beBrowserTerminal"  
+												 type="checkbox"  th:value="${obj.value.code}" />
+												<span th:text="${obj.value.name}" >不限</span>
+											</label>
+										</span>
+									</p>
+									<p class="cl">
+										<b class="fl tr">商品名称：</b>
+										<span class="fl">
+											<label class="mr10"><input class="mr5"  name="beTrackingProName" type="text"  /></label>
+										</span>
+									</p>
+									<p class="cl mt10">
+										<b class="fl tr">商品类别：</b>
+										<span class="fl">
+											<select class="proClassA"  target="proClassB_1" name="beTraProClassa"  >
+												<option th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('P_CATEGORY')}" 
+												th:text="${obj.value.name}"
+												th:value="${obj.value.code}"  value="0" >请选择</option>
+											</select>
+											<select class="proClassB_1" name="beTraProClassb" >
+												<option value="-1" >请选择</option>
+											</select>	
+										</span>
+									</p>
+									<p class="cl mt10">
+										<b class="fl tr">演出城市：</b>
+										<span class="fl">
+											<select class="provincesel"  target="citysel_4" name="beBrowseProvince"  >
+												<option th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('PROVINCE')}" 
+												th:text="${obj.value.name}"
+												th:value="${obj.value.code}"  value="0" >请选择</option>
+											</select>
+											<select class="citysel_4" name="beBrowseCity" >
+												<option value="-1" >请选择</option>
+											</select>
+										</span>
+									</p>
+									<p class="cl mt10">
+										<b class="fl tr">涉及艺人及团体：</b>
+										<span class="fl">
+											<label class="mr10"><input class="mr5" type="text" name="beBrowseGroupsActor" /></label>
+										</span>
+									</p>
+									</div>
+									<h3>购买流程跟踪</h3>
+									<div class="tab-centent">
+										<p class="cl mt10">
+											<b class="fl tr">商品名称：</b>
+											<span class="fl">
+												<label class="mr10"><input class="mr5" type="text" name="beBrowseProName" /></label>
+											</span>
+										</p>
+										<p class="cl">
+											<b class="fl tr">订单来源：</b>
+											<span class="fl">
+												<label   th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('ORDER_SOURCE_BEHA')}" 
+												class="mr10"><input class="mr5" name="beTrackingOrderSource" id="beTrackingOrderSource"  
+												 type="checkbox"  th:value="${obj.value.code}" />
+												<span th:text="${obj.value.name}" >不限</span>
+												</label>
+											</span>
+										</p>
+										<p class="cl">
+											<b class="fl tr">订单提交时间：</b>
+											<span class="fl">
+												<input type="text" class="start" id="beTraOrderSubIntervals" style="width:151px;" 
+												name="beTraOrderSubIntervals"  value="" />
+											    <span>至</span>
+											    <input type="text" class="end" id="beTraOrderSubIntervale" style="width:151px;" 
+											       name="beTraOrderSubIntervale" value="" />
+											</span>
+										</p>
+										<p class="cl">
+											<b class="fl tr">送货方式：</b>
+											<span class="fl">
+												<label   th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('PSXX')}" 
+												class="mr10"><input class="mr5" name="beTraDeliveryMode" id="beTraDeliveryMode"  
+												 type="checkbox"  th:value="${obj.value.code}" />
+												<span th:text="${obj.value.name}" >不限</span>
+												</label>
+											</span>
+										</p>
+										<p class="cl">
+											<b class="fl tr">是否进入支付环节：</b>
+											<span class="fl">
+												<label   th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('ISINTOPAYSECTION')}" 
+												class="mr10"><input class="mr5" name="bePaymentLink" id="bePaymentLink"  
+												 type="checkbox"  th:value="${obj.value.code}" />
+												<span th:text="${obj.value.name}" >不限</span>
+												</label>
+											</span>
+										</p>
+										<p class="cl">
+											<b class="fl tr">是否使用电子钱包：</b>
+											<span class="fl">
+												<label   th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('ISUSEELEC')}" 
+												class="mr10"><input class="mr5" name="beEwalletUseing" id="beEwalletUseing"  
+												 type="checkbox"  th:value="${obj.value.code}" />
+												<span th:text="${obj.value.name}" >不限</span>
+												</label>
+											</span>
+										</p>
+										<p class="cl">
+											<b class="fl tr">支付方式：</b>
+											<span class="fl">
+												<label   th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('PAYMETHOD')}" 
+												class="mr10"><input class="mr5" name="beTraPaymentMode" id="beTraPaymentMode"  
+												 type="checkbox"  th:value="${obj.value.code}" />
+												<span th:text="${obj.value.name}" >不限</span>
+												</label>
+											</span>
+										</p>
+										<p class="cl">
+											<b class="fl tr">支付是否成功：</b>
+											<span class="fl">
+												<label   th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('ISPAYSUCC')}" 
+												class="mr10"><input class="mr5" name="bePaymentSuccess" id="bePaymentSuccess"  
+												 type="checkbox"  th:value="${obj.value.code}" />
+												<span th:text="${obj.value.name}" >不限</span>
+												</label>
+											</span>
+										</p>
+									</div>	
+									
+									<h3>搜索行为</h3>
+									<div class="tab-centent">
+										<p class="cl mt10">
+											<b class="fl tr">订单提交时间：</b>
+											<span class="fl">
+												<input type="text" class="start" id="beSubTimes" style="width:151px;" 
+												name="beSubTimes"  value="" />
+											    <span>至</span>
+											    <input type="text" class="end" id="beSubTimee" style="width:151px;" 
+											       name="beSubTimee" value="" />
+											</span>
+										</p>
+										<p class="cl mt10">
+											<b class="fl tr">站内搜索关键词：</b>
+											<span class="fl">
+												<label class="mr10"><input class="mr5" name="beKeywordSearch" type="text" /></label>
+											</span>
+										</p>
+										<p class="cl mt10">
+											<b class="fl tr">站内搜索页：</b>
+											<span class="fl">
+												<label class="mr10"><input class="mr5" name="beInsideSearchPage" type="text" /></label>
+											</span>
+										</p>
+										<p class="cl mt10">
+											<b class="fl tr">站内落地页：</b>
+											<span class="fl">
+												<label class="mr10"><input class="mr5" name="beLandingPage" type="text" /></label>
+											</span>
+										</p>
+									</div>	
+									<h3>广告专题访问</h3>
+									<div class="tab-centent">
+										<p class="cl mt10">
+											<b class="fl tr">访问时间：</b>
+											<span class="fl">
+												<input type="text" class="start" id="beAccessStime" style="width:151px;" 
+												name="beAccessStime"  value="" />
+											    <span>至</span>
+											    <input type="text" class="end" id="beAccessEtime" style="width:151px;" 
+											       name="beAccessEtime" value="" />
+											</span>
+										</p>
+										<p class="cl">
+											<b class="fl tr">站内/站外：</b>
+											<span class="fl">
+												<label   th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('ISINNET')}" 
+												class="mr10"><input class="mr5" name="beInOutStation" id="beInOutStation"  
+												 type="checkbox"  th:value="${obj.value.code}" />
+												<span th:text="${obj.value.name}" >不限</span>
+												</label>
+											</span>
+										</p>
+										<p class="cl">
+											<b class="fl tr">站外来源：</b>
+											<span class="fl">
+												<label   th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('OUTNET_ORDERSOURCE')}" 
+												class="mr10"><input class="mr5" name="beExoticSource" id="beExoticSource"  
+												 type="checkbox"  th:value="${obj.value.code}" />
+												<span th:text="${obj.value.name}" >不限</span>
+												</label>
+											</span>
+										</p>
+										<p class="cl">
+											<b class="fl tr">广告专题关键词：</b>
+											<span class="fl">
+												<label class="mr10"><input class="mr5" name="beAdKeyword" type="text" /></label>
+											</span>
+										</p>
+									</div>	
+									
+									<h3>分享信息</h3>
+									<div class="tab-centent">
+										<p class="cl mt10">
+											<b class="fl tr">分享时间：</b>
+											<span class="fl">
+												<input type="text" class="start" id="beShareStime" style="width:151px;" 
+												name="beShareStime"  value="" />
+											    <span>至</span>
+											    <input type="text" class="end" id="beShareEtime" style="width:151px;" 
+											       name="beShareEtime" value="" />
+											</span>
+										</p>
+										<p class="cl mt10">
+											<b class="fl tr">商品名称：</b>
+											<span class="fl">
+												<label class="mr10"><input class="mr5" name="beCommodityName" type="text" /></label>
+											</span>
+										</p>
+										<p class="cl">
+											<b class="fl tr">分享渠道：</b>
+											<span class="fl">
+												<label   th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('SHARE_CHANNEL')}" 
+												class="mr10"><input class="mr5" name="beSharingChannels" id="beSharingChannels"  
+												 type="checkbox"  th:value="${obj.value.code}" />
+												<span th:text="${obj.value.name}" >不限</span>
+												</label>
+											</span>
+										</p>
+									</div>	
+									<h3>缺货登记</h3>
+									<div class="tab-centent">
+										<p class="cl mt10">
+											<b class="fl tr">登记时间：</b>
+											<span class="fl">
+												<input type="text" class="start" id="beRegistrationTimes" style="width:151px;" 
+												name="beRegistrationTimes"  value="" />
+											    <span>至</span>
+											    <input type="text" class="end" id="beRegistrationTimee" style="width:151px;" 
+											       name="beRegistrationTimee" value="" />
+											</span>
+										</p>
+										<p class="cl mt10">
+											<b class="fl tr">登记商品：</b>
+											<span class="fl">
+												<label class="mr10"><input class="mr5" name="beRegisteredGoods" type="text" /></label>
+											</span>
+										</p>
+										<p class="cl">
+											<b class="fl tr">登记数量：</b>
+											<span class="fl">
+												<label   th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('CHECKCOUNT')}" 
+												class="mr10"><input class="mr5" name="beRegisteredQuantity" id="beRegisteredQuantity"  
+												 type="checkbox"  th:value="${obj.value.code}" />
+												<span th:text="${obj.value.name}" >不限</span>
+												</label>
+											</span>
+										</p>
+										<p class="cl">
+											<b class="fl tr">商品类别：</b>
+											<span class="fl">
+												<select class="proClassA"  target="proClassB_2" name="beCommodityClassa"  >
+												<option th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('P_CATEGORY')}" 
+												th:text="${obj.value.name}"
+												th:value="${obj.value.code}"  value="0" >请选择</option>
+											</select>
+											<select class="proClassB_2" name="beCommodityClassb" >
+												<option value="-1" >请选择</option>
+											</select>	
+											</span>
+										</p>
+										<p class="cl mt10">
+											<b class="fl tr">演出城市：</b>
+											<span class="fl">
+												<select class="provincesel"  target="citysel_5" name="beOutStockProvince"  >
+												<option th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('PROVINCE')}" 
+												th:text="${obj.value.name}"
+												th:value="${obj.value.code}"  value="0" >请选择</option>
+												</select>
+												<select class="citysel_5" name="beOutStockCity" >
+													<option value="-1" >请选择</option>
+												</select>	
+											</span>
+										</p>
+										<p class="cl mt10">
+											<b class="fl tr">涉及艺人及团体：</b>
+											<span class="fl">
+												<label class="mr10"><input class="mr5" name="beOutOfStockGroups" type="text" /></label>
+											</span>
+										</p>
+									</div>	
+							</div>
+						</div>
+					</div>
+					<div  class="aui-accord-box undb">
+						<ul class="accord-ul accord-ul-nowrap tab cl" id="tab-2">
+						</ul>
+						<div id="tab-child-2" class="mt10">
+							<div>
+								 <h3>沟通信息</h3>
+									<div class="tab-centent">
+										<p class="cl">
+											<b class="fl tr">沟通类型：</b>
+											<span class="fl">
+												<label   th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('COMMUNICATE_TYPE')}" 
+												class="mr10"><input class="mr5" name="coCommunicationType" id="coCommunicationType"  
+												 type="checkbox"  th:value="${obj.value.code}" />
+												<span th:text="${obj.value.name}" >不限</span>
+												</label>
+											</span>
+										</p>
+										<p class="cl">
+											<b class="fl tr">沟通时间：</b>
+											<span class="fl">
+												<input type="text" class="start" id="coTimeStart" style="width:151px;" 
+												name="coTimeStart"  value="" />
+											    <span>至</span>
+											    <input type="text" class="end" id="coTimeEnd" style="width:151px;" 
+											       name="coTimeEnd" value="" />
+											</span>
+										</p>
+										<p class="cl">
+											<b class="fl tr">沟通次数：</b>
+											<span class="fl">
+												<label   th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('COMMUNICATE_COUNT')}" 
+												class="mr10"><input class="mr5" name="coCount" id="coCount"  
+												 type="checkbox"  th:value="${obj.value.code}" />
+												<span th:text="${obj.value.name}" >不限</span>
+												</label>
+											</span>
+										</p>
+										<p class="cl">
+											<b class="fl tr">沟通结果：</b>
+											<span class="fl">
+												<label   th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('COMMUNICATE_RESULT')}" 
+												class="mr10"><input class="mr5" name="coResult" id="coResult"  
+												 type="checkbox"  th:value="${obj.value.code}" />
+												<span th:text="${obj.value.name}" >不限</span>
+												</label>
+											</span>
+										</p>
+										<p class="cl">
+											<b class="fl tr">沟通频率：</b>
+											<span class="fl">
+												<label   th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('COMMUNICATE_RATE')}" 
+												class="mr10"><input class="mr5" name="coFrequency" id="coFrequency"  
+												 type="checkbox"  th:value="${obj.value.code}" />
+												<span th:text="${obj.value.name}" >不限</span>
+												</label>
+											</span>
+										</p>
+										<p class="cl">
+											<b class="fl tr">打开链接点击率：</b>
+											<span class="fl">
+												<label   th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('OPENLINK_RATE')}" 
+												class="mr10"><input class="mr5" name="coClickRate" id="coClickRate"  
+												 type="checkbox"  th:value="${obj.value.code}" />
+												<span th:text="${obj.value.name}" >不限</span>
+												</label>
+											</span>
+										</p>
+										<p class="cl">
+											<b class="fl tr">订单转化率：</b>
+											<span class="fl">
+												<label   th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('ORDERCHANGE_RATE')}" 
+												class="mr10"><input class="mr5" name="coOrderConversionRate" id="coOrderConversionRate"  
+												 type="checkbox"  th:value="${obj.value.code}" />
+												<span th:text="${obj.value.name}" >不限</span>
+												</label>
+											</span>
+										</p>
+										<p class="cl">
+											<b class="fl tr">沟通主题关键词：</b>
+											<span class="fl">
+												<label class="mr10"><input class="mr5" type="text" name="coComKeywords" /></label>
+											</span>
+										</p>
+									</div>	
+							</div>
+						</div>
+					</div>
+				</div>
+				</form>
+			</div>
+		</div>
+
+		<div id="rMenu" style="top: 269px; left: 64px;">
+			<ul>
+				<li id="m_add" onclick="addTreeNode();">新建子分类</li>
+				<li id="m_del" onclick="removeTreeNode();">删除分类</li>
+				<li id="m_rename" onclick="reNameNode()">重命名</li>
+			</ul>
+		</div>
+
+		<!-- 弹出框 -->
+		<div class="undb" id="dialogFormWin">
+			<div>
+				<form id="dialogForm">
+					<div class="cl mb10">
+						<p>
+							<span>节点名称：</span> <input type="text"
+								name="addNodeName" id="addNodeName" value="" />
+						</p>
+					</div>
+				</form>
+				<span id="msg" style="color:red"></span>
+			</div>
+		</div>
+
+	</div>
+
+
+
+</body>
+<!-- 脚本区域（弹框、脚本） -->
+<div layout:fragment="javascript">
+	<script th:src="@{/js/plugins/ztree/jquery.ztree.all.js}"></script>
+	<script th:src="@{/js/customers/lable.js}"></script>
+	<!-- 脚本区域（弹框、脚本） -->
+	<script type="text/javascript" th:inline="javascript">
+		$(function() {
+			//timeCalender2('#baRegTimeStart','#baRegTimeEnd');
+			timeCalender2('#baRegTimeStart','#baRegTimeEnd');
+			timeCalender2('#paPaymentStartTime','#paPaymentEndTime');
+			timeCalender2('#paEwalletRechargeStart','#paEwalletRechargeEnd');
+			timeCalender2('#meLastTradingStart','#meLastTradingEnd');
+			timeCalender2('#meUpgradeTimeStart','#meUpgradeTimeEnd');
+			timeCalender2('#meLastSignStart','#meLastSignEnd');
+			timeCalender2('#meLastTimeShareSatrt','#meLastTimeShareEnd');
+			timeCalender2('#meLastSubscriptionStart','#meLastSubscriptionEnd');
+			timeCalender2('#beTraOrderSubIntervals','#beTraOrderSubIntervale');
+			timeCalender2('#beSubTimes','#beSubTimee');
+			timeCalender2('#beShareStime','#beShareEtime');
+			timeCalender2('#beRegistrationTimes','#beRegistrationTimee');
+			timeCalender2('#coTimeStart','#coTimeEnd');
+			
+			function loadIframe($tab) {
+				var iframe = $("iframe", $tab);
+				//如果不存在src则进行加载
+				if (!iframe.attr("src")) {
+					iframe.attr('src', iframe.data("src"));
+				}
+			}
+			
+			//$("#tab-child").height($(window).height()- 50 - 10 - 56 - 50 -27 )
+			//$(".centent-l").height($(window).height()- 50 - 10 - 56 - 50 )
+			//进行tab组件初始化
+			$('#tab').accordion({
+				childId : '#tab-child',
+				afterTabSelect : function($tab, index) {
+					var tab = $("#tab-" + (index + 1));
+					if (tab.accordion) {
+						tab.accordion("layoutTab");
+						if (index != 0) {
+							tab.accordion("showCont");
+						}
+					}
+				}
+			});
+
+			$('#tab-1').accordion({
+				childId : '#tab-child-1',
+				moveTabAuto : true
+			});
+			$('#tab-2').accordion({
+				childId : '#tab-child-2',
+				moveTabAuto : true,
+				afterTabSelect : loadIframe,
+				lazyLoad : true
+			});
+			$('#tab-3').accordion({
+				childId : '#tab-child-3',
+				moveTabAuto : true,
+				afterTabSelect : loadIframe,
+				lazyLoad : true
+			});
+			$('#tab-4').accordion({
+				childId : '#tab-child-4',
+				moveTabAuto : true,
+				afterTabSelect : loadIframe,
+				lazyLoad : true
+			});
+			$('#tab-5').accordion({
+				childId : '#tab-child-5',
+				moveTabAuto : true,
+				afterTabSelect : loadIframe,
+				lazyLoad : true
+			});
+
+		});
+	</script>
+
+</div>
+
+</html>

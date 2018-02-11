@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.ylpw.web.crm.mapper.customer.TCustomerGradeMapper" >
+
+<cache eviction="LRU" size="10240" readOnly="true" />
+
+  <resultMap id="BaseResultMap" type="cn.com.ylpw.web.crm.entity.customer.TCustomerGrade" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="GNAME" property="gname" jdbcType="VARCHAR" />
+    <result column="IBEGIN" property="ibegin" jdbcType="INTEGER" />
+    <result column="IEND" property="iend" jdbcType="INTEGER" />
+    <result column="GTYPE" property="gtype" jdbcType="INTEGER" />
+    <result column="GNUM" property="gnum" jdbcType="INTEGER" />
+    <result column="IS_ENABLE" property="isEnable" jdbcType="INTEGER" />
+    <result column="IS_DEL" property="isDel" typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler" />
+    <result column="CREATE_ID" property="createId" jdbcType="BIGINT" />
+    <result column="CREATE_NAME" property="createName" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_ID" property="updateId" jdbcType="BIGINT" />
+    <result column="UPDATE_NAME" property="updateName" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="INTEGRAL_MULTIPLE" property="integralMultiple"   jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, GNAME, IBEGIN, IEND, GTYPE, GNUM, IS_ENABLE, IS_DEL, CREATE_ID, CREATE_NAME, 
+    CREATE_TIME, UPDATE_ID, UPDATE_NAME, UPDATE_TIME,INTEGRAL_MULTIPLE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_customer_grade
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_customer_grade
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.com.ylpw.web.crm.entity.customer.TCustomerGrade" useGeneratedKeys="true" keyProperty="id" flushCache="true" >
+    insert into t_customer_grade (ID, GNAME, IBEGIN, 
+      IEND, GTYPE, GNUM, 
+       IS_ENABLE, IS_DEL, 
+      CREATE_ID, CREATE_NAME, CREATE_TIME, 
+      UPDATE_ID, UPDATE_NAME, UPDATE_TIME
+      )
+    values (#{id,jdbcType=BIGINT}, #{gname,jdbcType=VARCHAR}, #{ibegin,jdbcType=INTEGER}, 
+      #{iend,jdbcType=INTEGER}, #{gtype,jdbcType=INTEGER}, #{gnum,jdbcType=INTEGER}, 
+       #{isEnable,jdbcType=INTEGER}, #{isDel,typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler}, 
+      #{createId,jdbcType=BIGINT}, #{createName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateId,jdbcType=BIGINT}, #{updateName,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.ylpw.web.crm.entity.customer.TCustomerGrade" useGeneratedKeys="true" keyProperty="id" flushCache="true" >
+    insert into t_customer_grade
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="gname != null" >
+        GNAME,
+      </if>
+      <if test="ibegin != null" >
+        IBEGIN,
+      </if>
+      <if test="iend != null" >
+        IEND,
+      </if>
+      <if test="gtype != null" >
+        GTYPE,
+      </if>
+      <if test="gnum != null" >
+        GNUM,
+      </if>
+      <if test="isEnable != null" >
+        IS_ENABLE,
+      </if>
+      <if test="isDel != null" >
+        IS_DEL,
+      </if>
+      <if test="createId != null" >
+        CREATE_ID,
+      </if>
+      <if test="createName != null" >
+        CREATE_NAME,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="updateId != null" >
+        UPDATE_ID,
+      </if>
+      <if test="updateName != null" >
+        UPDATE_NAME,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="gname != null" >
+        #{gname,jdbcType=VARCHAR},
+      </if>
+      <if test="ibegin != null" >
+        #{ibegin,jdbcType=INTEGER},
+      </if>
+      <if test="iend != null" >
+        #{iend,jdbcType=INTEGER},
+      </if>
+      <if test="gtype != null" >
+        #{gtype,jdbcType=INTEGER},
+      </if>
+      <if test="gnum != null" >
+        #{gnum,jdbcType=INTEGER},
+      </if>
+      <if test="isEnable != null" >
+        #{isEnable,jdbcType=INTEGER},
+      </if>
+      <if test="isDel != null" >
+        #{isDel,typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler},
+      </if>
+      <if test="createId != null" >
+        #{createId,jdbcType=BIGINT},
+      </if>
+      <if test="createName != null" >
+        #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateId != null" >
+        #{updateId,jdbcType=BIGINT},
+      </if>
+      <if test="updateName != null" >
+        #{updateName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.ylpw.web.crm.entity.customer.TCustomerGrade" flushCache="true"  >
+    update t_customer_grade
+    <set >
+      <if test="gname != null" >
+        GNAME = #{gname,jdbcType=VARCHAR},
+      </if>
+      <if test="ibegin != null" >
+        IBEGIN = #{ibegin,jdbcType=INTEGER},
+      </if>
+      <if test="iend != null" >
+        IEND = #{iend,jdbcType=INTEGER},
+      </if>
+      <if test="gtype != null" >
+        GTYPE = #{gtype,jdbcType=INTEGER},
+      </if>
+      <if test="gnum != null" >
+        GNUM = #{gnum,jdbcType=INTEGER},
+      </if>
+      <if test="isEnable != null" >
+        IS_ENABLE = #{isEnable,jdbcType=INTEGER},
+      </if>
+      <if test="isDel != null" >
+        IS_DEL = #{isDel,typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler},
+      </if>
+      <if test="createId != null" >
+        CREATE_ID = #{createId,jdbcType=BIGINT},
+      </if>
+      <if test="createName != null" >
+        CREATE_NAME = #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateId != null" >
+        UPDATE_ID = #{updateId,jdbcType=BIGINT},
+      </if>
+      <if test="updateName != null" >
+        UPDATE_NAME = #{updateName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="integralMultiple != null" >
+        INTEGRAL_MULTIPLE = #{integralMultiple},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.ylpw.web.crm.entity.customer.TCustomerGrade"  flushCache="true" >
+    update t_customer_grade
+    set GNAME = #{gname,jdbcType=VARCHAR},
+      IBEGIN = #{ibegin,jdbcType=INTEGER},
+      IEND = #{iend,jdbcType=INTEGER},
+      GTYPE = #{gtype,jdbcType=INTEGER},
+      GNUM = #{gnum,jdbcType=INTEGER},
+      IS_ENABLE = #{isEnable,jdbcType=INTEGER},
+      IS_DEL = #{isDel,typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler},
+      CREATE_ID = #{createId,jdbcType=BIGINT},
+      CREATE_NAME = #{createName,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_ID = #{updateId,jdbcType=BIGINT},
+      UPDATE_NAME = #{updateName,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  
+  
+  <select id="findGrades" resultType="java.util.HashMap" parameterType="java.util.Map">
+    select 
+    ID,GNAME
+    from t_customer_grade  where IS_ENABLE = 1  and  IS_DEL =1 
+  </select>
+  
+  <select id="findAll" resultType="java.util.HashMap" parameterType="java.util.Map">
+	 SELECT
+	(
+		SELECT
+			GROUP_CONCAT(DIC. NAME)
+		FROM
+			T_CUSTOMER_GRADE_RIGHT CGR
+		LEFT JOIN SYS_DICTIONARIE DIC ON DIC.ID = CGR.DICTIONARIE_ID
+		WHERE
+			CGR.CUSTOMER_GRADE_ID = CG.ID
+	) AS RIGHT_NAME,
+	CASE CG.GTYPE
+	WHEN 1 THEN '永久有效'
+	WHEN 2 THEN CONCAT( '每', CG.GNUM, '个月全部重置' )
+	WHEN 3 THEN CONCAT('升降', CG.GNUM, '天后')
+	ELSE
+		'其他'
+	END AS GTYPESTR,
+	 CG.*
+	FROM
+		T_CUSTOMER_GRADE CG
+	WHERE
+		IS_DEL = 1
+  </select>
+  
+  
+  <select id="findUsableGrade"  resultMap="BaseResultMap" >
+   select 
+    <include refid="Base_Column_List" />
+    from t_customer_grade
+  	WHERE
+		IS_DEL = 1 AND IS_ENABLE =1 
+  </select>
+  
+  
+  <select id="findByIntegralLimit" resultType="java.util.HashMap" parameterType="java.util.Map">
+	SELECT  GRADE.ID , GRADE.GNAME  , GRADE.INTEGRAL_MULTIPLE   FROM T_CUSTOMER_GRADE   GRADE  
+	WHERE
+		GRADE.IS_DEL = 1 and   GRADE.IS_ENABLE =1 
+  </select>
+  
+  <select id="isUse" resultType="java.util.HashMap" parameterType="java.lang.Long">
+	SELECT ID FROM t_customers WHERE GRADE_ID = #{cgId}
+  </select>
+  
+</mapper>

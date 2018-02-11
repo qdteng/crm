@@ -1,0 +1,687 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.ylpw.web.crm.mapper.customer.TCustomerGroupMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.ylpw.web.crm.entity.customer.TCustomerGroup" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="GCLASS" property="gclass" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="VARCHAR" />
+    <result column="GR_PAY_DAY" property="grPayDay" jdbcType="VARCHAR" />
+    <result column="GR_PAY_DAY_CUSTOM" property="grPayDayCustom" jdbcType="VARCHAR" />
+    <result column="GR_PAYMENT_NUM" property="grPaymentNum" jdbcType="VARCHAR" />
+    <result column="GR_PAYMENT_NUM_CUSTOM" property="grPaymentNumCustom" jdbcType="VARCHAR" />
+    <result column="GR_SUMPRICE" property="grSumprice" jdbcType="VARCHAR" />
+    <result column="GR_SUMPRICE_CUSTOM" property="grSumpriceCustom" jdbcType="VARCHAR" />
+    <result column="GR_UNIT_PRICE" property="grUnitPrice" jdbcType="VARCHAR" />
+    <result column="GR_UNIT_PRICE_CUSTOM" property="grUnitPriceCustom" jdbcType="VARCHAR" />
+    <result column="GR_CUSTOMER_LAVEL" property="grCustomerLavel" jdbcType="VARCHAR" />
+    <result column="GR_ADDR_PROV" property="grAddrProv" jdbcType="VARCHAR" />
+    <result column="GR_ADDR_CITY" property="grAddrCity" jdbcType="VARCHAR" />
+    <result column="GR_CLIENT" property="grClient" jdbcType="VARCHAR" />
+    <result column="GR_PRONAME" property="grProname" jdbcType="VARCHAR" />
+    <result column="GR_CLASSA" property="grClassa" jdbcType="VARCHAR" />
+    <result column="GR_CLASSB" property="grClassb" jdbcType="VARCHAR" />
+    <result column="GR_PRONUM" property="grPronum" jdbcType="VARCHAR" />
+    <result column="CREATE_ID" property="createId" jdbcType="BIGINT" />
+    <result column="CREATE_NAME" property="createName" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_ID" property="updateId" jdbcType="BIGINT" />
+    <result column="UPDATE_NAME" property="updateName" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="CUS_NUM"     property="cusNum"   />
+    <result column="EXECUTE_STATUS" property="executeStatus" jdbcType="INTEGER" />
+    <result column="EXPORT_FILE" property="exportFile" jdbcType="BIGINT" />
+    <result column="EXPORT_STATUS" property="exportStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, NAME, REMARK, GCLASS, TYPE, GR_PAY_DAY, GR_PAY_DAY_CUSTOM, GR_PAYMENT_NUM, GR_PAYMENT_NUM_CUSTOM, 
+    GR_SUMPRICE, GR_SUMPRICE_CUSTOM, GR_UNIT_PRICE, GR_UNIT_PRICE_CUSTOM, GR_CUSTOMER_LAVEL, 
+    GR_ADDR_PROV, GR_ADDR_CITY, GR_CLIENT, GR_PRONAME, GR_CLASSA, GR_CLASSB, GR_PRONUM, 
+    CREATE_ID, CREATE_NAME, CREATE_TIME, UPDATE_ID, UPDATE_NAME, UPDATE_TIME,CUS_NUM, EXECUTE_STATUS, EXPORT_FILE, EXPORT_STATUS  
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_customer_group
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_customer_group
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.com.ylpw.web.crm.entity.customer.TCustomerGroup"  useGeneratedKeys="true" keyProperty="id" >
+    insert into t_customer_group (ID, NAME, REMARK, 
+      GCLASS, TYPE, GR_PAY_DAY, 
+      GR_PAY_DAY_CUSTOM, GR_PAYMENT_NUM, GR_PAYMENT_NUM_CUSTOM, 
+      GR_SUMPRICE, GR_SUMPRICE_CUSTOM, GR_UNIT_PRICE, 
+      GR_UNIT_PRICE_CUSTOM, GR_CUSTOMER_LAVEL, GR_ADDR_PROV, 
+      GR_ADDR_CITY, GR_CLIENT, GR_PRONAME, 
+      GR_CLASSA, GR_CLASSB, GR_PRONUM, 
+      CREATE_ID, CREATE_NAME, CREATE_TIME, 
+      UPDATE_ID, UPDATE_NAME, UPDATE_TIME
+      )
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{gclass,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{grPayDay,jdbcType=VARCHAR}, 
+      #{grPayDayCustom,jdbcType=VARCHAR}, #{grPaymentNum,jdbcType=VARCHAR}, #{grPaymentNumCustom,jdbcType=VARCHAR}, 
+      #{grSumprice,jdbcType=VARCHAR}, #{grSumpriceCustom,jdbcType=VARCHAR}, #{grUnitPrice,jdbcType=VARCHAR}, 
+      #{grUnitPriceCustom,jdbcType=VARCHAR}, #{grCustomerLavel,jdbcType=VARCHAR}, #{grAddrProv,jdbcType=VARCHAR}, 
+      #{grAddrCity,jdbcType=VARCHAR}, #{grClient,jdbcType=VARCHAR}, #{grProname,jdbcType=VARCHAR}, 
+      #{grClassa,jdbcType=VARCHAR}, #{grClassb,jdbcType=VARCHAR}, #{grPronum,jdbcType=VARCHAR}, 
+      #{createId,jdbcType=BIGINT}, #{createName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateId,jdbcType=BIGINT}, #{updateName,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.ylpw.web.crm.entity.customer.TCustomerGroup"  useGeneratedKeys="true" keyProperty="id" >
+    insert into t_customer_group
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="gclass != null" >
+        GCLASS,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="grPayDay != null" >
+        GR_PAY_DAY,
+      </if>
+      <if test="grPayDayCustom != null" >
+        GR_PAY_DAY_CUSTOM,
+      </if>
+      <if test="grPaymentNum != null" >
+        GR_PAYMENT_NUM,
+      </if>
+      <if test="grPaymentNumCustom != null" >
+        GR_PAYMENT_NUM_CUSTOM,
+      </if>
+      <if test="grSumprice != null" >
+        GR_SUMPRICE,
+      </if>
+      <if test="grSumpriceCustom != null" >
+        GR_SUMPRICE_CUSTOM,
+      </if>
+      <if test="grUnitPrice != null" >
+        GR_UNIT_PRICE,
+      </if>
+      <if test="grUnitPriceCustom != null" >
+        GR_UNIT_PRICE_CUSTOM,
+      </if>
+      <if test="grCustomerLavel != null" >
+        GR_CUSTOMER_LAVEL,
+      </if>
+      <if test="grAddrProv != null" >
+        GR_ADDR_PROV,
+      </if>
+      <if test="grAddrCity != null" >
+        GR_ADDR_CITY,
+      </if>
+      <if test="grClient != null" >
+        GR_CLIENT,
+      </if>
+      <if test="grProname != null" >
+        GR_PRONAME,
+      </if>
+      <if test="grClassa != null" >
+        GR_CLASSA,
+      </if>
+      <if test="grClassb != null" >
+        GR_CLASSB,
+      </if>
+      <if test="grPronum != null" >
+        GR_PRONUM,
+      </if>
+      <if test="createId != null" >
+        CREATE_ID,
+      </if>
+      <if test="createName != null" >
+        CREATE_NAME,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="updateId != null" >
+        UPDATE_ID,
+      </if>
+      <if test="updateName != null" >
+        UPDATE_NAME,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="executeStatus != null" >
+        EXECUTE_STATUS,
+      </if>
+      <if test="exportFile != null" >
+        EXPORT_FILE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="gclass != null" >
+        #{gclass,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="grPayDay != null" >
+        #{grPayDay,jdbcType=VARCHAR},
+      </if>
+      <if test="grPayDayCustom != null" >
+        #{grPayDayCustom,jdbcType=VARCHAR},
+      </if>
+      <if test="grPaymentNum != null" >
+        #{grPaymentNum,jdbcType=VARCHAR},
+      </if>
+      <if test="grPaymentNumCustom != null" >
+        #{grPaymentNumCustom,jdbcType=VARCHAR},
+      </if>
+      <if test="grSumprice != null" >
+        #{grSumprice,jdbcType=VARCHAR},
+      </if>
+      <if test="grSumpriceCustom != null" >
+        #{grSumpriceCustom,jdbcType=VARCHAR},
+      </if>
+      <if test="grUnitPrice != null" >
+        #{grUnitPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="grUnitPriceCustom != null" >
+        #{grUnitPriceCustom,jdbcType=VARCHAR},
+      </if>
+      <if test="grCustomerLavel != null" >
+        #{grCustomerLavel,jdbcType=VARCHAR},
+      </if>
+      <if test="grAddrProv != null" >
+        #{grAddrProv,jdbcType=VARCHAR},
+      </if>
+      <if test="grAddrCity != null" >
+        #{grAddrCity,jdbcType=VARCHAR},
+      </if>
+      <if test="grClient != null" >
+        #{grClient,jdbcType=VARCHAR},
+      </if>
+      <if test="grProname != null" >
+        #{grProname,jdbcType=VARCHAR},
+      </if>
+      <if test="grClassa != null" >
+        #{grClassa,jdbcType=VARCHAR},
+      </if>
+      <if test="grClassb != null" >
+        #{grClassb,jdbcType=VARCHAR},
+      </if>
+      <if test="grPronum != null" >
+        #{grPronum,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null" >
+        #{createId,jdbcType=BIGINT},
+      </if>
+      <if test="createName != null" >
+        #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateId != null" >
+        #{updateId,jdbcType=BIGINT},
+      </if>
+      <if test="updateName != null" >
+        #{updateName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="executeStatus != null" >
+        #{executeStatus,jdbcType=INTEGER},
+      </if>
+      <if test="exportFile != null" >
+        #{exportFile,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.ylpw.web.crm.entity.customer.TCustomerGroup" >
+    update t_customer_group
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="gclass != null" >
+        GCLASS = #{gclass,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="grPayDay != null" >
+        GR_PAY_DAY = #{grPayDay,jdbcType=VARCHAR},
+      </if>
+      <if test="grPayDayCustom != null" >
+        GR_PAY_DAY_CUSTOM = #{grPayDayCustom,jdbcType=VARCHAR},
+      </if>
+      <if test="grPaymentNum != null" >
+        GR_PAYMENT_NUM = #{grPaymentNum,jdbcType=VARCHAR},
+      </if>
+      <if test="grPaymentNumCustom != null" >
+        GR_PAYMENT_NUM_CUSTOM = #{grPaymentNumCustom,jdbcType=VARCHAR},
+      </if>
+      <if test="grSumprice != null" >
+        GR_SUMPRICE = #{grSumprice,jdbcType=VARCHAR},
+      </if>
+      <if test="grSumpriceCustom != null" >
+        GR_SUMPRICE_CUSTOM = #{grSumpriceCustom,jdbcType=VARCHAR},
+      </if>
+      <if test="grUnitPrice != null" >
+        GR_UNIT_PRICE = #{grUnitPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="grUnitPriceCustom != null" >
+        GR_UNIT_PRICE_CUSTOM = #{grUnitPriceCustom,jdbcType=VARCHAR},
+      </if>
+      <if test="grCustomerLavel != null" >
+        GR_CUSTOMER_LAVEL = #{grCustomerLavel,jdbcType=VARCHAR},
+      </if>
+      <if test="grAddrProv != null" >
+        GR_ADDR_PROV = #{grAddrProv,jdbcType=VARCHAR},
+      </if>
+      <if test="grAddrCity != null" >
+        GR_ADDR_CITY = #{grAddrCity,jdbcType=VARCHAR},
+      </if>
+      <if test="grClient != null" >
+        GR_CLIENT = #{grClient,jdbcType=VARCHAR},
+      </if>
+      <if test="grProname != null" >
+        GR_PRONAME = #{grProname,jdbcType=VARCHAR},
+      </if>
+      <if test="grClassa != null" >
+        GR_CLASSA = #{grClassa,jdbcType=VARCHAR},
+      </if>
+      <if test="grClassb != null" >
+        GR_CLASSB = #{grClassb,jdbcType=VARCHAR},
+      </if>
+      <if test="grPronum != null" >
+        GR_PRONUM = #{grPronum,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null" >
+        CREATE_ID = #{createId,jdbcType=BIGINT},
+      </if>
+      <if test="createName != null" >
+        CREATE_NAME = #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateId != null" >
+        UPDATE_ID = #{updateId,jdbcType=BIGINT},
+      </if>
+      <if test="updateName != null" >
+        UPDATE_NAME = #{updateName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cusNum != null" >
+        CUS_NUM = #{cusNum},
+      </if>
+      <if test="executeStatus != null" >
+        EXECUTE_STATUS = #{executeStatus,jdbcType=INTEGER},
+      </if>
+      <if test="exportFile != null" >
+        EXPORT_FILE = #{exportFile,jdbcType=INTEGER},
+      </if>
+      <if test="exportStatus != null" >
+        EXPORT_STATUS = #{exportStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.ylpw.web.crm.entity.customer.TCustomerGroup" >
+    update t_customer_group
+    set NAME = #{name,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      GCLASS = #{gclass,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=VARCHAR},
+      GR_PAY_DAY = #{grPayDay,jdbcType=VARCHAR},
+      GR_PAY_DAY_CUSTOM = #{grPayDayCustom,jdbcType=VARCHAR},
+      GR_PAYMENT_NUM = #{grPaymentNum,jdbcType=VARCHAR},
+      GR_PAYMENT_NUM_CUSTOM = #{grPaymentNumCustom,jdbcType=VARCHAR},
+      GR_SUMPRICE = #{grSumprice,jdbcType=VARCHAR},
+      GR_SUMPRICE_CUSTOM = #{grSumpriceCustom,jdbcType=VARCHAR},
+      GR_UNIT_PRICE = #{grUnitPrice,jdbcType=VARCHAR},
+      GR_UNIT_PRICE_CUSTOM = #{grUnitPriceCustom,jdbcType=VARCHAR},
+      GR_CUSTOMER_LAVEL = #{grCustomerLavel,jdbcType=VARCHAR},
+      GR_ADDR_PROV = #{grAddrProv,jdbcType=VARCHAR},
+      GR_ADDR_CITY = #{grAddrCity,jdbcType=VARCHAR},
+      GR_CLIENT = #{grClient,jdbcType=VARCHAR},
+      GR_PRONAME = #{grProname,jdbcType=VARCHAR},
+      GR_CLASSA = #{grClassa,jdbcType=VARCHAR},
+      GR_CLASSB = #{grClassb,jdbcType=VARCHAR},
+      GR_PRONUM = #{grPronum,jdbcType=VARCHAR},
+      CREATE_ID = #{createId,jdbcType=BIGINT},
+      CREATE_NAME = #{createName,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_ID = #{updateId,jdbcType=BIGINT},
+      UPDATE_NAME = #{updateName,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      EXECUTE_STATUS = #{executeStatus,jdbcType=INTEGER},
+      EXPORT_FILE = #{exportFile,jdbcType=BIGINT},
+      EXPORT_STATUS = #{exportStatus,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  
+  
+   <select id="findAll" resultType="java.util.HashMap" parameterType="java.util.Map">
+  	SELECT  GR.ID, GR.NAME, GR.REMARK, GR.GCLASS, GR.TYPE, GR.CREATE_TIME, GR.UPDATE_TIME, 
+  	GR.EXECUTE_STATUS as EXECUTE_TYPE , 
+  	CASE GR.TYPE
+	WHEN 1 THEN '动态分组'
+	ELSE
+		'静态分组'
+	END AS TYPESTR,
+	
+	CASE GR.GCLASS
+	WHEN 1 THEN '一般分组'
+	ELSE
+		'标签分组'
+	END AS GTYPESTR,
+	GR.CUS_NUM, GR.EXECUTE_STATUS ,GR.EXPORT_STATUS 
+   FROM T_CUSTOMER_GROUP GR  WHERE 1=1
+    <!--分组名称 -->
+	<if test="groupName != null and groupName != '' ">
+	  		  and  GR.NAME  like '%${groupName}%' 
+	</if>
+	
+    <!--分组类型 -->
+	<if test="gclass != null and gclass != '' ">
+	  		  and  GR.GCLASS  =  #{gclass}
+	</if>  	  
+   
+     <!--分组时间 -->
+	<if test="(  group_start != null and group_start != ''  ) ">
+		<![CDATA[
+			and  GR.CREATE_TIME  >=#{group_start}
+		]]>
+	</if>
+	
+	<if test="( group_end != null and group_end != ''   ) ">
+		<![CDATA[
+			and  GR.CREATE_TIME <=#{group_end}
+		 ]]>
+	</if>
+    order by GR.ID desc 
+  </select>
+  
+  <select id="findByModel" resultType="java.util.HashMap" parameterType="cn.com.ylpw.web.crm.entity.customer.TCustomerGroup">
+  	SELECT
+		<include refid="Base_Column_List" /> ,
+		CASE GR.GCLASS
+			WHEN 1 THEN
+				'一般分组'
+			ELSE
+				'标签分组'
+			END AS GTYPESTR
+	FROM
+		T_CUSTOMER_GROUP GR
+	WHERE
+		1 = 1
+		  <if test="name != null and name != ''" >
+	        and NAME = #{name}
+	      </if>
+	      <if test="remark != null and remark != ''" >
+	        and REMARK = #{remark}
+	      </if>
+	      <if test="gclass != null and gclass != ''" >
+	        and GCLASS = #{gclass}
+	      </if>
+	      <if test="type != null and type != ''" >
+	        and TYPE = #{type}
+	      </if>
+	      <if test="grPayDay != null and grPayDay != ''" >
+	        and GR_PAY_DAY = #{grPayDay}
+	      </if>
+	      <if test="grPayDayCustom != null and grPayDayCustom != ''" >
+	        and GR_PAY_DAY_CUSTOM = #{grPayDayCustom}
+	      </if>
+	      <if test="grPaymentNum != null and grPaymentNum != ''" >
+	        and GR_PAYMENT_NUM = #{grPaymentNum}
+	      </if>
+	      <if test="grPaymentNumCustom != null and grPaymentNumCustom != ''" >
+	        and GR_PAYMENT_NUM_CUSTOM = #{grPaymentNumCustom}
+	      </if>
+	      <if test="grSumprice != null and grSumprice != ''" >
+	        and GR_SUMPRICE = #{grSumprice}
+	      </if>
+	      <if test="grSumpriceCustom != null and grSumpriceCustom != ''" >
+	        and GR_SUMPRICE_CUSTOM = #{grSumpriceCustom}
+	      </if>
+	      <if test="grUnitPrice != null and grUnitPrice != ''" >
+	        and GR_UNIT_PRICE = #{grUnitPrice}
+	      </if>
+	      <if test="grUnitPriceCustom != null and grUnitPriceCustom != ''" >
+	        and GR_UNIT_PRICE_CUSTOM = #{grUnitPriceCustom}
+	      </if>
+	      <if test="grCustomerLavel != null and grCustomerLavel != ''" >
+	        and GR_CUSTOMER_LAVEL = #{grCustomerLavel}
+	      </if>
+	      <if test="grAddrProv != null and grAddrProv != ''" >
+	        and GR_ADDR_PROV = #{grAddrProv}
+	      </if>
+	      <if test="grAddrCity != null and grAddrCity != ''" >
+	        and GR_ADDR_CITY = #{grAddrCity}
+	      </if>
+	      <if test="grClient != null and grClient != ''" >
+	        and GR_CLIENT = #{grClient}
+	      </if>
+	      <if test="grProname != null and grProname != ''" >
+	        and GR_PRONAME = #{grProname}
+	      </if>
+	      <if test="grClassa != null and grClassa != ''" >
+	        and GR_CLASSA = #{grClassa}
+	      </if>
+	      <if test="grClassb != null and grClassb != ''" >
+	        and GR_CLASSB = #{grClassb}
+	      </if>
+	      <if test="grPronum != null and grPronum != ''" >
+	        and GR_PRONUM = #{grPronum}
+	      </if>
+	      order by GR.ID desc 
+  </select>
+  <!-- 批量删除 start-->
+  <delete id="batchDel" parameterType="java.lang.Long" flushCache="true" >
+        DELETE FROM t_customer_group WHERE ID in
+        <foreach item="id" collection="ids" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+   </delete>
+  <!--批量删除 end -->
+  
+  <select id="findDynamicGroupByClass" resultMap="BaseResultMap"  >
+  		select <include refid="Base_Column_List" /> from t_customer_group gr where gr.gclass = #{gclass} and gr.TYPE = 1 
+  </select>
+  
+    <!-- 批量删除 start-->
+  <delete id="deleteGroupCustomersByGroupIdForBatch"  flushCache="true" >
+        DELETE FROM T_CUSTOMER_GROUP_JOINS WHERE GROUP_ID IN
+        <foreach item="id" collection="ids" open="(" separator="," close=")">
+            #{id}
+        </foreach> 
+   </delete>
+  <!--批量删除 end -->
+  
+    <!-- 批量删除 start-->
+  <delete id="deleteGroupLableByGroupIdForBatch"  flushCache="true" >
+        DELETE FROM T_CUSTOMER_GROUP_LABLE WHERE GROUP_ID  IN
+        <foreach item="id" collection="ids" open="(" separator="," close=")">
+            #{id}
+        </foreach> 
+   </delete>
+  <!--批量删除 end -->
+  
+  
+  <select id="findGroupByLableId" resultMap="BaseResultMap"  >
+  		
+  	select <include refid="Base_Column_List" />  from  (
+		select gp.*   from t_customer_group  gp  left join t_customer_group_lable gl   on gp.ID = gl.GROUP_ID  
+		where gl.LABLE_ID =#{lableid}
+	) tmp 
+	
+  </select>
+  
+  
+  <select id="findCustomerByGroupId" resultType="java.util.HashMap" parameterType="java.util.Map">
+	
+		select (select name  from sys_dictionarie  dis  where   pid = 64 
+		 and code = cus.sys_source  ) as SYS_SOURCE  , 
+		 CONVERT( cus.NICKNAME   USING utf8) as NICKNAME  , 
+		
+		 CONVERT( cus.truename   USING utf8) as TRUENAME   ,
+		  if (cus.SEX =1 ,'男','女') as SEX   ,
+		cus.PHONE , cus.EMAIL  ,cus.WEIBO_NO , cus.WEIXIN_NO  ,cus.CARD , 
+		
+		(select  GROUP_CONCAT( note.`NAME` ) from t_customer_join_note  cusnote 
+		 join  t_customer_note  note  on cusnote.NOTE_ID = note.id  where  cusnote.CUSTOMER_ID =cus.ID)  as  NOTE  ,
+		cusgroup.NAME as  GROUPNAME 
+		
+		from t_customers cus    left join  t_customer_group_joins cg   on  cus.id = cg.CUSTOMER_ID 
+		
+		left  join  t_customer_group   cusgroup    on  cg.GROUP_ID = cusgroup.ID
+		
+		where  cusgroup.ID = #{groupid}
+	
+	</select>
+	
+	<select id="findNoteById" resultType="java.util.HashMap" parameterType="java.util.Map">
+		select  GROUP_CONCAT( note.`NAME` ) AS NOTENAME from t_customer_join_note  cusnote 
+		 join  t_customer_note  note  on cusnote.NOTE_ID = note.id  where  cusnote.CUSTOMER_ID =#{customerId}
+	</select>
+	
+	<!--删除分组前验证该分组是否被触发、推送、投发引用 -->
+	<select id="isUse" resultType="java.util.HashMap" parameterType="java.lang.Long">
+		SELECT ID FROM t_activty_push_customer_group WHERE CUSTOMER_GROUP_ID = #{cgID}
+		UNION ALL
+		SELECT ID FROM t_activty_putin_customer_group WHERE CUSTOMER_GROUP_ID = #{cgID}
+		UNION ALL
+		SELECT ID FROM t_activty_triger_customer_group WHERE CUSTOMER_GROUP_ID = #{cgID}
+	</select>
+	
+	<!-- 会员分组列表页执行状态定时查询 -->
+	<select id="findStaticByIds" resultType="java.util.HashMap"  useCache="false" >
+		SELECT  ID , EXECUTE_STATUS, EXPORT_STATUS  FROM t_customer_group WHERE TYPE = 2 AND EXECUTE_STATUS = 1 AND ID IN 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach> 
+	</select>
+	
+	<!-- 生成导出分组更新 -->
+	<update id="updateForExport" parameterType="cn.com.ylpw.web.crm.entity.customer.TCustomerGroup" >
+    update t_customer_group
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="gclass != null" >
+        GCLASS = #{gclass,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="grPayDay != null" >
+        GR_PAY_DAY = #{grPayDay,jdbcType=VARCHAR},
+      </if>
+      <if test="grPayDayCustom != null" >
+        GR_PAY_DAY_CUSTOM = #{grPayDayCustom,jdbcType=VARCHAR},
+      </if>
+      <if test="grPaymentNum != null" >
+        GR_PAYMENT_NUM = #{grPaymentNum,jdbcType=VARCHAR},
+      </if>
+      <if test="grPaymentNumCustom != null" >
+        GR_PAYMENT_NUM_CUSTOM = #{grPaymentNumCustom,jdbcType=VARCHAR},
+      </if>
+      <if test="grSumprice != null" >
+        GR_SUMPRICE = #{grSumprice,jdbcType=VARCHAR},
+      </if>
+      <if test="grSumpriceCustom != null" >
+        GR_SUMPRICE_CUSTOM = #{grSumpriceCustom,jdbcType=VARCHAR},
+      </if>
+      <if test="grUnitPrice != null" >
+        GR_UNIT_PRICE = #{grUnitPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="grUnitPriceCustom != null" >
+        GR_UNIT_PRICE_CUSTOM = #{grUnitPriceCustom,jdbcType=VARCHAR},
+      </if>
+      <if test="grCustomerLavel != null" >
+        GR_CUSTOMER_LAVEL = #{grCustomerLavel,jdbcType=VARCHAR},
+      </if>
+      <if test="grAddrProv != null" >
+        GR_ADDR_PROV = #{grAddrProv,jdbcType=VARCHAR},
+      </if>
+      <if test="grAddrCity != null" >
+        GR_ADDR_CITY = #{grAddrCity,jdbcType=VARCHAR},
+      </if>
+      <if test="grClient != null" >
+        GR_CLIENT = #{grClient,jdbcType=VARCHAR},
+      </if>
+      <if test="grProname != null" >
+        GR_PRONAME = #{grProname,jdbcType=VARCHAR},
+      </if>
+      <if test="grClassa != null" >
+        GR_CLASSA = #{grClassa,jdbcType=VARCHAR},
+      </if>
+      <if test="grClassb != null" >
+        GR_CLASSB = #{grClassb,jdbcType=VARCHAR},
+      </if>
+      <if test="grPronum != null" >
+        GR_PRONUM = #{grPronum,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null" >
+        CREATE_ID = #{createId,jdbcType=BIGINT},
+      </if>
+      <if test="createName != null" >
+        CREATE_NAME = #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateId != null" >
+        UPDATE_ID = #{updateId,jdbcType=BIGINT},
+      </if>
+      <if test="updateName != null" >
+        UPDATE_NAME = #{updateName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cusNum != null" >
+        CUS_NUM = #{cusNum},
+      </if>
+      <if test="executeStatus != null" >
+        EXECUTE_STATUS = #{executeStatus,jdbcType=INTEGER},
+      </if>
+      <if test="exportFile != null" >
+        EXPORT_FILE = #{exportFile,jdbcType=INTEGER},
+      </if>
+      <if test="exportStatus != null" >
+        EXPORT_STATUS = #{exportStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

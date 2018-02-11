@@ -1,0 +1,80 @@
+<!DOCTYPE html>  
+<html xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  >  
+    <head>
+    	<meta charset="utf-8"></meta>
+        <title>配送信息统计</title>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}"></link>
+	    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"></link>
+	    <link rel="stylesheet" type="text/css" th:href="@{/css/validate.default.css}"></link>
+	    <script th:src="@{/js/plugins/jquery/jquery-1.7.min.js}"></script>
+	    <script th:src="@{/js/plugins/validate/jquery.form.js}"></script>
+	    <script th:src="@{/js/plugins/validate/validate.js}"></script>
+	    <script th:src="@{/js/plugins/layer/layer.js}"></script>
+	    
+	    <!-- 核心方法 -->
+	    <script th:src="@{/js/system/core.js}"></script>
+	    <script th:src="@{/js/system/index.js}"></script>
+	    <script th:src="@{/js/system/minBox.js}"></script>
+	    <script th:src="@{/js/system/accordion.js}"></script>
+    </head>  
+    <body>
+				
+			<div class="container">
+			    <section class="col-lg-12 ui-content ui-shadow">
+			      
+				    <!-- 列表主体 -->
+					<div class="search-form cl mt15 mb10" style="height:500px;overflow-x:auto;">
+						<!-- 列表主体（查询区域） -->
+						<form name="searchForm" id="searchForm" th:action="@{'/customers/address/list/' + ${customerid}}" action="/customers/orders/list/1" method="post">
+							<input  type="hidden"  id="pageNo" name="pageNo"  th:value="${page.pageNo}" value=""  />
+							<input  type="hidden" name="pageSize"  id="pageSize" th:value="${page.pageSize}" value=""  />
+						</form>
+						
+						<div th:if="${#lists.size(dateList) > 0}">
+							<!-- 列表主体（搜索结果） -->
+							<table class="table table-bordered mt15">
+								<tr>
+								  <th width="20" style="text-align:left;">序号</th>
+								  <th width="20" style="text-align:center;">是否当前默认</th>
+								  <th width="20" style="text-align:center;">收货人姓名</th>
+								  <th style="text-align:center;">收货地址</th>
+								  <th style="text-align:center;">邮编</th>
+								  <th style="text-align:center;">固定电话</th>
+								  <th style="text-align:center;">手机</th>
+								  <th style="text-align:center;">累计配送次数</th>
+								  <th style="text-align:center;">最后一次配送时间</th>
+								</tr>
+								<tr th:each="obj,indexStat:${dateList}">
+									<td th:text="${indexStat.index+1}" ></td>
+									<td style="text-align:center;" th:text="${obj.ID_DEFAULT eq 1 ?'是':'否'}"    >...</td>
+									<td style="text-align:center;" th:text="${obj.NAME}"    >...</td>
+									<td style="text-align:center;" th:text="${obj.ADDRESS}"  >...</td>
+									<td style="text-align:center;" th:text="${obj.ZIP}"  >...</td>
+									<td style="text-align:center;" th:text="${obj.TEL}"  >...</td>
+									<td style="text-align:center;" th:text="${obj.PHONE}"  >...</td>
+									<td style="text-align:center;" th:text="${obj.PSNUM}"  >...</td>
+									<td style="text-align:center;" th:text="${null!=obj.LAST_PSTIME?#dates.format(obj.LAST_PSTIME,'yyyy-MM-dd HH:mm:ss'):'' }"  >...</td>
+								</tr>
+							</table>
+						</div>
+						<div style="text-align: center;" th:if="${#lists.isEmpty(dateList)}">
+							无相关信息
+						</div>
+						<!-- 分页 -->
+					</div>
+					<div th:if="${#lists.size(dateList) > 0}"  th:include="layouts/page:: page" th:attr="pageFormId=searchForm,pageNo=${page.pageNo},pageSize=${page.pageSize},total=${page.total}">...</div>
+						
+			    </section>
+			</div>
+
+	</body>
+	
+	<!-- 脚本区域（弹框、脚本） -->
+    <script type="text/javascript">
+	    $(function() {
+	
+	      });
+    </script>
+	    
+</html>

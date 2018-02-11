@@ -1,0 +1,524 @@
+<!DOCTYPE html>  
+<html xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layouts/dialog" >  
+	
+	
+    <head>
+    	<meta charset="utf-8"></meta>
+        <title>详情</title>
+	    <link rel="stylesheet" type="text/css" th:href="@{/css/zTreeStyle/zTreeStyle.css}"></link>
+	    <link rel="stylesheet" type="text/css" th:href="@{/css/zTreeStyle/demo.css}"></link>
+	    
+	    <!-- 核心方法 -->
+	    <script th:src="@{/js/system/core.js}"></script>
+	    <script th:src="@{/js/system/index.js}"></script>
+	    <script th:src="@{/js/system/minBox.js}"></script>
+	    <script th:src="@{/js/system/accordion.js}"></script>
+	    <style>
+      	   .tab-iframe {
+			    display: block;
+			    width: 100%;
+			    height: 800px;
+			    overflow: auto;
+			    border: 0
+			  }
+			*{margin: 0;padding: 0;}
+			body{font:normal 12px/1.5  "微软雅黑", 'arial', 'Tahoma','simsun','Verdana';}
+			.p20{padding: 20px;}
+			.mt10{margin-top: 10px;}
+			.fl{float: left;}
+			
+			.clearfloat:after{display:block;clear:both;content:"";visibility:hidden;height:0}.clearfloat{zoom:1}.clear{*zoom:1;}.clear:after{content:'\20';display:block;height:0;clear:both;}
+			.member h3{border-bottom: 1px solid #CCCCCC;line-height: 40px;font-size: 16px;font-weight: normal;}
+			.content h4{font-size: 14px;font-weight: normal;margin-top: 15px;}
+			.content p{overflow: hidden;border-bottom: 1px solid #CCCCCC;padding-bottom: 10px;}
+			.content p span{height: 30px;line-height: 30px;margin: 5px 0;width: 90% !important;}
+			.content p span  b{width:120px;font-weight: normal; margin-right:5px ;}
+			.content p span  i{font-style: normal;}
+			
+			.labels label{display: block;float: left;background: #f4f4f4;margin:0 5px;padding: 5px 10px;}
+			.labels label b{font-weight: normal;margin-left: 10px;}
+			.labels a{background: #fff;border: 1px dashed #ccc;border-radius: 3px;color:#6fb6e0;padding: 4px 9px;float: left;margin-left: 5px;text-decoration: none;}
+	      </style >
+        <style>
+				* {
+					margin: 0;
+					padding: 0;
+				}
+				
+				body {
+					font: normal 12px/1.5 "微软雅黑", 'arial', 'Tahoma', 'simsun', 'Verdana';
+				}
+				
+				.p20 {
+					padding: 20px;
+				}
+				
+				.mt10 {
+					margin-top: 10px;
+				}
+				
+				.fl {
+					float: left;
+				}
+				
+				.clearfloat:after {
+					display: block;
+					clear: both;
+					content: "";
+					visibility: hidden;
+					height: 0
+				}
+				
+				.clearfloat {
+					zoom: 1
+				}
+				
+				.clear {
+					*zoom: 1;
+				}
+				
+				.clear:after {
+					content: '\20';
+					display: block;
+					height: 0;
+					clear: both;
+				}
+				
+				.member h3 {
+					border-bottom: 1px solid #CCCCCC;
+					line-height: 40px;
+					font-size: 16px;
+					font-weight: normal;
+				}
+				
+				.content h4 {
+					font-size: 14px;
+					font-weight: normal;
+					margin-top: 15px;
+				}
+				
+				.content p {
+					overflow: hidden;
+					border-bottom: 1px solid #CCCCCC;
+					padding-bottom: 10px;
+				}
+				
+				.content p span {
+					height: 30px;
+					line-height: 30px;
+					margin: 5px 0;
+					width: 300px;
+				}
+				
+				.content p span  b {
+					width: 120px;
+					font-weight: normal;
+					margin-right: 5px;
+				}
+				
+				.content p span  i {
+					font-style: normal;
+				}
+				
+				.labels label {
+					display: block;
+					float: left;
+					background: #f4f4f4;
+					margin: 0 5px;
+					padding: 5px 10px;
+				}
+				
+				.labels label b {
+					font-weight: normal;
+					margin-left: 10px;
+				}
+				
+				.labels a {
+					background: #fff;
+					border: 1px dashed #ccc;
+					border-radius: 3px;
+					color: #6fb6e0;
+					padding: 4px 9px;
+					float: left;
+					margin-left: 5px;
+					text-decoration: none;
+				}
+				
+				.tab-centent p{line-height: 30px;}
+				.tab-centent p b{font-weight:normal;width:120px;}
+				.tab-centent p span{width:80%;}
+				.content p span i input[type="radio"],.content p span b input[type="radio"]{vertical-align:text-top; margin-top:2px;}
+				</style>
+    </head>  
+    <body style="text-align:center;" >
+    	 <div layout:fragment="content" style='overflow:auto;height:490px'>
+		    	<!-- 添加用户 -->
+				<div  style="margin-top: 10px;"     id="addOrUpdateDialog"  >
+			    	<form action="/customers/group/update" method="post" id="detafilForm" class="form-horizontal">
+						<input type="hidden" name="id" th:value="${cGroup.id}" />
+						<div class="content mt10">
+							<p class="mt20">
+								<span>
+									<b class="fl">最近交易：</b>
+										<i class="fl mr10"  th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('CG_RECENTTRADE')}"   >
+											<input type="radio" th:value="${obj.value.code}"  name="grPayDay" class="recenttrade mr5"
+											th:id="${obj.value.id+'CG_RECENTTRADE'}" id="grPayDay"  
+											 th:checked="${#null==cGroup.grPayDay ?false:cGroup.grPayDay == obj.value.code }" />
+											<label th:for="${obj.value.id+'CG_RECENTTRADE'}" th:text="${obj.value.name}"  style="width:25px;"></label>
+										</i>
+										<b class="fl">
+											<input type="radio" name="grPayDay" class="recenttradezdy mr5" th:checked="${#null != cGroup.grPayDayCustom and '' != cGroup.grPayDayCustom}"></input><a href="javascript:void(0);"><span class="recenttradezdy">自定义</span></a>
+											<i th:style="${#null != cGroup.grPayDayCustom and '' != cGroup.grPayDayCustom?'':'display: none'}" style="display: none;" id="recenttradezdy">
+												<input type="text" name="grPayDayCustom" id="grPayDayCustom" class="c_positiveInteger recenttradezdy" style="width:40px;" th:value="${cGroup.grPayDayCustom}"></input>天
+											</i>
+										</b>
+								</span>
+							</p>
+						</div>
+						<div class="content mt10">
+							<p class="mt10">
+								<span>
+									<b class="fl">交易次数：</b>
+									<i class="fl mr10"  th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('CG_TRADECOUNT')}"   >
+										<input type="radio" th:value="${obj.value.code}"  name="grPaymentNum" class="tradecount mr5"
+										th:id="${obj.value.id+'CG_TRADECOUNT'}" id="grPaymentNum"  
+										 th:checked="${#null==cGroup.grPaymentNum ?false:cGroup.grPaymentNum == obj.value.code }" />
+										<label th:for="${obj.value.id+'CG_TRADECOUNT'}" th:text="${obj.value.name}"  style="width:25px;"></label>
+									</i>
+									<b class="fl">
+										<input type="radio" name="grPaymentNum" class="tradecountzdy mr5" th:checked="${#null != cGroup.grPaymentNumCustom and '' != cGroup.grPaymentNumCustom}"></input><a href="javascript:void(0);"><span class="tradecountzdy">自定义</span></a>
+										<span th:style="${#null != cGroup.grPaymentNumCustom and '' != cGroup.grPaymentNumCustom?'':'display: none'}" style="display: none;" id="tradecountzdy">
+											<input type="text" name="grPaymentNumCustom" id="grPaymentNumCustom" class="c_positiveInteger tradecountzdy" style="width:40px;" th:value="${cGroup.grPaymentNumCustom}"></input>次
+										</span>
+									</b>
+								</span>
+							</p>
+						</div>
+						<div class="content mt10">
+							<p class="mt10">
+								<span>
+									<b class="fl">累计金额：</b>
+									<i class="fl mr10"  th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('CG_CUMUTOTAL')}"   >
+										<input type="radio" th:value="${obj.value.code}"  name="grSumprice" class="cumutotal mr5"
+										th:id="${obj.value.id+'CG_CUMUTOTAL'}" id="grSumprice"  
+										 th:checked="${#null==cGroup.grSumprice ?false:cGroup.grSumprice == obj.value.code }" />
+										<label th:for="${obj.value.id+'CG_CUMUTOTAL'}" th:text="${obj.value.name}"  style="width:25px;"></label>
+									</i>
+									<b class="fl">
+										<input type="radio" name="grSumprice" class="cumutotalzdy mr5" th:checked="${#null != cGroup.grSumpriceCustom and '' != cGroup.grSumpriceCustom}"></input><a href="javascript:void(0);"><span class="cumutotalzdy">自定义</span></a>
+										<span th:style="${#null != cGroup.grSumpriceCustom and '' != cGroup.grSumpriceCustom?'':'display: none'}" style="display: none;" id="cumutotalzdy">
+											<input type="text" name="grSumpriceCustom" id="grSumpriceCustom" class="c_positiveInteger cumutotalzdy" style="width:40px;" th:value="${cGroup.grSumpriceCustom}"></input>元
+										</span>
+									</b>						
+								</span>
+							</p>
+						</div>
+						<div class="content mt10">
+							<p class="mt10">
+								<span>
+									<b class="fl">平均客单价：</b>
+									<i class="fl mr10" th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('CG_AVG_KDJ')}"   >
+										<input type="radio" th:value="${obj.value.code}"  name="grUnitPrice" class="avgkdj mr5"
+										th:id="${obj.value.id+'CG_AVG_KDJ'}" id="grUnitPrice"  
+										 th:checked="${#null==cGroup.grUnitPrice ?false:cGroup.grUnitPrice == obj.value.code }" />
+										<label th:for="${obj.value.id+'CG_AVG_KDJ'}" th:text="${obj.value.name}"  style="width:25px;"></label>
+									</i>
+									<b class="fl">
+									<input type="radio" name="grUnitPrice" class="avgkdjzdy mr5" th:checked="${#null != cGroup.grUnitPriceCustom and '' != cGroup.grUnitPriceCustom}"></input><a href="javascript:void(0);"><span class="avgkdjzdy">自定义</span></a>
+										<span th:style="${#null != cGroup.grUnitPriceCustom and '' != cGroup.grUnitPriceCustom?'':'display: none'}" style="display: none;" id="avgkdjzdy">
+											<input type="text" name="grUnitPriceCustom" id="grUnitPriceCustom" class="c_positiveInteger avgkdjzdy" style="width:40px;" th:value="${cGroup.grUnitPriceCustom}"></input>元
+										</span>	
+									</b>					
+								</span>
+							</p>
+						</div>
+						<div class="content mt10">
+							<p class="mt10">
+								<span>
+									<b class="fl">会员等级：</b>
+									<i class="fl mr10"  th:each="obj,indexStat:${customerGrades}"   >
+										<input type="radio" th:value="${obj.ID}"  name="grCustomerLavel" class="userlevel mr5"
+										th:id="${obj.ID+'USERLEVEL'}" id="grCustomerLavel"  
+										 th:checked="${#null==cGroup.grCustomerLavel ?false:(obj.ID+'') == cGroup.grCustomerLavel}" />
+											 
+										<label th:for="${obj.ID+'USERLEVEL'}" th:text="${obj.GNAME}"  style="width:25px;"></label>
+									</i>
+									<em class="f-red fr">注：不勾选则不限</em>
+								</span>
+							</p>
+						</div>
+						<div class="content mt10">
+							<p class="mt10">
+								<span class="fl">
+									<b class="fl">地区筛选：</b>
+									<i class="fl">
+										<input type="radio" value="0" name="selArea" class="grAddDefaultzdy mr5" th:checked="${#null != cGroup.id and #null == cGroup.grAddrProv}"></input>
+										<a class="mr10" href="javascript:void(0);"><span class="grAddDefaultzdy">默认全部</span></a>
+										<input type="radio" value="1" name="selArea" class="areazdy mr5" th:checked="${#null != cGroup.grAddrProv and '-1' != cGroup.grAddrProv}"></input>
+										<a class="mr10" href="javascript:void(0);"><span class="areazdy">自定义</span></a>
+										<span class="area" th:style="${#null != cGroup.grAddrProv and '' != cGroup.grAddrProv and '-1' != cGroup.grAddrProv?'':'display: none'}" style="display: none;">
+											<select class="provincesel"  target="citysel" name="grAddrProv" >
+												<option th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('PROVINCE')}" 
+												th:text="${obj.value.name}" th:selected="${cGroup.grAddrProv == obj.value.code}"
+												th:value="${obj.value.code}"  value="0" >请选择</option>
+											</select>
+											<select class="citysel" name="grAddrCity" >
+												<option value="-1" >请选择</option>
+											</select>
+											<input type="hidden" id="grAddrCity" th:value="${cGroup.grAddrCity}"	/>
+										</span>		
+									</i>			
+								</span>
+							</p>
+						</div>
+						<div class="content mt10">
+							<p class="mt10">
+								<span>
+									<b class="fl">下单终端：</b>
+									<i class="fl">
+										<span  th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('ORDERSOURCE')}"   >
+											<input class="mr5" type="radio" th:value="${obj.value.code}"  name="grClient" 
+											th:id="${obj.value.id+'grClient'}" id="grClient" value="1" 
+											 th:checked="${cGroup.grClient == obj.value.code}" />
+											<label class="mr10" th:for="${obj.value.id+'ORDERSOURCE'}" th:text="${obj.value.name}"  style="width:25px;">WAP</label>
+										</span>
+									</i>
+									<em class="f-red fr">注：不勾选则不限</em>						
+								</span>
+							</p>
+						</div>
+						<div class="content mt10">
+							<p class="mt10">
+								<span class="fl">
+									<b class="fl">指定票品：</b>
+									<i class="fl">
+										<input type="radio" value="0" name="signedProduct" class="allProduct mr5" th:checked="${(#null != cGroup.id and #null == cGroup.grProname and #null == cGroup.grClassa)?true:false}"></input>
+										<a class="mr10" href="javascript:void(0);"><span class="allProduct">全部商品</span></a>
+										<input type="radio" value="1" name="signedProduct" class="grProname mr5" th:checked="${(#null != cGroup.grProname and cGroup.grProname != '')?true:false}"></input>
+										<a class="mr10" href="javascript:void(0);"><span class="grProname">指定票品</span></a>
+										<input type="radio" value="2" name="signedProduct" class="grClassa mr5" th:checked="${(#null != cGroup.grClassa and cGroup.grClassa != '')?true:false}"></input>
+										<a class="mr10" href="javascript:void(0);"><span class="grClassa" >指定类目</span></a>
+										<input class="mr5" type="text" name="grProname" id="grProname" th:style="${#null != cGroup.grProname and cGroup.grProname != ''}?'':'display: none'" style="display: none;" th:value="${cGroup.grProname}"></input>
+										<select class="proClassA"  target="proClassB_2" name="grClassa" id="grClassa" th:style="${#null != cGroup.grClassa and cGroup.grClassa != ''}?'':'display: none'" style="display: none;">
+											<option th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('P_CATEGORY')}" 
+											th:text="${obj.value.name}" th:selected="${cGroup.grClassa == obj.value.code}"
+											th:value="${obj.value.code}"  value="0" >请选择</option>
+										</select>
+									</i>
+								</span>
+							</p>
+						</div>
+						<div class="content mt10">
+							<p class="mt10">
+								<span class="fl">
+									<b class="fl">商品件数：</b>
+									<i class="fl">
+										<a href="javascript:void(0);"><span class="grPronumzdy">自定义</span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+										<span th:style="${#null != cGroup.grPronum and cGroup.grPronum != ''}?'':'display: none'" id="grPronumzdy">
+											<input type="text" name="grPronum" id="grPronum" class="c_positiveInteger" style="width:80px;" th:value="${cGroup.grPronum}"></input>件
+										</span>		
+									</i>				
+								</span>
+							</p>
+						</div>
+						<div class="content mt10">
+							<p class="mt10">
+								<span class="fl">
+									<b class="fl">分组名称：</b>
+									<i class="fl">
+										<input type="text" name="name" id="name" class="c_maxlength_32 c_required" th:value="${cGroup.name}"></input>
+									</i>
+								</span>
+							</p>
+						</div>
+						<div class="content mt10">
+							<p class="mt10">
+								<span class="fl">
+									<b class="fl">分组说明：</b>
+									<i class="fl">
+										<input type="text" name="remark" id="remark" class="c_maxlength_64" th:value="${cGroup.remark}"></input>						
+									</i>
+								</span>
+							</p>
+						</div>
+						<div class="content mt10">
+							<p class="mt10">
+								<span class="fl">
+									<b class="fl">分组类型：</b>
+									<i class="fl">
+										<select name="type" id="type">
+											<option value="1" th:selected="${cGroup.type == '1'}">动态分组</option>
+											<option value="2" th:selected="${cGroup.type == '2'}" selected="selected">静态分组</option>
+										</select>
+									</i>
+								</span>
+							</p>
+						</div>
+					</form>
+			    </div>
+		    </div>
+		  
+		    <!-- 脚本区域（弹框、脚本） -->
+			<div layout:fragment="javascript">
+			    <script type="text/javascript">
+	    $(function() {
+	        loadArea();
+	        loadProClass();
+	        
+	        var _val = $('.provincesel').val() , target=$(".citysel");
+	        if('-1' != _val){
+	        	$.getJSON("/customers/lable/loadArea/"+_val, function(entry){
+					target.empty();
+					for ( var i in  entry){
+						var selected="";
+						if ($('#grAddrCity').val()==entry[i].code){
+							target.append('<option selected="selected" value="'+entry[i].code+'">'+entry[i].name+'</option>');
+						}else{
+							target.append('<option value="'+entry[i].code+'">'+entry[i].name+'</option>');
+						}
+						//console.log(entry[i].code);
+					}
+					
+				 });
+	        }
+	        
+	        $(".recenttrade input:first").attr("checked",true);  
+	        
+	      	//‘最近交易’自定义
+	      	$('.recenttradezdy').click(function(){
+	      		$('.recenttradezdy').attr("checked","checked");
+	      		$('#recenttradezdy').show();
+	      	});
+	      	//非‘最近交易’自定义，自定义文本框隐藏
+	      	$('.recenttrade').click(function(){
+	      		$('#grPayDayCustom').val('');//清空之前赋的值
+	      		$('#recenttradezdy').hide();
+	      	});
+	      	//‘交易次数’自定义
+	      	$('.tradecountzdy').click(function(){
+	      		$('.tradecountzdy').attr("checked","checked");
+	      		$('#tradecountzdy').show();
+	      	});
+	      	//非‘交易次数’自定义，自定义文本框隐藏
+	      	$('.tradecount').click(function(){
+	      		$('#grPaymentNumCustom').val('');//清空之前赋的值
+	      		$('#tradecountzdy').hide();
+	      	});
+	      	//‘累计金额’自定义
+	      	$('.cumutotalzdy').click(function(){
+	      		$('.cumutotalzdy').attr("checked","checked");
+	      		$('#cumutotalzdy').show();
+	      	});
+	      	//非‘累计金额’自定义，自定义文本框隐藏
+	      	$('.cumutotal').click(function(){
+	      		$('#grSumpriceCustom').val('');//清空之前赋的值
+	      		$('#cumutotalzdy').hide();
+	      	});
+	      	//‘平均客单价’自定义
+	      	$('.avgkdjzdy').click(function(){
+	      		$('.avgkdjzdy').attr("checked","checked");
+	      		$('#avgkdjzdy').show();
+	      	});
+	      	//非‘平均客单价’自定义，自定义文本框隐藏
+	      	$('.avgkdj').click(function(){
+	      		$('#grUnitPriceCustom').val('');//清空之前赋的值
+	      		$('#avgkdjzdy').hide();
+	      	});
+	      	//地区筛选-默认全部
+	      	$('.grAddDefaultzdy').click(function(){
+	      		$('.grAddDefaultzdy').attr("checked","checked");
+	      		$('.area').hide();
+	      		//$('.provincesel').hide();
+	      		//$('.citysel').hide();
+	      	});
+	      	//地区筛选-自定义
+	      	$('.areazdy').click(function(){
+	      		$('.areazdy').attr("checked","checked");
+	      		$('.area').show();
+	      		//$('.provincesel').show();
+	      		//$('.citysel').show();
+	      	});
+	      	//指定票品-全部商品
+	      	$('.allProduct').click(function(){
+	      		$('.allProduct').attr("checked","checked");
+	      		$('#grProname').val('');
+	      		$('#grClassa').val(0);
+	      		$('#grProname').hide();
+	      		$('#grClassa').hide();
+	      	});
+	      	//指定票品-指定票品
+	      	$('.grProname').click(function(){
+	      		$('.grProname').attr("checked","checked");
+	      		$('#grProname').val('');
+	      		$('#grClassa').val(0);
+	      		$('#grProname').show();
+	      		$('#grClassa').hide();
+	      	});
+	      	//指定票品-指定类目
+	      	$('.grClassa').click(function(){
+	      		$('.grClassa').attr("checked","checked");
+	      		$('#grProname').val('');
+	      		$('#grClassa').val(0);
+	      		$('#grProname').hide();
+	      		$('#grClassa').show();
+	      	});
+	      	//商品件数
+	      	$('.grPronumzdy').click(function(){
+	      		if($('#grPronumzdy').css("display")=="none"){
+	      			$('#grPronumzdy').show(); 
+	      		}else{
+	      			$('#grPronum').val('');
+	      			$('#grPronumzdy').hide();
+	      		}
+	      	});
+	      	
+	      	//保存
+	      	$('#addNormal').click(function(){
+	      		$frm = $("#detafilForm");
+			    var validateWidget = $frm.validate();
+	    		//1.启用表单验证。
+	    		if (!validateWidget.check()) {//1.基础样式校验。
+	    			return false;
+	    		}
+	    		$frm.submit();
+	      	});
+	      });
+	    
+	    
+	    //重复提交
+			   		var repeat =  true ;
+			    	function subForm(parentWin){
+			    		if (!repeat){
+			    			return ;
+			    		}
+			    		$frm = $("#detafilForm");
+					    var validateWidget = $frm.validate();
+			    		//1.启用表单验证。
+			    		if (!validateWidget.check()) {//1.基础样式校验。
+			    			return false;
+			    		}
+			    		
+			    		repeat = false; 
+			    		//提交表单
+		        		$frm.ajaxSubmit({success: function(entry, statusText, xhr, $form){
+		        			
+		        			if(entry.code=="success"){
+		        				$(parentWin).find("#searchForm").submit();
+		        			}
+	        				repeat=true; 
+	        				
+		        			layer.msg(entry.message,{time: 2000} ,function (){
+		        				
+		        			}); 
+		        			 
+						}});
+			    	}
+	    </script>
+		    </div>
+		    
+	</body>
+	
+	
+</html>

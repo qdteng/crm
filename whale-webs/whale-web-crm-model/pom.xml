@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>whale-webs</artifactId>
+		<groupId>cn.com.ylpw</groupId>
+		<version>0.0.1</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+
+	<artifactId>whale-web-crm-model</artifactId>
+	<packaging>jar</packaging>
+
+	<name>whale-web-crm-model</name>
+	<url>http://maven.apache.org</url>
+
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>cn.com.ylpw</groupId>
+			<artifactId>whale-boot-starters-mybatis</artifactId>
+			<version>0.0.1</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>cn.com.ylpw</groupId>
+			<artifactId>whale-core-tools</artifactId>
+			<version>0.0.1</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+		
+		 <!-- 添加 spring-data-elasticsearch的依赖 -->
+		<dependency>
+			<groupId> org.springframework.boot </groupId>
+			<artifactId> spring-boot-starter-data-elasticsearch </artifactId>
+			<scope>provided</scope>
+		</dependency>
+	
+	</dependencies>
+	
+	 <build>
+        <!-- 指定下面的目录为资源文件 -->
+        <resources>
+            <!-- 设置自动替换 -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                  <include>**/*.properties</include>
+		          <include>**/*.xml</include>
+		          <include>**/*.tld</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                  <exclude>**/*.properties</exclude>
+		          <exclude>**/*.xml</exclude>
+		          <exclude>**/*.tld</exclude>
+                </excludes>
+                <filtering>false</filtering>
+            </resource>
+            
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+		          <include>**/*.properties</include>
+		          <include>**/*.xml</include>
+		          <include>**/*.tld</include>
+		        </includes>
+		        <filtering>false</filtering>
+            </resource>
+            
+        </resources>
+        
+	</build>
+  
+
+
+</project>

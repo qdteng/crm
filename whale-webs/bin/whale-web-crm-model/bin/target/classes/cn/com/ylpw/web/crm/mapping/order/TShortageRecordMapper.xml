@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.ylpw.web.crm.mapper.order.TShortageRecordMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.ylpw.web.crm.entity.order.TShortageRecord" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="CUSTOMERSID" property="customersid" jdbcType="BIGINT" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="PRODUCT_NAME" property="productName" jdbcType="VARCHAR" />
+    <result column="PRODUCT_PIRCE" property="productPirce" jdbcType="DECIMAL" />
+    <result column="PRODUCT_COUNT" property="productCount" jdbcType="INTEGER" />
+    <result column="PRODUCT_TYPEA" property="productTypea" jdbcType="VARCHAR" />
+    <result column="PRODUCT_TYPEB" property="productTypeb" jdbcType="VARCHAR" />
+    <result column="PERFORMER" property="performer" jdbcType="VARCHAR" />
+    <result column="CITY_NAME" property="cityName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, CUSTOMERSID, CREATE_TIME, PRODUCT_NAME, PRODUCT_PIRCE, PRODUCT_COUNT, PRODUCT_TYPEA, 
+    PRODUCT_TYPEB, PERFORMER, CITY_NAME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_shortage_record
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_shortage_record
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.com.ylpw.web.crm.entity.order.TShortageRecord" >
+    insert into t_shortage_record (ID, CUSTOMERSID, CREATE_TIME, 
+      PRODUCT_NAME, PRODUCT_PIRCE, PRODUCT_COUNT, 
+      PRODUCT_TYPEA, PRODUCT_TYPEB, PERFORMER, 
+      CITY_NAME)
+    values (#{id,jdbcType=BIGINT}, #{customersid,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{productName,jdbcType=VARCHAR}, #{productPirce,jdbcType=DECIMAL}, #{productCount,jdbcType=INTEGER}, 
+      #{productTypea,jdbcType=VARCHAR}, #{productTypeb,jdbcType=VARCHAR}, #{performer,jdbcType=VARCHAR}, 
+      #{cityName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.ylpw.web.crm.entity.order.TShortageRecord" >
+    insert into t_shortage_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="customersid != null" >
+        CUSTOMERSID,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="productName != null" >
+        PRODUCT_NAME,
+      </if>
+      <if test="productPirce != null" >
+        PRODUCT_PIRCE,
+      </if>
+      <if test="productCount != null" >
+        PRODUCT_COUNT,
+      </if>
+      <if test="productTypea != null" >
+        PRODUCT_TYPEA,
+      </if>
+      <if test="productTypeb != null" >
+        PRODUCT_TYPEB,
+      </if>
+      <if test="performer != null" >
+        PERFORMER,
+      </if>
+      <if test="cityName != null" >
+        CITY_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="customersid != null" >
+        #{customersid,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productPirce != null" >
+        #{productPirce,jdbcType=DECIMAL},
+      </if>
+      <if test="productCount != null" >
+        #{productCount,jdbcType=INTEGER},
+      </if>
+      <if test="productTypea != null" >
+        #{productTypea,jdbcType=VARCHAR},
+      </if>
+      <if test="productTypeb != null" >
+        #{productTypeb,jdbcType=VARCHAR},
+      </if>
+      <if test="performer != null" >
+        #{performer,jdbcType=VARCHAR},
+      </if>
+      <if test="cityName != null" >
+        #{cityName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.ylpw.web.crm.entity.order.TShortageRecord" >
+    update t_shortage_record
+    <set >
+      <if test="customersid != null" >
+        CUSTOMERSID = #{customersid,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productName != null" >
+        PRODUCT_NAME = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productPirce != null" >
+        PRODUCT_PIRCE = #{productPirce,jdbcType=DECIMAL},
+      </if>
+      <if test="productCount != null" >
+        PRODUCT_COUNT = #{productCount,jdbcType=INTEGER},
+      </if>
+      <if test="productTypea != null" >
+        PRODUCT_TYPEA = #{productTypea,jdbcType=VARCHAR},
+      </if>
+      <if test="productTypeb != null" >
+        PRODUCT_TYPEB = #{productTypeb,jdbcType=VARCHAR},
+      </if>
+      <if test="performer != null" >
+        PERFORMER = #{performer,jdbcType=VARCHAR},
+      </if>
+      <if test="cityName != null" >
+        CITY_NAME = #{cityName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.ylpw.web.crm.entity.order.TShortageRecord" >
+    update t_shortage_record
+    set CUSTOMERSID = #{customersid,jdbcType=BIGINT},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      PRODUCT_NAME = #{productName,jdbcType=VARCHAR},
+      PRODUCT_PIRCE = #{productPirce,jdbcType=DECIMAL},
+      PRODUCT_COUNT = #{productCount,jdbcType=INTEGER},
+      PRODUCT_TYPEA = #{productTypea,jdbcType=VARCHAR},
+      PRODUCT_TYPEB = #{productTypeb,jdbcType=VARCHAR},
+      PERFORMER = #{performer,jdbcType=VARCHAR},
+      CITY_NAME = #{cityName,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  
+  
+   <insert id="insertBatchSelective" parameterType="java.util.List" >
+  	  insert into t_shortage_record (
+	  	  ID, CUSTOMERSID, CREATE_TIME, 
+	      PRODUCT_NAME, PRODUCT_PIRCE, PRODUCT_COUNT, 
+	      PRODUCT_TYPEA, PRODUCT_TYPEB, PERFORMER, 
+	      CITY_NAME
+      ) values 
+     <foreach collection ="list" item="record" index= "index" separator ="," >
+     	(
+	      #{record.id,jdbcType=BIGINT}, #{record.customersid,jdbcType=BIGINT}, #{record.createTime,jdbcType=TIMESTAMP}, 
+	      #{record.productName,jdbcType=VARCHAR}, #{record.productPirce,jdbcType=DECIMAL}, #{record.productCount,jdbcType=INTEGER}, 
+	      #{record.productTypea,jdbcType=VARCHAR}, #{record.productTypeb,jdbcType=VARCHAR}, #{record.performer,jdbcType=VARCHAR}, 
+	      #{record.cityName,jdbcType=VARCHAR}
+        )
+     </foreach>
+  </insert>
+  
+  
+  
+  <select id="findAll" parameterType="java.util.HashMap" resultType="java.util.HashMap" >
+	    SELECT * FROM  T_SHORTAGE_RECORD WHERE CUSTOMERSID = #{customerid }  
+        order by  id desc
+  </select>
+  
+  
+</mapper>

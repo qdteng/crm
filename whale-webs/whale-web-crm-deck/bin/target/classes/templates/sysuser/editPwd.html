@@ -1,0 +1,100 @@
+<!DOCTYPE html>  
+<html xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorator="layouts/index">  
+    <head>
+    	<meta charset="utf-8"></meta>
+        <title>用户修改密码-页面</title>
+	    <script th:src="@{/js/plugins/cryptojs/core.js}"></script>
+	    <script th:src="@{/js/plugins/cryptojs/crypto-js.js}"></script>
+	    <script th:src="@{/js/plugins/cryptojs/md5.js}"></script>
+	    <script type="text/javascript">
+ 			/*<![CDATA[*/
+ 			
+ 			jQuery(document).ready(function() {
+ 				
+ 				//1.启用表单验证。
+ 				var validateWidget = $("#editPwdForm").validate();
+ 				
+ 				function check() {
+	    			if (!validateWidget.check()) {//1.基础样式校验。
+	    				return false;
+	    			}
+	    			//2.自定义校验。
+	    			var lrMd5Val =  (""+CryptoJS.MD5($.trim($("#oldPwd").val()))).toUpperCase();
+	    			if (lrMd5Val != $("#curUserPwd").val()) {
+	    				validateWidget.addPrompt("oldPwd","旧密码错误");
+	    				return false;
+	    			}
+	    			if ($("#confirmPwd").val() != $("#pwd").val()) {
+	    				validateWidget.addPrompt("confirmPwd","与新密码不一致");
+	    				return false;
+	    			}
+				}
+ 				
+ 				//2.表单验证。
+ 				$("#submitPwd").click(function() {
+ 					if (check() === false) {
+ 						return false;
+ 					}
+ 				});
+ 				
+ 				if ($("#pwdMessage").val() != "") {
+ 					if ("SUCCESS" == $("#pwdMessage").val()) {
+ 						layer.alert("密码修改成功！请重新登陆！", function(){ exit(); });
+ 					} else {
+ 						layer.alert($("#pwdMessage").val());
+ 					}
+ 				}
+				
+ 			});
+ 			
+ 			/*]]>*/
+ 		</script>
+    </head>
+    <body>
+	    <div layout:fragment="content">
+			<div class="container">
+			    <section class="col-lg-12 ui-content ui-shadow">
+					<!-- 列表页头（标题、操作按钮） -->
+					<h3>修改密码</h3>
+				    <!-- 列表主体 -->
+					<div class="form-cont mt30" style="overflow-x:auto;">
+						<!-- 列表主体（查询区域） -->
+						<input type="hidden" id="pwdMessage" th:value="${message}" value="" />
+						<form id="editPwdForm" name="editPwdForm" action="/editPwd.do" method="post">
+							<input type="hidden" id="curUserPwd" th:value="${session.SESSION_USER.pwd}" value="" />
+							<div>
+								<div class="cl">
+							    	<div class="form-lable">
+										<label for="">旧密码：<i>*</i></label>
+										<input type="password" class="c_required" size="50" autocomplete ="off" id="oldPwd" name="oldPwd" placeholder="请输入原密码" value="" />
+									</div>
+								</div>
+								<div class="cl">
+									<div class="form-lable mt20">
+										<label for="">新密码：<i>*</i></label>
+										<input type="password" class="c_required c_minlength_6 c_maxlength_15 c_ylbank" size="50" autocomplete ="off" id="pwd" name="pwd" placeholder="请输入新密码" value="" />
+										<span>(长度6-15位，字母、数字、或字母+数字组合)</span>
+									</div>
+								</div>
+								<div class="cl">
+									<div class="form-lable mt20">
+										<label for="">确认密码：<i>*</i></label>
+										<input type="password" class="c_required c_minlength_6 c_maxlength_15 c_ylbank" size="50" autocomplete ="off" id="confirmPwd" name="confirmPwd" placeholder="请输入确认密码" value="" />
+									</div>
+								</div>
+								<div class="cl">
+									<div class="form-lable mt20">
+										<label for="">&nbsp;&nbsp;&nbsp;&nbsp;</label>
+										<button id="submitPwd" class="yl-btn yl-btn-blue">确定</button>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+			    </section>
+			</div>
+	    </div> 
+	</body>
+</html>

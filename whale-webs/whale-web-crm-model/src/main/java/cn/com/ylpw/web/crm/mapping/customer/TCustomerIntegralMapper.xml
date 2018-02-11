@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.ylpw.web.crm.mapper.customer.TCustomerIntegralMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.ylpw.web.crm.entity.customer.TCustomerIntegral" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="UPDATE_ID" property="updateId" jdbcType="BIGINT" />
+    <result column="UPDATE_NAME" property="updateName" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="OPT_TYPE" property="optType" jdbcType="INTEGER" />
+    <result column="CUSTOMER_ID" property="customerId" jdbcType="BIGINT" />
+    <result column="INTEGRAL_LIMIT_ID" property="integralLimitId" jdbcType="BIGINT" />
+    <result column="INTEGRAL" property="integral" jdbcType="BIGINT" />
+    <result column="ISTATUS" property="istatus" jdbcType="BIGINT" />
+    <result column="USEABLE" property="useable" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, UPDATE_ID, UPDATE_NAME, CREATE_TIME, OPT_TYPE, CUSTOMER_ID, INTEGRAL_LIMIT_ID, 
+    INTEGRAL,ISTATUS,USEABLE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_customer_integral
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_customer_integral
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.com.ylpw.web.crm.entity.customer.TCustomerIntegral" >
+    insert into t_customer_integral (ID, UPDATE_ID, UPDATE_NAME, 
+      CREATE_TIME, OPT_TYPE, CUSTOMER_ID, 
+      INTEGRAL_LIMIT_ID, INTEGRAL)
+    values (#{id,jdbcType=BIGINT}, #{updateId,jdbcType=BIGINT}, #{updateName,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{optType,jdbcType=INTEGER}, #{customerId,jdbcType=BIGINT}, 
+      #{integralLimitId,jdbcType=BIGINT}, #{integral,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.ylpw.web.crm.entity.customer.TCustomerIntegral" >
+    insert into t_customer_integral
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="updateId != null" >
+        UPDATE_ID,
+      </if>
+      <if test="updateName != null" >
+        UPDATE_NAME,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="optType != null" >
+        OPT_TYPE,
+      </if>
+      <if test="customerId != null" >
+        CUSTOMER_ID,
+      </if>
+      <if test="integralLimitId != null" >
+        INTEGRAL_LIMIT_ID,
+      </if>
+      <if test="integral != null" >
+        INTEGRAL,
+      </if>
+      <if test="useable != null" >
+        USEABLE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="updateId != null" >
+        #{updateId,jdbcType=BIGINT},
+      </if>
+      <if test="updateName != null" >
+        #{updateName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="optType != null" >
+        #{optType,jdbcType=INTEGER},
+      </if>
+      <if test="customerId != null" >
+        #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="integralLimitId != null" >
+        #{integralLimitId,jdbcType=BIGINT},
+      </if>
+      <if test="integral != null" >
+        #{integral,jdbcType=BIGINT},
+      </if>
+      <if test="useable != null" >
+        #{useable,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.ylpw.web.crm.entity.customer.TCustomerIntegral" >
+    update t_customer_integral
+    <set >
+      <if test="updateId != null" >
+        UPDATE_ID = #{updateId,jdbcType=BIGINT},
+      </if>
+      <if test="updateName != null" >
+        UPDATE_NAME = #{updateName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="optType != null" >
+        OPT_TYPE = #{optType,jdbcType=INTEGER},
+      </if>
+      <if test="customerId != null" >
+        CUSTOMER_ID = #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="integralLimitId != null" >
+        INTEGRAL_LIMIT_ID = #{integralLimitId,jdbcType=BIGINT},
+      </if>
+      <if test="integral != null" >
+        INTEGRAL = #{integral,jdbcType=BIGINT},
+      </if>
+      <if test="useable != null" >
+        USEABLE = #{useable,jdbcType=BIGINT},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.ylpw.web.crm.entity.customer.TCustomerIntegral" >
+    update t_customer_integral
+    set UPDATE_ID = #{updateId,jdbcType=BIGINT},
+      UPDATE_NAME = #{updateName,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      OPT_TYPE = #{optType,jdbcType=INTEGER},
+      CUSTOMER_ID = #{customerId,jdbcType=BIGINT},
+      INTEGRAL_LIMIT_ID = #{integralLimitId,jdbcType=BIGINT},
+      INTEGRAL = #{integral,jdbcType=BIGINT}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  
+  
+  
+  <insert id="batchSave" parameterType="java.util.List" >
+   insert into t_customer_integral (ID,  
+      CREATE_TIME, OPT_TYPE, CUSTOMER_ID, 
+      INTEGRAL_LIMIT_ID, INTEGRAL)
+    values
+     <foreach collection ="list" item="integral" index= "index" separator ="," >
+     	 (
+     	    #{integral.id,jdbcType=BIGINT},  
+			#{integral.createTime,jdbcType=TIMESTAMP}, #{integral.optType,jdbcType=INTEGER}, #{integral.customerId,jdbcType=BIGINT}, 
+			#{integral.integralLimitId,jdbcType=BIGINT}, #{integral.integral,jdbcType=BIGINT}
+	     )
+     </foreach>
+  </insert>
+  <!-- 查询失效的用户积分 -->
+  <select id="findIntegralByTimeLimit1" resultMap="BaseResultMap"   parameterType="java.util.HashMap"  >
+    select 
+    <include refid="Base_Column_List" />
+    from t_customer_integral 
+    <![CDATA[
+	    where   DATE_FORMAT( create_time ,'%Y-%m-%d'  )  <=
+		DATE_FORMAT( #{date} ,'%Y-%m-%d'  ) 
+		and INTEGRAL_LIMIT_ID = #{limitid} and USEABLE>0  and istatus !=0  limit  1, 5000
+	]]> 
+  </select>
+  
+  <!-- 查询失效的用户积分 -->
+  <select id="findIntegralByTimeLimit2" resultMap="BaseResultMap"   parameterType="java.util.HashMap"  >
+    select 
+    <include refid="Base_Column_List" />
+    from t_customer_integral 
+    <![CDATA[
+	    where   
+		 create_time   <= date_add(  CONCAT(DATE_FORMAT( create_time ,'%Y'  )  ,#{datestr})  , interval 1 day)
+		 and NOW() >=date_add(  CONCAT(DATE_FORMAT( create_time ,'%Y'  )  ,#{datestr})  , interval 1 day) 
+		 and INTEGRAL_LIMIT_ID = #{limitid} and USEABLE>0  and istatus !=0  limit  1, 5000
+	]]> 
+  </select>
+  
+  <!-- 查询失效的用户积分 -->
+  <select id="findIntegralByTimeLimit3" resultMap="BaseResultMap"   parameterType="java.util.HashMap"  >
+    select 
+    <include refid="Base_Column_List" />
+    from t_customer_integral 
+    <![CDATA[
+	    where   
+	    create_time    <= date_add(  CONCAT(DATE_FORMAT( NOW() ,'%Y'  )  ,'-12-31')  , interval -1 year) 
+		and NOW() >=   CONCAT(DATE_FORMAT( NOW() ,'%Y'  )  ,#{datestr})
+		 and INTEGRAL_LIMIT_ID = #{limitid} and USEABLE>0  and istatus !=0  limit  1, 5000
+	]]> 
+  </select>
+  
+  
+  <update id="batchUpdate2dis" parameterType="long" flushCache="true" >
+        update t_customer_integral    set istatus =0  where id in
+        <foreach item="id" collection="ids" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+   </update>
+  
+  
+</mapper>

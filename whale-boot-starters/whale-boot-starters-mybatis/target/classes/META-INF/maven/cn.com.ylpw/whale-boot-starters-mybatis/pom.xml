@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <parent>
+    <groupId>cn.com.ylpw</groupId>
+    <artifactId>whale-boot-starters</artifactId>
+    <version>0.0.1</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+
+  <artifactId>whale-boot-starters-mybatis</artifactId>
+  <packaging>jar</packaging>
+  <name>whale-boot-starters-mybatis</name>
+  <url>http://maven.apache.org</url>
+  
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    
+    <mybatis.version>3.4.5</mybatis.version>
+    <mybatis.spring.version>1.3.1</mybatis.spring.version>
+	<pagehelper.version>4.1.6</pagehelper.version>
+    <mapper.version>3.3.9</mapper.version>
+  </properties>
+  
+  <dependencies>
+	<dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-test</artifactId>
+    </dependency>
+    
+     <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-test</artifactId>
+    </dependency>
+    
+     <dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+	</dependency>
+	<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+	</dependency>
+		
+	
+	<dependency> 
+    	<groupId>cn.com.ylpw</groupId>
+    	<artifactId>whale-boot-starters-datasource-druid</artifactId>
+    	<version>0.0.1</version>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-jdbc</artifactId>
+    </dependency>
+
+	<dependency>
+		<groupId>cn.com.ylpw</groupId>
+		<artifactId>whale-core-tools</artifactId>
+		<version>0.0.1</version>
+		<scope>provided</scope>
+	</dependency>
+		
+    <dependency>
+        <groupId>org.springframework.data</groupId>
+        <artifactId>spring-data-commons</artifactId>
+        <exclusions>
+            <exclusion>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjrt</artifactId>
+            </exclusion>
+        </exclusions>
+    </dependency>
+    
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot</artifactId>
+        <scope>provided</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.mybatis</groupId>
+        <artifactId>mybatis</artifactId>
+        <version>${mybatis.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.mybatis</groupId>
+        <artifactId>mybatis-spring</artifactId>
+        <version>${mybatis.spring.version}</version>
+    </dependency>
+	<dependency>
+		<groupId>com.github.pagehelper</groupId>
+		<artifactId>pagehelper</artifactId>
+		<version>${pagehelper.version}</version>
+	</dependency>
+  </dependencies>
+</project>

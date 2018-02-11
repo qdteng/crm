@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.ylpw.web.crm.mapper.order.TPaymentTypesMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.ylpw.web.crm.entity.order.TPaymentTypes" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="CUSTOMERSID" property="customersid" jdbcType="BIGINT" />
+    <result column="TYPE" property="type" jdbcType="VARCHAR" />
+    <result column="CARD_NO" property="cardNo" jdbcType="VARCHAR" />
+    <result column="SUM_PRICE" property="sumPrice" jdbcType="DECIMAL" />
+    <result column="PAY_COUNT" property="payCount"   />
+    <result column="LAST_TIME" property="lastTime" jdbcType="TIMESTAMP" />
+    <result column="ORDERSID"  property="ordersid" jdbcType="BIGINT"  />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, CUSTOMERSID, TYPE, CARD_NO, SUM_PRICE, PAY_COUNT, LAST_TIME,ORDERSID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_payment_types
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_payment_types
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.com.ylpw.web.crm.entity.order.TPaymentTypes" >
+    insert into t_payment_types (ID, CUSTOMERSID, TYPE, 
+      CARD_NO, SUM_PRICE, PAY_COUNT, 
+      LAST_TIME)
+    values (#{id,jdbcType=BIGINT}, #{customersid,jdbcType=BIGINT}, #{type,jdbcType=VARCHAR}, 
+      #{cardNo,jdbcType=VARCHAR}, #{sumPrice,jdbcType=DECIMAL}, #{payCount}, 
+      #{lastTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.ylpw.web.crm.entity.order.TPaymentTypes" >
+    insert into t_payment_types
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="customersid != null" >
+        CUSTOMERSID,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="cardNo != null" >
+        CARD_NO,
+      </if>
+      <if test="sumPrice != null" >
+        SUM_PRICE,
+      </if>
+      <if test="payCount != null" >
+        PAY_COUNT,
+      </if>
+      <if test="lastTime != null" >
+        LAST_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="customersid != null" >
+        #{customersid,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNo != null" >
+        #{cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="sumPrice != null" >
+        #{sumPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="payCount != null" >
+        #{payCount},
+      </if>
+      <if test="lastTime != null" >
+        #{lastTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.ylpw.web.crm.entity.order.TPaymentTypes" >
+    update t_payment_types
+    <set >
+      <if test="customersid != null" >
+        CUSTOMERSID = #{customersid,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNo != null" >
+        CARD_NO = #{cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="sumPrice != null" >
+        SUM_PRICE = #{sumPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="payCount != null" >
+        PAY_COUNT = #{payCount},
+      </if>
+      <if test="lastTime != null" >
+        LAST_TIME = #{lastTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.ylpw.web.crm.entity.order.TPaymentTypes" >
+    update t_payment_types
+    set CUSTOMERSID = #{customersid,jdbcType=BIGINT},
+      TYPE = #{type,jdbcType=VARCHAR},
+      CARD_NO = #{cardNo,jdbcType=VARCHAR},
+      SUM_PRICE = #{sumPrice,jdbcType=DECIMAL},
+      PAY_COUNT = #{payCount},
+      LAST_TIME = #{lastTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  
+  
+   <insert id="insertBatchSelective" parameterType="java.util.List" >
+  	  insert into t_payment_types ( CUSTOMERSID, TYPE, 
+      CARD_NO, SUM_PRICE, PAY_COUNT, 
+      LAST_TIME , ORDERSID )
+      values 
+     <foreach collection ="list" item="payType" index= "index" separator ="," >
+     	(
+	     	#{payType.customersid,jdbcType=BIGINT}, #{payType.type,jdbcType=VARCHAR}, 
+			#{payType.cardNo,jdbcType=VARCHAR}, #{payType.sumPrice,jdbcType=DECIMAL}, #{payType.payCount}, 
+			#{payType.lastTime,jdbcType=TIMESTAMP},#{payType.ordersid,jdbcType=BIGINT}
+        )
+     </foreach>
+  </insert>
+  
+   <select id="findAll" parameterType="java.util.HashMap" resultType="java.util.HashMap" >
+		SELECT CUSTOMERSID , TYPE ,SUM(SUM_PRICE) as SUM_PRICE ,
+		COUNT(PAY_COUNT) as PAY_COUNT , MAX(LAST_TIME) as LAST_TIME , MAX(CARD_NO) as CARD_NO
+		FROM  T_PAYMENT_TYPES where   CUSTOMERSID =#{customerid }   GROUP BY  CUSTOMERSID , TYPE
+		ORDER BY  LAST_TIME  DESC 
+   </select>
+  
+  
+  <delete id="deleteBatchByCustomerId" parameterType="long" flushCache="true" >
+        delete from T_PAYMENT_TYPES where CUSTOMERSID in
+        <foreach item="id" collection="ids" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

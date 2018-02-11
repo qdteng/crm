@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.ylpw.web.crm.mapper.usable.TFilesMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.ylpw.web.crm.entity.usable.TFiles" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="TYPE" property="type" jdbcType="VARCHAR" />
+    <result column="PATH" property="path" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="REF_NAME" property="refName" jdbcType="VARCHAR" />
+    <result column="SIZE" property="size" jdbcType="BIGINT" />
+    <result column="SUFFIX" property="suffix" jdbcType="VARCHAR" />
+    <result column="NO" property="no" jdbcType="VARCHAR" />
+    <result column="ISWEBLOD" property="isweblod" jdbcType="BIT" />
+    <result column="RELATIVE_PATH" property="relativePath" jdbcType="VARCHAR" />
+    <result column="CREATE_ID" property="createId" jdbcType="BIGINT" />
+    <result column="CREATE_NAME" property="createName" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_ID" property="updateId" jdbcType="BIGINT" />
+    <result column="UPDATE_NAME" property="updateName" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, TYPE, PATH, NAME, REF_NAME, SIZE, SUFFIX, NO, ISWEBLOD, RELATIVE_PATH, CREATE_ID, 
+    CREATE_NAME, CREATE_TIME, UPDATE_ID, UPDATE_NAME, UPDATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_files
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_files
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.com.ylpw.web.crm.entity.usable.TFiles" useGeneratedKeys="true" keyProperty="id">
+    insert into t_files (ID, TYPE, PATH, 
+      NAME, REF_NAME, SIZE, 
+      SUFFIX, NO, ISWEBLOD, RELATIVE_PATH, 
+      CREATE_ID, CREATE_NAME, CREATE_TIME, 
+      UPDATE_ID, UPDATE_NAME, UPDATE_TIME
+      )
+    values (#{id,jdbcType=BIGINT}, #{type,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{refName,jdbcType=VARCHAR}, #{size,jdbcType=BIGINT}, 
+      #{suffix,jdbcType=VARCHAR}, #{no,jdbcType=VARCHAR}, #{isweblod,jdbcType=BIT}, #{relativePath,jdbcType=VARCHAR}, 
+      #{createId,jdbcType=BIGINT}, #{createName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateId,jdbcType=BIGINT}, #{updateName,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.ylpw.web.crm.entity.usable.TFiles" useGeneratedKeys="true" keyProperty="id">
+    insert into t_files
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="path != null" >
+        PATH,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="refName != null" >
+        REF_NAME,
+      </if>
+      <if test="size != null" >
+        SIZE,
+      </if>
+      <if test="suffix != null" >
+        SUFFIX,
+      </if>
+      <if test="no != null" >
+        NO,
+      </if>
+      <if test="isweblod != null" >
+        ISWEBLOD,
+      </if>
+      <if test="relativePath != null" >
+        RELATIVE_PATH,
+      </if>
+      <if test="createId != null" >
+        CREATE_ID,
+      </if>
+      <if test="createName != null" >
+        CREATE_NAME,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="updateId != null" >
+        UPDATE_ID,
+      </if>
+      <if test="updateName != null" >
+        UPDATE_NAME,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null" >
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="refName != null" >
+        #{refName,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null" >
+        #{size,jdbcType=BIGINT},
+      </if>
+      <if test="suffix != null" >
+        #{suffix,jdbcType=VARCHAR},
+      </if>
+      <if test="no != null" >
+        #{no,jdbcType=VARCHAR},
+      </if>
+      <if test="isweblod != null" >
+        #{isweblod,jdbcType=BIT},
+      </if>
+      <if test="relativePath != null" >
+        #{relativePath,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null" >
+        #{createId,jdbcType=BIGINT},
+      </if>
+      <if test="createName != null" >
+        #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateId != null" >
+        #{updateId,jdbcType=BIGINT},
+      </if>
+      <if test="updateName != null" >
+        #{updateName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.ylpw.web.crm.entity.usable.TFiles" >
+    update t_files
+    <set >
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null" >
+        PATH = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="refName != null" >
+        REF_NAME = #{refName,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null" >
+        SIZE = #{size,jdbcType=BIGINT},
+      </if>
+      <if test="suffix != null" >
+        SUFFIX = #{suffix,jdbcType=VARCHAR},
+      </if>
+      <if test="no != null" >
+        NO = #{no,jdbcType=VARCHAR},
+      </if>
+      <if test="isweblod != null" >
+        ISWEBLOD = #{isweblod,jdbcType=BIT},
+      </if>
+      <if test="relativePath != null" >
+        RELATIVE_PATH = #{relativePath,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null" >
+        CREATE_ID = #{createId,jdbcType=BIGINT},
+      </if>
+      <if test="createName != null" >
+        CREATE_NAME = #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateId != null" >
+        UPDATE_ID = #{updateId,jdbcType=BIGINT},
+      </if>
+      <if test="updateName != null" >
+        UPDATE_NAME = #{updateName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.ylpw.web.crm.entity.usable.TFiles" >
+    update t_files
+    set TYPE = #{type,jdbcType=VARCHAR},
+      PATH = #{path,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      REF_NAME = #{refName,jdbcType=VARCHAR},
+      SIZE = #{size,jdbcType=BIGINT},
+      SUFFIX = #{suffix,jdbcType=VARCHAR},
+      NO = #{no,jdbcType=VARCHAR},
+      ISWEBLOD = #{isweblod,jdbcType=BIT},
+      RELATIVE_PATH = #{relativePath,jdbcType=VARCHAR},
+      CREATE_ID = #{createId,jdbcType=BIGINT},
+      CREATE_NAME = #{createName,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_ID = #{updateId,jdbcType=BIGINT},
+      UPDATE_NAME = #{updateName,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <delete id="batchDelByIds" parameterType="long" flushCache="true">
+  	DELETE FROM t_files WHERE 1 = 1 AND ID IN
+     <foreach collection ="ids" item="id" open= "(" separator ="," close=")">
+     	#{id}    
+     </foreach>
+  </delete>
+</mapper>

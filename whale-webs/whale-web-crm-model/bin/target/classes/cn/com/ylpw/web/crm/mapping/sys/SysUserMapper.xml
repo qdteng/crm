@@ -1,0 +1,100 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.ylpw.web.crm.mapper.sys.SysUserMapper">
+	
+	<resultMap id="BaseResultMap" type="cn.com.ylpw.web.crm.entity.sys.SysUser" >
+    	<id column="ID" property="id" jdbcType="BIGINT" />
+    	<result column="SYS_ROLE_ID" property="sysRoleId" jdbcType="BIGINT" />
+    	<result column="NAME" property="name" jdbcType="VARCHAR" />
+	    <result column="ACC_CODE" property="accCode" jdbcType="VARCHAR" />
+	    <result column="PWD" property="pwd" jdbcType="VARCHAR" />
+	    <result column="PHONE" property="phone" jdbcType="VARCHAR" />
+	    <result column="STATUS" property="status" jdbcType="INTEGER" />
+	    <result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
+	    <result column="IS_DEL"  property="isDel" typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler"  />
+	    <result column="CREATE_ID" property="createId" jdbcType="BIGINT" />
+	    <result column="CREATE_NAME" property="createName" jdbcType="VARCHAR" />
+	    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+	    <result column="UPDATE_ID" property="updateId" jdbcType="BIGINT" />
+	    <result column="UPDATE_NAME" property="updateName" jdbcType="VARCHAR" />
+	    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+   </resultMap>
+	
+	<insert id="save" parameterType="cn.com.ylpw.web.crm.entity.sys.SysUser">
+		INSERT INTO SYS_USER(  SYS_ROLE_ID, NAME, ACC_CODE, PWD, PHONE, STATUS, REMARKS, CREATE_ID, CREATE_NAME, CREATE_TIME)
+  		VALUES(  #{sysRoleId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR} , #{accCode,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{remarks,jdbcType=VARCHAR}, #{createId,jdbcType=BIGINT}, #{createName,jdbcType=VARCHAR}, SYSDATE())
+	</insert>
+	
+	<update id="update" parameterType="cn.com.ylpw.web.crm.entity.sys.SysUser">
+		UPDATE SYS_USER
+		<set>
+			<if test="sysRoleId != null" >
+	    		SYS_ROLE_ID = #{sysRoleId,jdbcType=BIGINT},
+		    </if>
+		    <if test="name != null and name !=''" >
+		    	NAME = #{name,jdbcType=VARCHAR},
+		    </if>
+		    <if test="pwd != null and pwd !=''" >
+		    	PWD = #{pwd,jdbcType=VARCHAR},
+		    </if>
+		    <if test="phone != null and phone !=''" >
+		    	PHONE = #{phone,jdbcType=VARCHAR},
+		    </if>
+		    <if test="status != null" >
+		    	STATUS = #{status,jdbcType=INTEGER},
+		    </if>
+		    <if test="remarks != null and remarks !=''" >
+		    	REMARKS = #{remarks,jdbcType=VARCHAR},
+		    </if>
+		    <if test="updateId != null" >
+		    	UPDATE_ID = #{updateId,jdbcType=VARCHAR},
+		    </if>
+		    <if test="updateName != null and updateName !=''" >
+		    	UPDATE_NAME = #{updateName,jdbcType=VARCHAR},
+		    </if>
+		    <if test="1 == 1" >
+		    	UPDATE_TIME = SYSDATE()
+		    </if>
+		</set>
+		WHERE ID = #{id,jdbcType=BIGINT}
+	</update>
+	
+	<update id="delete" parameterType="cn.com.ylpw.web.crm.entity.sys.SysUser">
+		UPDATE SYS_USER SET IS_DEL = 0 WHERE ID = #{id,jdbcType=BIGINT}
+	</update>
+  
+	<select id="findById" resultMap="BaseResultMap">
+		SELECT * FROM SYS_USER WHERE ID = #{id,jdbcType=BIGINT}
+	</select>
+	
+	<select id="findAll" parameterType="cn.com.ylpw.web.crm.entity.sys.SysUser" resultType="cn.com.ylpw.web.crm.model.sys.SysUserGrid">
+		SELECT u.id,u.sys_role_id as sysRoleId,u.name,u.acc_code as accCode,u.phone,u.status,u.remarks,(SELECT r.name FROM SYS_ROLE r WHERE r.id=u.sys_role_id) as sysRoleName FROM SYS_USER u
+		<where> 
+		    <if test="1 == 1">
+		        IS_DEL = 1
+		    </if>
+		    <if test="sysRoleId != null">
+		        AND SYS_ROLE_ID = #{sysRoleId,jdbcType=BIGINT}
+		    </if>
+		    <if test="name != null and name !='' ">
+		        AND NAME LIKE ('%'||'${name}'||'%')
+		    </if>
+		</where>
+	</select>
+	
+	<select id="findBySysUser" resultMap="BaseResultMap" parameterType="cn.com.ylpw.web.crm.entity.sys.SysUser" >
+		SELECT * FROM SYS_USER 
+		<where> 
+		    <if test="isDel != null">
+		        IS_DEL = #{isDel,typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler}
+		    </if>
+		    <if test="accCode != null and accCode !='' ">
+		        AND ACC_CODE = #{accCode,jdbcType=VARCHAR}
+		    </if>
+		</where>
+	</select>
+	
+	<select id="countByRoleId" resultType="int">
+		SELECT COUNT(1) FROM SYS_USER WHERE IS_DEL=1 AND SYS_ROLE_ID = #{sysRoleId,jdbcType=BIGINT}
+	</select>
+  
+</mapper>

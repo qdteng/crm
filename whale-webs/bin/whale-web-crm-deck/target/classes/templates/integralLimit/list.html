@@ -1,0 +1,335 @@
+<!DOCTYPE html>  
+<html xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorator="layouts/index">  
+    <head>
+    	<meta charset="utf-8"></meta>
+        <title>积分规则设置</title>
+    </head>  
+    <body>
+	    <div layout:fragment="content">
+	    	<style>
+				.validitys{position:relative;display:inline-block;}
+				.validitys > input[type='text']{position:relative;}
+				.monthDay{position:absolute;z-index:99;background:#f0f0f0;border:2px solid #ddd;padding:5px 10px;display:none;}
+				.monthDay p {margin:5px 0}
+				.monthDay p span{line-height:30px;}
+				.monthDay p select {width:60px;}
+			</style>
+			<div class="container"   >
+			    <section class="col-lg-12 ui-content ui-shadow">
+			      
+					<!-- 列表页头（标题、操作按钮） -->
+					<h3>
+						积分规则设置
+					</h3>
+				    
+				    <div style="border-style: solid;border-color: rgba(228, 228, 228, 1);
+				    border-width: 1px;background-color: rgba(128, 128, 128, 0.047);height: 38px;padding-top: 7px;padding-left:10px;" >
+						积分额  =  会员等级积分倍数 X 消费激励成长值 + 会员等级积分倍数 X 会员活跃成长值
+				    </div>
+				    
+				    <!-- 列表主体 -->
+					<div  class="cl mt15 mb10" style="overflow-x:auto;">
+						
+						<!-- 列表主体（查询区域） -->
+						<form name="myform" id="searchForm" action="/customers/grade/list" method="post">
+							<input  type="hidden"  id="pageNo" name="pageNo"  th:value="${page.pageNo}" value=""  />
+							<input  type="hidden" name="pageSize"  id="pageSize" th:value="${page.pageSize}" value=""  />
+						</form>
+                
+						<div th:if="${#lists.size(dateList) > 0}">
+							<!-- 列表主体（搜索结果） -->
+							<table class="table table-bordered mt15">
+								<tr>
+								  <th width="20" style="text-align:center;">会员等级</th>
+								  <th   style="text-align:center;">积分倍数</th>
+								  <th width="200" style="text-align:center;">操作</th>
+								</tr>
+								<tr th:each="obj,indexStat:${dateList}">
+									<td style="text-align:center;" th:text="${obj.GNAME}">...</td>
+									<td style="text-align:center;" th:attr="val=${obj.INTEGRAL_MULTIPLE}" 
+									 th:text="${obj.INTEGRAL_MULTIPLE}">...</td>
+									<td style="text-align:center;" >
+										<a href="###" class="a-view mr10 edit"  
+										th:attr="obj_id=${obj.ID}">编辑</a>
+										<a href="###" class="a-view mr10 saveIntegral yl-btn-disabled"  
+										th:attr="obj_id=${obj.ID}">保存</a>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<div style="border-style: solid;border-color: rgba(228, 228, 228, 1);
+				  	  border-width: 1px;background-color: rgba(128, 128, 128, 0.047);
+				  	 padding: 7px 12px; margin-bottom: 150px;" >
+					  	 <form  id="integralFrm"  action="/integralLimit/saveLimit" method="post"   >
+							积分有效期 ：<br/>
+							<div class="mb5">
+								<input type="radio" name="type"  th:checked="${#null==integralLimit ?false:1==integralLimit.type }" 
+								 value="1" />
+								自取之日起 <input type="text" class="dateVal c_positive wh60" th:attr="name=${integralLimit}?${1==integralLimit.type ?'dateVal':''}:'',val=${integralLimit}?${1==integralLimit.type ?integralLimit.dateVal:''}:''"
+								onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"
+								 th:value="${integralLimit}?${1==integralLimit.type ?integralLimit.dateVal:''}:''"
+								 name=""  />天内有效，次日0点失效 <br/>
+							</div>
+							
+							<div class="mb5">
+								<input type="radio" name="type"  th:checked="${#null==integralLimit ?false:2==integralLimit.type }"
+								value="2" />
+								有效期截止每年
+								
+								
+								 <div class="validitys">
+										 <input type="text" readonly="readonly" id="jiezhi" class="jiezhi dateVal  start wh60"
+										 th:attr="name=${integralLimit}?${2==integralLimit.type ?'dateVal':''}:'',val=${integralLimit}?${2==integralLimit.type ?integralLimit.dateVal:''}:''"
+										  th:value="${integralLimit}?${2==integralLimit.type ?integralLimit.dateVal:''}:''"
+										    name=""  />
+										 <div class="monthDay monthDay_one">
+											<p class="cl">
+												<span class="fl">月：</span>
+												<select class="fl birth_month birth_month_one" id="birth_month_one" onchange="setDays(this,birth_day_one);"></select>
+											</p>
+											<p class="cl">
+												<span class="fl">日：</span>
+												<select class="fl birth_day birth_day_one" id="birth_day_one"></select>
+											</p>
+										</div>
+								 </div>
+								 次日0点失效 例：选择12-31，
+								即积分有效期截止本年12月31日，下一年1月1日0点失效 
+							</div>
+							<div >
+								<input type="radio" name="type"  th:checked="${#null==integralLimit ?false:3==integralLimit.type }"  
+								value="3" />
+								每年
+								  
+								  <div class="validitys">
+								   
+										<input type="text" readonly="readonly"  class="dateVal meinian wh60" id="meinian" 
+											th:attr="name=${integralLimit}?${3==integralLimit.type ?'dateVal':''}:'',val=${integralLimit}?${2==integralLimit.type ?integralLimit.dateVal:''}:''"
+											th:value="${integralLimit}?${3==integralLimit.type ?integralLimit.dateVal:''}:''"
+										  name=""  />
+										 <div class="monthDay monthDay_two">
+											<p class="cl">
+												<span class="fl">月：</span>
+												<select class="fl birth_month birth_month_two" id="birth_month_two" onchange="setDays(this,birth_day_two);"></select>
+											</p>
+											<p class="cl">
+												<span class="fl">日：</span>
+												<select class="fl birth_day birth_day_two" id="birth_day_two"></select>
+											</p>
+										</div>
+								 </div>
+								 
+								上一年度，剩余积分失效 例：选择06-06，即上一年度截止12月31日的剩余积分，将于设置日期当天0点起失效 <br/>
+							</div>
+							<button class="subIntegralLimit yl-btn yl-btn-blue-shadow add yl-btn-disabled " style="margin-left: 40%" type="button" >保存</button>
+					  </form>
+			    </div>
+			    </section>
+			    
+			</div>
+			
+			 
+				    
+	    </div> 
+	</body>
+	
+	<!-- 脚本区域（弹框、脚本） -->
+	
+	<div layout:fragment="javascript">
+	    <script src="/js/pages/monthDay.js"></script>
+	    <script type="text/javascript">
+	    $(function (){
+	    		$(".container").css("height","auto !important");
+		        //打开新建会员等级页面
+		        $('#add').click(function() {
+			    	layer.open({
+			    		title:"添加会员等级",
+			    		type: 2, 
+			    		btn: ['保存', '取消'],
+			    		area:['560px','480px'],
+			    		yes: function(index, layero){
+			    			var body = layer.getChildFrame('body', index);
+	                        var iframeWin = window[layero.find('iframe')[0]['name']];
+	                        iframeWin.subForm(document);
+			    			    //按钮【按钮一】的回调
+		    			},
+		    			btn2: function(index, layero){
+			    			//按钮【按钮一】的回调
+		    			},
+			    		content: '/customers/grade/showDetail'
+			    	}); 
+			    });
+		        
+		        
+		        
+		        $(".edit").click(function (){
+		        	//<![CDATA[
+						$(this).siblings().removeClass("yl-btn-disabled");
+		        		var val =$(this).parent().parent().find("td").eq(1).attr("val")?$(this).parent().parent().find("td").eq(1).attr("val"):""; 
+		       			$(this).parent().parent().find("td")
+		       			.eq(1).html(' <input type="text" style="border-style: solid;border-color: rgba(228, 228, 228, 1);border-width: 1px;" name="integralMultiple"  value="'+val +'"  /> ');
+	       			//]]>
+		        });
+		        
+		        $(".saveIntegral").click(function (){
+		        	if ($(this).attr("class").indexOf("yl-btn-disabled")==-1){
+			        	var  integralMultiple =$(this).parent().parent().find("td")
+		       			.eq(1).find("input").val() , evn_obj= this;
+			        	if(null==integralMultiple||""==integralMultiple ){
+			        		//alert ("请输入积分倍数！");
+			        		layer.alert('请输入积分倍数！');
+			        		return ;
+			        	}else{
+			        		if(integralMultiple > 0){}else{
+			        			//alert ("请输入合法的积分倍数！");
+			        			layer.alert('请输入合法的积分倍数！');
+				        		return ;
+			        		}
+			        	}
+			        	
+		        	    $.ajax({ url: "/integralLimit/updLimitMultiple" ,  data :{id :$(this).attr("obj_id") , integralMultiple:integralMultiple } , success:function(date){
+		        	    	if(date.code=="success"){
+		        	    		$(this).addClass("yl-btn-disabled");
+		        	    		$(evn_obj).parent().parent().find("td")
+		    	       			.eq(1).find("input").remove();
+		        	    		$(evn_obj).parent().parent().find("td")
+		    	       			.eq(1).html(integralMultiple);
+		        	    		$(evn_obj).parent().parent().find("td")
+		    	       			.eq(1).attr("val",integralMultiple);
+		        			}
+		        	    	layer.msg(date.message,{time: 2000} ,function (){
+		        	    		window.location.reload();
+		        	    	}); 
+			        	}
+	               	 }); 
+		        	}
+		        });
+		        //积分有效期选择
+		        $("#integralFrm").find("input[name='type']").click(function (){
+		        	$(".dateVal").attr("name","");
+		        	$(this).parent().find("input[type='text']").attr("name","dateVal");
+		        });
+		        //有效期规则项更改
+		        $("input[name='type']").change(function (){
+		        	 $(".subIntegralLimit").removeClass("yl-btn-disabled");
+		        });
+		        
+		        $("input[name='type']:checked").parent().find("input").keyup(function (){
+		        	if ($(this).val()!=$(this).attr("val")){
+		        		 $(".subIntegralLimit").removeClass("yl-btn-disabled");
+		        	}
+		        });
+		        
+		        //点击 保存积分有效期
+		        $(".subIntegralLimit").click(function (){
+		        	//<![CDATA[
+	        	           if (!$(this).hasClass("yl-btn-disabled")){
+	        	        	   
+	        	           
+						        	if ($("#integralFrm").find("input[name='type']:checked").length<1){
+						        		//alert ("请选择有效期");
+						        		layer.alert('请选择有效期');
+						        		return ;
+						        	}
+						        	if ($("#integralFrm").find("input[name='dateVal']").val()==""){
+						        		//alert ("请填写正确有效期");
+						        		layer.alert('请填写正确有效期');
+						        		return ;
+						        	}
+						        	$frm = $("#integralFrm");
+							    	var validateWidget = $frm.validate();
+							    	//1.启用表单验证。
+						    		if (!validateWidget.check()) {//1.基础样式校验。
+						    			//alert ("自取之日的数值太大了");
+						    			layer.alert('自取之日的数值太大了');
+						    			return ;
+						    		}
+					        		$("#integralFrm").ajaxSubmit({success: function(entry, statusText, xhr, $form){
+					        			
+					        			if(entry.code=="success"){
+					        			}
+					        			layer.msg(entry.message,{time: 2000} ,function (){
+					        			}); 
+					        			
+					        			window.location.reload();
+					        			 
+									}});
+	        	           }
+		        	//]]>
+		        });
+		    });
+	    
+		    $.datetimepicker.setLocale('ch');//设置中文
+	       /*   $("#jiezhi").datetimepicker({
+	        	yearOffset:0,
+	            timepicker:false,
+	            lang:'ch',
+	            format:'m-d',
+	            formatDate:'m-d',
+	            onGenerate:function( ct ){
+	        		return '2017-10-22' ;
+	        	}
+	        }); */
+		    
+	       /*  $("#meinian").datetimepicker({
+	        	yearOffset:0,
+	            timepicker:false,
+	            lang:'ch',
+	            format:'m-d',
+	            formatDate:'m-d',
+	            onGenerate:function( ct ){
+	        		return '2017-10-22' ;
+	        	}
+	        }); */
+	       
+	        $("#jiezhi").focus(function(){
+	        	$(".monthDay_one").show();
+	        }); 
+	       
+	        //日月不足俩位补零
+	        function MonthDay(birthMonth,birthDay,jianzhi){
+	        	
+	        	var valMonth,valDay;
+	        	 
+	        	if(birthMonth.val().length == 1){
+	        		valMonth='0'+ birthMonth.val();
+	        	}else{
+	        		valMonth=birthMonth.val();
+	        	};
+	        	
+	        	 if(birthDay.val().length == 1){
+	        		valDay='0'+ birthDay.val();
+	        	}else{
+	        		valDay=birthDay.val();
+	        	};
+	        	
+	        	jianzhi.val(valMonth + '-' + valDay); 
+	        }
+	        
+	        
+	        $("#birth_day_one").change(function(){
+	        	$(".monthDay_one").hide();
+	        	MonthDay($("#birth_month_one"),$("#birth_day_one"),$('#jiezhi'));
+	        });
+			
+
+	        $("#meinian").focus(function(){
+	        	$(".monthDay_two").show();
+	        }); 
+	        
+	        $("#birth_day_two").change(function(){
+	        	$(".monthDay_two").hide();
+	        	MonthDay($("#birth_month_two"),$("#birth_day_two"),$('#meinian'));
+	        });
+	       
+        	 
+	     
+	       
+		    
+	    </script>
+    </div>
+    
+</html>

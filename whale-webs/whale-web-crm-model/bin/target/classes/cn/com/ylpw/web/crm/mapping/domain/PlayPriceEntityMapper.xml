@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.ylpw.web.crm.mapper.domain.PlayPriceEntityMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.ylpw.web.crm.entity.domain.PlayPriceEntity" >
+			<id column="ID" property="id" jdbcType="BIGINT" />
+			<result column="PRICE_ID" property="priceId"  />
+			<result column="ORIGINAL_PRICE" property="originalPrice"  />
+			<result column="DISCOUNT_PRICE" property="discountPrice"  />
+			<result column="SALE_PRICE" property="salePrice"  />
+			<result column="SALE_DESC" property="saleDesc"  />
+			<result column="GET_SCORE" property="getScore"  />
+			<result column="CREATE_USER" property="createUser"  />
+			<result column="CREATE_TIME" property="createTime"  />
+			<result column="LAST_MODIFY_USER" property="lastModifyUser"  />
+			<result column="LAST_MODIFY_TIME" property="lastModifyTime"  />
+			<result column="BIND_YLID" property="bindYlid"  />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+		PRICE_ID,
+		ORIGINAL_PRICE,
+		DISCOUNT_PRICE,
+		SALE_PRICE,
+		SALE_DESC,
+		GET_SCORE,
+		CREATE_USER,
+		CREATE_TIME,
+		LAST_MODIFY_USER,
+		LAST_MODIFY_TIME,
+		BIND_YLID
+  </sql>
+  
+  <insert id="insertSelective" parameterType="cn.com.ylpw.web.crm.entity.domain.PlayPriceEntity" >
+    insert into play_price
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+	      <if test="priceId != null" >
+	        PRICE_ID,
+	      </if>
+	      <if test="originalPrice != null" >
+	        ORIGINAL_PRICE,
+	      </if>
+	      <if test="discountPrice != null" >
+	        DISCOUNT_PRICE,
+	      </if>
+	      <if test="salePrice != null" >
+	        SALE_PRICE,
+	      </if>
+	      <if test="saleDesc != null" >
+	        SALE_DESC,
+	      </if>
+	      <if test="getScore != null" >
+	        GET_SCORE,
+	      </if>
+	      <if test="createUser != null" >
+	        CREATE_USER,
+	      </if>
+	      <if test="createTime != null" >
+	        CREATE_TIME,
+	      </if>
+	      <if test="lastModifyUser != null" >
+	        LAST_MODIFY_USER,
+	      </if>
+	      <if test="lastModifyTime != null" >
+	        LAST_MODIFY_TIME,
+	      </if>
+	      <if test="bindYlid != null" >
+	        BIND_YLID,
+	      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+	      <if test="priceId != null" >
+	        #{priceId},
+	      </if>
+	      <if test="originalPrice != null" >
+	        #{originalPrice},
+	      </if>
+	      <if test="discountPrice != null" >
+	        #{discountPrice},
+	      </if>
+	      <if test="salePrice != null" >
+	        #{salePrice},
+	      </if>
+	      <if test="saleDesc != null" >
+	        #{saleDesc},
+	      </if>
+	      <if test="getScore != null" >
+	        #{getScore},
+	      </if>
+	      <if test="createUser != null" >
+	        #{createUser},
+	      </if>
+	      <if test="createTime != null" >
+	        #{createTime},
+	      </if>
+	      <if test="lastModifyUser != null" >
+	        #{lastModifyUser},
+	      </if>
+	      <if test="lastModifyTime != null" >
+	        #{lastModifyTime},
+	      </if>
+	      <if test="bindYlid != null" >
+	        #{bindYlid},
+	      </if>
+    </trim>
+  </insert>
+  
+  
+   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" flushCache="true"  >
+    delete from play_price
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  
+   <update id="updateByPrimaryKeySelective" parameterType="cn.com.ylpw.web.crm.entity.domain.PlayPriceEntity" flushCache="true" >
+    update play_price
+    <set >
+	      <if test="priceId != null" >
+	        PRICE_ID = #{priceId},
+	      </if>
+	      <if test="originalPrice != null" >
+	        ORIGINAL_PRICE = #{originalPrice},
+	      </if>
+	      <if test="discountPrice != null" >
+	        DISCOUNT_PRICE = #{discountPrice},
+	      </if>
+	      <if test="salePrice != null" >
+	        SALE_PRICE = #{salePrice},
+	      </if>
+	      <if test="saleDesc != null" >
+	        SALE_DESC = #{saleDesc},
+	      </if>
+	      <if test="getScore != null" >
+	        GET_SCORE = #{getScore},
+	      </if>
+	      <if test="createUser != null" >
+	        CREATE_USER = #{createUser},
+	      </if>
+	      <if test="createTime != null" >
+	        CREATE_TIME = #{createTime},
+	      </if>
+	      <if test="lastModifyUser != null" >
+	        LAST_MODIFY_USER = #{lastModifyUser},
+	      </if>
+	      <if test="lastModifyTime != null" >
+	        LAST_MODIFY_TIME = #{lastModifyTime},
+	      </if>
+	      <if test="bindYlid != null" >
+	        BIND_YLID = #{bindYlid},
+	      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from play_price
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <select id="pageFind" resultType="java.util.HashMap" parameterType="java.util.Map">
+  	 SELECT <include refid="Base_Column_List" />  FROM  play_price    WHERE  1=1 
+  	 <if test="id != null and id != '' ">
+	   	  AND  ID =#{id}
+   	 </if>
+  </select>
+  
+  <delete id="batchDel" parameterType="java.lang.Long" flushCache="true" >
+        DELETE FROM play_price WHERE ID in
+        <foreach item="id" collection="ids" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+   </delete>
+  
+</mapper>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>  
+<html xmlns:th="http://www.thymeleaf.org">  
+<head>
+	<meta charset="utf-8"></meta>
+	<meta http-equiv="X-UA-Compatible" content="IE=8" /> 
+    <title>CRM系统</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}"></link>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"></link>
+    <script th:src="@{/js/plugins/jquery/jquery-1.7.min.js}"></script>
+    <script th:src="@{/js/plugins/cryptojs/core.js}"></script>
+    <script th:src="@{/js/plugins/cryptojs/crypto-js.js}"></script>
+    <script th:src="@{/js/plugins/cryptojs/aes.js}"></script>
+    <script type="text/javascript">
+ 		jQuery(document).ready(function() {
+
+		    $("#loginForm").submit(function(){
+		        var accCode = $(this).find("#accCode").val();
+		        if($.trim(accCode) == "") {
+		        	$("#loginForm #errorMessage").html("账号必填"); loginErrorMessage();
+		        	$(this).find("#accCode").focus();
+		            return false;
+		        }
+		        var password = $(this).find("#pwd").val();
+		        if($.trim(password) == "") {
+		        	$("#loginForm #errorMessage").html("密码必填"); loginErrorMessage();
+		        	$(this).find("#pwd").focus();
+		            return false;
+		        }
+		        var key = $("#AES_KEY").val();
+				key = CryptoJS.enc.Utf8.parse(key);  
+				password = CryptoJS.enc.Utf8.parse($.trim(password));
+				var encrypted = CryptoJS.AES.encrypt(password, key, {mode:CryptoJS.mode.ECB,padding: CryptoJS.pad.Pkcs7});
+				$("#password").val("*#*#*#*#*");
+				$("#pwd").val(encrypted);
+		    });
+		    
+		    //登录事件
+		    $("#loginSubmit").click(function(){
+		      $("#loginForm").submit();
+		    });
+		    
+			loginErrorMessage();
+			
+			//清空左侧菜单状态选中。ZhaoHb2017.03.16
+			localStorage.navIndex = '';
+        	localStorage.navIndexThrid = '';
+        	
+		});
+		
+		function loginErrorMessage() {
+			if ($("#loginForm #errorMessage").html() != "") {
+		    	$("#loginForm #errorMessage").removeClass("undb");
+		    } else {
+		    	$("#loginForm #errorMessage").addClass("undb");
+		    }
+		}
+	</script>
+</head>
+<body style="background: #117ee9;">
+<div class="login-box"></div>
+<div class="login-con">
+	<div class="login-c">
+		<div class="tc"><img src="" th:src="@{/images/logo.png}" height="100"/></div>
+		<div class="f18">CRM系统</div>
+	</div>
+	<div class="login">
+		<form id="loginForm" action="/login.do" method="post">
+			<div id="errorMessage" class="mb20 line32 tc bg-error f-error undb" th:text="${errorMessage}"></div>
+			<div class="mb20"><input type="hidden" id="AES_KEY" th:value="${session.BI_AES_KEY}" value="admin" /><input type="text" id="accCode" name="accCode" placeholder="账号" th:value="admin" value="" /></div>
+			<div class="mb30"><input type="password" id="password" name="password" value="123456" style="display:none;"/><input type="text" id="pwd" name="pwd" placeholder="密码" value="123456" onfocus="this.type='password'" /></div>
+			<!-- <div class="mb30 cl"><input class="fl mt4" type="checkbox" name="" value="" /><span class="fl ml5 f-gray3">下次自动登录</span></div>-->
+			<div id="loginSubmit" class="yl-btn yl-btn-blue">登&nbsp;&nbsp;&nbsp;&nbsp;录</div>
+			<!--
+			<div class="cl mt20">
+				<a class="fr" href="###">立即注册</a>
+				<a class="f-gray6" href="###">忘记密码</a>
+			</div>
+			-->
+		</form>
+	</div>
+</div>
+<div  class="login-footer">
+	© 2017 qdteng@sohu.com 版权所有
+	<a class="ml30" href="###">服务协议</a> |
+	<a href="###">权利声明</a> |
+	<a href="###">版本更新</a> |
+	<a href="###">帮助中心</a> |
+	<a href="###">问题反馈</a> |
+	<a href="###">版权投诉</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.ylpw.web.crm.mapper.sys.SysMenuMapper">
+
+	<cache eviction="LRU" size="1024" readOnly="true" />
+	
+	<resultMap id="BaseResultMap" type="cn.com.ylpw.web.crm.entity.sys.SysMenu" >
+    	<id column="ID" property="id" jdbcType="BIGINT" />
+    	<result column="PID" property="pid" jdbcType="BIGINT" />
+    	<result column="NAME" property="name" jdbcType="VARCHAR" />
+	    <result column="URL" property="url" jdbcType="VARCHAR" />
+	    <result column="STATUS" property="status" jdbcType="INTEGER" />
+	    <result column="ORD" property="ord" jdbcType="INTEGER" />
+	    <result column="IS_DEL"  property="isDel" typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler"  />
+	    <result column="CREATE_ID" property="createId" jdbcType="BIGINT" />
+	    <result column="CREATE_NAME" property="createName" jdbcType="VARCHAR" />
+	    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+	    <result column="UPDATE_ID" property="updateId" jdbcType="BIGINT" />
+	    <result column="UPDATE_NAME" property="updateName" jdbcType="VARCHAR" />
+	    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+   </resultMap>
+	
+	<insert id="save" parameterType="cn.com.ylpw.web.crm.entity.sys.SysMenu" flushCache="true">
+		INSERT INTO SYS_MENU(  PID, NAME, URL, STATUS, ORD, CREATE_ID, CREATE_NAME, CREATE_TIME)
+  		VALUES(  #{pid,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR} , #{url,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{ord,jdbcType=INTEGER}, #{createId,jdbcType=BIGINT}, #{createName,jdbcType=VARCHAR}, SYSDATE())
+	</insert>
+	
+	<update id="update" parameterType="cn.com.ylpw.web.crm.entity.sys.SysMenu" flushCache="true">
+		UPDATE SYS_MENU 
+		<set>
+			<if test="pid != null" >
+	    		PID = #{pid,jdbcType=BIGINT},
+		    </if>
+			<if test="name != null and name !=''" >
+	    		NAME = #{name,jdbcType=VARCHAR},
+		    </if>
+		    <if test="url != null and url !=''" >
+		    	URL = #{url,jdbcType=VARCHAR},
+		    </if>
+		    <if test="ord != null" >
+		    	ORD = #{ord,jdbcType=INTEGER},
+		    </if>
+		    <if test="status != null" >
+		    	STATUS = #{status,jdbcType=INTEGER},
+		    </if>
+		    <if test="updateId != null" >
+		    	UPDATE_ID = #{updateId,jdbcType=VARCHAR},
+		    </if>
+		    <if test="updateName != null and updateName !=''" >
+		    	UPDATE_NAME = #{updateName,jdbcType=VARCHAR},
+		    </if>
+		    <if test="1 == 1" >
+		    	UPDATE_TIME = SYSDATE()
+		    </if>
+		</set>
+		WHERE ID = #{id,jdbcType=BIGINT}
+	</update>
+	
+	<update id="delete" parameterType="cn.com.ylpw.web.crm.entity.sys.SysMenu" flushCache="true">
+		UPDATE SYS_MENU SET IS_DEL=0 WHERE ID = #{id,jdbcType=BIGINT}
+	</update>
+  
+	<select id="findById" resultMap="BaseResultMap">
+		SELECT * FROM SYS_MENU WHERE ID = #{id,jdbcType=BIGINT}
+	</select>
+	
+	<select id="findAll" parameterType="cn.com.ylpw.web.crm.entity.sys.SysMenu" resultType="cn.com.ylpw.web.crm.model.sys.SysMenuGrid" useCache="true">
+		SELECT m.*,(SELECT pm.name FROM SYS_MENU pm WHERE pm.id=m.pid) as pname,(SELECT COUNT(1) FROM SYS_MENU WHERE IS_DEL=1 AND PID = m.ID) as childrenNum FROM SYS_MENU m WHERE IS_DEL=1
+		<if test="pid != null" >
+    		AND PID = #{pid,jdbcType=BIGINT}
+	    </if>
+	    <if test="status != null" >
+    		AND STATUS = #{status,jdbcType=INTEGER}
+	    </if>
+	    ORDER BY PID ASC, ORD ASC
+	</select>
+	
+	<select id="findByRoleId" resultMap="BaseResultMap" useCache="true">
+		SELECT * FROM SYS_MENU WHERE STATUS=1 AND IS_DEL=1 
+		<if test="roleId != null and roleId != 1" >
+			AND ID IN (SELECT rm.SYS_MENU_ID FROM SYS_ROLE_MENU rm WHERE rm.ISVALID=1 AND rm.SYS_ROLE_ID=#{roleId,jdbcType=BIGINT}) 
+		</if>
+		ORDER BY PID ASC, ORD ASC
+	</select>
+	
+	<select id="findByAdmin" resultMap="BaseResultMap">
+		SELECT * FROM SYS_MENU WHERE STATUS=1 AND IS_DEL=1 ORDER BY PID ASC, ORD ASC
+	</select>
+	
+	<select id="findAllMenusUrl" resultType="string" useCache="true">
+		SELECT URL FROM SYS_MENU WHERE PID!=0 AND IS_DEL=1
+	</select>
+  
+</mapper>

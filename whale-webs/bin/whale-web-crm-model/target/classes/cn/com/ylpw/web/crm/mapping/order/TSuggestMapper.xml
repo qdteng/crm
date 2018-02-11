@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.ylpw.web.crm.mapper.order.TSuggestMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.ylpw.web.crm.entity.order.TSuggest" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="CUSTOMERSID" property="customersid" jdbcType="BIGINT" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="TYPE" property="type" jdbcType="VARCHAR" />
+    <result column="ORDERS_ID" property="ordersId"   />
+    <result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
+    <result column="SOLVE_DESC" property="solveDesc" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, CUSTOMERSID, CREATE_TIME, TYPE, ORDERS_ID, DESCRIPTION, SOLVE_DESC
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_suggest
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_suggest
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.com.ylpw.web.crm.entity.order.TSuggest" >
+    insert into t_suggest (ID, CUSTOMERSID, CREATE_TIME, 
+      TYPE, ORDERS_ID, DESCRIPTION, 
+      SOLVE_DESC)
+    values (#{id,jdbcType=BIGINT}, #{customersid,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{type,jdbcType=VARCHAR}, #{ordersId}, #{description,jdbcType=VARCHAR}, 
+      #{solveDesc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.ylpw.web.crm.entity.order.TSuggest" >
+    insert into t_suggest
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="customersid != null" >
+        CUSTOMERSID,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="ordersId != null" >
+        ORDERS_ID,
+      </if>
+      <if test="description != null" >
+        DESCRIPTION,
+      </if>
+      <if test="solveDesc != null" >
+        SOLVE_DESC,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="customersid != null" >
+        #{customersid,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="ordersId != null" >
+        #{ordersId},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="solveDesc != null" >
+        #{solveDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.ylpw.web.crm.entity.order.TSuggest" >
+    update t_suggest
+    <set >
+      <if test="customersid != null" >
+        CUSTOMERSID = #{customersid,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="ordersId != null" >
+        ORDERS_ID = #{ordersId},
+      </if>
+      <if test="description != null" >
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="solveDesc != null" >
+        SOLVE_DESC = #{solveDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.ylpw.web.crm.entity.order.TSuggest" >
+    update t_suggest
+    set CUSTOMERSID = #{customersid,jdbcType=BIGINT},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      TYPE = #{type,jdbcType=VARCHAR},
+      ORDERS_ID = #{ordersId},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      SOLVE_DESC = #{solveDesc,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  
+   <insert id="insertBatchSelective" parameterType="java.util.List" >
+  	  insert into t_suggest (ID, CUSTOMERSID, CREATE_TIME, 
+      TYPE, ORDERS_ID, DESCRIPTION, 
+      SOLVE_DESC)
+   	  values
+     <foreach collection ="list" item="sug" index= "index" separator ="," >
+     	 (
+     	    #{sug.id,jdbcType=BIGINT}, #{sug.customersid,jdbcType=BIGINT}, #{sug.createTime,jdbcType=TIMESTAMP}, 
+			#{sug.type,jdbcType=VARCHAR}, #{sug.ordersId}, #{sug.description,jdbcType=VARCHAR}, 
+			#{sug.solveDesc,jdbcType=VARCHAR}
+      	 )
+     </foreach>
+  	</insert>
+  	
+	 <select id="findAll" parameterType="java.util.HashMap" resultType="java.util.HashMap" >
+		    SELECT ID,CUSTOMERSID,CREATE_TIME,TYPE,ORDERS_ID,
+		    CONVERT(DESCRIPTION  USING utf8) as   DESCRIPTION,SOLVE_DESC 
+		    FROM  T_SUGGEST WHERE CUSTOMERSID = #{customerid }  
+	        order by  id desc
+	 </select>
+  
+  
+</mapper>

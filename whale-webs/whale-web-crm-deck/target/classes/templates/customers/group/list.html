@@ -1,0 +1,394 @@
+<!DOCTYPE html>  
+<html xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorator="layouts/index">  
+    <head>
+    	<meta charset="utf-8"></meta>
+        <title>会员体系-会员分组</title>
+    </head>  
+    <body>
+	    <div layout:fragment="content">
+	    	
+			<div class="container">
+			    <section class="col-lg-12 ui-content ui-shadow">
+			      
+					<!-- 列表页头（标题、操作按钮） -->
+					<h3>
+						会员分组
+					</h3>
+				    
+				    <!-- 列表主体 -->
+					<div class="cl mt15 mb10" style="overflow-x:auto;">
+						<!-- 列表主体（查询区域） -->
+						<form name="myform" id="searchForm" action="/customers/group/list" method="post">
+							<input  type="hidden"  id="pageNo" name="pageNo"  th:value="${page.pageNo}" value=""  />
+							<input  type="hidden" name="pageSize"  id="pageSize" th:value="${page.pageSize}" value=""  />
+							<div class=" bg-gray border-gray pb10 pl15">
+								<div class="cl">
+							    	<div class="form-group mt15">
+										<label for="">分组类型:</label>
+										<select name="gclass" >
+											<option value="" >请选择</option>
+											<option th:selected="${searchParam['gclass'] == '1'  }"  value="1" >一般分组</option>
+											<option th:selected="${searchParam['gclass'] == '2'  }"  value="2" >标签分组</option>
+										</select>
+									</div>
+									<div class="form-group mt15">
+										<label for="">分组名称:</label>
+										<input type="text" autocomplete ="off" name="groupName" id="groupName" placeholder="请输入查询参数"  th:value="${searchParam['groupName']}"  value="" />
+									</div>
+									<div class="form-group mt15">
+										<label for="">分组时间:</label>
+										<input type="text" class="start" id="group_start" style="width:151px;" 
+										name="group_start"  th:value="${searchParam['group_start']}"    value="" />
+										<span>至</span>
+			                            <input type="text" class="end" id="group_end" 
+			                            style="width:151px;"  th:value="${searchParam['group_end']}"    name="group_end" value="" />
+									</div>
+								    <button class="fl yl-btn yl-btn-blue-shadow query mt15 queryBtn">查询</button>
+								    <button style="margin-left: 1%;"  type="button"  onclick="javaScript:clearForm($('#searchForm')[0]);" class="fl yl-btn yl-btn-blue-shadow query mt15">清除</button>
+								</div>
+							</div>
+						</form>
+						<div class="pt10">
+							 <input type="button" style="margin-left:1%;"  class="yl-btn yl-btn-blue-shadow addGroupDetail "  openUrl="/customers/group/detail/0" value="新建分组"/>
+							 <input type="button" style="margin-left:1%;"  class="yl-btn yl-btn-blue-shadow  yl-btn-disabled generateExportGroup "   value="生成导出分组用户"/>
+							 <input type="button" style="margin-left:1%;"  class="yl-btn yl-btn-blue-shadow  yl-btn-disabled exportGroup "   value="导出分组用户"/>
+							 <!-- <input type="button" class="yl-btn yl-btn-blue-shadow yl-btn-disabled" id="delBatchBtn" value="批量删除" /> -->
+						</div>
+                
+						<div th:if="${#lists.size(dateList) > 0}">
+							<!-- 列表主体（搜索结果） -->
+							<table class="table table-bordered mt15">
+								<tr>
+								  <th width="20" style="text-align:center;"><input type="checkbox" id="checkAll" style=" width:20px;" />序号</th>
+								  <th width="20" style="text-align:center;">分组ID</th>
+								  <th width="20" style="text-align:center;">分组名称</th>
+								  <th width="20" style="text-align:center;">分组类型</th>
+								  <th style="text-align:center;">会员人数</th>
+								  <th style="text-align:center;">分组来源</th>
+								  <th style="text-align:center;">说明</th>
+								  <th style="text-align:center;">创建时间</th>
+								  <th style="text-align:center;">更新时间</th>
+								  <th style="text-align:center;">执行状态</th>
+								  <th style="text-align:center;">分组导出文件</th>
+								  <th width="200" style="text-align:center;">操作</th>
+								</tr>
+								<tr th:each="obj,indexStat:${dateList}">
+									<td style="text-align:center;"><input name="ids" class="ids" type="checkbox" th:value="${obj.ID}" value="" style="width: 20px" /><span th:text="${indexStat.index+1}" /></td>
+									<td style="text-align:center;" th:text="${obj.ID}"></td>
+									<td style="text-align:center;" th:text="${obj.NAME}"></td>
+									<td style="text-align:center;" th:text="${obj.TYPESTR}"></td>
+									<td style="text-align:center;" th:text="${obj.CUS_NUM}">...</td>
+									<td style="text-align:center;" th:text="${obj.GTYPESTR}">...</td>
+									<td style="text-align:center;" th:text="${obj.REMARK }">...</td>
+									<td style="text-align:center;" th:text="${#null != obj.CREATE_TIME ? #calendars.format(obj.CREATE_TIME,'yyyy-MM-dd HH:mm:ss') : ''}">...</td>
+									<td style="text-align:center;" th:text="${#null != obj.UPDATE_TIME ? #calendars.format(obj.UPDATE_TIME,'yyyy-MM-dd HH:mm:ss') : (#null != obj.CREATE_TIME ? #calendars.format(obj.CREATE_TIME,'yyyy-MM-dd HH:mm:ss') : '')}">...</td>
+									<td style="text-align:center;" >
+										<img th:attr="class='imgvals', rel=${obj.EXECUTE_TYPE}, obj_id=${obj.ID}" 
+										style="position: absolute;top: 3px;left: calc((100% - 23px)/2);"
+										alt="" th:src="${1 == obj.EXECUTE_TYPE ? '/images/finish.png' : '/images/wait.png' }" 
+										height="23" width="23" th:title="${1 == obj.EXECUTE_TYPE ? '执行完毕' : '等待执行' }" />
+									</td>
+									<td style="text-align:center;" >
+										<img th:attr="class='imgvalss', rel=${obj.EXPORT_STATUS}, obj_id=${obj.ID}" 
+										style="position: absolute;top: 3px;left: calc((100% - 23px)/2);"
+										alt="" th:src="${2 == obj.EXPORT_STATUS ? '/images/finish.png' : (0 == obj.EXPORT_STATUS ? '/images/chazi.jpg' : '/images/refresh.gif') }" 
+										height="23" width="23" th:title="${2 == obj.EXPORT_STATUS ? '已生成' : (0 == obj.EXPORT_STATUS ? '未生成' : '正在生成') }" />
+									</td>
+									<td style="text-align:center;" >
+										<a href="###" class="a-view mr10 updShieldBtn" open_url="/market/active/showTemplate"
+										th:attr="obj_id=${obj.ID}">会员营销</a>
+										<a href="###" class="a-view mr10 updateGroup"  
+										th:attr="obj_id=${obj.ID}">编辑</a>
+										<a href="###" class="a-view mr10 del"  
+										th:attr="obj_id=${obj.ID}">删除</a>
+									</td>
+								</tr>
+							</table>
+						</div>
+						</div>
+						<!-- 分页 -->
+			 			<div th:if="${#lists.size(dateList) > 0}"  th:include="layouts/page:: page" th:attr="pageFormId=searchForm,pageNo=${page.pageNo},pageSize=${page.pageSize},total=${page.total}">...</div>
+						
+			    </section>
+			</div>
+	    	
+	    	
+	    </div> 
+	</body>
+	
+	<!-- 脚本区域（弹框、脚本） -->
+	<div layout:fragment="javascript">
+	    
+	    <script type="text/javascript">
+	    $(function (){
+	    	var imgvals = $('.imgvals[rel=0]');
+	    	var imgvalss = $('.imgvalss[rel=1]');
+	    	/* if(imgvals.length > 0){
+	    		var n=imgvals.length;
+				var timer = null;
+				var ids = "";
+				$.each(imgvals, function(index, value){
+					if($(value).attr("rel") == 0){//拼接会员分组ID
+						if(ids.length == 0){
+							ids = $(value).attr("obj_id");
+						}else{
+							ids = ids + ","+$(value).attr("obj_id");
+						}
+					}
+				});
+				timer = setInterval(function(){
+					if(n == 0){//当前页的执行状态都‘执行完毕’，停止刷新
+						clearInterval(timer);
+					}else{
+						refreshSend(ids);//执行状态进行中，刷新……
+						n = $('.imgvals[rel=0]').length;//重新计数需要刷新的数据
+					}
+				},3000);
+	    	} */
+	    	
+	    	/* if(imgvalss.length > 0){
+	    		var n=imgvalss.length;
+				var timer = null;
+				var ids = "";
+				$.each(imgvalss, function(index, value){
+					if($(value).attr("rel") == 1){//拼接会员分组ID
+						if(ids.length == 0){
+							ids = $(value).attr("obj_id");
+						}else{
+							ids = ids + ","+$(value).attr("obj_id");
+						}
+					}
+				});
+				timer = setInterval(function(){
+					if(n == 0){//当前页的执行状态都‘执行完毕’，停止刷新
+						clearInterval(timer);
+					}else{
+						refreshSend2(ids);//执行状态进行中，刷新……
+						n = $('.imgvalss[rel=1]').length;//重新计数需要刷新的数据
+					}
+				},3000);
+	    	} */
+			
+	    	$(".query-btn").click(function (){
+	    		
+	    		$frm = $("#searchForm");
+			    var validateWidget = $frm.validate();
+	    		//1.启用表单验证。
+	    		if (!validateWidget.check()) {//1.基础样式校验。
+	    			return false;
+	    		}
+	    		return  true ; 
+	    		
+	    	});
+	    	
+	    	//批量选中、启用按钮
+	    	$(".table input[type='checkbox']").click(function (){
+	    		if ($(this).attr("id")=="checkAll"){//全选
+	    			if ($(this).prop("checked")){
+	    				$(".table input[type='checkbox']").prop("checked",true);	
+	    			}else{
+	    				$(".table input[type='checkbox']").prop("checked",false);
+	    			}
+	    		}
+	    		
+	    		if($(".table input[type='checkbox']:checked").length>0){
+	    				$("#delBatchBtn").removeClass("yl-btn-disabled");
+	    				$(".exportGroup").removeClass("yl-btn-disabled");
+	    				$(".generateExportGroup").removeClass("yl-btn-disabled");
+	    		}else {
+	    			$("#delBatchBtn").addClass("yl-btn-disabled");
+	    			$(".exportGroup").addClass("yl-btn-disabled");
+	    			$(".generateExportGroup").addClass("yl-btn-disabled");
+	    		}
+	    		
+	    	});
+	    	
+	    	//批量删除
+	        $('#delBatchBtn').click(function() {
+	        	layer.load(2);
+	        	var ids = new Array();
+	        		$("input[name='ids']:checked").each(function (){
+		        			ids.push($(this).val());
+	        		});
+	        		ids= ids.join(",");
+	        		confirm(function(){
+		        		 $.getJSON("/customers/group/batchDel",{ ids:ids  }, function(entry){
+		        			  if(entry.code=="success"){
+			        				$(document).find("#searchForm").submit();
+			        			}
+		        			 
+								layer.msg(entry.message,{time: 2000} ,function (){
+									layer.close(layer.load());
+			        			}); 
+								
+							});
+	                });
+	        });
+	   
+	        timeCalender2('#group_start','#group_end');
+	        
+	        //会员营销
+	        $('.updShieldBtn').click(function() {
+	        	var $this = $(this) , id =  $this.attr("obj_id"), url = $this.attr("open_url");
+	        	window.location.href = url;
+	        });
+	        
+	        //删除
+		    $('.del').click(function() {
+		    	var id = $(this).attr("obj_id");
+	        	confirm(function(){
+	        		 $.getJSON("/customers/group/delCustomerGroup",{id: id}, function(entry){
+	        			  if(entry.code=="success"){
+	        					//layer.load(2);
+		        				$(document).find("#searchForm").submit();
+		        			}
+	        			 
+							layer.msg(entry.message,{time: 2000} ,function (){
+		        			}); 
+							
+						});
+	               });
+		    });
+		    
+		    //打开‘编辑窗口’
+		    $('.updateGroup').click(function(){
+		    	var id = $(this).attr("obj_id");
+		    	 layer.open({
+		    		 title:"修改分组",
+		    		  type: 2, 
+		    		  btn: ['确定', '取消'],
+		    		  area:['810px','600px'],
+		    		  yes: function(index, layero){
+		    			  
+		    			  var body = layer.getChildFrame('body', index);
+                         var iframeWin = window[layero.find('iframe')[0]['name']];
+                         iframeWin.subForm(document);
+		    			    //按钮【按钮一】的回调
+	    			  },
+	    			  btn2: function(index, layero){
+		    			    //按钮【按钮一】的回调
+	    			  },
+		    		  content: '/customers/group/detail/'+id
+		    		}); 
+		    });
+		    //新建分组窗口
+		    $(".addGroupDetail").click(function(){
+		    	var url = $(this).attr("openUrl");
+		    	var id = $(this).attr("obj_id");
+		    	 layer.open({
+		    		 title:"新建分组",
+		    		  type: 2, 
+		    		  btn: ['生成分组', '取消'],
+		    		  area:['810px','600px'],
+		    		  yes: function(index, layero){
+		    			  
+		    			 var body = layer.getChildFrame('body', index);
+                         var iframeWin = window[layero.find('iframe')[0]['name']];
+                         iframeWin.subGroupFrm(document);
+		    			    //按钮【按钮一】的回调
+	    			  },
+	    			  btn2: function(index, layero){
+		    			    //按钮【按钮一】的回调
+	    			  },
+		    		  content: url
+		    		}); 
+		    });
+		    
+		    //生成导出分组用户
+		    $(".generateExportGroup").click(function(){
+		    	layer.load(2);
+		    	$("input[name='ids']:checked").each(function (){
+        			//<![CDATA[ 
+        			$("#searchForm").append('<iframe src="/customers/group/generateCustomersGroupZip?groupid='+ $(this).val()  +'"  style="display: none" />');
+        			//]]>
+        		});
+		    	setTimeout(function(){layer.close(layer.load());window.location.reload();}, 2500); 
+		    });
+		    
+		  //导出分组用户
+		  $(".exportGroup").click(function(){
+		    	layer.load(2);
+		    	$("input[name='ids']:checked").each(function (){
+        			//<![CDATA[ 
+        			$("#searchForm").append('<iframe src="/customers/group/exportCustomersGroupZip?groupid='+ $(this).val()  +'"  style="display: none" />');
+        			//]]>
+        		});
+		    	layer.close(layer.load());
+		    	/* $("input[name='ids']:checked").each(function (){
+        			$.getJSON("/customers/group/exportCustomersGroupZip",{groupid: $(this).val()}, function(entry){
+							layer.msg(entry.message,{time: 2000} ,function (){
+		        			}); 
+						});
+        		}); */
+		    	//setTimeout(layer.close(layer.load()), 5500); 
+		    });
+	        
+	    });
+	    
+	    function refreshSend(groupId) {
+	        var xmlHttpReg = null;
+	        if (window.ActiveXObject) {//如果是IE
+	            xmlHttpReg = new ActiveXObject("Microsoft.XMLHTTP");
+	        } else if (window.XMLHttpRequest) {
+	            xmlHttpReg = new XMLHttpRequest(); //实例化一个xmlHttpReg
+	        }
+	        if (xmlHttpReg != null) {
+	            xmlHttpReg.open("get", "/customers/group/executeStatus/"+groupId, true);
+	            xmlHttpReg.send(null);
+	            xmlHttpReg.onreadystatechange = doResult; //设置回调函数
+	        }
+	        function doResult() {
+	        	var obj = jQuery.parseJSON(xmlHttpReg.responseText);
+	        	if(obj){
+   					  $.each(obj, function(index, entity){
+   						  if(entity.EXECUTE_STATUS=="-1"){
+   							  $('.imgvals[obj_id='+entity.ID+']').attr("src", "/images/refresh.gif");
+   	    					  $('.imgvals[obj_id='+entity.ID+']').attr("title", "执行中");
+   						  }else if (entity.EXECUTE_STATUS=="1") {
+   							  $('.imgvals[obj_id='+entity.ID+']').attr("src", "/images/finish.png");
+   	    					  $('.imgvals[obj_id='+entity.ID+']').attr("rel", 1);
+   	    					  $('.imgvals[obj_id='+entity.ID+']').attr("title", "执行完毕");
+   						  }
+   					  });
+	        	}
+	        }
+	    }
+	    
+	    function refreshSend2(groupId) {
+	        var xmlHttpReg = null;
+	        if (window.ActiveXObject) {//如果是IE
+	            xmlHttpReg = new ActiveXObject("Microsoft.XMLHTTP");
+	        } else if (window.XMLHttpRequest) {
+	            xmlHttpReg = new XMLHttpRequest(); //实例化一个xmlHttpReg
+	        }
+	        if (xmlHttpReg != null) {
+	            xmlHttpReg.open("get", "/customers/group/executeExportStatus/"+groupId, true);
+	            xmlHttpReg.send(null);
+	            xmlHttpReg.onreadystatechange = doResult; //设置回调函数
+	        }
+	        function doResult() {
+	        	var obj = jQuery.parseJSON(xmlHttpReg.responseText);
+	        	if(obj){
+   					  $.each(obj, function(index, entity){
+   						  if(entity.EXPORT_STATUS=="0"){
+							  $('.imgvalss[obj_id='+entity.ID+']').attr("src", "/images/chazi.jpg");
+	    					  $('.imgvalss[obj_id='+entity.ID+']').attr("title", "未生成");
+						  }else if (entity.EXPORT_STATUS=="1") {
+							  $('.imgvalss[obj_id='+entity.ID+']').attr("src", "/images/refresh.gif");
+	    					  $('.imgvalss[obj_id='+entity.ID+']').attr("rel", 1);
+	    					  $('.imgvalss[obj_id='+entity.ID+']').attr("title", "正在生成");
+						  }else{
+							  $('.imgvalss[obj_id='+entity.ID+']').attr("src", "/images/finish.png");
+	    					  $('.imgvalss[obj_id='+entity.ID+']').attr("rel", 2);
+	    					  $('.imgvalss[obj_id='+entity.ID+']').attr("title", "已生成");
+						  }
+   					  });
+	        	}
+	        }
+	    }
+	    </script>
+    </div>
+    
+</html>

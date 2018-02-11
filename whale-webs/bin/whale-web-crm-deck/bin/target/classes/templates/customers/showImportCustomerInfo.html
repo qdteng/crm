@@ -1,0 +1,82 @@
+<!DOCTYPE html>  
+<html xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layouts/dialog" >  
+	
+	
+    <head>
+    	<meta charset="utf-8"></meta>
+        <title>会员资料导入</title>
+    </head>  
+    <body style="text-align:center;" >
+    	 <div layout:fragment="content">
+		    	<!-- 添加用户 -->
+				<div  style="margin-top: 10px;"     id="addOrUpdateDialog"  >
+			    	<form action="/customers/importCustomerInfo" method="post" id="detafilForm" class="form-horizontal" enctype="multipart/form-data">
+			        <div class="box-content content-list pb30">
+						<div class="cl mb20">
+			        		<p>
+			        			使用帮助：由于部分会员信息不全，运营人员可自行导入补全例如生日、QQ、微信等信息，只能导入会员信息，非会员信息无效
+								文件格式：excel，csv格式，文件大小不超过5M。
+								<a href="javascript:void(0);" onclick="exportImportCusModel();">点击下载模板</a>
+			        		</p>
+			        		<br />
+			        		<p>
+			        			<input class="w200 c_required c_minlength_1 c_maxlength_20" type="file" name="uploadFiles" id="uploadFiles" value="文件上传" />
+			        		</p>
+			        	</div>
+			        </div>
+			         <br/>
+				    <br/>
+				    <br/>
+				    <div style="height: 100px;"></div>
+			        </form>
+			        <form action="/customers/exportImportCModel" id="exportImportCModel" name="exportImportCModel" target="_blank">
+				    	<input name="downLoad" id="downLoad" type="hidden" />
+				    </form>
+			    </div>
+		    </div>
+		  
+		    <!-- 脚本区域（弹框、脚本） -->
+			<div layout:fragment="javascript">
+			    <script type="text/javascript">
+			    	//重复提交
+			   		var repeat =  true ;
+			    	function subForm(parentWin){
+			    		if (!repeat){
+			    			return ;
+			    		}
+			    		$frm = $("#detafilForm");
+					    var validateWidget = $frm.validate();
+			    		//1.启用表单验证。
+			    		if (!validateWidget.check()) {//1.基础样式校验。
+			    			return false;
+			    		}
+			    		
+			    		repeat = false; 
+			    		//提交表单
+		        		$frm.ajaxSubmit({success: function(entry, statusText, xhr, $form){
+		        			
+		        			if(entry.code=="success"){
+		        				$(parentWin).find("#searchForm").submit();
+		        			}
+	        				repeat=true; 
+	        				
+		        			layer.msg(entry.message,{time: 2000} ,function (){
+		        			}); 
+		        			 
+						}});
+			    	}
+			    	
+			    	//下载导入模板
+			    	function exportImportCusModel(){
+						$('#exportImportCModel').submit();
+			    	}
+			    
+			    </script>
+		    </div>
+		    
+	</body>
+	
+	
+</html>

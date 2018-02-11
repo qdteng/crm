@@ -1,0 +1,202 @@
+<!DOCTYPE html>  
+<html xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorator="layouts/index">  
+    <head>
+    	<meta charset="utf-8"></meta>
+        <title>${ftl_description}</title>
+    </head>  
+    <body>
+	    <div layout:fragment="content">
+			<div class="container">
+			    <section class="col-lg-12 ui-content ui-shadow">
+					<!-- 列表页头（标题、操作按钮） -->
+					<h3>
+						${ftl_description}
+					</h3>
+				    <!-- 列表主体 -->
+					<div class="cl mt15 mb10" style="overflow-x:auto;">
+						<!-- 列表主体（查询区域） -->
+						<form name="searchForm" id="searchForm" action="/${entityName?uncap_first}/list" method="post">
+							<input  type="hidden"  id="pageNo" name="pageNo"  th:value="${'$'}{page.pageNo}" value=""  />
+							<input  type="hidden" name="pageSize"  id="pageSize" th:value="${'$'}{page.pageSize}" value=""  />
+							<div class=" bg-gray border-gray pb10 pl15">
+								<div class="cl">
+							    	<div class="form-group mr10 mt15">
+										<label style="width:75px;"  for="">ID:</label>
+										<input type="text" class="w150 mr15"   
+										autocomplete ="off" name="id" th:value="${'$'}{searchParam['id']}" placeholder="请输入ID" value="" />
+									</div>
+								</div>
+									
+								<div class="cl">
+									<button style="margin-left: 40%;" class="fl yl-btn yl-btn-blue-shadow query mt15 query-btn">查询</button>
+									<button style="margin-left: 1%;"  type="button"  onclick="javaScript:clearForm(${'$'}('#searchForm')[0]);" class="fl yl-btn yl-btn-blue-shadow query mt15">清除</button>
+								</div>
+							</div>
+						</form>
+						
+                
+						<div >
+							<div class="pt10">
+								<input type="button" style="margin-top:0;"  class="yl-btn yl-btn-blue-shadow" 
+								id="delBatchBtn" value="删除"/>
+								<input type="button"    class="yl-btn yl-btn-blue-shadow" id="add" value="添加"/>
+							</div>
+							<!-- 列表主体（搜索结果） -->
+							<table class="table table-bordered mt15">
+								<tr>
+								  <th width="5" style="text-align:left;"><input type="checkbox" id="checkAll" style=" width:20px;" /></th>
+								  <th  style="text-align:center;">id</th>
+								  <#list columns as po>
+								  <th   style="text-align:center;">${po.filedComment}</th>
+								  </#list>
+								  <th width="5%" style="text-align:center;">操作</th>
+								</tr>
+								<tr th:if="${'$'}{${'#'}lists.size(dateList) > 0}"  th:each="obj,indexStat:${'$'}{dateList}">
+									<td><input name="ids" class="ids" type="checkbox"   
+									th:value="${'$'}{obj.ID}" value="" style="width: 20px" /></td>
+									<td style="text-align:center;" th:text="${'$'}{obj.ID}">...</td>
+									<#list columns as po>
+									<td style="text-align:center;" th:text="${'$'}{obj.${po.fieldDbName?upper_case}}">...</td>
+									</#list>
+									<td style="text-align:center;" >
+										<a href="###" th:attr="oid=${'$'}{obj.ID}" class="a-view mr10  del">删除</a>
+										<a href="###" th:attr="oid=${'$'}{obj.ID}" class="a-view mr10  edit">编辑</a>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+						
+						<!-- 分页 -->
+			 			<div th:if="${'$'}{${'#'}lists.size(dateList) > 0}"  th:include="layouts/page:: page" th:attr="pageFormId=searchForm,pageNo=${'$'}{page.pageNo},pageSize=${'$'}{page.pageSize},total=${'$'}{page.total}">...</div>
+			    </section>
+			</div>
+	    	
+	    	
+	    </div> 
+	</body>
+	
+	<!-- 脚本区域（弹框、脚本） -->
+	<div layout:fragment="javascript">
+	    
+	    <script type="text/javascript">
+		    ${'$'}(function (){
+		    	//查询校验
+		    	${'$'}(".query-btn").click(function (){
+		    		${'$'}frm = ${'$'}("#searchForm");
+				    var validateWidget = ${'$'}frm.validate();
+		    		//1.启用表单验证。
+		    		if (!validateWidget.check()) {//1.基础样式校验。
+		    			return false;
+		    		}
+		    		layer.load(2, {
+		    			shade: [0.3,'#fff']
+		    		});
+		    		return  true ; 
+		    	});
+		        
+		        //添加
+		        
+				${'$'}('#add').click(function() {
+						layer.open({
+									title : "添加${ftl_description}",
+									type : 2,
+									btn : [ '保存', '取消' ],
+									area : [ '560px', '480px' ],
+									yes : function(index, layero) {
+										var body = layer.getChildFrame('body',
+												index);
+										var iframeWin = window[layero.find('iframe')[0]['name']];
+										iframeWin.subForm(document);
+										//按钮【按钮一】的回调
+									},
+									btn2 : function(index, layero) {
+										//按钮【按钮一】的回调
+									},
+									content : '/${entityName?uncap_first}/addorupdate'
+								});
+					 });
+					
+		        //编辑
+	        	${'$'}('.edit').click(function() {
+	        			id =${'$'}(this).attr("oid");
+						layer.open({
+									title : "编辑${ftl_description}",
+									type : 2,
+									btn : [ '保存', '取消' ],
+									area : [ '560px', '480px' ],
+									yes : function(index, layero) {
+										var body = layer.getChildFrame('body',
+												index);
+										var iframeWin = window[layero.find('iframe')[0]['name']];
+										iframeWin.subForm(document);
+										//按钮【按钮一】的回调
+									},
+									btn2 : function(index, layero) {
+										//按钮【按钮一】的回调
+									},
+									content : '/${entityName?uncap_first}/addorupdate?id='+id
+							});
+					 });
+		        //删除
+		        ${'$'}('.del').click(function() {
+	        			id =${'$'}(this).attr("oid");
+			        	confirm(function(){
+			        		 $.getJSON("/${entityName?uncap_first}/del",{ids:id}, function(entry){
+			        			  if(entry.code=="success"){
+				        				$(document).find("#searchForm").submit();
+				        			}
+									layer.msg(entry.message,{time: 2000} ,function (){
+				        			}); 
+								});
+			               });
+					 });
+		        
+		        //批量删除
+		        $('#delBatchBtn').click(function() {
+	        		var ids = new Array();
+	        		$("input[name='ids']:checked").each(function (){
+		        			ids.push($(this).val());
+	        		});
+	        		ids= ids.join(",");
+	        		if (ids.length<1){ alert("请选择要删除的项"); return ;}
+	        		confirm(function(){
+	        			layer.load(2);
+		        		 $.getJSON("/${entityName?uncap_first}/del",{ ids:ids  }, function(entry){
+		        			  if(entry.code=="success"){
+			        				$(document).find("#searchForm").submit();
+			        			}
+								layer.msg(entry.message,{time: 2000} ,function (){
+									layer.close(layer.load());
+			        			}); 
+							});
+	                });
+		        });
+	        
+	        
+	        	//批量选中、启用按钮
+		    	$(".table input[type='checkbox']").click(function (){
+		    		if ($(this).attr("id")=="checkAll"){//全选
+		    			if ($(this).prop("checked")){
+		    				$(".table input[type='checkbox']").prop("checked",true);	
+		    			}else{
+		    				$(".table input[type='checkbox']").prop("checked",false);
+		    			}
+		    		}
+		    		
+		    		if($(".table input[type='checkbox']:checked").length>0){
+		    				$("#delBatchBtn").removeClass("yl-btn-disabled");
+		    		}else {
+		    			$("#delBatchBtn").addClass("yl-btn-disabled");
+		    		}
+		    		
+		    	});
+		    	
+		        
+		    });
+	    </script>
+    </div>
+    
+</html>

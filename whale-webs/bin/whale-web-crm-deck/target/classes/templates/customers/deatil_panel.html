@@ -1,0 +1,205 @@
+<!DOCTYPE html>  
+<html xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  >  
+    <head>
+    	<meta charset="utf-8"></meta>
+        <title>查看会员信息</title>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}"></link>
+	    <link rel="stylesheet" type="text/css" th:href="@{/css/aui.min.css}"></link>
+	    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"></link>
+	    <link rel="stylesheet" type="text/css" th:href="@{/css/validate.default.css}"></link>
+	    <script th:src="@{/js/plugins/jquery/jquery-1.7.min.js}"></script>
+	    <script th:src="@{/js/plugins/validate/jquery.form.js}"></script>
+	    <script th:src="@{/js/plugins/validate/validate.js}"></script>
+	    <script th:src="@{/js/plugins/layer/layer.js}"></script>
+	    
+	    <!-- 核心方法 -->
+	    <script th:src="@{/js/system/core.js}"></script>
+	    <script th:src="@{/js/system/index.js}"></script>
+	    <script th:src="@{/js/system/minBox.js}"></script>
+	    <script th:src="@{/js/system/accordion.js}"></script>
+	    
+    </head>  
+    <body>
+
+	  <style>
+	      	   .tab-iframe {
+				    display: block;
+				    width: 100%;
+				    height: 800px;
+				    overflow: auto;
+				    border: 0
+				  }
+      </style>
+	<div id="box-pop2" class="p10" >
+		<ul class="aui-accord-ul tab cl" id="tab">
+			<li><span>基本信息</span></li>
+			<li><span>交易信息</span></li>
+			<li><span>会员信息</span></li>
+			<li><span>行为信息</span></li>
+			<li><span>沟通信息</span></li>
+		</ul>
+		<div id="tab-child" class="aui-accord-box pt30 pb20 mb10">
+			<div>
+				<ul class="accord-ul accord-ul-nowrap tab cl" id="tab-1">
+				</ul>
+				<div id="tab-child-1" class="mt10">
+					<div>
+						<iframe data-src="###" th:attr="data-src=@{'/customers/detail/baseinfo/' + ${customer.id}}" class="tab-iframe"></iframe>
+					</div>
+				</div>
+			</div>
+			<div style="display: none;">
+				<ul class="aui-accord-ul tab cl" id="tab-2">
+					<li>交易记录</li>
+					<li>电子钱包使用记录</li>
+					<li>乐通卡使用记录</li>
+					<li>配送信息统计</li>
+					<li>支付方式统计</li>
+					<li>退票记录</li>
+				</ul>
+				<div id="tab-child-2">
+					<div class="aui-accord-box">
+						<iframe data-src="tab-2.html" th:attr="data-src=@{'/customers/orders/list/' + ${customer.pwsysId}}"  class="tab-iframe"></iframe>
+					</div>
+					<div class="aui-accord-box">
+						<iframe data-src="tab-2.html" th:attr="data-src=@{'/customers/ewallet/list/' + ${customer.pwsysId}}"  class="tab-iframe"></iframe>
+					</div>
+					<div class="aui-accord-box">
+						<iframe data-src="tab-2.html" th:attr="data-src=@{'/customers/letong/list/' + ${customer.pwsysId}}"  class="tab-iframe"></iframe>
+					</div>
+					<div class="aui-accord-box">
+						<iframe data-src="tab-2.html" th:attr="data-src=@{'/customers/address/list/' + ${customer.pwsysId}}"  class="tab-iframe"></iframe>
+					</div>
+					<div class="aui-accord-box">
+						<iframe data-src="tab-2.html" th:attr="data-src=@{'/customers/paytypes/list/' + ${customer.pwsysId}}"  class="tab-iframe"></iframe>
+					</div>
+					<div class="aui-accord-box">
+						<iframe data-src="tab-2.html" th:attr="data-src=@{'/customers/ordersrefund/list/' + ${customer.pwsysId}}"  class="tab-iframe"></iframe>
+					</div>
+				</div>
+			</div>
+			<div style="display: none;">
+				<ul class="accord-ul accord-ul-nowrap tab cl" id="tab-3">
+				</ul>
+				<div id="tab-child-3" class="mt10">
+					<div>
+						<iframe data-src="tab-3.html" th:attr="data-src=@{'/customers/detail/info/' + ${customer.id}}"  class="tab-iframe"></iframe>
+					</div>
+				</div>
+			</div>
+			<div style="display: none;">
+				<ul class="aui-accord-ul tab cl" id="tab-4">
+					<li>商品浏览记录*</li>
+					<li>购买流程跟踪*</li>
+					<li>搜索行为*</li>
+					<li>广告专题访问*</li>
+					<li>分享*</li>
+					<li>缺货登记</li>
+				</ul>
+				<div id="tab-child-4">
+					<div class="aui-accord-box">
+						**
+					</div>
+					<div class="aui-accord-box">4-2</div>
+					<div class="aui-accord-box">4-3</div>
+					<div class="aui-accord-box">4-4</div>
+					<div class="aui-accord-box">4-5</div>
+					<div class="aui-accord-box">
+						<iframe data-src="###" th:attr="data-src=@{'/customers/shortagerecord/list/' + ${customer.pwsysId}}"    class="tab-iframe"></iframe>
+					</div>
+				</div>
+			</div>
+			<div style="display: none;">
+				<ul class="aui-accord-ul tab cl" id="tab-5">
+					<li>电话咨询*</li>
+					<li>在线咨询*</li>
+					<li>EMD营销*</li>
+					<li>短信营销*</li>
+					<li>微信营销*</li>
+					<li>意见建议</li>
+					<li>投诉*</li>
+				</ul>
+				<div id="tab-child-5">
+					<div class="aui-accord-box">
+						**
+					</div>
+					<div class="aui-accord-box">5-2</div>
+					<div class="aui-accord-box">5-3</div>
+					<div class="aui-accord-box">5-4</div>
+					<div class="aui-accord-box">5-5</div>
+					<div class="aui-accord-box">
+						<iframe data-src="###" th:attr="data-src=@{'/customers/suggest/list/' + ${customer.pwsysId}}"    class="tab-iframe"></iframe>
+					</div>
+					<div class="aui-accord-box">5-7</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+	
+	<!-- 脚本区域（弹框、脚本） -->
+	    <script type="text/javascript">
+	    $(function() {
+	        function loadIframe($tab) {
+	          var iframe = $("iframe", $tab);
+	          //如果不存在src则进行加载
+	          if (!iframe.attr("src")) {
+	            iframe.attr('src', iframe.data("src"));
+	          } 
+	        }
+	        
+	        //进行tab组件初始化
+	        $('#tab').accordion({
+	          childId: '#tab-child',
+	          afterTabSelect: function($tab,index){
+	            var tab = $("#tab-" + (index + 1));
+	            if(tab.accordion){
+	              tab.accordion("layoutTab");
+	              if(index != 0){
+	                tab.accordion("showCont");
+	              }
+	            }
+	          }
+	        });
+
+
+	        $('#tab-1').accordion({
+	          childId: '#tab-child-1',
+	          moveTabAuto: true,
+	          afterTabSelect: loadIframe,
+	        });
+	        $('#tab-2').accordion({
+	          childId: '#tab-child-2',
+	          moveTabAuto: true,
+	          afterTabSelect: loadIframe,
+	          lazyLoad:true
+	        });
+	        $('#tab-3').accordion({
+	          childId: '#tab-child-3',
+	          moveTabAuto: true,
+	          afterTabSelect: loadIframe,
+	          lazyLoad:true
+	        });
+	        $('#tab-4').accordion({
+	          childId: '#tab-child-4',
+	          moveTabAuto: true,
+	          afterTabSelect: loadIframe,
+	          lazyLoad:true
+	        });
+	        $('#tab-5').accordion({
+	          childId: '#tab-child-5',
+	          moveTabAuto: true,
+	          afterTabSelect: loadIframe,
+	          lazyLoad:true
+	        });
+
+
+	      });
+	    
+	    </script>
+	    
+	    
+	    
+</html>

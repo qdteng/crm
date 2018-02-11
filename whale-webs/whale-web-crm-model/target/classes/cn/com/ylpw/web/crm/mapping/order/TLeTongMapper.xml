@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.ylpw.web.crm.mapper.order.TLeTongMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.ylpw.web.crm.entity.order.TLeTong" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="CUSTOMERSID" property="customersid" jdbcType="BIGINT" />
+    <result column="CARDNO" property="cardno" jdbcType="VARCHAR" />
+    <result column="PAY_PRICE" property="payPrice" jdbcType="DECIMAL" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="ORDER_ID" property="orderId" jdbcType="BIGINT" />
+    <result column="BEFORE_PRICE" property="beforePrice" jdbcType="DECIMAL" />
+    <result column="AFTER_PRICE" property="afterPrice" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, CUSTOMERSID, CARDNO, PAY_PRICE, CREATE_TIME, ORDER_ID, BEFORE_PRICE, AFTER_PRICE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_letong
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_letong
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.com.ylpw.web.crm.entity.order.TLeTong" >
+    insert into t_letong (ID, CUSTOMERSID, CARDNO, 
+      PAY_PRICE, CREATE_TIME, ORDER_ID, 
+      BEFORE_PRICE, AFTER_PRICE)
+    values (#{id,jdbcType=BIGINT}, #{customersid,jdbcType=BIGINT}, #{cardno,jdbcType=VARCHAR}, 
+      #{payPrice,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}, #{orderId,jdbcType=BIGINT}, 
+      #{beforePrice,jdbcType=DECIMAL}, #{afterPrice,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.ylpw.web.crm.entity.order.TLeTong" >
+    insert into t_letong
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="customersid != null" >
+        CUSTOMERSID,
+      </if>
+      <if test="cardno != null" >
+        CARDNO,
+      </if>
+      <if test="payPrice != null" >
+        PAY_PRICE,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="orderId != null" >
+        ORDER_ID,
+      </if>
+      <if test="beforePrice != null" >
+        BEFORE_PRICE,
+      </if>
+      <if test="afterPrice != null" >
+        AFTER_PRICE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="customersid != null" >
+        #{customersid,jdbcType=BIGINT},
+      </if>
+      <if test="cardno != null" >
+        #{cardno,jdbcType=VARCHAR},
+      </if>
+      <if test="payPrice != null" >
+        #{payPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="beforePrice != null" >
+        #{beforePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="afterPrice != null" >
+        #{afterPrice,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.ylpw.web.crm.entity.order.TLeTong" >
+    update t_letong
+    <set >
+      <if test="customersid != null" >
+        CUSTOMERSID = #{customersid,jdbcType=BIGINT},
+      </if>
+      <if test="cardno != null" >
+        CARDNO = #{cardno,jdbcType=VARCHAR},
+      </if>
+      <if test="payPrice != null" >
+        PAY_PRICE = #{payPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderId != null" >
+        ORDER_ID = #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="beforePrice != null" >
+        BEFORE_PRICE = #{beforePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="afterPrice != null" >
+        AFTER_PRICE = #{afterPrice,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.ylpw.web.crm.entity.order.TLeTong" >
+    update t_letong
+    set CUSTOMERSID = #{customersid,jdbcType=BIGINT},
+      CARDNO = #{cardno,jdbcType=VARCHAR},
+      PAY_PRICE = #{payPrice,jdbcType=DECIMAL},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      ORDER_ID = #{orderId,jdbcType=BIGINT},
+      BEFORE_PRICE = #{beforePrice,jdbcType=DECIMAL},
+      AFTER_PRICE = #{afterPrice,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <insert id="insertBatchSelective" parameterType="java.util.List" >
+  	  insert into t_letong (ID, CUSTOMERSID, CARDNO, 
+      PAY_PRICE, CREATE_TIME, ORDER_ID, 
+      BEFORE_PRICE, AFTER_PRICE)
+      VALUES 
+     <foreach collection ="list" item="letong" index= "index" separator ="," >
+     	(
+     	  #{letong.id,jdbcType=BIGINT}, #{letong.customersid,jdbcType=BIGINT}, #{letong.cardno,jdbcType=VARCHAR}, 
+	      #{letong.payPrice,jdbcType=DECIMAL}, #{letong.createTime,jdbcType=TIMESTAMP}, #{letong.orderId,jdbcType=BIGINT}, 
+	      #{letong.beforePrice,jdbcType=DECIMAL}, #{letong.afterPrice,jdbcType=DECIMAL}
+     	)
+     </foreach>
+  </insert>
+  
+   <select id="findAll" parameterType="cn.com.ylpw.web.crm.entity.order.TLeTong" resultType="java.util.HashMap" >
+	 SELECT * FROM  T_LETONG LETONG   WHERE LETONG.ORDER_ID IN ( SELECT  ID FROM  T_ORDERS_INFO OD  WHERE  OD.CUSTOMERSID = #{customerid}  )   order by  id desc  
+   </select>
+  
+</mapper>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>  
+<html xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorator="layouts/index">  
+<head>
+ <meta charset="utf-8"></meta>
+ <title>系统管理-用户管理页</title>
+<script type="text/javascript">
+/*<![CDATA[*/
+
+ 	function userSubmitHander() {
+		//1.启用表单验证。
+		var validateWidget = $("#userForm").validate({ parentPromptWinId:"userForm" });
+		if (!validateWidget.check()) {//1.基础样式校验。
+			return false;
+		}
+		//2.账号唯一校验
+		var formAction = $("#userForm").attr("action");
+		if (formAction == "/sysuser/save.do") {
+			if (!/^[a-zA-Z][0-9a-zA-Z]*$/.test($("#userForm_accCode").val())) {
+				validateWidget.addPrompt("userForm_accCode","以字母开头！");
+				return false;
+			}
+			var flag = "Y";
+			$.ajax({
+				type:"GET",
+				cache:false,
+				async:false,
+				url:"/sysuser/uniqueAccCode.do?accCode="+$("#userForm_accCode").val(),
+				success: function(data) {
+					flag = data;
+				}
+			});
+			if (flag == "N") {
+				validateWidget.addPrompt("userForm_accCode","账号已存在！");
+				return false;
+			}
+		}
+		$("#userForm").submit();
+	}
+ 	
+	jQuery(document).ready(function() {
+		
+		//添加窗口
+		$("#addUser").click(function() {
+		  $("#userForm").attr("action", "/sysuser/save.do");
+		  $("#userForm")[0].reset();
+	      $("#userFormWin").minInBox({
+	      		"boxHeight": 510,
+	            "boxWidth": 680,
+	            "boxName": "添加用户",
+	            "iSubmitHander": userSubmitHander,
+	            "iCancelHander":function(){
+	            	//取消
+	            },
+	            "iCloseHander": function(){
+	            	//右上角
+	            }
+	      });
+	      $("#userForm_accCode").attr("disabled", false);
+	      $("#userForm_pwd").addClass("c_required c_minlength_6 c_maxlength_15 c_ylbank");
+	      $("#userForm_pwd_fred").show();
+	    });
+	    
+	    //显示/隐藏 操作
+	    $(".editStatus").click(function() {
+       	   var url = "/sysuser/editStatus.do?id="+$(this).attr("id")+"&type="+$(this).attr("type");
+       	   var msg = "你确定要执行【"+($(this).attr("type")==2?"解锁":"锁定")+"】操作？";
+	       confirm(msg,function(){
+	     		document.location.href = url;
+	       });
+	    });
+	    
+	    //编辑窗口
+	  	$(".editUser").click(function() {
+	  		var _boxName = "编辑用户【"+$(this).attr("name")+"】";
+		  	$("#userFormWin").minInBox({
+	      		"boxHeight": 510,
+	            "boxWidth": 680,
+	            "boxName": _boxName,
+	            "iSubmitHander": userSubmitHander,
+	            "iCancelHander":function(){
+	            	//取消
+	            },
+	            "iCloseHander": function(){
+	            	//右上角
+	            }
+	      	});
+	      	$("#userForm").attr("action","/sysuser/edit.do");
+	      	$("#userForm_accCode").attr("disabled", true);
+	      	$("#userForm_pwd").removeClass("c_required c_minlength_6 c_maxlength_15 c_ylbank");
+	      	$("#userForm_pwd_fred").hide();
+		  	$("#userForm_id").val($(this).attr("id"));
+		  	$("#userForm_accCode").val($(this).attr("accCode"));
+		  	$("#userForm_name").val($(this).attr("name"));
+		  	$("#userForm_phone").val($(this).attr("phone"));
+		  	$("#userForm_sysRoleId").val($(this).attr("sysRoleId"));
+		  	$("#userForm_remarks").val($(this).attr("remarks"));
+		  	$("input[type='radio'][name='status'][value="+$(this).attr("status")+"]").prop("checked", true);
+	     });
+	     
+	     //删除
+	     $(".deleteUser").click(function() {
+	     	var $this = $(this);
+	     	confirm("你确定要执行【删除】操作？",function(){
+	     		document.location.href = "/sysuser/del.do?id=" + $this.attr("id");
+	        });
+	     });
+	
+	});
+	
+/*]]>*/	
+</script>
+</head>
+<body>
+<div layout:fragment="content">
+	<div class="container">
+	    <section class="col-lg-12 ui-content ui-shadow">
+		<!-- 列表页头（标题、操作按钮） -->
+		<h3>
+			用户管理
+		</h3>
+	    <!-- 列表主体 -->
+		<div class="search-form cl mt15 mb10" style="overflow-x:auto;">
+			<!-- 列表主体（查询区域）-->
+			<form id="queryUserForm" name="queryUserForm" action="/sysuser/show.do" method="post">
+				<div class=" bg-gray border-gray pb10 pl15">
+					<div class="cl">
+						<div class="form-group mr10 mt15">
+							<label for="">用户角色：</label>
+							<select name="sysRoleId">
+								<option value="">请选择</option>
+								<option th:each="role,roleStat:${roles}" th:value="${role.id}" th:text="${role.name}" th:selected="${role.id==sysUser.sysRoleId}">--</option>
+							</select>
+						</div>
+				    	<div class="form-group mr10 mt15">
+							<label for="">用户名称：</label>
+							<input type="text" autocomplete ="off" name="name" placeholder="用户名称" value="" th:value="${sysUser.name}" />
+						</div>
+					    <button class="fl yl-btn yl-btn-blue-shadow query mt15">查询</button>
+					</div>
+					<!-- 
+					<div class="conditionCon undb mt10">
+						<div class="form-group mr10">
+							<label for="">用户手机号</label>
+							<input type="text" autocomplete ="off" name="phone" placeholder="请输入查询参数" value="" />
+						</div>
+					</div>
+					<button class="yl-btn yl-btn-blue-shadow query ml70 mt10" style="display: none;">查询</button>
+					<div class="fr mr5 f-blue conditionBtn mr10" style="margin-top:-28px;"><a href="####">更多</a>&nbsp;<i class="icon iconfont">+</i></div>
+					 -->
+				</div>
+			</form>
+			<div th:if="${#lists.size(page.data) > 0}">
+				<div class="pt10">
+					<input type="button" class="yl-btn yl-btn-blue-shadow" id="addUser" value="添加" />
+				</div>
+				<!-- 列表主体（搜索结果） -->
+				<table class="table table-bordered mt15">
+					<tr>
+					  <!-- <th width="20" style="text-align:left;"><input type="checkbox" id="table_checkall" style=" width:20px;" /></th> -->
+					  <th width="20" style="text-align:center;">编号</th>
+					  <th style="text-align:center;">账号</th>
+					  <th style="text-align:center;">用户名称</th>
+					  <th style="text-align:center;">联系方式</th>
+					  <th style="text-align:center;">用户角色</th>
+					  <th style="text-align:center;">状态</th>
+					  <th width="200" style="text-align:center;">操作</th>
+					</tr>
+					<tr th:each="user,userStat:${page.data}">
+						<!-- <td><input name="table_check" type="checkbox" value="${user.id}" style="width: 20px" /></td> -->
+						<td style="text-align:center;" th:text="${(page.pageNo-1)*page.pageSize+userStat.index+1}">...</td>
+						<td style="text-align:center;" th:text="${user.accCode}">...</td>
+						<td style="text-align:center;" th:text="${user.name}">...</td>
+						<td style="text-align:center;" th:text="${user.phone}">...</td>
+						<td style="text-align:center;" th:text="${user.sysRoleName}">...</td>
+						<td style="text-align:center;" th:text="${user.statusShow}">...</td>
+						<td style="text-align:center;" >
+							<span th:if="${user.id != 1 and user.status == 1}"><a href="###" class="a-view mr10 editStatus" th:attr="id=${user.id},type=1">锁定</a>|&nbsp;</span>
+							<span th:if="${user.id != 1 and user.status == 0}"><a href="###" class="a-view mr10 editStatus" th:attr="id=${user.id},type=2">解锁</a>|&nbsp;</span>
+							<span><a href="###" class="a-view mr10 editUser" th:attr="id=${user.id},name=${user.name},accCode=${user.accCode},phone=${user.phone},sysRoleId=${user.sysRoleId},status=${user.status},remarks=${user.remarks}">修改</a></span>
+							<span th:if="${user.id != 1}">|&nbsp;<a href="###" class="a-view mr10 deleteUser" th:attr="id=${user.id}">删除</a></span>
+						</td>
+					</tr>
+				 </table>
+			 </div>
+			 <!-- 分页 -->
+			 <div th:include="layouts/page:: page" th:attr="pageFormId=queryUserForm,pageNo=${page.pageNo},pageSize=${page.pageSize},total=${page.total}">...</div>
+		 </div>
+	   </section>
+	</div>
+</div>
+</body>
+<!-- 脚本区域（弹框、脚本） -->
+<div layout:fragment="javascript">
+<!-- 添加/编辑用户窗口 -->
+<div class="undb" id="userFormWin">
+ 	<div>
+	     <form id="userForm" action="/sysuser/save.do" method="post" class="form-horizontal">
+	     	<input id="userForm_id" name="id" type="hidden" value="" />
+	     	<div class="cl mb10">
+	     		<p>
+	     			<span><i class="f-red">* </i>账号：</span>
+	     			<input class="w200 c_required c_minlength_6 c_maxlength_15 c_ylbank" id="userForm_accCode" name="accCode" type="text" placeholder="账号" />
+	     			<label for="">(长度6-15位，字母开头，字母、字母+数字组合)</label>
+	     		</p>
+	     	</div>
+	     	<div class="cl mb10">
+	     		<p>
+	     			<span><i id="userForm_pwd_fred" class="f-red">* </i>密码：</span>
+	     			<input class="w200" id="userForm_pwd" name="pwd" type="text" placeholder="密码" />
+	     			<label for="">(长度6-15位，字母、数字、或字母+数字组合)</label>
+	     		</p>
+	     	</div>
+	     	<div class="cl mb10">
+	     		<p>
+	     			<span><i class="f-red">* </i>用户名称：</span>
+	     			<input class="w200 c_required c_minlength_2 c_maxlength_4 c_chinese" id="userForm_name" name="name" type="text" placeholder="用户名称" />
+	     			<label for="">(长度2-4位，汉字)</label>
+	     		</p>
+	     	</div>
+	     	<div class="cl mb10">
+	     		<p>
+	     			<span>联系方式：</span>
+	     			<input class="w200" id="userForm_phone" name="phone" type="text" placeholder="联系方式" />
+	     		</p>
+	     	</div>
+	     	<div class="cl mb10">
+	     		<p>
+	     			<span><i class="f-red">* </i>用户角色：</span>
+	     			<select id="userForm_sysRoleId" name="sysRoleId">
+						<option th:each="role,roleStat:${roles}" th:value="${role.id}" th:text="${role.name}">--</option>
+					</select>
+					<label for=""><a href="/sysrole/show.do">没有合适的角色？去添加。</a></label>
+	     		</p>
+	     	</div>
+	     	<div class="cl mb10">
+	     		<p>
+	     			<span><i class="f-red">* </i>用户状态：</span>
+	     			<input type="radio" class="userForm_status" name="status" value="1" checked="checked" />&nbsp;正常&nbsp;&nbsp;
+	     			<input type="radio" class="userForm_status" name="status" value="0" />&nbsp;锁定
+	     		</p>
+	     	</div>
+	     	<div class="cl">
+	     		<p style="vertical-align:text-top;">
+	     			<span style="vertical-align:text-top;">备注：</span>
+	     			<textarea id="userForm_remarks" name="remarks" rows="5" cols="50" placeholder="备注"></textarea>
+	     		</p>
+	     	</div>
+    	</form>
+	</div>
+</div>
+</div>
+</html>

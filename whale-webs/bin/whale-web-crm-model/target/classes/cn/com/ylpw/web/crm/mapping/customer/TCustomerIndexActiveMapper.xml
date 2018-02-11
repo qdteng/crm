@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.ylpw.web.crm.mapper.customer.TCustomerIndexActiveMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.ylpw.web.crm.entity.customer.TCustomerIndexActive" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="INDEX_ID" property="indexId" jdbcType="BIGINT" />
+    <result column="ANUM" property="anum" jdbcType="INTEGER" />
+    <result column="AINDEX" property="aindex" jdbcType="INTEGER" />
+    <result column="ATYPE" property="atype" jdbcType="INTEGER" />
+    <result column="IS_ENABLE" property="isEnable" jdbcType="INTEGER" />
+    <result column="IS_DEL"  property="isDel" typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler"  />
+    <result column="CREATE_ID" property="createId" jdbcType="BIGINT" />
+    <result column="CREATE_NAME" property="createName" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_ID" property="updateId" jdbcType="BIGINT" />
+    <result column="UPDATE_NAME" property="updateName" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, INDEX_ID, ANUM, AINDEX, ATYPE, IS_ENABLE, IS_DEL, CREATE_ID, CREATE_NAME, CREATE_TIME, 
+    UPDATE_ID, UPDATE_NAME, UPDATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_customer_index_active
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_customer_index_active
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.com.ylpw.web.crm.entity.customer.TCustomerIndexActive" >
+    insert into t_customer_index_active (ID, INDEX_ID, ANUM, 
+      AINDEX, ATYPE, IS_ENABLE, 
+      IS_DEL, CREATE_ID, CREATE_NAME, 
+      CREATE_TIME, UPDATE_ID, UPDATE_NAME, 
+      UPDATE_TIME)
+    values (#{id,jdbcType=BIGINT}, #{indexId,jdbcType=BIGINT}, #{anum,jdbcType=INTEGER}, 
+      #{aindex,jdbcType=INTEGER}, #{atype,jdbcType=INTEGER}, #{isEnable,jdbcType=INTEGER}, 
+      #{isDel,typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler}, #{createId,jdbcType=BIGINT}, #{createName,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateId,jdbcType=BIGINT}, #{updateName,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.ylpw.web.crm.entity.customer.TCustomerIndexActive" >
+    insert into t_customer_index_active
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="indexId != null" >
+        INDEX_ID,
+      </if>
+      <if test="anum != null" >
+        ANUM,
+      </if>
+      <if test="aindex != null" >
+        AINDEX,
+      </if>
+      <if test="atype != null" >
+        ATYPE,
+      </if>
+      <if test="isEnable != null" >
+        IS_ENABLE,
+      </if>
+      <if test="isDel != null" >
+        IS_DEL,
+      </if>
+      <if test="createId != null" >
+        CREATE_ID,
+      </if>
+      <if test="createName != null" >
+        CREATE_NAME,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="updateId != null" >
+        UPDATE_ID,
+      </if>
+      <if test="updateName != null" >
+        UPDATE_NAME,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="indexId != null" >
+        #{indexId,jdbcType=BIGINT},
+      </if>
+      <if test="anum != null" >
+        #{anum,jdbcType=INTEGER},
+      </if>
+      <if test="aindex != null" >
+        #{aindex,jdbcType=INTEGER},
+      </if>
+      <if test="atype != null" >
+        #{atype,jdbcType=INTEGER},
+      </if>
+      <if test="isEnable != null" >
+        #{isEnable,jdbcType=INTEGER},
+      </if>
+      <if test="isDel != null" >
+        #{isDel,typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler},
+      </if>
+      <if test="createId != null" >
+        #{createId,jdbcType=BIGINT},
+      </if>
+      <if test="createName != null" >
+        #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateId != null" >
+        #{updateId,jdbcType=BIGINT},
+      </if>
+      <if test="updateName != null" >
+        #{updateName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.ylpw.web.crm.entity.customer.TCustomerIndexActive" >
+    update t_customer_index_active
+    <set >
+      <if test="indexId != null" >
+        INDEX_ID = #{indexId,jdbcType=BIGINT},
+      </if>
+      <if test="anum != null" >
+        ANUM = #{anum,jdbcType=INTEGER},
+      </if>
+      <if test="aindex != null" >
+        AINDEX = #{aindex,jdbcType=INTEGER},
+      </if>
+      <if test="atype != null" >
+        ATYPE = #{atype,jdbcType=INTEGER},
+      </if>
+      <if test="isEnable != null" >
+        IS_ENABLE = #{isEnable,jdbcType=INTEGER},
+      </if>
+      <if test="isDel != null" >
+        IS_DEL = #{isDel,typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler},
+      </if>
+      <if test="createId != null" >
+        CREATE_ID = #{createId,jdbcType=BIGINT},
+      </if>
+      <if test="createName != null" >
+        CREATE_NAME = #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateId != null" >
+        UPDATE_ID = #{updateId,jdbcType=BIGINT},
+      </if>
+      <if test="updateName != null" >
+        UPDATE_NAME = #{updateName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.ylpw.web.crm.entity.customer.TCustomerIndexActive" >
+    update t_customer_index_active
+    set INDEX_ID = #{indexId,jdbcType=BIGINT},
+      ANUM = #{anum,jdbcType=INTEGER},
+      AINDEX = #{aindex,jdbcType=INTEGER},
+      ATYPE = #{atype,jdbcType=INTEGER},
+      IS_ENABLE = #{isEnable,jdbcType=INTEGER},
+      IS_DEL = #{isDel,typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler},
+      CREATE_ID = #{createId,jdbcType=BIGINT},
+      CREATE_NAME = #{createName,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_ID = #{updateId,jdbcType=BIGINT},
+      UPDATE_NAME = #{updateName,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="findAll" resultType="java.util.HashMap" parameterType="java.util.Map">
+  	SELECT 
+  		<include refid="Base_Column_List" /> 
+  			FROM t_customer_index_active where IS_DEL != 0 ORDER BY ATYPE
+  </select>
+  <insert id="insertBatchSelective" parameterType="java.util.List" >
+    INSERT INTO t_customer_index_active (ID, INDEX_ID, ANUM, 
+      AINDEX, ATYPE, IS_ENABLE, 
+      IS_DEL, CREATE_ID, CREATE_NAME, 
+      CREATE_TIME, UPDATE_ID, UPDATE_NAME, 
+      UPDATE_TIME)
+    VALUES 
+     <foreach collection ="list" item="cia" index= "index" separator ="," >
+     	(
+    		#{cia.id,jdbcType=BIGINT}, #{cia.indexId,jdbcType=BIGINT}, #{cia.anum,jdbcType=INTEGER}, 
+      		#{cia.aindex,jdbcType=INTEGER}, #{cia.atype,jdbcType=INTEGER}, #{cia.isEnable,jdbcType=INTEGER}, 
+      		#{cia.isDel,typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler}, #{cia.createId,jdbcType=BIGINT}, #{cia.createName,jdbcType=VARCHAR}, 
+		    #{cia.createTime,jdbcType=TIMESTAMP}, #{cia.updateId,jdbcType=BIGINT}, #{cia.updateName,jdbcType=VARCHAR}, 
+		    #{cia.updateTime,jdbcType=TIMESTAMP}
+		 )     
+     </foreach>
+  </insert>
+</mapper>

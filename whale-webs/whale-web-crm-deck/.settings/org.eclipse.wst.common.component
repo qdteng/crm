@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="whale-web-biz-deck">
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <dependent-module archiveName="whale-boot-starters-mybatis-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/whale-boot-starters-mybatis/whale-boot-starters-mybatis">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="whale-boot-starters-datasource-druid-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/whale-boot-starters-datasource-druid/whale-boot-starters-datasource-druid">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="whale-core-tools-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/whale-core-tools/whale-core-tools">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="whale-web-crm-model-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/whale-web-crm-model/whale-web-crm-model">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="java-output-path" value="/whale-web-biz-deck/target/classes"/>
+        <property name="context-root" value="whale-web-crm-deck"/>
+    </wb-module>
+</project-modules>

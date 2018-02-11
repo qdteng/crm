@@ -1,0 +1,168 @@
+<!DOCTYPE html>  
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layouts/dialog" >  
+    <head>
+    	<meta charset="utf-8"></meta>
+        <title>会员体系-消费激励</title>
+        <style>
+			.db{display:block;}
+			.consumption{border:1px solid #eee;}
+			.consumption h3{height:30px;width:100%;background:#f8f8f8;line-height:30px;font-size:14px;padding-left:10px;}
+			.consumption .centent{padding:10px;}
+			.consumption .centent label{width:90px;display:block; height:30px;line-height:30px;}
+		 </style>
+    </head>  
+    <body>
+	    <div layout:fragment="content">
+	    	
+			<div class="container">
+			    <section class="col-lg-12 ui-content ui-shadow">
+				    <!-- 列表主体 -->
+					<div class="cl mt15 mb10" style="overflow-x:none; height:475px;overflow:auto;">
+                	<form action="/customers/index/saveOrUpdateRecency" method="post" id="detafilForm" class="form-horizontal">
+						<div class="consumption">
+							<h3>消费<b class="fr mr10"><input class="mr5" type="radio" name="isEnableXF" value="1" checked="checked" th:checked="${'1' == isEnableXF}" />开<input class="ml10 mr5" type="radio" name="isEnableXF" value="0" th:checked="${'0' == isEnableXF}" />关</b></h3>
+							<div class="centent">
+								<div class="cl">
+									<label class="fl">基本规则：</label>
+									<p class="fl" th:if="${#null != list1 and #lists.size(list1) > 0}">
+										<span th:each="obj,indexStat:${list1}">
+											每消费<input type="text" name="monetary1" value="" th:value="${obj.MONETARY}" class="c_num" readOnly="true" />元，加
+											<input type="text" name="mindex1" value="" th:value="${obj.MINDEX}" class="c_positive" readOnly="true" />成长值
+										</span>
+									</p>
+									<p class="fl" th:if="${#lists.size(list1) == 0}">
+										<span>
+											每消费<input type="text" name="monetary1" value="" class="c_num" readOnly="true" />元，加
+											<input type="text" name="mindex1" value="" class="c_positive" readOnly="true" />成长值
+										</span>
+									</p>
+								</div>
+								<div class="cl mt10">
+									<label class="fl">额外奖励规则：</label>
+									<p class="fl" th:if="${#null != list2 and #lists.size(list2) > 0}">
+										<span class="db"><input type="button" name="" value="添加奖励规则" class="yl-btn yl-btn-blue-shadow add-rewardxf mr5 " />注：最多设置5个额外奖励规则，多个奖励不叠加</span>
+										<span class="db mt10" th:each="obj,indexStat:${list2}">一次性消费<input type="text" name="monetarys1" value="" th:value="${obj.MONETARY}" class="c_num" readOnly="true" />元，额外加
+										<input type="text" name="mindexs1" value="" th:value="${obj.MINDEX}" class="c_positive" readOnly="true" />成长值&nbsp;&nbsp;<a href="###" class="remove-reward" readOnly="true">删除</a></span>
+									</p>
+									<p class="fl" th:if="${#lists.size(list2) == 0}">
+										<span class="db"><input type="button" name="" value="添加奖励规则" class="yl-btn yl-btn-blue-shadow add-rewardxf mr5" />注：最多设置5个额外奖励规则，多个奖励不叠加</span>
+										<span class="db mt10">一次性消费<input type="text" name="monetarys1" value="" class="c_num" readOnly="true" />元，额外加
+										<input type="text" name="mindexs1" value="" class="c_positive" readOnly="true" />成长值&nbsp;&nbsp;<a href="###" class="remove-reward" >删除</a></span>
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="consumption mt10">
+							<h3>充值<b class="fr mr10"><input class="mr5" type="radio" name="isEnableCZ" value="1" th:checked="${'1' ==  isEnableCZ}" />开<input class="ml10 mr5" type="radio" name="isEnableCZ" value="0" th:checked="${'0' ==  isEnableCZ}" />关</b></h3>
+							<div class="centent">
+								<div class="cl">
+									<label class="fl">基本规则：</label>
+									<p class="fl" th:if="${#null != list3 and #lists.size(list3) > 0}">
+										<span th:each="obj,indexStat:${list3}">
+											每充值<input type="text" name="monetary2" value="" th:value="${obj.MONETARY}" class="c_num" readOnly="true" />元，加
+											<input type="text" name="mindex2" value="" th:value="${obj.MINDEX}" class="c_positive" readOnly="true" />成长值
+										</span>
+									</p>
+									<p class="fl" th:if="${#lists.size(list3) == 0}">
+										<span>
+											每充值<input type="text" name="monetary2" value="" class="c_num" readOnly="true" />元，加
+											<input type="text" name="mindex2" value="" class="c_positive" readOnly="true" />成长值
+										</span>
+									</p>
+								</div>
+								<div class="cl mt10">
+									<label class="fl">额外奖励规则：</label>
+									<p class="fl" th:if="${#null != list4 and #lists.size(list4) > 0}">
+										<span class="db"><input type="button" name="" value="添加奖励规则" class="yl-btn yl-btn-blue-shadow add-rewardcz mr5" />注：最多设置5个额外奖励规则，多个奖励不叠加</span>
+										<span class="db mt10" th:each="obj,indexStat:${list4}">一次充值<input type="text" name="monetarys2" value="" th:value="${obj.MONETARY}" class="c_num" readOnly="true" />元，额外加
+										<input type="text" name="mindexs2" value="" th:value="${obj.MINDEX}" class="c_positive" readOnly="true" />成长值&nbsp;&nbsp;<a href="###" class="remove-reward" >删除</a></span>
+									</p>
+									<p class="fl" th:if="${#lists.size(list4) == 0}">
+										<span class="db"><input type="button" name="" value="添加奖励规则" class="yl-btn yl-btn-blue-shadow add-rewardcz mr5" />注：最多设置5个额外奖励规则，多个奖励不叠加</span>
+										<span class="db mt10">一次充值<input type="text" name="monetarys2" value="" class="c_num" readOnly="true" />元，额外加
+										<input type="text" name="mindexs2" value="" class="c_positive" readOnly="true" />成长值&nbsp;&nbsp;<a href="###" class="remove-reward" >删除</a></span>
+									</p>
+								</div>
+							</div>
+						</div>
+					</form>
+					</div>
+			    </section>
+			</div>
+	    	
+	    	
+	    </div> 
+	</body>
+	
+	<!-- 脚本区域（弹框、脚本） -->
+	<div layout:fragment="javascript">
+	    
+	    <script type="text/javascript">
+	    function updateFun (){
+        	//$('input').removeAttr("readonly");
+        	var inputs = $("input[type='text']");
+    		$.each(inputs, function(index,val) {
+			    val.removeAttribute("readOnly"); 
+    		});
+        }
+	    
+	    $(function (){
+	    	
+	    	var rewardxf = '<span class="db mt10">一次性消费<input type="text" name="monetarys1" value="" class="c_num" readOnly="true" />元，额外加<input type="text" name="mindexs1" value="" class="c_positive" readOnly="true" />成长值&nbsp;&nbsp;<a href="###" class="remove-reward">删除</a></span>'
+	    	var rewardcz = '<span class="db mt10">一次充值<input type="text" name="monetarys2" value="" class="c_num" readOnly="true" />元，额外加<input type="text" name="mindexs2" value="" class="c_positive" readOnly="true" />成长值&nbsp;&nbsp;<a href="###" class="remove-reward">删除</a></span>'
+	    	//消费-添加奖励规则
+	    	$(".add-rewardxf").click(function(){
+	    		if($(this).parent().siblings().length > 4){}else{
+	    			$(this).parent().parent().append(rewardxf);}
+	    	});
+	    	//充值-添加奖励规则
+	    	$(".add-rewardcz").click(function(){
+	    		if($(this).parent().siblings().length > 4){}else{
+	    			$(this).parent().parent().append(rewardcz);}
+	    	});
+	    	
+	    	$(".consumption .centent").on('click','.remove-reward',function(){
+	    		$(this).parent().remove();
+	    	});
+	    	
+	    
+	        $(".addtr").on('click','.removetr',function(){
+	        	$(this).parent().parent().remove();
+	        
+	        });
+	        
+	    });
+	    
+	    //重复提交
+   		var repeat =  true ;
+    	function subForm(parentWin){
+    		if (!repeat){
+    			return ;
+    		}
+    		$frm = $("#detafilForm");
+		    var validateWidget = $frm.validate();
+    		//1.启用表单验证。
+    		if (!validateWidget.check()) {//1.基础样式校验。
+    			return false;
+    		}
+    		
+    		repeat = false; 
+    		//提交表单
+       		$frm.ajaxSubmit({success: function(entry, statusText, xhr, $form){
+       			
+       			if(entry.code=="success"){
+       				$(parentWin).find("#searchForm").submit();
+       			}
+      				repeat=true; 
+      				
+       			layer.msg(entry.message,{time: 2000} ,function (){
+       				
+       			}); 
+       			 
+			}});
+    	}
+	    </script>
+    </div>
+    
+</html>

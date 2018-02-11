@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.ylpw.web.crm.mapper.test.GuestEntityMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.ylpw.web.crm.entity.test.GuestEntity" >
+			<id column="ID" property="id" jdbcType="BIGINT" />
+			<result column="NAME" property="name"  />
+			<result column="SEX" property="sex"  />
+			<result column="CREATE_TIME" property="createTime"  />
+			<result column="MON" property="mon"  />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+		ID,
+		NAME,
+		SEX,
+		CREATE_TIME,
+		MON
+  </sql>
+  
+  <insert id="insertSelective" parameterType="cn.com.ylpw.web.crm.entity.test.GuestEntity" >
+    insert into t_guest
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+	      <if test="id != null" >
+	        ID,
+	      </if>
+	      <if test="name != null" >
+	        NAME,
+	      </if>
+	      <if test="sex != null" >
+	        SEX,
+	      </if>
+	      <if test="createTime != null" >
+	        CREATE_TIME,
+	      </if>
+	      <if test="mon != null" >
+	        MON,
+	      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+	      <if test="id != null" >
+	        #{id},
+	      </if>
+	      <if test="name != null" >
+	        #{name},
+	      </if>
+	      <if test="sex != null" >
+	        #{sex},
+	      </if>
+	      <if test="createTime != null" >
+	        #{createTime},
+	      </if>
+	      <if test="mon != null" >
+	        #{mon},
+	      </if>
+    </trim>
+  </insert>
+  
+  
+   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" flushCache="true"  >
+    delete from t_guest
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  
+   <update id="updateByPrimaryKeySelective" parameterType="cn.com.ylpw.web.crm.entity.test.GuestEntity" flushCache="true" >
+    update t_guest
+    <set >
+	      <if test="id != null" >
+	        ID = #{id},
+	      </if>
+	      <if test="name != null" >
+	        NAME = #{name},
+	      </if>
+	      <if test="sex != null" >
+	        SEX = #{sex},
+	      </if>
+	      <if test="createTime != null" >
+	        CREATE_TIME = #{createTime},
+	      </if>
+	      <if test="mon != null" >
+	        MON = #{mon},
+	      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_guest
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <select id="pageFind" resultType="java.util.HashMap" parameterType="java.util.Map">
+  	 SELECT <include refid="Base_Column_List" />  FROM  t_guest    WHERE  1=1 
+  	 <if test="id != null and id != '' ">
+	   	  AND  ID =#{id}
+   	 </if>
+  </select>
+  
+  <delete id="batchDel" parameterType="java.lang.Long" flushCache="true" >
+        DELETE FROM t_guest WHERE ID in
+        <foreach item="id" collection="ids" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+   </delete>
+  
+</mapper>

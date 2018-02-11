@@ -1,0 +1,347 @@
+<!DOCTYPE html>  
+<html xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorator="layouts/index">  
+    <head>
+    	<meta charset="utf-8"></meta>
+        <title>会员信息-列表页</title>
+    </head>  
+    <body>
+	    <div layout:fragment="content">
+	    	
+	    	
+	    	
+			<div class="container">
+			    <section class="col-lg-12 ui-content ui-shadow">
+			      	
+				    
+				    
+				     	
+					<!-- 列表页头（标题、操作按钮） -->
+					<h3>
+						会员信息
+					</h3>
+					
+				    
+				    <!-- 列表主体 -->
+					<div class="cl mt15 mb10" style="overflow-x:auto;">
+						<!-- 列表主体（查询区域） -->
+						<form name="searchForm" id="searchForm" action="/customers/list" method="post">
+							<input  type="hidden"  id="pageNo" name="pageNo"  th:value="${page.pageNo}" value=""  />
+							<input  type="hidden" name="pageSize"  id="pageSize" th:value="${page.pageSize}" value=""  />
+							<div class=" bg-gray border-gray pb10 pl15">
+								<div class="cl">
+							    	<div class="form-group mr10 mt15">
+										
+										<label style="width:75px;"  for="">注册ID:</label>
+										<input type="text" class="w150 mr15"   
+										autocomplete ="off" name="pwsysId" th:value="${searchParam['pwsysId']}" placeholder="请输入会员注册ID" value="" />
+										<label for="">会员手机号:</label>
+										<input type="text" class="w150 mr15"
+										autocomplete ="off" name="phone" th:value="${searchParam['phone']}" placeholder="请输入手机号" value="" />
+										<label for="">会员名称:</label>
+										<input type="text"  class="w150 mr15"
+										autocomplete ="off" name="truename" th:value="${searchParam['truename']}" placeholder="请输入会员名称" value="" />
+									</div>
+							    	<div class="form-group mr10 mt15">
+										
+										<label style="width:75px;"  for="">会员来源:</label>
+										<select name="sysSource" class="w150 mr15" >
+											<option value="" >请选择</option>
+											<option th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('CUSTOMER_SYS_SOURCE')}" 
+											th:text="${obj.value.name}"
+											th:selected=" ${searchParam['sysSource'] == obj.value.code  }"
+											th:value="${obj.value.code}"  value="0" >请选择</option>
+										</select>
+										<label for="">会员状态:</label>
+										<select  name="vipStatus" class="w150 mr15" >
+											<option value="" >请选择</option>
+											<option th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('VIP_STATUS')}" 
+											th:text="${obj.value.name}" 
+											th:selected="${searchParam['vipStatus'] == obj.value.code }"
+											 th:value="${obj.value.code}"  value="0" >请选择</option>
+										</select>
+										<label for="">会员级别:</label>
+										<select name="vipRank" class="w150 mr15">
+											<option value="" >请选择</option>
+											
+											<option th:each="obj,indexStat:${customerGrades}" 
+											th:text="${obj.GNAME}"   
+											th:selected="${searchParam['vipRank']+'' == obj.ID+'' }"
+											 th:value="${obj.ID}"  value="0" >请选择</option>
+											
+										</select>
+										
+									</div>
+								    <div class="form-group mr10 mt15">
+										<label style="width:75px;" for="">上次交易时间:</label>
+										<input type="text" class="start w150 mr15" id="pay_start"
+										name="payStart" th:value="${searchParam['payStart']}" value="" />
+			                            <span>至</span>
+			                            <input type="text" class="end w150 mr15" id="pay_end" 
+			                             th:value="${searchParam['payEnd']}"  name="payEnd" value="" />
+										<label for="">下单终端:</label>
+										<span  th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('ORDERSOURCE')}"   >
+											<input class="wh20 radio" type="checkbox" th:value="${obj.value.code}"  name="ORDERSOURCE" 
+											th:id="${obj.value.id+'ORDERSOURCE'}" id="ORDERSOURCE" value="1" 
+											th:attr="a=${searchParam['ORDERSOURCE']}"
+											 th:checked="${#null==searchParam['ORDERSOURCE'] ?false:#lists.contains(searchParam['ORDERSOURCE'], obj.value.code ) }" />
+											<label th:for="${obj.value.id+'ORDERSOURCE'}" th:text="${obj.value.name}"  style="width:25px;">WAP</label>
+										</span>
+									</div>
+								</div>
+								
+								 <div class="conditionCon undb mt10 cl">
+										<div class="form-group mr15">
+											<label style="width:75px;" for="">交易总额</label>
+											<input type="text" style="width: 60px;" autocomplete ="off" name="priceS"  id="priceS"
+											class=" c_positivenum " th:value="${searchParam['priceS']}" placeholder="" value="" />
+											&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;&nbsp;&nbsp;
+											<input type="text" autocomplete ="off" name="priceE" id="priceE"
+											class=" c_positivenum  wh60 mr15"  th:value="${searchParam['priceE']}" placeholder="" value="" />
+											<label for="">交易笔数</label>
+												<input type="text" style="width: 60px;" autocomplete ="off" id="payS"  class="c_positive"
+												name="payS" th:value="${searchParam['payS']}"  placeholder="" value="" />
+											&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;&nbsp;&nbsp;
+											<input type="text" style="width: 60px;" autocomplete ="off"  id="payE" class="c_positive mr15"
+											name="payE" th:value="${searchParam['payE']}" placeholder="" value="" />
+											<label for="">平均客单价</label>
+												<input type="text" style="width: 60px;" autocomplete ="off"   id="avgS" class="c_positivenum"
+												name="avgS" th:value="${searchParam['avgS']}" placeholder="" value="" />
+											&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;&nbsp;&nbsp;
+											<input type="text" autocomplete ="off"   id="avgE" class=" wh60 mr15 c_positivenum"
+											name="avgE" th:value="${searchParam['avgE']}"  placeholder="" value="" />
+										</div>
+								</div>
+									
+								<div class="conditionCon undb mt10 cl">
+										<div class="form-group mr10">
+											<label style="width:75px;" for="">退货次数</label>
+											<input type="text" style="width: 60px;" autocomplete ="off"   id="refS" class="c_positive"
+											th:value="${searchParam['refS']}" name="refS" placeholder="" value="" />
+											&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;&nbsp;&nbsp;
+											<input type="text" autocomplete ="off"   id="refE" class="wh60 mr15 c_positive"
+											th:value="${searchParam['refE']}"  name="refE" placeholder="" value="" />
+											<label for="">退货金额</label>
+												<input type="text" style="width: 60px;" autocomplete ="off"  id="refPriceS"  class="c_positivenum"
+												 th:value="${searchParam['refPriceS']}" name="refPriceS" placeholder="" value="" />
+											&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;&nbsp;&nbsp;
+											<input type="text" style="width: 60px;" autocomplete ="off"    id="refPriceE"  class="c_positivenum mr15"
+											th:value="${searchParam['refPriceE']}" name="refPriceE" placeholder="" value="" />
+											<label for="">取消订单数</label>
+												<input type="text" style="width: 60px;" autocomplete ="off"   id="cancelS" class="c_positive"
+												th:value="${searchParam['cancelS']}" name="cancelS" placeholder="" value="" />
+											&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;&nbsp;&nbsp;
+											<input type="text" style="width: 60px;" autocomplete ="off"   id="cancelE" class="c_positive"
+											th:value="${searchParam['cancelE']}" name="cancelE" placeholder="" value="" />
+										</div>
+								</div>
+								
+								<div class="conditionCon undb mt10 cl">
+										<div class="form-group mr10">
+											
+											<label style="width:75px;" for="">入会时间:</label>
+											<input type="text" class="start" id="reg_start" style="width:151px;" 
+											name="regS" th:value="${searchParam['regS']}"  value="" />
+				                            <span>至</span>
+				                            <input type="text" class="end mr15" id="reg_end" style="width:151px;" 
+				                            name="regE"     th:value="${searchParam['regE']}"  value="" />
+											
+											<label for="">营销屏蔽</label>
+											<span th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('YXPB')}" >
+												<input  class="wh20 radio" style="width:20px;"
+													th:value="${obj.value.code}"  th:checked="${searchParam['yxpb']+'' == obj.value.code+'' }"
+												  type="radio"  name="yxpb"  th:id="${obj.value.id+'yxpb'}" placeholder="" value="" />
+												  <label th:for="${obj.value.id+'yxpb'}" th:text="${obj.value.name}"  style="width:40px;">已屏蔽</label>
+											</span>
+										</div>
+								</div>
+									
+									
+								<div class="fr mr5 f-blue conditionBtn mr10" style="margin-top:-28px;"><a href="####">更多</a>&nbsp;
+									<i class="icon iconfont">+</i>
+								</div>
+									
+								<div class="cl">
+									<button style="margin-left: 40%;" class="fl yl-btn yl-btn-blue-shadow query mt15 query-btn">查询</button>
+									<button style="margin-left: 1%;"  type="button"  onclick="javaScript:clearForm($('#searchForm')[0]);" class="fl yl-btn yl-btn-blue-shadow query mt15">清除</button>
+								</div>
+							</div>
+						</form>
+						
+                
+						<div th:if="${#lists.size(dateList) > 0}">
+							<div class="pt10">
+								<input type="button" style="margin-top:0;"  class="yl-btn yl-btn-blue-shadow yl-btn-disabled " 
+								id="updShieldBatchBtn" value="批量营销屏蔽"/>
+								<input type="button"    class="yl-btn yl-btn-blue-shadow" id="add" value="会员资料导入"/>
+							</div>
+							<!-- <input type="button"    class="yl-btn yl-btn-blue-shadow" id="add" value="会员资料导入"/> -->
+							<!-- 列表主体（搜索结果） -->
+							<table class="table table-bordered mt15">
+								<tr>
+								  <th width="20" style="text-align:left;"><input type="checkbox" id="checkAll" style=" width:20px;" /></th>
+								  <th width="20" style="text-align:center;">注册ID</th>
+								  <th width="20" style="text-align:center;">会员名称</th>
+								  <th style="text-align:center;">会员来源</th>
+								  <th style="text-align:center;">会员状态</th>
+								  <th style="text-align:center;">会员级别</th>
+								  <th style="text-align:center;">交易笔数</th>
+								  <th style="text-align:center;">交易总额</th>
+								  <th style="text-align:center;">平均客单价</th>
+								  <th style="text-align:center;">上次交易时间</th>
+								  <th style="text-align:center;">营销屏蔽</th>
+								  <th width="200" style="text-align:center;">操作</th>
+								</tr>
+								<tr th:each="obj,indexStat:${dateList}">
+									<td><input name="ids" class="ids" type="checkbox"   
+									th:value="${obj.ID}" value="" style="width: 20px" /></td>
+									<td style="text-align:center;" th:text="${obj.PWSYSID}">...</td>
+									<td style="text-align:center;" th:text="${obj.TRUENAME}">...</td>
+									<td style="text-align:center;" th:text="${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('CUSTOMER_SYS_SOURCE').get(obj.SYS_SOURCE).getName() }"></td>
+									<td style="text-align:center;" th:text="${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('VIP_STATUS').get(obj.VIP_STATUS+'').getName()  }">...</td>
+									<td style="text-align:center;" th:text="${obj.GNAME}">...</td>
+									<td style="text-align:center;" th:text="${obj.PAY_NUM}">...</td>
+									<td style="text-align:center;" th:text="${obj.PAY_TOTAL_PRICE>0} ?${#numbers.formatDecimal(obj.PAY_TOTAL_PRICE, 0, 'COMMA', 2, 'POINT') }:0">...</td>
+									<td style="text-align:center;" th:text="${obj.PAY_NUM>0} ? ${obj.PAY_TOTAL_PRICE /obj.PAY_NUM }:0">...</td>
+									<td style="text-align:center;" th:text="${#null != obj.LAST_PAY_DATE ? #calendars.format(obj.LAST_PAY_DATE,'yyyy-MM-dd HH:mm:ss') : ''}">...</td>
+									<td style="text-align:center;" th:text="${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('YXPB').get(obj.SHIELD+'').getName()  }">...</td>
+									<td style="text-align:center;" >
+										<a th:href="@{'/customers/detail/' + ${obj.ID}}" href="/customers/detail/1" target="_blank" class="a-view mr10 updateUser" th:attr="uid=${obj.TRUENAME}">查看</a>|&nbsp;
+										<a href="###" class="a-view mr10 updShieldBtn" th:text="${obj.SHIELD eq 0 ?'营销屏蔽':'解除屏蔽'}" th:attr="obj_id=${obj.ID}">营销屏蔽</a>
+										<!-- <a href="###" class="mr10 f-gray">删除</a> -->
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+						
+						<!-- 分页 -->
+			 			<div th:if="${#lists.size(dateList) > 0}"  th:include="layouts/page:: page" th:attr="pageFormId=searchForm,pageNo=${page.pageNo},pageSize=${page.pageSize},total=${page.total}">...</div>
+			    </section>
+			</div>
+	    	
+	    	
+	    </div> 
+	</body>
+	
+	<!-- 脚本区域（弹框、脚本） -->
+	<div layout:fragment="javascript">
+	    
+	    <script type="text/javascript">
+	    $(function (){
+	    	
+	    	$(".query-btn").click(function (){
+	    		//layer.load(1, {shade: false});
+	    		$frm = $("#searchForm");
+			    var validateWidget = $frm.validate();
+	    		//1.启用表单验证。
+	    		if (!validateWidget.check()) {//1.基础样式校验。
+	    			return false;
+	    		}
+	    		layer.load(2, {
+	    			shade: [0.3,'#fff']
+	    		});
+	    		
+	    		return  true ; 
+	    		
+	    	});
+	    	
+	    	
+	   
+	        timeCalender2('#pay_start','#pay_end');
+	        timeCalender2('#reg_start','#reg_end');
+	        
+	      //批量选中、启用按钮
+	    	$(".table input[type='checkbox']").click(function (){
+	    		if ($(this).attr("id")=="checkAll"){//全选
+	    			if ($(this).prop("checked")){
+	    				$(".table input[type='checkbox']").prop("checked",true);	
+	    			}else{
+	    				$(".table input[type='checkbox']").prop("checked",false);
+	    			}
+	    		}
+	    		if($(".table input[type='checkbox']:checked").length>0){
+	    				$("#updShieldBatchBtn").removeClass("yl-btn-disabled");
+	    		}else {
+	    			$("#updShieldBatchBtn").addClass("yl-btn-disabled");
+	    		}
+	    		
+	    	});
+	  
+	    
+	    
+	        //营销屏蔽操作
+	        $('.updShieldBtn').click(function() {
+	        	var $this = $(this) , id =  $this.attr("obj_id");
+	        	confirm(function(){
+	        		 $.getJSON("/customers/updShield",{ ids: id }, function(entry){
+	        			 	if(entry.code=="success"){
+	        					//layer.load(2);
+		        				$(document).find("#searchForm").submit();
+		        			}
+							layer.msg(entry.message,{time: 2000} ,function (){
+		        			}); 
+						});
+                });
+	        });
+	        
+	        
+		    //批量营销屏蔽
+	        $('#updShieldBatchBtn').click(function() {
+	        	
+	        	if ($(this).attr("class").indexOf("yl-btn-disabled")==-1){
+	        		var ids = new Array();
+	        		$("input[name='ids']:checked").each(function (){
+		        			ids.push($(this).val());
+	        		});
+	        		ids= ids.join(",");
+	        		confirm(function(){
+		        		 $.getJSON("/customers/updShield",{ ids:ids  }, function(entry){
+		        			 	if(entry.code=="success"){
+		        					//layer.load(2);
+			        				$(document).find("#searchForm").submit();
+			        			}
+								layer.msg(entry.message,{time: 2000} ,function (){
+			        			}); 
+								
+							});
+	                });
+	        	}
+	        	 
+	        });
+	        
+	        //打开会员资料导入窗口
+	        $('#add').click(function() {
+		    	
+		    	//var $ckObj = $(" table .on").find("input[type='checkbox']") ,  pid = $ckObj.val();
+		    	
+		    	//pid = pid==undefined?0:pid;
+		    	
+				/* if ($ckObj.attr("pid")!="0"){
+					pid = 0 ;
+		    	} */
+		    	
+		    	 layer.open({
+		    		 title:"会员资料补充",
+		    		  type: 2, 
+		    		  btn: ['确定', '取消'],
+		    		  area:['410px','270px'],
+		    		  yes: function(index, layero){
+		    			  
+		    			  var body = layer.getChildFrame('body', index);
+	                         var iframeWin = window[layero.find('iframe')[0]['name']];
+	                         iframeWin.subForm(document);
+		    			    //按钮【按钮一】的回调
+	    			  },
+	    			  btn2: function(index, layero){
+		    			    //按钮【按钮一】的回调
+	    			  },
+		    		  content: '/customers/showImportCustomerInfo'
+		    		}); 
+		    });
+	    });
+	    </script>
+    </div>
+    
+</html>

@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.ylpw.web.crm.mapper.order.TOrdersInfoMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.ylpw.web.crm.entity.order.TOrdersInfo" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="CUSTOMERSID" property="customersid" jdbcType="BIGINT" />
+    <result column="ORDER_SOURCE" property="orderSource"  />
+    <result column="ORDER_STATUS" property="orderStatus" jdbcType="VARCHAR" />
+    <result column="PAY_STATUS" property="payStatus" jdbcType="VARCHAR" />
+    <result column="ORDER_SUMPRICE" property="orderSumprice" jdbcType="DECIMAL" />
+    <result column="PROS" property="pros" jdbcType="VARCHAR" />
+    <result column="PROS_NUM" property="prosNum" jdbcType="INTEGER" />
+    <result column="PRO_TYPES" property="proTypes" jdbcType="VARCHAR" />
+    <result column="PRO_TYPESA" property="proTypesa" jdbcType="VARCHAR" />
+    <result column="PRO_CITY" property="proCity" jdbcType="VARCHAR" />
+    <result column="ARTISTS_INTRODUCED" property="artistsIntroduced"  typeHandler="cn.com.ylpw.web.crm.util.ConvertBlobTypeHandler"  />
+    <result column="SHOPING_TYPE" property="shopingType" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="PAY_TIME" property="payTime" jdbcType="TIMESTAMP" />
+    <result column="PS_TIME" property="psTime" jdbcType="TIMESTAMP" />
+    <result column="REF_REMARK" property="refRemark" jdbcType="VARCHAR" />
+    <result column="REF_MALICE" property="refMalice" jdbcType="INTEGER" />
+    <result column="SJZF_PRICE" property="sjzfPrice" jdbcType="DECIMAL" />
+    <result column="REFUN_PRICE" property="refunPrice" jdbcType="DECIMAL" />
+    <result column="ADDRESSID" property="addressid" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, CUSTOMERSID, ORDER_SOURCE, ORDER_STATUS, PAY_STATUS, ORDER_SUMPRICE, PROS, PROS_NUM, 
+    PRO_TYPES,PRO_TYPESA,PRO_CITY, ARTISTS_INTRODUCED, SHOPING_TYPE, CREATE_TIME, PAY_TIME, PS_TIME, 
+    REF_REMARK, REF_MALICE,SJZF_PRICE,REFUN_PRICE,ADDRESSID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_orders_info
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_orders_info
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.com.ylpw.web.crm.entity.order.TOrdersInfo" >
+    insert into t_orders_info (ID, CUSTOMERSID, ORDER_SOURCE, 
+      ORDER_STATUS, PAY_STATUS, ORDER_SUMPRICE, 
+      PROS, PROS_NUM, PRO_TYPES, 
+      PRO_CITY, ARTISTS_INTRODUCED, SHOPING_TYPE, 
+      CREATE_TIME, PAY_TIME, PS_TIME, 
+      REF_REMARK, REF_MALICE)
+    values (#{id,jdbcType=BIGINT}, #{customersid,jdbcType=BIGINT}, #{orderSource}, 
+      #{orderStatus,jdbcType=VARCHAR}, #{payStatus,jdbcType=VARCHAR}, #{orderSumprice,jdbcType=DECIMAL}, 
+      #{pros,jdbcType=VARCHAR}, #{prosNum,jdbcType=INTEGER}, #{proTypes,jdbcType=VARCHAR}, 
+      #{proCity,jdbcType=VARCHAR}, #{artistsIntroduced,jdbcType=VARCHAR}, #{shopingType,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{payTime,jdbcType=TIMESTAMP}, #{psTime,jdbcType=TIMESTAMP}, 
+      #{refRemark,jdbcType=VARCHAR}, #{refMalice,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.ylpw.web.crm.entity.order.TOrdersInfo" >
+    insert into t_orders_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="customersid != null" >
+        CUSTOMERSID,
+      </if>
+      <if test="orderSource != null" >
+        ORDER_SOURCE,
+      </if>
+      <if test="orderStatus != null" >
+        ORDER_STATUS,
+      </if>
+      <if test="payStatus != null" >
+        PAY_STATUS,
+      </if>
+      <if test="orderSumprice != null" >
+        ORDER_SUMPRICE,
+      </if>
+      <if test="pros != null" >
+        PROS,
+      </if>
+      <if test="prosNum != null" >
+        PROS_NUM,
+      </if>
+      <if test="proTypes != null" >
+        PRO_TYPES,
+      </if>
+       <if test="proTypesa != null" >
+        PRO_TYPESA,
+      </if>
+      <if test="proCity != null" >
+        PRO_CITY,
+      </if>
+      <if test="artistsIntroduced != null" >
+        ARTISTS_INTRODUCED,
+      </if>
+      <if test="shopingType != null" >
+        SHOPING_TYPE,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="payTime != null" >
+        PAY_TIME,
+      </if>
+      <if test="psTime != null" >
+        PS_TIME,
+      </if>
+      <if test="refRemark != null" >
+        REF_REMARK,
+      </if>
+      <if test="refMalice != null" >
+        REF_MALICE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="customersid != null" >
+        #{customersid,jdbcType=BIGINT},
+      </if>
+      <if test="orderSource != null" >
+        #{orderSource},
+      </if>
+      <if test="orderStatus != null" >
+        #{orderStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="payStatus != null" >
+        #{payStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="orderSumprice != null" >
+        #{orderSumprice,jdbcType=DECIMAL},
+      </if>
+      <if test="pros != null" >
+        #{pros,jdbcType=VARCHAR},
+      </if>
+      <if test="prosNum != null" >
+        #{prosNum,jdbcType=INTEGER},
+      </if>
+      <if test="proTypes != null" >
+        #{proTypes,jdbcType=VARCHAR},
+      </if>
+      <if test="proTypesa != null" >
+        #{proTypesa,jdbcType=VARCHAR},
+      </if>
+      <if test="proCity != null" >
+        #{proCity,jdbcType=VARCHAR},
+      </if>
+      <if test="artistsIntroduced != null" >
+        #{artistsIntroduced,jdbcType=VARCHAR},
+      </if>
+      <if test="shopingType != null" >
+        #{shopingType,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payTime != null" >
+        #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="psTime != null" >
+        #{psTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="refRemark != null" >
+        #{refRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="refMalice != null" >
+        #{refMalice,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.ylpw.web.crm.entity.order.TOrdersInfo" >
+    update t_orders_info
+    <set >
+      <if test="customersid != null" >
+        CUSTOMERSID = #{customersid,jdbcType=BIGINT},
+      </if>
+      <if test="orderSource != null" >
+        ORDER_SOURCE = #{orderSource},
+      </if>
+      <if test="orderStatus != null" >
+        ORDER_STATUS = #{orderStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="payStatus != null" >
+        PAY_STATUS = #{payStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="orderSumprice != null" >
+        ORDER_SUMPRICE = #{orderSumprice,jdbcType=DECIMAL},
+      </if>
+      <if test="pros != null" >
+        PROS = #{pros,jdbcType=VARCHAR},
+      </if>
+      <if test="prosNum != null" >
+        PROS_NUM = #{prosNum,jdbcType=INTEGER},
+      </if>
+      <if test="proTypes != null" >
+        PRO_TYPES = #{proTypes,jdbcType=VARCHAR},
+      </if>
+       <if test="proTypesa != null" >
+        PRO_TYPESA = #{proTypesa,jdbcType=VARCHAR},
+      </if>
+      <if test="proCity != null" >
+        PRO_CITY = #{proCity,jdbcType=VARCHAR},
+      </if>
+      <if test="artistsIntroduced != null" >
+        ARTISTS_INTRODUCED = #{artistsIntroduced,jdbcType=VARCHAR},
+      </if>
+      <if test="shopingType != null" >
+        SHOPING_TYPE = #{shopingType,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payTime != null" >
+        PAY_TIME = #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="psTime != null" >
+        PS_TIME = #{psTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="refRemark != null" >
+        REF_REMARK = #{refRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="refMalice != null" >
+        REF_MALICE = #{refMalice,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.ylpw.web.crm.entity.order.TOrdersInfo" >
+    update t_orders_info
+    set CUSTOMERSID = #{customersid,jdbcType=BIGINT},
+      ORDER_SOURCE = #{orderSource},
+      ORDER_STATUS = #{orderStatus,jdbcType=VARCHAR},
+      PAY_STATUS = #{payStatus,jdbcType=VARCHAR},
+      ORDER_SUMPRICE = #{orderSumprice,jdbcType=DECIMAL},
+      PROS = #{pros,jdbcType=VARCHAR},
+      PROS_NUM = #{prosNum,jdbcType=INTEGER},
+      PRO_TYPES = #{proTypes,jdbcType=VARCHAR},
+      PRO_CITY = #{proCity,jdbcType=VARCHAR},
+      ARTISTS_INTRODUCED = #{artistsIntroduced,jdbcType=VARCHAR},
+      SHOPING_TYPE = #{shopingType,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      PAY_TIME = #{payTime,jdbcType=TIMESTAMP},
+      PS_TIME = #{psTime,jdbcType=TIMESTAMP},
+      REF_REMARK = #{refRemark,jdbcType=VARCHAR},
+      REF_MALICE = #{refMalice,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  
+  
+   <insert id="insertBatchSelective" parameterType="java.util.List" >
+   	   insert into t_orders_info (ID, CUSTOMERSID, ORDER_SOURCE, 
+	      ORDER_STATUS, PAY_STATUS, ORDER_SUMPRICE, 
+	      PROS, PROS_NUM, PRO_TYPES, PRO_TYPESA,
+	      PRO_CITY, ARTISTS_INTRODUCED, SHOPING_TYPE, 
+	      CREATE_TIME, PAY_TIME, PS_TIME, 
+	      REF_REMARK, REF_MALICE,SJZF_PRICE,REFUN_PRICE,ADDRESSID)
+	    values 
+   		<foreach collection ="list" item="order" index= "index" separator ="," >
+     	(
+     	  #{order.id,jdbcType=BIGINT}, #{order.customersid,jdbcType=BIGINT}, #{order.orderSource}, 
+	      #{order.orderStatus,jdbcType=VARCHAR}, #{order.payStatus,jdbcType=VARCHAR}, #{order.orderSumprice,jdbcType=DECIMAL}, 
+	      #{order.pros,jdbcType=VARCHAR}, #{order.prosNum,jdbcType=INTEGER}, #{order.proTypes,jdbcType=VARCHAR}, #{order.proTypesa,jdbcType=VARCHAR}, 
+	      #{order.proCity,jdbcType=VARCHAR}, #{order.artistsIntroduced,jdbcType=VARCHAR}, #{order.shopingType,jdbcType=VARCHAR}, 
+	      #{order.createTime,jdbcType=TIMESTAMP}, #{order.payTime,jdbcType=TIMESTAMP}, #{order.psTime,jdbcType=TIMESTAMP}, 
+	      #{order.refRemark,jdbcType=VARCHAR}, #{order.refMalice,jdbcType=INTEGER} , #{order.sjzfPrice}, #{order.refunPrice},#{order.addressid}
+     		
+     	 )
+     	</foreach>
+	</insert>  
+	
+	<select id="findAll" parameterType="cn.com.ylpw.web.crm.entity.order.TOrdersInfo" resultType="java.util.HashMap" >
+	    SELECT <include refid="Base_Column_List" />, CONVERT(ARTISTS_INTRODUCED USING utf8) AS ARTISTSINTRODUCED FROM  T_ORDERS_INFO WHERE CUSTOMERSID = #{customerid }  
+	    <if test="orderStatus != null" >
+      	 	 AND instr(ORDER_STATUS,'${orderStatus}')> 0
+        </if>
+        
+	    <if test="orderStatusIsRef != null and  orderStatusIsRef ==1 " >
+      	 	 AND   instr(ORDER_STATUS,'退')>0
+        </if>
+	    <if test="payStatus != null" >
+      	 	 AND instr(PAY_STATUS,'${payStatus}')> 0
+        </if>
+        order by  id desc
+	</select>
+	
+	
+	<select id="findOrderTotal" parameterType="cn.com.ylpw.web.crm.entity.order.TOrdersInfo" resultType="java.util.HashMap" >
+	    select  count(1)  as ORDERCOUNT, sum(od.ORDER_SUMPRICE)  as ORDERSUMPRICE from t_orders_info od
+	     where  od.CUSTOMERSID = #{customerid }  
+	     <if test="orderStatus != null" >
+      	 	 AND instr(od.ORDER_STATUS,'${orderStatus}')> 0
+        </if>
+	    <if test="payStatus != null" >
+      	 	 AND instr(od.PAY_STATUS,'${payStatus}')> 0
+        </if>
+	</select>
+	
+	
+	
+	<select id="findOrderProsByid" parameterType="cn.com.ylpw.web.crm.entity.order.TOrdersInfo" resultType="java.util.HashMap" >
+	    select   od.ID , od.PROS from t_orders_info od
+	    where  od.ID > #{maxid }  
+        order by  id desc
+	</select>
+	 
+	<select id="selectCount"  resultType="java.lang.Integer"      >
+	    select    count(1) as totalCount  from t_orders_info 
+	</select>
+	
+	<select id="findOrdersByIds" parameterType="java.util.List"  resultMap="BaseResultMap" >
+	    select   <include refid="Base_Column_List" />  from t_orders_info od
+	    where  od.ID in  (
+		    <foreach collection ="list" item="id" index= "index" separator ="," >
+		    	#{id}
+		    </foreach>
+	    )
+	</select>
+	
+	
+	<select id="findOrdersByCustomerIdAndFRMIndex" parameterType="java.util.Map"  resultType="java.util.HashMap" >
+	
+		select count(1) as PAYCOUNT ,  sum(od.ORDER_SUMPRICE) as PAYPRICE  ,od.CUSTOMERSID from t_orders_info od where od.ORDER_STATUS = '已完成'  
+		<if test="null != stime">
+		 <![CDATA[   
+			and od.CREATE_TIME >= #{stime} 
+	   ]]>
+		</if>
+		
+	   <if test="null != etime">
+	   	<![CDATA[   
+		  and od.CREATE_TIME <= #{etime}
+	   ]]>
+	   </if>
+	   <if test="null != customerids and customerids.size > 0">
+	   	and  od.CUSTOMERSID  in( 
+			    <foreach collection ="customerids" item="cusid" index= "index" separator ="," >
+			    	#{cusid}
+			    </foreach>
+	    )
+	   </if>
+	    group by od.CUSTOMERSID 
+	</select>
+	
+	<select id="findOrdersGroupByPros" parameterType="java.lang.Long"  resultType="java.util.HashMap" >
+		SELECT  OD.PROS  FROM T_ORDERS_INFO  OD WHERE  OD.PAY_STATUS ='已支付' and OD.CUSTOMERSID = #{pwsysid}  GROUP BY OD.PROS
+	</select>
+	
+	
+	<select id="selectByIdsForUpdateStatus" parameterType="java.util.List"  resultType="java.util.HashMap" >
+	    SELECT OD.ID ,  OD.ORDER_STATUS , OD.PAY_STATUS ,  OD.ORDER_SUMPRICE  ,
+	    (SELECT  MAX(CUS.ID)  FROM T_CUSTOMERS CUS WHERE  CUS.PWSYSID = OD.CUSTOMERSID)  AS CUSTOMERID
+	    FROM T_ORDERS_INFO OD
+	    where  OD.ID in  (
+		    <foreach collection ="ids" item="id" index= "index" separator ="," >
+		    	#{id}
+		    </foreach>
+	    )
+	</select>
+  
+</mapper>

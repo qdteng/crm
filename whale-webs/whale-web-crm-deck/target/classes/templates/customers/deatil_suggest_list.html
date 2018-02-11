@@ -1,0 +1,72 @@
+<!DOCTYPE html>  
+<html xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  >  
+    <head>
+    	<meta charset="utf-8"></meta>
+        <title>查看缺货登记记录</title>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}"></link>
+	    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"></link>
+	    <link rel="stylesheet" type="text/css" th:href="@{/css/validate.default.css}"></link>
+	    <script th:src="@{/js/plugins/jquery/jquery-1.7.min.js}"></script>
+	    <script th:src="@{/js/plugins/validate/jquery.form.js}"></script>
+	    <script th:src="@{/js/plugins/validate/validate.js}"></script>
+	    <script th:src="@{/js/plugins/layer/layer.js}"></script>
+	    
+	    <!-- 核心方法 -->
+	    <script th:src="@{/js/system/core.js}"></script>
+	    <script th:src="@{/js/system/index.js}"></script>
+	    <script th:src="@{/js/system/minBox.js}"></script>
+	    <script th:src="@{/js/system/accordion.js}"></script>
+    </head>  
+    <body>
+				
+			<div class="container">
+			    <section class="col-lg-12 ui-content ui-shadow">
+				    <!-- 列表主体 -->
+					<div class="search-form cl mt15 mb10" style="overflow-x:auto;">
+						<!-- 列表主体（查询区域） -->
+						<form name="searchForm" id="searchForm" th:action="@{'/customers/suggest/list/' + ${customerid}}" action="/customers/orders/list/1" method="post">
+							<input  type="hidden"  id="pageNo" name="pageNo"  th:value="${page.pageNo}" value=""  />
+							<input  type="hidden" name="pageSize"  id="pageSize" th:value="${page.pageSize}" value=""  />
+						</form>
+						
+						<div th:if="${#lists.size(dateList) > 0}">
+							<!-- 列表主体（搜索结果） -->
+							<table class="table table-bordered mt15">
+								<tr>
+								  <th width="20" style="text-align:left;">序号</th>
+								  <th width="20" style="text-align:center;">时间</th>
+								  <th style="text-align:center;">建议类型</th>
+								  <th style="text-align:center;">关联订单</th>
+								  <th style="text-align:center;">意见内容</th>
+								  <th style="text-align:center;">后续跟进处理情况</th>
+								</tr>
+								<tr th:each="obj,indexStat:${dateList}">
+									<td style="text-align:center;" th:text="${indexStat.index+1}"  >...</td>
+									<td style="text-align:center;" th:text="${null!=obj.CREATE_TIME?#dates.format(obj.CREATE_TIME,'yyyy-MM-dd HH:mm:ss') :''}">...</td>
+									<td style="text-align:center;" >...</td>
+									<td style="text-align:center;" >...</td>
+									<td style="text-align:center;" th:text="${obj.DESCRIPTION}">...</td>
+									<td style="text-align:center;" th:text="${obj.SOLVE_DESC}">...</td>
+								</tr>
+							</table>
+						</div>
+						<div style="text-align: center;" th:if="${#lists.isEmpty(dateList)}">
+							无相关信息
+						</div>
+						<!-- 分页 -->
+			 			<div th:if="${#lists.size(dateList) > 0}"  th:include="layouts/page:: page" th:attr="pageFormId=searchForm,pageNo=${page.pageNo},pageSize=${page.pageSize},total=${page.total}">...</div>
+						</div>
+			    </section>
+			</div>
+
+	</body>
+	
+	<!-- 脚本区域（弹框、脚本） -->
+    <script type="text/javascript">
+	    $(function() {
+	
+	      });
+    </script>
+	    
+</html>

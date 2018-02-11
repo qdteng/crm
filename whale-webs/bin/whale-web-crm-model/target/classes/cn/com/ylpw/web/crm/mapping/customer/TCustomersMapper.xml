@@ -1,0 +1,3301 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.ylpw.web.crm.mapper.customer.TCustomersMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.ylpw.web.crm.entity.customer.TCustomers" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    
+    <result column="PWSYSID" property="pwsysId" jdbcType="BIGINT" />
+    <result column="SYS1ID" property="sys1Id" jdbcType="BIGINT" />
+    <result column="SYS2ID" property="sys2Id" jdbcType="BIGINT" />
+    <result column="SYS3ID" property="sys3Id" jdbcType="BIGINT" />
+    
+    
+    <result column="TRUENAME" property="truename" 
+     typeHandler="cn.com.ylpw.web.crm.util.ConvertBlobTypeHandler"  />
+    <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+    <result column="SEX" property="sex" jdbcType="VARCHAR" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="REGDATE" property="regdate" jdbcType="TIMESTAMP" />
+    <result column="NICKNAME" property="nickname"  
+     typeHandler="cn.com.ylpw.web.crm.util.ConvertBlobTypeHandler"   />
+    <result column="CARDTYPE" property="cardtype" jdbcType="DECIMAL" />
+    <result column="CARD" property="card" jdbcType="VARCHAR" />
+    <result column="USERTYPE" property="usertype" jdbcType="DECIMAL" />
+    <result column="DISCOUNTDETAILID" property="discountdetailid" jdbcType="BIGINT" />
+    <result column="IP" property="ip" jdbcType="VARCHAR" />
+    <result column="REGEMAIL" property="regemail" jdbcType="DECIMAL" />
+    <result column="PHONE" property="phone" jdbcType="VARCHAR" />
+    <result column="TEL" property="tel" jdbcType="VARCHAR" />
+    <result column="INTEGRAL" property="integral" jdbcType="DECIMAL" />
+    <result column="NUM" property="num" jdbcType="DECIMAL" />
+    <result column="BUYNUM" property="buynum" jdbcType="DECIMAL" />
+    <result column="MALICE" property="malice" jdbcType="DECIMAL" />
+    <result column="INFO" property="info" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="DECIMAL" />
+    <result column="CREATETIME" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="LASTTIME" property="lasttime" jdbcType="TIMESTAMP" />
+    <result column="LASTUSER" property="lastuser" jdbcType="VARCHAR" />
+    <result column="DISCOUNTID" property="discountid" jdbcType="DECIMAL" />
+    <result column="RENEWAL" property="renewal" jdbcType="DECIMAL" />
+    <result column="RENEWALPWD" property="renewalpwd" jdbcType="VARCHAR" />
+    <result column="OLDUSERID" property="olduserid" jdbcType="VARCHAR" />
+    <result column="OLDMARK" property="oldmark" jdbcType="VARCHAR" />
+    <result column="UNIONUSERID" property="unionuserid" jdbcType="VARCHAR" />
+    <result column="FCONFIGID" property="fconfigid" jdbcType="DECIMAL" />
+    <result column="TNUMBER" property="tnumber" jdbcType="VARCHAR" />
+    <result column="LEVELS" property="levels" jdbcType="DECIMAL" />
+    <result column="AMOUNT" property="amount" jdbcType="DECIMAL" />
+    <result column="LNAME" property="lname" jdbcType="VARCHAR" />
+    <result column="ADRESS" property="adress" jdbcType="VARCHAR" />
+    <result column="EFFECT" property="effect" jdbcType="DECIMAL" />
+    <result column="CODE" property="code" jdbcType="VARCHAR" />
+    <result column="UNIONDISCOUNT" property="uniondiscount" jdbcType="DECIMAL" />
+    <result column="THIRDDISCOUNT" property="thirddiscount" jdbcType="DECIMAL" />
+    <result column="USERDISCOUNT" property="userdiscount" jdbcType="DECIMAL" />
+    <result column="CITYID" property="cityid" jdbcType="DECIMAL" />
+    <result column="TYPE" property="type" jdbcType="DECIMAL" />
+    <result column="LEGALPERSON" property="legalperson" jdbcType="VARCHAR" />
+    <result column="BUSINESSDATE" property="businessdate" jdbcType="TIMESTAMP" />
+    <result column="STARCAPITAL" property="starcapital" jdbcType="DECIMAL" />
+    <result column="EMPLOYEENUM" property="employeenum" jdbcType="DECIMAL" />
+    <result column="ASSET" property="asset" jdbcType="DECIMAL" />
+    <result column="YYZZURL" property="yyzzurl" jdbcType="VARCHAR" />
+    <result column="SFZURL" property="sfzurl" jdbcType="VARCHAR" />
+    <result column="USERNAME" property="username" typeHandler="cn.com.ylpw.web.crm.util.ConvertBlobTypeHandler" />
+    <result column="NATIVEPLACE" property="nativeplace" jdbcType="VARCHAR" />
+    <result column="CUSTOMERCITY" property="customercity"  typeHandler="cn.com.ylpw.web.crm.util.ConvertBlobTypeHandler"  />
+    <result column="DATASOURCE" property="datasource" jdbcType="VARCHAR" />
+    <result column="CUSTOMERSOURCE" property="customersource" jdbcType="DECIMAL" />
+    <result column="INDUSTRY" property="industry" jdbcType="VARCHAR" />
+    <result column="POSITION" property="position" jdbcType="VARCHAR" />
+    <result column="INCOMELEVELS" property="incomelevels" jdbcType="VARCHAR" />
+    <result column="INCOMERANGE" property="incomerange" jdbcType="VARCHAR" />
+    <result column="BUYPURPOSE" property="buypurpose" jdbcType="DECIMAL" />
+    <result column="BUYFREQUENCY" property="buyfrequency" jdbcType="VARCHAR" />
+    <result column="TICKETPRICE" property="ticketprice" jdbcType="VARCHAR" />
+    <result column="ATTENTIONSTAR" property="attentionstar" jdbcType="VARCHAR" />
+    <result column="MARITALSTATUS" property="maritalstatus" jdbcType="DECIMAL" />
+    <result column="ISCHILDREN" property="ischildren" jdbcType="DECIMAL" />
+    <result column="CHILDRENBIRTHDAY" property="childrenbirthday" jdbcType="VARCHAR" />
+    <result column="ISINTERNET" property="isinternet" jdbcType="DECIMAL" />
+    <result column="ATTENTIONTYPE" property="attentiontype" jdbcType="VARCHAR" />
+    <result column="INTERESTS" property="interests" jdbcType="VARCHAR" />
+    <result column="INTERESTSOTHER" property="interestsother" jdbcType="VARCHAR" />
+    <result column="BIRTHDAY" property="birthday" jdbcType="VARCHAR" />
+    <result column="CURRENTAMOUNT" property="currentamount" jdbcType="DECIMAL" />
+    <result column="EDUCATION" property="education" jdbcType="VARCHAR" />
+    <result column="UNIONSETTLEMENTDISCOUNT" property="unionsettlementdiscount" jdbcType="DECIMAL" />
+    <result column="ISRENEWAL" property="isrenewal" jdbcType="DECIMAL" />
+    <result column="REGPHONE" property="regphone" jdbcType="DECIMAL" />
+    <result column="REGSAFETYINFO" property="regsafetyinfo" jdbcType="DECIMAL" />
+    <result column="LASTLOGINTIME" property="lastlogintime" jdbcType="TIMESTAMP" />
+    <result column="UNIONTYPE" property="uniontype" jdbcType="VARCHAR" />
+    <result column="DISCOUNTTYPE" property="discounttype" jdbcType="VARCHAR" />
+    <result column="LIMITSTARTTIME" property="limitstarttime" jdbcType="TIMESTAMP" />
+    <result column="LIMITENDTIME" property="limitendtime" jdbcType="TIMESTAMP" />
+    <result column="SPREADTYPEID" property="spreadtypeid" jdbcType="DECIMAL" />
+    <result column="REGISTEREDSOURCE" property="registeredsource" jdbcType="DECIMAL" />
+    <result column="PHONE_SYS" property="phoneSys" jdbcType="DECIMAL" />
+    <result column="PHONE_MODEL" property="phoneModel" jdbcType="VARCHAR" />
+    <result column="PHONE_VERSION" property="phoneVersion" jdbcType="VARCHAR" />
+    <result column="CLIENT_VERSION" property="clientVersion" jdbcType="VARCHAR" />
+    <result column="CHANNEL_ID" property="channelId" jdbcType="BIGINT" />
+    <result column="HEADIMG" property="headimg" jdbcType="VARCHAR" />
+    <result column="DEVICETOKEN" property="devicetoken" jdbcType="VARCHAR" />
+    <result column="LASTLOGINPHONETYPE" property="lastloginphonetype" jdbcType="DECIMAL" />
+    <result column="ACCS_FLAG" property="accsFlag" jdbcType="VARCHAR" />
+    <result column="UNIONKEY" property="unionkey" jdbcType="VARCHAR" />
+    <result column="ERROR_CHANNEL_NAME" property="errorChannelName" jdbcType="VARCHAR" />
+    <result column="IOS_IDFA" property="iosIdfa" jdbcType="VARCHAR" />
+    <result column="LAST_LOGIN_CHANNEL" property="lastLoginChannel" jdbcType="VARCHAR" />
+    <result column="IFALIPAY" property="ifalipay" jdbcType="DECIMAL" />
+    <result column="SPREADWAY" property="spreadway" jdbcType="DECIMAL" />
+    <result column="GRADE_NAME" property="gradeName" jdbcType="VARCHAR" />
+    <result column="GRADE_ID" property="gradeId" jdbcType="BIGINT" />
+    <result column="CINDEX" property="cindex" />
+    <result column="CINDEX_UPDDATE" property="cindexUpddate" jdbcType="TIMESTAMP" />
+    <result column="SHIELD" property="shield" jdbcType="DECIMAL" />
+    <result column="SYS_SOURCE" property="sysSource" jdbcType="VARCHAR" />
+    <result column="WEIBO_NO" property="weiboNo" jdbcType="VARCHAR" />
+    <result column="WEIXIN_NO" property="weixinNo" jdbcType="VARCHAR" />
+    <result column="CRM_INTEGRAL_SYS" property="crmIntegralSys"  jdbcType="INTEGER" />
+    <result column="CRM_INTEGRAL_OPT" property="crmIntegralOpt"  jdbcType="INTEGER" />
+    <result column="CRM_INTEGRAL_STATUS" property="crmIntegralStatus"  jdbcType="INTEGER" />
+    <result column="CRM_INTEGRAL_CONSUME" property="crmIntegralConsume"  jdbcType="INTEGER" />
+    <result column="CRM_INTEGRAL_USABLE" property="crmIntegralUsable"  jdbcType="INTEGER" />
+    <result column="QQNUM" property="qqNum"  jdbcType="VARCHAR" />
+    <result column="CONSTELLATION" property="constellation"  jdbcType="VARCHAR" />
+    <!-- <result column="USERID_TOKEN" property="useridToken"  jdbcType="VARCHAR" /> -->
+  </resultMap>
+    
+  <sql id="Base_Column_List" >
+    ID,PWSYSID , SYS1ID,SYS2ID,SYS3ID, TRUENAME, PASSWORD, SEX, EMAIL, REGDATE, NICKNAME, CARDTYPE, CARD, USERTYPE, 
+    DISCOUNTDETAILID, IP, REGEMAIL, PHONE, TEL, INTEGRAL, NUM, BUYNUM, MALICE, INFO, 
+    STATUS, CREATETIME, LASTTIME, LASTUSER, DISCOUNTID, RENEWAL, RENEWALPWD, OLDUSERID, 
+    OLDMARK, UNIONUSERID, FCONFIGID, TNUMBER, LEVELS, AMOUNT, LNAME, ADRESS, EFFECT, 
+    CODE, UNIONDISCOUNT, THIRDDISCOUNT, USERDISCOUNT, CITYID, TYPE, LEGALPERSON, BUSINESSDATE, 
+    STARCAPITAL, EMPLOYEENUM, ASSET, YYZZURL, SFZURL, USERNAME, NATIVEPLACE, CUSTOMERCITY, 
+    DATASOURCE, CUSTOMERSOURCE, INDUSTRY, POSITION, INCOMELEVELS, INCOMERANGE, BUYPURPOSE, 
+    BUYFREQUENCY, TICKETPRICE, ATTENTIONSTAR, MARITALSTATUS, ISCHILDREN, CHILDRENBIRTHDAY, 
+    ISINTERNET, ATTENTIONTYPE, INTERESTS, INTERESTSOTHER, BIRTHDAY, CURRENTAMOUNT, EDUCATION, 
+    UNIONSETTLEMENTDISCOUNT, ISRENEWAL, REGPHONE, REGSAFETYINFO, LASTLOGINTIME, UNIONTYPE, 
+    DISCOUNTTYPE, LIMITSTARTTIME, LIMITENDTIME, SPREADTYPEID, REGISTEREDSOURCE, PHONE_SYS, 
+    PHONE_MODEL, PHONE_VERSION, CLIENT_VERSION, CHANNEL_ID, HEADIMG, DEVICETOKEN, LASTLOGINPHONETYPE, 
+    ACCS_FLAG, UNIONKEY, ERROR_CHANNEL_NAME, IOS_IDFA, LAST_LOGIN_CHANNEL, IFALIPAY, 
+    SPREADWAY, GRADE_NAME, GRADE_ID, CINDEX, CINDEX_UPDDATE,SHIELD,SYS_SOURCE,WEIBO_NO,WEIXIN_NO,
+    GRAGE_UPDATE_LAST,CRM_INTEGRAL_SYS,CRM_INTEGRAL_OPT,CRM_INTEGRAL_STATUS,QQNUM,CONSTELLATION  <!-- ,  USERID_TOKEN -->
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_customers
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_customers
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.com.ylpw.web.crm.entity.customer.TCustomers" useGeneratedKeys="true" keyProperty="id">
+    insert into t_customers (ID, TRUENAME, PASSWORD, 
+      SEX, EMAIL, REGDATE, 
+      NICKNAME, CARDTYPE, CARD, 
+      USERTYPE, DISCOUNTDETAILID, IP, 
+      REGEMAIL, PHONE, TEL, 
+      INTEGRAL, NUM, BUYNUM, 
+      MALICE, INFO, STATUS, 
+      CREATETIME, LASTTIME, LASTUSER, 
+      DISCOUNTID, RENEWAL, RENEWALPWD, 
+      OLDUSERID, OLDMARK, UNIONUSERID, 
+      FCONFIGID, TNUMBER, LEVELS, 
+      AMOUNT, LNAME, ADRESS, 
+      EFFECT, CODE, UNIONDISCOUNT, 
+      THIRDDISCOUNT, USERDISCOUNT, CITYID, 
+      TYPE, LEGALPERSON, BUSINESSDATE, 
+      STARCAPITAL, EMPLOYEENUM, ASSET, 
+      YYZZURL, SFZURL, USERNAME, 
+      NATIVEPLACE, CUSTOMERCITY, DATASOURCE, 
+      CUSTOMERSOURCE, INDUSTRY, POSITION, 
+      INCOMELEVELS, INCOMERANGE, BUYPURPOSE, 
+      BUYFREQUENCY, TICKETPRICE, ATTENTIONSTAR, 
+      MARITALSTATUS, ISCHILDREN, CHILDRENBIRTHDAY, 
+      ISINTERNET, ATTENTIONTYPE, INTERESTS, 
+      INTERESTSOTHER, BIRTHDAY, CURRENTAMOUNT, 
+      EDUCATION, UNIONSETTLEMENTDISCOUNT, ISRENEWAL, 
+      REGPHONE, REGSAFETYINFO, LASTLOGINTIME, 
+      UNIONTYPE, DISCOUNTTYPE, LIMITSTARTTIME, 
+      LIMITENDTIME, SPREADTYPEID, REGISTEREDSOURCE, 
+      PHONE_SYS, PHONE_MODEL, PHONE_VERSION, 
+      CLIENT_VERSION, CHANNEL_ID, HEADIMG, 
+      DEVICETOKEN, LASTLOGINPHONETYPE, ACCS_FLAG, 
+      UNIONKEY, ERROR_CHANNEL_NAME, IOS_IDFA, 
+      LAST_LOGIN_CHANNEL, IFALIPAY, SPREADWAY, 
+      GRADE_NAME, GRADE_ID, CINDEX, 
+      CINDEX_UPDDATE,QQNUM,CONSTELLATION)
+    values (#{id,jdbcType=BIGINT}, #{truename,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{regdate,jdbcType=TIMESTAMP}, 
+      #{nickname,jdbcType=VARCHAR}, #{cardtype,jdbcType=DECIMAL}, #{card,jdbcType=VARCHAR}, 
+      #{usertype,jdbcType=DECIMAL}, #{discountdetailid,jdbcType=BIGINT}, #{ip,jdbcType=VARCHAR}, 
+      #{regemail,jdbcType=DECIMAL}, #{phone,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, 
+      #{integral,jdbcType=DECIMAL}, #{num,jdbcType=DECIMAL}, #{buynum,jdbcType=DECIMAL}, 
+      #{malice,jdbcType=DECIMAL}, #{info,jdbcType=VARCHAR}, #{status,jdbcType=DECIMAL}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{lasttime,jdbcType=TIMESTAMP}, #{lastuser,jdbcType=VARCHAR}, 
+      #{discountid,jdbcType=DECIMAL}, #{renewal,jdbcType=DECIMAL}, #{renewalpwd,jdbcType=VARCHAR}, 
+      #{olduserid,jdbcType=VARCHAR}, #{oldmark,jdbcType=VARCHAR}, #{unionuserid,jdbcType=VARCHAR}, 
+      #{fconfigid,jdbcType=DECIMAL}, #{tnumber,jdbcType=VARCHAR}, #{levels,jdbcType=DECIMAL}, 
+      #{amount,jdbcType=DECIMAL}, #{lname,jdbcType=VARCHAR}, #{adress,jdbcType=VARCHAR}, 
+      #{effect,jdbcType=DECIMAL}, #{code,jdbcType=VARCHAR}, #{uniondiscount,jdbcType=DECIMAL}, 
+      #{thirddiscount,jdbcType=DECIMAL}, #{userdiscount,jdbcType=DECIMAL}, #{cityid,jdbcType=DECIMAL}, 
+      #{type,jdbcType=DECIMAL}, #{legalperson,jdbcType=VARCHAR}, #{businessdate,jdbcType=TIMESTAMP}, 
+      #{starcapital,jdbcType=DECIMAL}, #{employeenum,jdbcType=DECIMAL}, #{asset,jdbcType=DECIMAL}, 
+      #{yyzzurl,jdbcType=VARCHAR}, #{sfzurl,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{nativeplace,jdbcType=VARCHAR}, #{customercity,jdbcType=VARCHAR}, #{datasource,jdbcType=VARCHAR}, 
+      #{customersource,jdbcType=DECIMAL}, #{industry,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, 
+      #{incomelevels,jdbcType=VARCHAR}, #{incomerange,jdbcType=VARCHAR}, #{buypurpose,jdbcType=DECIMAL}, 
+      #{buyfrequency,jdbcType=VARCHAR}, #{ticketprice,jdbcType=VARCHAR}, #{attentionstar,jdbcType=VARCHAR}, 
+      #{maritalstatus,jdbcType=DECIMAL}, #{ischildren,jdbcType=DECIMAL}, #{childrenbirthday,jdbcType=VARCHAR}, 
+      #{isinternet,jdbcType=DECIMAL}, #{attentiontype,jdbcType=VARCHAR}, #{interests,jdbcType=VARCHAR}, 
+      #{interestsother,jdbcType=VARCHAR}, #{birthday,jdbcType=VARCHAR}, #{currentamount,jdbcType=DECIMAL}, 
+      #{education,jdbcType=VARCHAR}, #{unionsettlementdiscount,jdbcType=DECIMAL}, #{isrenewal,jdbcType=DECIMAL}, 
+      #{regphone,jdbcType=DECIMAL}, #{regsafetyinfo,jdbcType=DECIMAL}, #{lastlogintime,jdbcType=TIMESTAMP}, 
+      #{uniontype,jdbcType=VARCHAR}, #{discounttype,jdbcType=VARCHAR}, #{limitstarttime,jdbcType=TIMESTAMP}, 
+      #{limitendtime,jdbcType=TIMESTAMP}, #{spreadtypeid,jdbcType=DECIMAL}, #{registeredsource,jdbcType=DECIMAL}, 
+      #{phoneSys,jdbcType=DECIMAL}, #{phoneModel,jdbcType=VARCHAR}, #{phoneVersion,jdbcType=VARCHAR}, 
+      #{clientVersion,jdbcType=VARCHAR}, #{channelId,jdbcType=BIGINT}, #{headimg,jdbcType=VARCHAR}, 
+      #{devicetoken,jdbcType=VARCHAR}, #{lastloginphonetype,jdbcType=DECIMAL}, #{accsFlag,jdbcType=VARCHAR}, 
+      #{unionkey,jdbcType=VARCHAR}, #{errorChannelName,jdbcType=VARCHAR}, #{iosIdfa,jdbcType=VARCHAR}, 
+      #{lastLoginChannel,jdbcType=VARCHAR}, #{ifalipay,jdbcType=DECIMAL}, #{spreadway,jdbcType=DECIMAL}, 
+      #{gradeName,jdbcType=VARCHAR}, #{gradeId,jdbcType=BIGINT}, #{cindex}, 
+      #{cindexUpddate,jdbcType=TIMESTAMP}, #{qqNum,jdbcType=VARCHAR}, #{constellation,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.ylpw.web.crm.entity.customer.TCustomers" useGeneratedKeys="true" keyProperty="id">
+    insert into t_customers
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="truename != null" >
+        TRUENAME,
+      </if>
+      <if test="password != null" >
+        PASSWORD,
+      </if>
+      <if test="sex != null" >
+        SEX,
+      </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
+      <if test="regdate != null" >
+        REGDATE,
+      </if>
+      <if test="nickname != null" >
+        NICKNAME,
+      </if>
+      <if test="cardtype != null" >
+        CARDTYPE,
+      </if>
+      <if test="card != null" >
+        CARD,
+      </if>
+      <if test="usertype != null" >
+        USERTYPE,
+      </if>
+      <if test="discountdetailid != null" >
+        DISCOUNTDETAILID,
+      </if>
+      <if test="ip != null" >
+        IP,
+      </if>
+      <if test="regemail != null" >
+        REGEMAIL,
+      </if>
+      <if test="phone != null" >
+        PHONE,
+      </if>
+      <if test="tel != null" >
+        TEL,
+      </if>
+      <if test="integral != null" >
+        INTEGRAL,
+      </if>
+      <if test="num != null" >
+        NUM,
+      </if>
+      <if test="buynum != null" >
+        BUYNUM,
+      </if>
+      <if test="malice != null" >
+        MALICE,
+      </if>
+      <if test="info != null" >
+        INFO,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="createtime != null" >
+        CREATETIME,
+      </if>
+      <if test="lasttime != null" >
+        LASTTIME,
+      </if>
+      <if test="lastuser != null" >
+        LASTUSER,
+      </if>
+      <if test="discountid != null" >
+        DISCOUNTID,
+      </if>
+      <if test="renewal != null" >
+        RENEWAL,
+      </if>
+      <if test="renewalpwd != null" >
+        RENEWALPWD,
+      </if>
+      <if test="olduserid != null" >
+        OLDUSERID,
+      </if>
+      <if test="oldmark != null" >
+        OLDMARK,
+      </if>
+      <if test="unionuserid != null" >
+        UNIONUSERID,
+      </if>
+      <if test="fconfigid != null" >
+        FCONFIGID,
+      </if>
+      <if test="tnumber != null" >
+        TNUMBER,
+      </if>
+      <if test="levels != null" >
+        LEVELS,
+      </if>
+      <if test="amount != null" >
+        AMOUNT,
+      </if>
+      <if test="lname != null" >
+        LNAME,
+      </if>
+      <if test="adress != null" >
+        ADRESS,
+      </if>
+      <if test="effect != null" >
+        EFFECT,
+      </if>
+      <if test="code != null" >
+        CODE,
+      </if>
+      <if test="uniondiscount != null" >
+        UNIONDISCOUNT,
+      </if>
+      <if test="thirddiscount != null" >
+        THIRDDISCOUNT,
+      </if>
+      <if test="userdiscount != null" >
+        USERDISCOUNT,
+      </if>
+      <if test="cityid != null" >
+        CITYID,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="legalperson != null" >
+        LEGALPERSON,
+      </if>
+      <if test="businessdate != null" >
+        BUSINESSDATE,
+      </if>
+      <if test="starcapital != null" >
+        STARCAPITAL,
+      </if>
+      <if test="employeenum != null" >
+        EMPLOYEENUM,
+      </if>
+      <if test="asset != null" >
+        ASSET,
+      </if>
+      <if test="yyzzurl != null" >
+        YYZZURL,
+      </if>
+      <if test="sfzurl != null" >
+        SFZURL,
+      </if>
+      <if test="username != null" >
+        USERNAME,
+      </if>
+      <if test="nativeplace != null" >
+        NATIVEPLACE,
+      </if>
+      <if test="customercity != null" >
+        CUSTOMERCITY,
+      </if>
+      <if test="datasource != null" >
+        DATASOURCE,
+      </if>
+      <if test="customersource != null" >
+        CUSTOMERSOURCE,
+      </if>
+      <if test="industry != null" >
+        INDUSTRY,
+      </if>
+      <if test="position != null" >
+        POSITION,
+      </if>
+      <if test="incomelevels != null" >
+        INCOMELEVELS,
+      </if>
+      <if test="incomerange != null" >
+        INCOMERANGE,
+      </if>
+      <if test="buypurpose != null" >
+        BUYPURPOSE,
+      </if>
+      <if test="buyfrequency != null" >
+        BUYFREQUENCY,
+      </if>
+      <if test="ticketprice != null" >
+        TICKETPRICE,
+      </if>
+      <if test="attentionstar != null" >
+        ATTENTIONSTAR,
+      </if>
+      <if test="maritalstatus != null" >
+        MARITALSTATUS,
+      </if>
+      <if test="ischildren != null" >
+        ISCHILDREN,
+      </if>
+      <if test="childrenbirthday != null" >
+        CHILDRENBIRTHDAY,
+      </if>
+      <if test="isinternet != null" >
+        ISINTERNET,
+      </if>
+      <if test="attentiontype != null" >
+        ATTENTIONTYPE,
+      </if>
+      <if test="interests != null" >
+        INTERESTS,
+      </if>
+      <if test="interestsother != null" >
+        INTERESTSOTHER,
+      </if>
+      <if test="birthday != null" >
+        BIRTHDAY,
+      </if>
+      <if test="currentamount != null" >
+        CURRENTAMOUNT,
+      </if>
+      <if test="education != null" >
+        EDUCATION,
+      </if>
+      <if test="unionsettlementdiscount != null" >
+        UNIONSETTLEMENTDISCOUNT,
+      </if>
+      <if test="isrenewal != null" >
+        ISRENEWAL,
+      </if>
+      <if test="regphone != null" >
+        REGPHONE,
+      </if>
+      <if test="regsafetyinfo != null" >
+        REGSAFETYINFO,
+      </if>
+      <if test="lastlogintime != null" >
+        LASTLOGINTIME,
+      </if>
+      <if test="uniontype != null" >
+        UNIONTYPE,
+      </if>
+      <if test="discounttype != null" >
+        DISCOUNTTYPE,
+      </if>
+      <if test="limitstarttime != null" >
+        LIMITSTARTTIME,
+      </if>
+      <if test="limitendtime != null" >
+        LIMITENDTIME,
+      </if>
+      <if test="spreadtypeid != null" >
+        SPREADTYPEID,
+      </if>
+      <if test="registeredsource != null" >
+        REGISTEREDSOURCE,
+      </if>
+      <if test="phoneSys != null" >
+        PHONE_SYS,
+      </if>
+      <if test="phoneModel != null" >
+        PHONE_MODEL,
+      </if>
+      <if test="phoneVersion != null" >
+        PHONE_VERSION,
+      </if>
+      <if test="clientVersion != null" >
+        CLIENT_VERSION,
+      </if>
+      <if test="channelId != null" >
+        CHANNEL_ID,
+      </if>
+      <if test="headimg != null" >
+        HEADIMG,
+      </if>
+      <if test="devicetoken != null" >
+        DEVICETOKEN,
+      </if>
+      <if test="lastloginphonetype != null" >
+        LASTLOGINPHONETYPE,
+      </if>
+      <if test="accsFlag != null" >
+        ACCS_FLAG,
+      </if>
+      <if test="unionkey != null" >
+        UNIONKEY,
+      </if>
+      <if test="errorChannelName != null" >
+        ERROR_CHANNEL_NAME,
+      </if>
+      <if test="iosIdfa != null" >
+        IOS_IDFA,
+      </if>
+      <if test="lastLoginChannel != null" >
+        LAST_LOGIN_CHANNEL,
+      </if>
+      <if test="ifalipay != null" >
+        IFALIPAY,
+      </if>
+      <if test="spreadway != null" >
+        SPREADWAY,
+      </if>
+      <if test="gradeName != null" >
+        GRADE_NAME,
+      </if>
+      <if test="gradeId != null" >
+        GRADE_ID,
+      </if>
+      <if test="cindex != null" >
+        CINDEX,
+      </if>
+      <if test="cindexUpddate != null" >
+        CINDEX_UPDDATE,
+      </if>
+      <if test="shield != null" >
+        SHIELD,
+      </if>
+      <if test="sysSource != null" >
+        SYS_SOURCE,
+      </if>
+      <if test="weiboNo != null" >
+        WEIBO_NO,
+      </if>
+      <if test="weixinNo != null" >
+        WEIXIN_NO,
+      </if>
+      <if test="qqNum != null" >
+        QQNUM,
+      </if>
+      <if test="constellation != null" >
+        CONSTELLATION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="truename != null" >
+        #{truename,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="regdate != null" >
+        #{regdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="cardtype != null" >
+        #{cardtype,jdbcType=DECIMAL},
+      </if>
+      <if test="card != null" >
+        #{card,jdbcType=VARCHAR},
+      </if>
+      <if test="usertype != null" >
+        #{usertype,jdbcType=DECIMAL},
+      </if>
+      <if test="discountdetailid != null" >
+        #{discountdetailid,jdbcType=BIGINT},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="regemail != null" >
+        #{regemail,jdbcType=DECIMAL},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="integral != null" >
+        #{integral,jdbcType=DECIMAL},
+      </if>
+      <if test="num != null" >
+        #{num,jdbcType=DECIMAL},
+      </if>
+      <if test="buynum != null" >
+        #{buynum,jdbcType=DECIMAL},
+      </if>
+      <if test="malice != null" >
+        #{malice,jdbcType=DECIMAL},
+      </if>
+      <if test="info != null" >
+        #{info,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lasttime != null" >
+        #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastuser != null" >
+        #{lastuser,jdbcType=VARCHAR},
+      </if>
+      <if test="discountid != null" >
+        #{discountid,jdbcType=DECIMAL},
+      </if>
+      <if test="renewal != null" >
+        #{renewal,jdbcType=DECIMAL},
+      </if>
+      <if test="renewalpwd != null" >
+        #{renewalpwd,jdbcType=VARCHAR},
+      </if>
+      <if test="olduserid != null" >
+        #{olduserid,jdbcType=VARCHAR},
+      </if>
+      <if test="oldmark != null" >
+        #{oldmark,jdbcType=VARCHAR},
+      </if>
+      <if test="unionuserid != null" >
+        #{unionuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="fconfigid != null" >
+        #{fconfigid,jdbcType=DECIMAL},
+      </if>
+      <if test="tnumber != null" >
+        #{tnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="levels != null" >
+        #{levels,jdbcType=DECIMAL},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="lname != null" >
+        #{lname,jdbcType=VARCHAR},
+      </if>
+      <if test="adress != null" >
+        #{adress,jdbcType=VARCHAR},
+      </if>
+      <if test="effect != null" >
+        #{effect,jdbcType=DECIMAL},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="uniondiscount != null" >
+        #{uniondiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="thirddiscount != null" >
+        #{thirddiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="userdiscount != null" >
+        #{userdiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="cityid != null" >
+        #{cityid,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=DECIMAL},
+      </if>
+      <if test="legalperson != null" >
+        #{legalperson,jdbcType=VARCHAR},
+      </if>
+      <if test="businessdate != null" >
+        #{businessdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="starcapital != null" >
+        #{starcapital,jdbcType=DECIMAL},
+      </if>
+      <if test="employeenum != null" >
+        #{employeenum,jdbcType=DECIMAL},
+      </if>
+      <if test="asset != null" >
+        #{asset,jdbcType=DECIMAL},
+      </if>
+      <if test="yyzzurl != null" >
+        #{yyzzurl,jdbcType=VARCHAR},
+      </if>
+      <if test="sfzurl != null" >
+        #{sfzurl,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="nativeplace != null" >
+        #{nativeplace,jdbcType=VARCHAR},
+      </if>
+      <if test="customercity != null" >
+        #{customercity,jdbcType=VARCHAR},
+      </if>
+      <if test="datasource != null" >
+        #{datasource,jdbcType=VARCHAR},
+      </if>
+      <if test="customersource != null" >
+        #{customersource,jdbcType=DECIMAL},
+      </if>
+      <if test="industry != null" >
+        #{industry,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="incomelevels != null" >
+        #{incomelevels,jdbcType=VARCHAR},
+      </if>
+      <if test="incomerange != null" >
+        #{incomerange,jdbcType=VARCHAR},
+      </if>
+      <if test="buypurpose != null" >
+        #{buypurpose,jdbcType=DECIMAL},
+      </if>
+      <if test="buyfrequency != null" >
+        #{buyfrequency,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketprice != null" >
+        #{ticketprice,jdbcType=VARCHAR},
+      </if>
+      <if test="attentionstar != null" >
+        #{attentionstar,jdbcType=VARCHAR},
+      </if>
+      <if test="maritalstatus != null" >
+        #{maritalstatus,jdbcType=DECIMAL},
+      </if>
+      <if test="ischildren != null" >
+        #{ischildren,jdbcType=DECIMAL},
+      </if>
+      <if test="childrenbirthday != null" >
+        #{childrenbirthday,jdbcType=VARCHAR},
+      </if>
+      <if test="isinternet != null" >
+        #{isinternet,jdbcType=DECIMAL},
+      </if>
+      <if test="attentiontype != null" >
+        #{attentiontype,jdbcType=VARCHAR},
+      </if>
+      <if test="interests != null" >
+        #{interests,jdbcType=VARCHAR},
+      </if>
+      <if test="interestsother != null" >
+        #{interestsother,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="currentamount != null" >
+        #{currentamount,jdbcType=DECIMAL},
+      </if>
+      <if test="education != null" >
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="unionsettlementdiscount != null" >
+        #{unionsettlementdiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="isrenewal != null" >
+        #{isrenewal,jdbcType=DECIMAL},
+      </if>
+      <if test="regphone != null" >
+        #{regphone,jdbcType=DECIMAL},
+      </if>
+      <if test="regsafetyinfo != null" >
+        #{regsafetyinfo,jdbcType=DECIMAL},
+      </if>
+      <if test="lastlogintime != null" >
+        #{lastlogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uniontype != null" >
+        #{uniontype,jdbcType=VARCHAR},
+      </if>
+      <if test="discounttype != null" >
+        #{discounttype,jdbcType=VARCHAR},
+      </if>
+      <if test="limitstarttime != null" >
+        #{limitstarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="limitendtime != null" >
+        #{limitendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="spreadtypeid != null" >
+        #{spreadtypeid,jdbcType=DECIMAL},
+      </if>
+      <if test="registeredsource != null" >
+        #{registeredsource,jdbcType=DECIMAL},
+      </if>
+      <if test="phoneSys != null" >
+        #{phoneSys,jdbcType=DECIMAL},
+      </if>
+      <if test="phoneModel != null" >
+        #{phoneModel,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneVersion != null" >
+        #{phoneVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="clientVersion != null" >
+        #{clientVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="channelId != null" >
+        #{channelId,jdbcType=BIGINT},
+      </if>
+      <if test="headimg != null" >
+        #{headimg,jdbcType=VARCHAR},
+      </if>
+      <if test="devicetoken != null" >
+        #{devicetoken,jdbcType=VARCHAR},
+      </if>
+      <if test="lastloginphonetype != null" >
+        #{lastloginphonetype,jdbcType=DECIMAL},
+      </if>
+      <if test="accsFlag != null" >
+        #{accsFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="unionkey != null" >
+        #{unionkey,jdbcType=VARCHAR},
+      </if>
+      <if test="errorChannelName != null" >
+        #{errorChannelName,jdbcType=VARCHAR},
+      </if>
+      <if test="iosIdfa != null" >
+        #{iosIdfa,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginChannel != null" >
+        #{lastLoginChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="ifalipay != null" >
+        #{ifalipay,jdbcType=DECIMAL},
+      </if>
+      <if test="spreadway != null" >
+        #{spreadway,jdbcType=DECIMAL},
+      </if>
+      <if test="gradeName != null" >
+        #{gradeName,jdbcType=VARCHAR},
+      </if>
+      <if test="gradeId != null" >
+        #{gradeId,jdbcType=BIGINT},
+      </if>
+      <if test="cindex != null" >
+        #{cindex},
+      </if>
+      <if test="cindexUpddate != null" >
+        #{cindexUpddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shield != null" >
+        #{shield,jdbcType=DECIMAL},
+      </if>
+      <if test="sysSource != null" >
+        #{sysSource,jdbcType=VARCHAR},
+      </if>
+      <if test="weiboNo != null" >
+        #{weiboNo,jdbcType=VARCHAR},
+      </if>
+      <if test="weixinNo != null" >
+        #{weixinNo,jdbcType=VARCHAR},
+      </if>
+      <if test="qqNum != null" >
+        #{qqNum,jdbcType=VARCHAR},
+      </if>
+      <if test="constellation != null" >
+        #{constellation,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.ylpw.web.crm.entity.customer.TCustomers" >
+    update t_customers
+    <set>
+      <if test="truename != null" >
+        TRUENAME = #{truename,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        PASSWORD = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        SEX = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="regdate != null" >
+        REGDATE = #{regdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nickname != null" >
+        NICKNAME = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="cardtype != null" >
+        CARDTYPE = #{cardtype,jdbcType=DECIMAL},
+      </if>
+      <if test="card != null" >
+        CARD = #{card,jdbcType=VARCHAR},
+      </if>
+      <if test="usertype != null" >
+        USERTYPE = #{usertype,jdbcType=DECIMAL},
+      </if>
+      <if test="discountdetailid != null" >
+        DISCOUNTDETAILID = #{discountdetailid,jdbcType=BIGINT},
+      </if>
+      <if test="ip != null" >
+        IP = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="regemail != null" >
+        REGEMAIL = #{regemail,jdbcType=DECIMAL},
+      </if>
+      <if test="phone != null" >
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        TEL = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="integral != null" >
+        INTEGRAL = #{integral,jdbcType=DECIMAL},
+      </if>
+      <if test="num != null" >
+        NUM = #{num,jdbcType=DECIMAL},
+      </if>
+      <if test="buynum != null" >
+        BUYNUM = #{buynum,jdbcType=DECIMAL},
+      </if>
+      <if test="malice != null" >
+        MALICE = #{malice,jdbcType=DECIMAL},
+      </if>
+      <if test="info != null" >
+        INFO = #{info,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null" >
+        CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lasttime != null" >
+        LASTTIME = #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastuser != null" >
+        LASTUSER = #{lastuser,jdbcType=VARCHAR},
+      </if>
+      <if test="discountid != null" >
+        DISCOUNTID = #{discountid,jdbcType=DECIMAL},
+      </if>
+      <if test="renewal != null" >
+        RENEWAL = #{renewal,jdbcType=DECIMAL},
+      </if>
+      <if test="renewalpwd != null" >
+        RENEWALPWD = #{renewalpwd,jdbcType=VARCHAR},
+      </if>
+      <if test="olduserid != null" >
+        OLDUSERID = #{olduserid,jdbcType=VARCHAR},
+      </if>
+      <if test="oldmark != null" >
+        OLDMARK = #{oldmark,jdbcType=VARCHAR},
+      </if>
+      <if test="unionuserid != null" >
+        UNIONUSERID = #{unionuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="fconfigid != null" >
+        FCONFIGID = #{fconfigid,jdbcType=DECIMAL},
+      </if>
+      <if test="tnumber != null" >
+        TNUMBER = #{tnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="levels != null" >
+        LEVELS = #{levels,jdbcType=DECIMAL},
+      </if>
+      <if test="amount != null" >
+        AMOUNT = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="lname != null" >
+        LNAME = #{lname,jdbcType=VARCHAR},
+      </if>
+      <if test="adress != null" >
+        ADRESS = #{adress,jdbcType=VARCHAR},
+      </if>
+      <if test="effect != null" >
+        EFFECT = #{effect,jdbcType=DECIMAL},
+      </if>
+      <if test="code != null" >
+        CODE = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="uniondiscount != null" >
+        UNIONDISCOUNT = #{uniondiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="thirddiscount != null" >
+        THIRDDISCOUNT = #{thirddiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="userdiscount != null" >
+        USERDISCOUNT = #{userdiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="cityid != null" >
+        CITYID = #{cityid,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=DECIMAL},
+      </if>
+      <if test="legalperson != null" >
+        LEGALPERSON = #{legalperson,jdbcType=VARCHAR},
+      </if>
+      <if test="businessdate != null" >
+        BUSINESSDATE = #{businessdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="starcapital != null" >
+        STARCAPITAL = #{starcapital,jdbcType=DECIMAL},
+      </if>
+      <if test="employeenum != null" >
+        EMPLOYEENUM = #{employeenum,jdbcType=DECIMAL},
+      </if>
+      <if test="asset != null" >
+        ASSET = #{asset,jdbcType=DECIMAL},
+      </if>
+      <if test="yyzzurl != null" >
+        YYZZURL = #{yyzzurl,jdbcType=VARCHAR},
+      </if>
+      <if test="sfzurl != null" >
+        SFZURL = #{sfzurl,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        USERNAME = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="nativeplace != null" >
+        NATIVEPLACE = #{nativeplace,jdbcType=VARCHAR},
+      </if>
+      <if test="customercity != null" >
+        CUSTOMERCITY = #{customercity,jdbcType=VARCHAR},
+      </if>
+      <if test="datasource != null" >
+        DATASOURCE = #{datasource,jdbcType=VARCHAR},
+      </if>
+      <if test="customersource != null" >
+        CUSTOMERSOURCE = #{customersource,jdbcType=DECIMAL},
+      </if>
+      <if test="industry != null" >
+        INDUSTRY = #{industry,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        POSITION = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="incomelevels != null" >
+        INCOMELEVELS = #{incomelevels,jdbcType=VARCHAR},
+      </if>
+      <if test="incomerange != null" >
+        INCOMERANGE = #{incomerange,jdbcType=VARCHAR},
+      </if>
+      <if test="buypurpose != null" >
+        BUYPURPOSE = #{buypurpose,jdbcType=DECIMAL},
+      </if>
+      <if test="buyfrequency != null" >
+        BUYFREQUENCY = #{buyfrequency,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketprice != null" >
+        TICKETPRICE = #{ticketprice,jdbcType=VARCHAR},
+      </if>
+      <if test="attentionstar != null" >
+        ATTENTIONSTAR = #{attentionstar,jdbcType=VARCHAR},
+      </if>
+      <if test="maritalstatus != null" >
+        MARITALSTATUS = #{maritalstatus,jdbcType=DECIMAL},
+      </if>
+      <if test="ischildren != null" >
+        ISCHILDREN = #{ischildren,jdbcType=DECIMAL},
+      </if>
+      <if test="childrenbirthday != null" >
+        CHILDRENBIRTHDAY = #{childrenbirthday,jdbcType=VARCHAR},
+      </if>
+      <if test="isinternet != null" >
+        ISINTERNET = #{isinternet,jdbcType=DECIMAL},
+      </if>
+      <if test="attentiontype != null" >
+        ATTENTIONTYPE = #{attentiontype,jdbcType=VARCHAR},
+      </if>
+      <if test="interests != null" >
+        INTERESTS = #{interests,jdbcType=VARCHAR},
+      </if>
+      <if test="interestsother != null" >
+        INTERESTSOTHER = #{interestsother,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        BIRTHDAY = #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="currentamount != null" >
+        CURRENTAMOUNT = #{currentamount,jdbcType=DECIMAL},
+      </if>
+      <if test="education != null" >
+        EDUCATION = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="unionsettlementdiscount != null" >
+        UNIONSETTLEMENTDISCOUNT = #{unionsettlementdiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="isrenewal != null" >
+        ISRENEWAL = #{isrenewal,jdbcType=DECIMAL},
+      </if>
+      <if test="regphone != null" >
+        REGPHONE = #{regphone,jdbcType=DECIMAL},
+      </if>
+      <if test="regsafetyinfo != null" >
+        REGSAFETYINFO = #{regsafetyinfo,jdbcType=DECIMAL},
+      </if>
+      <if test="lastlogintime != null" >
+        LASTLOGINTIME = #{lastlogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uniontype != null" >
+        UNIONTYPE = #{uniontype,jdbcType=VARCHAR},
+      </if>
+      <if test="discounttype != null" >
+        DISCOUNTTYPE = #{discounttype,jdbcType=VARCHAR},
+      </if>
+      <if test="limitstarttime != null" >
+        LIMITSTARTTIME = #{limitstarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="limitendtime != null" >
+        LIMITENDTIME = #{limitendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="spreadtypeid != null" >
+        SPREADTYPEID = #{spreadtypeid,jdbcType=DECIMAL},
+      </if>
+      <if test="registeredsource != null" >
+        REGISTEREDSOURCE = #{registeredsource,jdbcType=DECIMAL},
+      </if>
+      <if test="phoneSys != null" >
+        PHONE_SYS = #{phoneSys,jdbcType=DECIMAL},
+      </if>
+      <if test="phoneModel != null" >
+        PHONE_MODEL = #{phoneModel,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneVersion != null" >
+        PHONE_VERSION = #{phoneVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="clientVersion != null" >
+        CLIENT_VERSION = #{clientVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="channelId != null" >
+        CHANNEL_ID = #{channelId,jdbcType=BIGINT},
+      </if>
+      <if test="headimg != null" >
+        HEADIMG = #{headimg,jdbcType=VARCHAR},
+      </if>
+      <if test="devicetoken != null" >
+        DEVICETOKEN = #{devicetoken,jdbcType=VARCHAR},
+      </if>
+      <if test="lastloginphonetype != null" >
+        LASTLOGINPHONETYPE = #{lastloginphonetype,jdbcType=DECIMAL},
+      </if>
+      <if test="accsFlag != null" >
+        ACCS_FLAG = #{accsFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="unionkey != null" >
+        UNIONKEY = #{unionkey,jdbcType=VARCHAR},
+      </if>
+      <if test="errorChannelName != null" >
+        ERROR_CHANNEL_NAME = #{errorChannelName,jdbcType=VARCHAR},
+      </if>
+      <if test="iosIdfa != null" >
+        IOS_IDFA = #{iosIdfa,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginChannel != null" >
+        LAST_LOGIN_CHANNEL = #{lastLoginChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="ifalipay != null" >
+        IFALIPAY = #{ifalipay,jdbcType=DECIMAL},
+      </if>
+      <if test="spreadway != null" >
+        SPREADWAY = #{spreadway,jdbcType=DECIMAL},
+      </if>
+      <if test="gradeName != null" >
+        GRADE_NAME = #{gradeName,jdbcType=VARCHAR},
+      </if>
+      <if test="gradeId != null" >
+        GRADE_ID = #{gradeId,jdbcType=BIGINT},
+      </if>
+      <if test="cindex != null" >
+        CINDEX = #{cindex},
+      </if>
+      <if test="cindexUpddate != null" >
+        CINDEX_UPDDATE = #{cindexUpddate,jdbcType=TIMESTAMP},
+      </if>
+       <if test="shield != null" >
+        SHIELD=#{shield,jdbcType=DECIMAL},
+      </if>
+      <if test="sysSource != null" >
+        SYS_SOURCE=#{sysSource,jdbcType=VARCHAR},
+      </if>
+      <if test="weiboNo != null" >
+        WEIBO_NO=#{weiboNo,jdbcType=VARCHAR},
+      </if>
+      <if test="weixinNo != null" >
+        WEIXIN_NO=#{weixinNo,jdbcType=VARCHAR},
+      </if>
+      <if test="crmIntegralSys != null" >
+        CRM_INTEGRAL_SYS=#{crmIntegralSys},
+      </if>
+      <if test="crmIntegralOpt != null" >
+        CRM_INTEGRAL_OPT=#{crmIntegralOpt},
+      </if>
+      <if test="crmIntegralStatus != null" >
+        CRM_INTEGRAL_STATUS=#{crmIntegralStatus},
+      </if>
+      <if test="crmIntegralConsume != null" >
+        CRM_INTEGRAL_CONSUME=#{crmIntegralConsume},
+      </if>
+      <if test="crmIntegralUsable != null" >
+        CRM_INTEGRAL_USABLE=#{crmIntegralUsable},
+      </if>
+      <if test="qqNum != null" >
+        QQNUM=#{qqNum},
+      </if>
+      <if test="constellation != null" >
+        CONSTELLATION=#{constellation},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.ylpw.web.crm.entity.customer.TCustomers" >
+    update t_customers
+    set TRUENAME = #{truename,jdbcType=VARCHAR},
+      PASSWORD = #{password,jdbcType=VARCHAR},
+      SEX = #{sex,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      REGDATE = #{regdate,jdbcType=TIMESTAMP},
+      NICKNAME = #{nickname,jdbcType=VARCHAR},
+      CARDTYPE = #{cardtype,jdbcType=DECIMAL},
+      CARD = #{card,jdbcType=VARCHAR},
+      USERTYPE = #{usertype,jdbcType=DECIMAL},
+      DISCOUNTDETAILID = #{discountdetailid,jdbcType=BIGINT},
+      IP = #{ip,jdbcType=VARCHAR},
+      REGEMAIL = #{regemail,jdbcType=DECIMAL},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      TEL = #{tel,jdbcType=VARCHAR},
+      INTEGRAL = #{integral,jdbcType=DECIMAL},
+      NUM = #{num,jdbcType=DECIMAL},
+      BUYNUM = #{buynum,jdbcType=DECIMAL},
+      MALICE = #{malice,jdbcType=DECIMAL},
+      INFO = #{info,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=DECIMAL},
+      CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      LASTTIME = #{lasttime,jdbcType=TIMESTAMP},
+      LASTUSER = #{lastuser,jdbcType=VARCHAR},
+      DISCOUNTID = #{discountid,jdbcType=DECIMAL},
+      RENEWAL = #{renewal,jdbcType=DECIMAL},
+      RENEWALPWD = #{renewalpwd,jdbcType=VARCHAR},
+      OLDUSERID = #{olduserid,jdbcType=VARCHAR},
+      OLDMARK = #{oldmark,jdbcType=VARCHAR},
+      UNIONUSERID = #{unionuserid,jdbcType=VARCHAR},
+      FCONFIGID = #{fconfigid,jdbcType=DECIMAL},
+      TNUMBER = #{tnumber,jdbcType=VARCHAR},
+      LEVELS = #{levels,jdbcType=DECIMAL},
+      AMOUNT = #{amount,jdbcType=DECIMAL},
+      LNAME = #{lname,jdbcType=VARCHAR},
+      ADRESS = #{adress,jdbcType=VARCHAR},
+      EFFECT = #{effect,jdbcType=DECIMAL},
+      CODE = #{code,jdbcType=VARCHAR},
+      UNIONDISCOUNT = #{uniondiscount,jdbcType=DECIMAL},
+      THIRDDISCOUNT = #{thirddiscount,jdbcType=DECIMAL},
+      USERDISCOUNT = #{userdiscount,jdbcType=DECIMAL},
+      CITYID = #{cityid,jdbcType=DECIMAL},
+      TYPE = #{type,jdbcType=DECIMAL},
+      LEGALPERSON = #{legalperson,jdbcType=VARCHAR},
+      BUSINESSDATE = #{businessdate,jdbcType=TIMESTAMP},
+      STARCAPITAL = #{starcapital,jdbcType=DECIMAL},
+      EMPLOYEENUM = #{employeenum,jdbcType=DECIMAL},
+      ASSET = #{asset,jdbcType=DECIMAL},
+      YYZZURL = #{yyzzurl,jdbcType=VARCHAR},
+      SFZURL = #{sfzurl,jdbcType=VARCHAR},
+      USERNAME = #{username,jdbcType=VARCHAR},
+      NATIVEPLACE = #{nativeplace,jdbcType=VARCHAR},
+      CUSTOMERCITY = #{customercity,jdbcType=VARCHAR},
+      DATASOURCE = #{datasource,jdbcType=VARCHAR},
+      CUSTOMERSOURCE = #{customersource,jdbcType=DECIMAL},
+      INDUSTRY = #{industry,jdbcType=VARCHAR},
+      POSITION = #{position,jdbcType=VARCHAR},
+      INCOMELEVELS = #{incomelevels,jdbcType=VARCHAR},
+      INCOMERANGE = #{incomerange,jdbcType=VARCHAR},
+      BUYPURPOSE = #{buypurpose,jdbcType=DECIMAL},
+      BUYFREQUENCY = #{buyfrequency,jdbcType=VARCHAR},
+      TICKETPRICE = #{ticketprice,jdbcType=VARCHAR},
+      ATTENTIONSTAR = #{attentionstar,jdbcType=VARCHAR},
+      MARITALSTATUS = #{maritalstatus,jdbcType=DECIMAL},
+      ISCHILDREN = #{ischildren,jdbcType=DECIMAL},
+      CHILDRENBIRTHDAY = #{childrenbirthday,jdbcType=VARCHAR},
+      ISINTERNET = #{isinternet,jdbcType=DECIMAL},
+      ATTENTIONTYPE = #{attentiontype,jdbcType=VARCHAR},
+      INTERESTS = #{interests,jdbcType=VARCHAR},
+      INTERESTSOTHER = #{interestsother,jdbcType=VARCHAR},
+      BIRTHDAY = #{birthday,jdbcType=VARCHAR},
+      CURRENTAMOUNT = #{currentamount,jdbcType=DECIMAL},
+      EDUCATION = #{education,jdbcType=VARCHAR},
+      UNIONSETTLEMENTDISCOUNT = #{unionsettlementdiscount,jdbcType=DECIMAL},
+      ISRENEWAL = #{isrenewal,jdbcType=DECIMAL},
+      REGPHONE = #{regphone,jdbcType=DECIMAL},
+      REGSAFETYINFO = #{regsafetyinfo,jdbcType=DECIMAL},
+      LASTLOGINTIME = #{lastlogintime,jdbcType=TIMESTAMP},
+      UNIONTYPE = #{uniontype,jdbcType=VARCHAR},
+      DISCOUNTTYPE = #{discounttype,jdbcType=VARCHAR},
+      LIMITSTARTTIME = #{limitstarttime,jdbcType=TIMESTAMP},
+      LIMITENDTIME = #{limitendtime,jdbcType=TIMESTAMP},
+      SPREADTYPEID = #{spreadtypeid,jdbcType=DECIMAL},
+      REGISTEREDSOURCE = #{registeredsource,jdbcType=DECIMAL},
+      PHONE_SYS = #{phoneSys,jdbcType=DECIMAL},
+      PHONE_MODEL = #{phoneModel,jdbcType=VARCHAR},
+      PHONE_VERSION = #{phoneVersion,jdbcType=VARCHAR},
+      CLIENT_VERSION = #{clientVersion,jdbcType=VARCHAR},
+      CHANNEL_ID = #{channelId,jdbcType=BIGINT},
+      HEADIMG = #{headimg,jdbcType=VARCHAR},
+      DEVICETOKEN = #{devicetoken,jdbcType=VARCHAR},
+      LASTLOGINPHONETYPE = #{lastloginphonetype,jdbcType=DECIMAL},
+      ACCS_FLAG = #{accsFlag,jdbcType=VARCHAR},
+      UNIONKEY = #{unionkey,jdbcType=VARCHAR},
+      ERROR_CHANNEL_NAME = #{errorChannelName,jdbcType=VARCHAR},
+      IOS_IDFA = #{iosIdfa,jdbcType=VARCHAR},
+      LAST_LOGIN_CHANNEL = #{lastLoginChannel,jdbcType=VARCHAR},
+      IFALIPAY = #{ifalipay,jdbcType=DECIMAL},
+      SPREADWAY = #{spreadway,jdbcType=DECIMAL},
+      GRADE_NAME = #{gradeName,jdbcType=VARCHAR},
+      GRADE_ID = #{gradeId,jdbcType=BIGINT},
+      CINDEX = #{cindex},
+      CINDEX_UPDDATE = #{cindexUpddate,jdbcType=TIMESTAMP},
+      SYS_SOURCE=#{sysSource,jdbcType=VARCHAR},
+      WEIBO_NO=#{weiboNo,jdbcType=VARCHAR},
+      WEIXIN_NO=#{weixinNo,jdbcType=VARCHAR},
+      QQNUM=#{qqNum,jdbcType=VARCHAR},
+      CONSTELLATION=#{constellation,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="findAll" resultType="java.util.HashMap" parameterType="java.util.Map">
+    select 
+    *
+    from t_customers
+  </select>
+  
+  
+  <insert id="insertBatchSelective" parameterType="java.util.List" >
+    INSERT INTO T_CUSTOMERS (   PWSYSID,SYS1ID,SYS2ID,SYS3ID , TRUENAME, PASSWORD, 
+      SEX, EMAIL, REGDATE, 
+      NICKNAME, CARDTYPE, CARD, 
+      USERTYPE, DISCOUNTDETAILID, IP, 
+      REGEMAIL, PHONE, TEL, 
+      INTEGRAL, NUM, BUYNUM, 
+      MALICE, INFO, STATUS, 
+      CREATETIME, LASTTIME, LASTUSER, 
+      DISCOUNTID, RENEWAL, RENEWALPWD, 
+      OLDUSERID, OLDMARK, UNIONUSERID, 
+      FCONFIGID, TNUMBER, LEVELS, 
+      AMOUNT, LNAME, ADRESS, 
+      EFFECT, CODE, UNIONDISCOUNT, 
+      THIRDDISCOUNT, USERDISCOUNT, CITYID, 
+      TYPE, LEGALPERSON, BUSINESSDATE, 
+      STARCAPITAL, EMPLOYEENUM, ASSET, 
+      YYZZURL, SFZURL, USERNAME, 
+      NATIVEPLACE, CUSTOMERCITY, DATASOURCE, 
+      CUSTOMERSOURCE, INDUSTRY, POSITION, 
+      INCOMELEVELS, INCOMERANGE, BUYPURPOSE, 
+      BUYFREQUENCY, TICKETPRICE, ATTENTIONSTAR, 
+      MARITALSTATUS, ISCHILDREN, CHILDRENBIRTHDAY, 
+      ISINTERNET, ATTENTIONTYPE, INTERESTS, 
+      INTERESTSOTHER, BIRTHDAY, CURRENTAMOUNT, 
+      EDUCATION, UNIONSETTLEMENTDISCOUNT, ISRENEWAL, 
+      REGPHONE, REGSAFETYINFO, LASTLOGINTIME, 
+      UNIONTYPE, DISCOUNTTYPE, LIMITSTARTTIME, 
+      LIMITENDTIME, SPREADTYPEID, REGISTEREDSOURCE, 
+      PHONE_SYS, PHONE_MODEL, PHONE_VERSION, 
+      CLIENT_VERSION, CHANNEL_ID, HEADIMG, 
+      DEVICETOKEN, LASTLOGINPHONETYPE, ACCS_FLAG, 
+      UNIONKEY, ERROR_CHANNEL_NAME, IOS_IDFA, 
+      LAST_LOGIN_CHANNEL, IFALIPAY, SPREADWAY, 
+      GRADE_NAME, GRADE_ID, CINDEX, 
+      CINDEX_UPDDATE , SYS_SOURCE,WEIBO_NO,WEIXIN_NO,QQNUM,CONSTELLATION,USERID_TOKEN)
+    VALUES
+     <foreach collection ="list" item="cus" index= "index" separator ="," >
+     	(
+    		 #{cus.pwsysId,jdbcType=BIGINT},#{cus.sys1Id,jdbcType=BIGINT},
+    		  #{cus.sys2Id,jdbcType=BIGINT},#{cus.sys3Id,jdbcType=BIGINT},
+    		   #{cus.truename,jdbcType=VARCHAR}, #{cus.password,jdbcType=VARCHAR}, 
+		      #{cus.sex,jdbcType=VARCHAR}, #{cus.email,jdbcType=VARCHAR}, #{cus.regdate,jdbcType=TIMESTAMP}, 
+		      #{cus.nickname,jdbcType=VARCHAR}, #{cus.cardtype,jdbcType=DECIMAL}, #{cus.card,jdbcType=VARCHAR}, 
+		      #{cus.usertype,jdbcType=DECIMAL}, #{cus.discountdetailid,jdbcType=BIGINT}, #{cus.ip,jdbcType=VARCHAR}, 
+		      #{cus.regemail,jdbcType=DECIMAL}, #{cus.phone,jdbcType=VARCHAR}, #{cus.tel,jdbcType=VARCHAR}, 
+		      #{cus.integral,jdbcType=DECIMAL}, #{cus.num,jdbcType=DECIMAL}, #{cus.buynum,jdbcType=DECIMAL}, 
+		      #{cus.malice,jdbcType=DECIMAL}, #{cus.info,jdbcType=VARCHAR}, #{cus.status,jdbcType=DECIMAL}, 
+		      #{cus.createtime,jdbcType=TIMESTAMP}, #{cus.lasttime,jdbcType=TIMESTAMP}, #{cus.lastuser,jdbcType=VARCHAR}, 
+		      #{cus.discountid,jdbcType=DECIMAL}, #{cus.renewal,jdbcType=DECIMAL}, #{cus.renewalpwd,jdbcType=VARCHAR}, 
+		      #{cus.olduserid,jdbcType=VARCHAR}, #{cus.oldmark,jdbcType=VARCHAR}, #{cus.unionuserid,jdbcType=VARCHAR}, 
+		      #{cus.fconfigid,jdbcType=DECIMAL}, #{cus.tnumber,jdbcType=VARCHAR}, #{cus.levels,jdbcType=DECIMAL}, 
+		      #{cus.amount,jdbcType=DECIMAL}, #{cus.lname,jdbcType=VARCHAR}, #{cus.adress,jdbcType=VARCHAR}, 
+		      #{cus.effect,jdbcType=DECIMAL}, #{cus.code,jdbcType=VARCHAR}, #{cus.uniondiscount,jdbcType=DECIMAL}, 
+		      #{cus.thirddiscount,jdbcType=DECIMAL}, #{cus.userdiscount,jdbcType=DECIMAL}, #{cus.cityid,jdbcType=DECIMAL}, 
+		      #{cus.type,jdbcType=DECIMAL}, #{cus.legalperson,jdbcType=VARCHAR}, #{cus.businessdate,jdbcType=TIMESTAMP}, 
+		      #{cus.starcapital,jdbcType=DECIMAL}, #{cus.employeenum,jdbcType=DECIMAL}, #{cus.asset,jdbcType=DECIMAL}, 
+		      #{cus.yyzzurl,jdbcType=VARCHAR}, #{cus.sfzurl,jdbcType=VARCHAR}, #{cus.username,jdbcType=VARCHAR}, 
+		      #{cus.nativeplace,jdbcType=VARCHAR}, #{cus.customercity,jdbcType=VARCHAR}, #{cus.datasource,jdbcType=VARCHAR}, 
+		      #{cus.customersource,jdbcType=DECIMAL}, #{cus.industry,jdbcType=VARCHAR}, #{cus.position,jdbcType=VARCHAR}, 
+		      #{cus.incomelevels,jdbcType=VARCHAR}, #{cus.incomerange,jdbcType=VARCHAR}, #{cus.buypurpose,jdbcType=DECIMAL}, 
+		      #{cus.buyfrequency,jdbcType=VARCHAR}, #{cus.ticketprice,jdbcType=VARCHAR}, #{cus.attentionstar,jdbcType=VARCHAR}, 
+		      #{cus.maritalstatus,jdbcType=DECIMAL}, #{cus.ischildren,jdbcType=DECIMAL}, #{cus.childrenbirthday,jdbcType=VARCHAR}, 
+		      #{cus.isinternet,jdbcType=DECIMAL}, #{cus.attentiontype,jdbcType=VARCHAR}, #{cus.interests,jdbcType=VARCHAR}, 
+		      #{cus.interestsother,jdbcType=VARCHAR}, #{cus.birthday,jdbcType=VARCHAR}, #{cus.currentamount,jdbcType=DECIMAL}, 
+		      #{cus.education,jdbcType=VARCHAR}, #{cus.unionsettlementdiscount,jdbcType=DECIMAL}, #{cus.isrenewal,jdbcType=DECIMAL}, 
+		      #{cus.regphone,jdbcType=DECIMAL}, #{cus.regsafetyinfo,jdbcType=DECIMAL}, #{cus.lastlogintime,jdbcType=TIMESTAMP}, 
+		      #{cus.uniontype,jdbcType=VARCHAR}, #{cus.discounttype,jdbcType=VARCHAR}, #{cus.limitstarttime,jdbcType=TIMESTAMP}, 
+		      #{cus.limitendtime,jdbcType=TIMESTAMP}, #{cus.spreadtypeid,jdbcType=DECIMAL}, #{cus.registeredsource,jdbcType=DECIMAL}, 
+		      #{cus.phoneSys,jdbcType=DECIMAL}, #{cus.phoneModel,jdbcType=VARCHAR}, #{cus.phoneVersion,jdbcType=VARCHAR}, 
+		      #{cus.clientVersion,jdbcType=VARCHAR}, #{cus.channelId,jdbcType=BIGINT}, #{cus.headimg,jdbcType=VARCHAR}, 
+		      #{cus.devicetoken,jdbcType=VARCHAR}, #{cus.lastloginphonetype,jdbcType=DECIMAL}, #{cus.accsFlag,jdbcType=VARCHAR}, 
+		      #{cus.unionkey,jdbcType=VARCHAR}, #{cus.errorChannelName,jdbcType=VARCHAR}, #{cus.iosIdfa,jdbcType=VARCHAR}, 
+		      #{cus.lastLoginChannel,jdbcType=VARCHAR}, #{cus.ifalipay,jdbcType=DECIMAL}, #{cus.spreadway,jdbcType=DECIMAL}, 
+		      #{cus.gradeName,jdbcType=VARCHAR}, #{cus.gradeId,jdbcType=BIGINT}, #{cus.cindex}, 
+		      #{cus.cindexUpddate,jdbcType=TIMESTAMP} ,#{cus.sysSource},#{cus.weiboNo},#{cus.weixinNo},#{cus.qqNum},#{cus.constellation},#{cus.useridToken}
+		 )     
+     </foreach>
+  </insert>
+  
+  	<!-- 会员列表查询 start  -->
+  	
+  	<sql id="Where_Param_Find" >
+    <where>
+    	<!-- 会员来源 
+	     <if test="sysSource != null and sysSource != '' ">
+	       and  SYS_SOURCE = #{sysSource}
+	   	 </if>-->
+	   	 <!-- 会员状态 
+	     <if test="vipStatus != null and vipStatus != '' ">
+	       	 <choose>
+		        <when test="vipStatus == 0 ">
+		           and  c.ID not   in (
+							select od.CUSTOMERSID   from t_orders_info od 
+							where od.pay_status='已支付' group by od.CUSTOMERSID 
+							having   sum(1)>0
+					)
+		        </when>
+		        <otherwise>
+		           and  c.ID   in (
+							select od.CUSTOMERSID   from t_orders_info od 
+							where od.pay_status='已支付' group by od.CUSTOMERSID 
+							having   sum(1)>0
+					)
+		        </otherwise>
+	   		 </choose>
+	   	 </if>-->
+	   	
+	   	  <!-- 会员姓名 
+	   	  <if test="truename != null and truename != '' ">
+	   	  <![CDATA[
+	   	  		  and  c.TRUENAME  like  '%${truename}%'
+	   	    ]]>
+	   	  </if>-->
+	   	  <!-- 上次交易时间 
+	   	  <if test="( (payStart != null and payStart != '' ) or  (payEnd != null and payEnd != '' )   ) ">
+		   	    and  c.ID    in (
+					select od.CUSTOMERSID   from t_orders_info od where od.pay_status='已支付'  
+					<if test="(  payStart != null and payStart != ''  ) ">
+					<![CDATA[
+						and    od.PAY_TIME   >=  #{payStart}
+					]]>
+					</if>
+					<if test="( payEnd != null and payEnd != ''   ) ">
+					<![CDATA[
+						and   od.PAY_TIME   <=#{payEnd}
+					 ]]>	
+					</if>
+				)
+	   	  </if>-->
+	   	  
+	   	   <!-- 会员级别 -->
+	   	  <if test="vipRank != null and vipRank != '' ">
+	   	  		  and  c.GRADE_ID =#{vipRank}
+	   	  </if>
+	   	  
+	   	  <if test="null!=isOrderSearch and isOrderSearch ">
+	   	  	  and  c.PWSYSID     in (
+		   	  	  select od.CUSTOMERSID  from t_orders_info od where 1=1  
+			   	  <!-- 下单终端 -->
+			   	  <if test="( orderSourceIndex != null     ) ">
+			   	  		and  od.ORDER_SOURCE  in (
+						  #{orderSourceIndex}
+						)
+			   	  </if>
+	   	 	 )
+	   	  </if>
+	   	  
+	   	   <!--入会时间 -->
+	   	  <if test="( ( regS != null and regS != '' ) or  ( regE != null and regE != ''  )   ) ">
+					<if test="(  regS != null and regS != ''  ) ">
+						<![CDATA[
+							and  c.CREATETIME  >=#{regS}
+						]]>
+					</if>
+					<if test="( regE != null and regE != ''   ) ">
+						<![CDATA[
+							and  c.CREATETIME <=#{regE}
+						 ]]>
+					</if>
+	   	  </if>
+	   	  
+	   	   <!--营销屏蔽 -->
+	   	  <if test="yxpb != null and yxpb != '' ">
+	   	  		  and  c.SHIELD  =  #{yxpb}
+	   	  </if>
+	   	  
+	   	  <if test="ids != null" >
+			and  c.id in
+		      <foreach item="id" collection="ids" open="(" separator="," close=")">
+		          #{id}
+		      </foreach>
+	      </if>
+	   	  
+	   	  <!-- 注册ID -->
+	   	  <if test="pwsysId != null and '' != pwsysId">
+	   	  		  and  c.PWSYSID =#{pwsysId}
+	   	  </if>
+	   	    <!-- 交易总额
+	   	  <if test="( ( priceS != null and priceS != ''   ) or  ( priceE != null and priceE != ''     )   ) ">
+		   	    and  c.ID    in (
+			   	    select  od.CUSTOMERSID    from t_orders_info od  where  od.PAY_STATUS='已支付' group by od.CUSTOMERSID 
+					having   1=1 
+					<if test="(  priceS != null and priceS != ''  ) ">
+						<![CDATA[
+							and IFNULL( sum(od.SJZF_PRICE) ,0) >=#{priceS} 
+						]]>
+					</if>
+					<if test="( priceE != null and priceE != ''   ) ">
+						<![CDATA[
+							 and IFNULL( sum(od.SJZF_PRICE),0 ) <=#{priceE}
+						 ]]>	
+					</if>
+				)
+	   	  </if> -->
+	   	    <!-- 交易笔数
+	   	  <if test="( ( payS != null and payS != '' ) or  ( payE != null and payE != ''  )   ) ">
+		   	    and  c.ID    in (
+			   	    select  od.CUSTOMERSID    from t_orders_info od  where  od.PAY_STATUS='已支付' group by od.CUSTOMERSID 
+					having   1=1 
+					<if test="(  payS != null and payS != ''  ) ">
+						<![CDATA[
+							and  IFNULL( count(od.id) ,0) >=#{payS} 
+						]]>
+					</if>
+					<if test="( payE != null and payE != ''   ) ">
+						<![CDATA[
+							 and  IFNULL( count(od.id) ,0) <=#{payE}
+						 ]]>	
+					</if>
+				)
+	   	  </if> -->
+	   	  
+	   	    <!--平均客单价
+	   	  <if test="( ( avgS != null and avgS != '' ) or  ( avgE != null and avgE != ''  )   ) ">
+		   	    and  c.ID    in (
+			   	    select  od.CUSTOMERSID    from t_orders_info od  where  od.PAY_STATUS='已支付' group by od.CUSTOMERSID 
+					having   1=1 
+					<if test="(  avgS != null and avgS != ''  ) ">
+						<![CDATA[
+							 and IFNULL( (sum(od.SJZF_PRICE) / count(od.id)) ,0)  >=#{avgS} 
+						]]>
+					</if>
+					<if test="( avgE != null and avgE != ''   ) ">
+						<![CDATA[
+							and IFNULL( (sum(od.SJZF_PRICE) / count(od.id)) ,0)   <=#{avgE} 
+						 ]]>	
+					</if>
+				)
+	   	  </if> -->
+	   	  
+	   	    <!--退货次数 
+	   	  <if test="( ( refS != null and refS != '' ) or  ( refE != null and refE != ''  )   ) ">
+		   	    and  c.ID    in (
+			   	    select  od.CUSTOMERSID    from t_orders_info od  where  od.PAY_STATUS='已退款' group by od.CUSTOMERSID 
+					having   1=1
+					<if test="(  refS != null and refS != ''  ) ">
+						<![CDATA[
+							and IFNULL(  count(od.id) ,0)  >=#{refS}
+						]]>
+					</if>
+					<if test="( refE != null and refE != ''   ) ">
+						<![CDATA[
+							and IFNULL(  count(od.id), 0)  <=#{refE}
+						 ]]>	
+					</if>
+				)
+	   	  </if>-->
+	   	  
+	   	    <!--退货金额
+	   	  <if test="( ( refPriceS != null and refPriceS != '' ) or  ( refPriceE != null and refPriceE != ''  )   ) ">
+		   	    and  c.ID    in (
+			   	    select  IFNULL( sum(od.REFUN_PRICE),0)    from t_orders_info od  where  od.PAY_STATUS='已退款' group by od.CUSTOMERSID 
+					having   1=1
+					<if test="(  refS != null and refS != ''  ) ">
+						<![CDATA[
+							and IFNULL( sum(od.REFUN_PRICE),0)  >=#{refPriceS}
+						]]>
+					</if>
+					<if test="( refE != null and refE != ''   ) ">
+						<![CDATA[
+							and IFNULL( sum(od.REFUN_PRICE),0)  <=#{refPriceE}
+						 ]]>	
+					</if>
+				)
+	   	  </if> -->
+	   	  
+	   	    <!--取消订单数 
+	   	  <if test="( ( cancelS != null and cancelS != '' ) or  ( cancelE != null and cancelE != ''  )   ) ">
+		   	    and  c.ID    in (
+			   	    select  od.CUSTOMERSID    from t_orders_info od  where  od.PAY_STATUS!='已支付' 
+			   	    and  (od.ORDER_STATUS ='用户已删除'   or  od.ORDER_STATUS ='无效'  )  group by od.CUSTOMERSID 
+					having   1=1
+					<if test="(  cancelS != null and cancelS != ''  ) ">
+						<![CDATA[ 
+							and  IFNULL( count(od.id),0)  >=#{refPriceS}
+						]]>
+					</if>
+					<if test="( cancelE != null and cancelE != ''   ) ">
+						<![CDATA[
+							and  IFNULL( count(od.id),0)  <=#{refPriceE}
+						 ]]>
+					</if>
+				)
+	   	  </if>-->
+     	
+    </where>
+    
+   	  
+    </sql>
+    
+    <select id="findByParamsCount" resultType="long" parameterType="cn.com.ylpw.web.crm.form.TCustomerForm">
+    	SELECT count(1) FROM T_CUSTOMERS c
+    	<include refid="Where_Param_Find" />
+    </select>
+    
+    <select id="findByParams" resultType="java.util.HashMap" parameterType="cn.com.ylpw.web.crm.form.TCustomerForm">
+		
+		   SELECT 
+		          c.ID,c.PWSYSID,
+					CONVERT(c.TRUENAME USING utf8) as TRUENAME  , 
+					c.SYS_SOURCE,
+						(SELECT
+							IFNULL(sum(1),0)
+						FROM
+							t_orders_info oinfo1
+						WHERE
+							oinfo1.CUSTOMERSID = c.PWSYSID    and oinfo1.pay_status='已支付'  ) as PAY_NUM ,	 
+						
+							(SELECT
+								if (IFNULL(count(1),0)>0 ,1, 0)
+							FROM
+								t_orders_info oinfo1
+							WHERE
+								oinfo1.CUSTOMERSID = c.PWSYSID    and oinfo1.pay_status='已支付'  )  as VIP_STATUS ,
+						(SELECT
+							IFNULL(sum(oinfo1.ORDER_SUMPRICE),0)
+						FROM
+							t_orders_info oinfo1
+						WHERE
+							oinfo1.CUSTOMERSID = c.PWSYSID   and oinfo1.pay_status='已支付'    ) as PAY_TOTAL_PRICE ,
+							
+						(SELECT
+							 oinfo1.PAY_TIME
+						FROM
+							t_orders_info oinfo1  
+						WHERE
+							oinfo1.CUSTOMERSID = c.PWSYSID and oinfo1.pay_status='已支付'  
+						order by oinfo1.PAY_TIME desc    LIMIT 0,1    ) as LAST_PAY_DATE ,
+				
+						c.GRADE_NAME  ,
+						
+						c.SHIELD,
+						(SELECT cg.GNAME FROM t_customer_grade cg WHERE cg.ID = c.GRADE_ID) AS GNAME
+		FROM
+			t_customers c  
+			<include refid="Where_Param_Find" />
+			order by  c.id asc 
+  </select>
+  <!-- 会员列表查询 end  -->
+  
+  
+  <!-- 批量营销屏蔽 start-->
+  
+  <update id="updShieldBatch" parameterType="long" flushCache="true" >
+        update t_customers cus  set cus.SHIELD =  IF(cus.SHIELD=1,0 ,1)  where id in
+        <foreach item="id" collection="ids" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+   </update>
+  <!--批量营销屏蔽 end -->
+  
+   <select id="findCustomerInfo" resultType="java.util.HashMap" parameterType="java.util.Map">
+	   <![CDATA[
+		    SELECT  CUS.ID , (SELECT cg.GNAME FROM t_customer_grade cg WHERE cg.ID = cus.GRADE_ID) AS GRADE_NAME , IFNULL(CUS.INTEGRAL ,0 ) AS   INTEGRAL,
+			(SELECT NAME  FROM SYS_DICTIONARIE  WHERE PID = 64   AND  CODE =  CUS.SYS_SOURCE ) AS   SYS_SOURCE,
+			
+			(SELECT OD.PAY_TIME FROM T_ORDERS_INFO  OD WHERE  
+			 OD.CUSTOMERSID =CUS.PWSYSID   AND OD.PAY_STATUS ='已支付'  ORDER BY ID DESC  LIMIT 0 ,1 )  AS LAST_PAY_TIME ,
+			
+			IFNULL( (SELECT  SUM(OD.ORDER_SUMPRICE)    FROM T_ORDERS_INFO  OD WHERE  
+			 OD.CUSTOMERSID =CUS.PWSYSID    AND OD.PAY_STATUS ='已支付'  
+			AND  DATE_FORMAT( OD.PAY_TIME , '%Y') =  DATE_FORMAT( NOW() , '%Y')
+			GROUP BY  DATE_FORMAT( OD.PAY_TIME , '%Y') ) ,0 )  AS   SJZF_YEAR ,
+			
+			
+			(SELECT  COUNT(1) FROM T_ORDERS_INFO  OD WHERE  
+			 OD.CUSTOMERSID =CUS.PWSYSID   AND OD.PAY_STATUS ='已支付'   )  AS PAY_COUNT   ,
+			
+			
+			IFNULL(  (SELECT  SUM(OD.ORDER_SUMPRICE)  FROM T_ORDERS_INFO  OD WHERE  
+			 OD.CUSTOMERSID =CUS.PWSYSID    AND OD.PAY_STATUS ='已支付'  ) ,0 )  AS   SJZF_TOTAL   ,
+			
+			IFNULL(  (SELECT  SUM(OD.PROS_NUM)  FROM T_ORDERS_INFO  OD WHERE  
+			 OD.CUSTOMERSID =CUS.PWSYSID    AND OD.PAY_STATUS ='已支付'  ) ,0 )  AS   PRO_TOTAL  ,
+			
+			IFNULL(  (SELECT  SUM(OD.ORDER_SUMPRICE)  FROM T_ORDERS_INFO  OD WHERE  
+			 OD.CUSTOMERSID =CUS.PWSYSID    AND OD.PAY_STATUS ='未支付'  ) ,0 )  AS   NOT_PAY_TOTAL   ,
+			
+			CUS.CINDEX
+			 ,
+			(SELECT  COUNT(1) FROM T_EWALLET EW  WHERE EW.CUSTOMERSID = CUS.PWSYSID AND EW.PAY_PRICE > 0   AND EW.FLAG = 0 ) AS   RECHARGE_COUNT,
+			
+			(SELECT  SUM(EW.PAY_PRICE) FROM T_EWALLET EW  WHERE EW.CUSTOMERSID = CUS.PWSYSID AND EW.PAY_PRICE > 0 AND EW.FLAG = 0  ) 
+			AS   RECHARGE_SUMPRICE  ,
+			
+			( SELECT GROUP_CONCAT( NOTE.NAME) FROM T_CUSTOMER_JOIN_NOTE JOIN_NOTE  
+			LEFT JOIN T_CUSTOMER_NOTE    NOTE ON  JOIN_NOTE.NOTE_ID = NOTE.ID   WHERE  JOIN_NOTE.CUSTOMER_ID = CUS.ID  )  
+			AS  NOTE ,
+			( SELECT GROUP_CONCAT( JOIN_NOTE.ID) FROM T_CUSTOMER_JOIN_NOTE JOIN_NOTE  
+			LEFT JOIN T_CUSTOMER_NOTE    NOTE ON  JOIN_NOTE.NOTE_ID = NOTE.ID   WHERE  JOIN_NOTE.CUSTOMER_ID = CUS.ID  )  
+			AS  JOIN_NOTEID, cus.PWSYSID ,cus.GRADE_NAME
+			from t_customers  cus   where cus.id=  #{customersid} ;
+		]]>
+   </select>
+   
+   
+    <update id="updateBatchSelective" parameterType="java.util.List">
+	        <foreach collection="list" item="cus" index="index" open="" close="" separator=";" >
+	     	  update t_customers
+			    <set >
+			      <if test="cus.truename != null" >
+			        TRUENAME = #{cus.truename,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.password != null" >
+			        PASSWORD = #{cus.password,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.sex != null" >
+			        SEX = #{cus.sex,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.email != null" >
+			        EMAIL = #{cus.email,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.regdate != null" >
+			        REGDATE = #{cus.regdate,jdbcType=TIMESTAMP},
+			      </if>
+			      <if test="cus.nickname != null" >
+			        NICKNAME = #{cus.nickname,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.cardtype != null" >
+			        CARDTYPE = #{cus.cardtype,jdbcType=DECIMAL},
+			      </if>
+			      <if test="cus.card != null" >
+			        CARD = #{cus.card,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.usertype != null" >
+			        USERTYPE = #{cus.usertype,jdbcType=DECIMAL},
+			      </if>
+			      <if test="cus.discountdetailid != null" >
+			        DISCOUNTDETAILID = #{cus.discountdetailid,jdbcType=BIGINT},
+			      </if>
+			      <if test="cus.ip != null" >
+			        IP = #{cus.ip,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.regemail != null" >
+			        REGEMAIL = #{cus.regemail,jdbcType=DECIMAL},
+			      </if>
+			      <if test="cus.phone != null" >
+			        PHONE = #{cus.phone,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.tel != null" >
+			        TEL = #{cus.tel,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.integral != null" >
+			        INTEGRAL = #{cus.integral,jdbcType=DECIMAL},
+			      </if>
+			      <if test="cus.num != null" >
+			        NUM = #{cus.num,jdbcType=DECIMAL},
+			      </if>
+			      <if test="cus.buynum != null" >
+			        BUYNUM = #{cus.buynum,jdbcType=DECIMAL},
+			      </if>
+			      <if test="cus.malice != null" >
+			        MALICE = #{cus.malice,jdbcType=DECIMAL},
+			      </if>
+			      <if test="cus.info != null" >
+			        INFO = #{cus.info,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.status != null" >
+			        STATUS = #{cus.status,jdbcType=DECIMAL},
+			      </if>
+			      <if test="cus.createtime != null" >
+			        CREATETIME = #{cus.createtime,jdbcType=TIMESTAMP},
+			      </if>
+			      <if test="cus.lasttime != null" >
+			        LASTTIME = #{cus.lasttime,jdbcType=TIMESTAMP},
+			      </if>
+			      <if test="cus.lastuser != null" >
+			        LASTUSER = #{cus.lastuser,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.discountid != null" >
+			        DISCOUNTID = #{cus.discountid,jdbcType=DECIMAL},
+			      </if>
+			      <if test="cus.renewal != null" >
+			        RENEWAL = #{cus.renewal,jdbcType=DECIMAL},
+			      </if>
+			      <if test="cus.renewalpwd != null" >
+			        RENEWALPWD = #{cus.renewalpwd,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.olduserid != null" >
+			        OLDUSERID = #{cus.olduserid,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.oldmark != null" >
+			        OLDMARK = #{cus.oldmark,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.unionuserid != null" >
+			        UNIONUSERID = #{cus.unionuserid,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.fconfigid != null" >
+			        FCONFIGID = #{cus.fconfigid,jdbcType=DECIMAL},
+			      </if>
+			      <if test="cus.tnumber != null" >
+			        TNUMBER = #{cus.tnumber,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.levels != null" >
+			        LEVELS = #{cus.levels,jdbcType=DECIMAL},
+			      </if>
+			      <if test="cus.amount != null" >
+			        AMOUNT = #{cus.amount,jdbcType=DECIMAL},
+			      </if>
+			      <if test="cus.lname != null" >
+			        LNAME = #{cus.lname,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.adress != null" >
+			        ADRESS = #{cus.adress,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.effect != null" >
+			        EFFECT = #{cus.effect,jdbcType=DECIMAL},
+			      </if>
+			      <if test="cus.code != null" >
+			        CODE = #{cus.code,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.uniondiscount != null" >
+			        UNIONDISCOUNT = #{cus.uniondiscount,jdbcType=DECIMAL},
+			      </if>
+			      <if test="cus.thirddiscount != null" >
+			        THIRDDISCOUNT = #{cus.thirddiscount,jdbcType=DECIMAL},
+			      </if>
+			      <if test="cus.userdiscount != null" >
+			        USERDISCOUNT = #{cus.userdiscount,jdbcType=DECIMAL},
+			      </if>
+			      <if test="cus.cityid != null" >
+			        CITYID = #{cus.cityid,jdbcType=DECIMAL},
+			      </if>
+			      <if test="cus.type != null" >
+			        TYPE = #{cus.type,jdbcType=DECIMAL},
+			      </if>
+			      <if test="cus.legalperson != null" >
+			        LEGALPERSON = #{cus.legalperson,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.businessdate != null" >
+			        BUSINESSDATE = #{cus.businessdate,jdbcType=TIMESTAMP},
+			      </if>
+			      <if test="cus.starcapital != null" >
+			        STARCAPITAL = #{cus.starcapital,jdbcType=DECIMAL},
+			      </if>
+			      <if test="cus.employeenum != null" >
+			        EMPLOYEENUM = #{cus.employeenum,jdbcType=DECIMAL},
+			      </if>
+			      <if test="cus.asset != null" >
+			        ASSET = #{cus.asset,jdbcType=DECIMAL},
+			      </if>
+			      <if test="cus.yyzzurl != null" >
+			        YYZZURL = #{cus.yyzzurl,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.sfzurl != null" >
+			        SFZURL = #{cus.sfzurl,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.username != null" >
+			        USERNAME = #{cus.username,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.nativeplace != null" >
+			        NATIVEPLACE = #{cus.nativeplace,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.customercity != null" >
+			        CUSTOMERCITY = #{cus.customercity,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.datasource != null" >
+			        DATASOURCE = #{cus.datasource,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.customersource != null" >
+			        CUSTOMERSOURCE = #{cus.customersource,jdbcType=DECIMAL},
+			      </if>
+			      <if test="cus.industry != null" >
+			        INDUSTRY = #{cus.industry,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.position != null" >
+			        POSITION = #{cus.position,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.incomelevels != null" >
+			        INCOMELEVELS = #{cus.incomelevels,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.incomerange != null" >
+			        INCOMERANGE = #{cus.incomerange,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.buypurpose != null" >
+			        BUYPURPOSE = #{cus.buypurpose,jdbcType=DECIMAL},
+			      </if>
+			      <if test="cus.buyfrequency != null" >
+			        BUYFREQUENCY = #{cus.buyfrequency,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.ticketprice != null" >
+			        TICKETPRICE = #{cus.ticketprice,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.attentionstar != null" >
+			        ATTENTIONSTAR = #{cus.attentionstar,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.maritalstatus != null" >
+			        MARITALSTATUS = #{cus.maritalstatus,jdbcType=DECIMAL},
+			      </if>
+			      <if test="cus.ischildren != null" >
+			        ISCHILDREN = #{cus.ischildren,jdbcType=DECIMAL},
+			      </if>
+			      <if test="cus.childrenbirthday != null" >
+			        CHILDRENBIRTHDAY = #{cus.childrenbirthday,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.isinternet != null" >
+			        ISINTERNET = #{cus.isinternet,jdbcType=DECIMAL},
+			      </if>
+			      <if test="cus.attentiontype != null" >
+			        ATTENTIONTYPE = #{cus.attentiontype,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.interests != null" >
+			        INTERESTS = #{cus.interests,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.interestsother != null" >
+			        INTERESTSOTHER = #{cus.interestsother,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.birthday != null" >
+			        BIRTHDAY = #{cus.birthday,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.currentamount != null" >
+			        CURRENTAMOUNT = #{cus.currentamount,jdbcType=DECIMAL},
+			      </if>
+			      <if test="cus.education != null" >
+			        EDUCATION = #{cus.education,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.unionsettlementdiscount != null" >
+			        UNIONSETTLEMENTDISCOUNT = #{cus.unionsettlementdiscount,jdbcType=DECIMAL},
+			      </if>
+			      <if test="cus.isrenewal != null" >
+			        ISRENEWAL = #{cus.isrenewal,jdbcType=DECIMAL},
+			      </if>
+			      <if test="cus.regphone != null" >
+			        REGPHONE = #{cus.regphone,jdbcType=DECIMAL},
+			      </if>
+			      <if test="cus.regsafetyinfo != null" >
+			        REGSAFETYINFO = #{cus.regsafetyinfo,jdbcType=DECIMAL},
+			      </if>
+			      <if test="cus.lastlogintime != null" >
+			        LASTLOGINTIME = #{cus.lastlogintime,jdbcType=TIMESTAMP},
+			      </if>
+			      <if test="cus.uniontype != null" >
+			        UNIONTYPE = #{cus.uniontype,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.discounttype != null" >
+			        DISCOUNTTYPE = #{cus.discounttype,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.limitstarttime != null" >
+			        LIMITSTARTTIME = #{cus.limitstarttime,jdbcType=TIMESTAMP},
+			      </if>
+			      <if test="cus.limitendtime != null" >
+			        LIMITENDTIME = #{cus.limitendtime,jdbcType=TIMESTAMP},
+			      </if>
+			      <if test="cus.spreadtypeid != null" >
+			        SPREADTYPEID = #{cus.spreadtypeid,jdbcType=DECIMAL},
+			      </if>
+			      <if test="cus.registeredsource != null" >
+			        REGISTEREDSOURCE = #{cus.registeredsource,jdbcType=DECIMAL},
+			      </if>
+			      <if test="cus.phoneSys != null" >
+			        PHONE_SYS = #{cus.phoneSys,jdbcType=DECIMAL},
+			      </if>
+			      <if test="cus.phoneModel != null" >
+			        PHONE_MODEL = #{cus.phoneModel,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.phoneVersion != null" >
+			        PHONE_VERSION = #{cus.phoneVersion,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.clientVersion != null" >
+			        CLIENT_VERSION = #{cus.clientVersion,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.channelId != null" >
+			        CHANNEL_ID = #{cus.channelId,jdbcType=BIGINT},
+			      </if>
+			      <if test="cus.headimg != null" >
+			        HEADIMG = #{cus.headimg,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.devicetoken != null" >
+			        DEVICETOKEN = #{cus.devicetoken,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.lastloginphonetype != null" >
+			        LASTLOGINPHONETYPE = #{cus.lastloginphonetype,jdbcType=DECIMAL},
+			      </if>
+			      <if test="cus.accsFlag != null" >
+			        ACCS_FLAG = #{cus.accsFlag,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.unionkey != null" >
+			        UNIONKEY = #{cus.unionkey,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.errorChannelName != null" >
+			        ERROR_CHANNEL_NAME = #{cus.errorChannelName,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.iosIdfa != null" >
+			        IOS_IDFA = #{cus.iosIdfa,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.lastLoginChannel != null" >
+			        LAST_LOGIN_CHANNEL = #{cus.lastLoginChannel,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.ifalipay != null" >
+			        IFALIPAY = #{cus.ifalipay,jdbcType=DECIMAL},
+			      </if>
+			      <if test="cus.spreadway != null" >
+			        SPREADWAY = #{cus.spreadway,jdbcType=DECIMAL},
+			      </if>
+			      <if test="cus.gradeName != null" >
+			        GRADE_NAME = #{cus.gradeName,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.gradeId != null" >
+			        GRADE_ID = #{cus.gradeId,jdbcType=BIGINT},
+			      </if>
+			      <if test="cus.cindex != null" >
+			        CINDEX = #{cus.cindex},
+			      </if>
+			      <if test="cus.cindexUpddate != null" >
+			        CINDEX_UPDDATE = #{cus.cindexUpddate,jdbcType=TIMESTAMP},
+			      </if>
+			       <if test="cus.shield != null" >
+			        SHIELD=#{cus.shield,jdbcType=DECIMAL},
+			      </if>
+			      <if test="cus.sysSource != null" >
+			        SYS_SOURCE=#{cus.sysSource,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.weiboNo != null" >
+			        WEIBO_NO=#{cus.weiboNo,jdbcType=VARCHAR},
+			      </if>
+			      <if test="cus.weixinNo != null" >
+			        WEIXIN_NO=#{cus.weixinNo,jdbcType=VARCHAR},
+			      </if>
+			    </set>
+			    where ID = #{cus.id,jdbcType=BIGINT} 
+	     </foreach>
+			   
+    </update>
+  
+  
+	  <select id="selectCount" resultType="java.lang.Long"   >
+	    select 
+	     count(1) as totalCount
+	    from t_customers
+	  </select>
+	  
+	  
+	   <select id="findBySetElastic" resultType="java.util.HashMap" parameterType="cn.com.ylpw.web.crm.form.TCustomerForm">
+		  SELECT 
+	 	 <![CDATA[
+	 	 		c.ID,
+				c.SHIELD,
+				c.CREATETIME,
+	            c.PWSYSID,
+	            c.GRADE_ID,
+				IFNULL( CONVERT(c.TRUENAME USING utf8) ,'') as TRUENAME  , 
+				IFNULL( CONVERT(c.USERNAME USING utf8) ,'')  as USERNAME  , 
+				c.SYS_SOURCE,
+				c.PHONE , c.EMAIL ,
+				ifnull (TIMESTAMPDIFF(YEAR, c.BIRTHDAY, CURDATE())  , 0 )as  AGE,
+				c.SEX , c.CARD , c.CARDTYPE  ,c.USERTYPE , 
+				IFNULL( CONVERT(c.NICKNAME USING utf8) ,'') as NICKNAME  
+			]]>
+				
+				<if test="orderIdMax !=null">
+				<![CDATA[
+				 ,
+				GROUP_CONCAT( DISTINCT od.ORDER_SOURCE ) as ORDER_SOURCE ,
+				GROUP_CONCAT( DISTINCT od.pros)   as ORDER_PRODUCTS ,
+				GROUP_CONCAT( DISTINCT od.pro_types) as ORDER_PRODUCT_TYPES ,
+				GROUP_CONCAT( DISTINCT od.pro_typesa) as ORDER_PRODUCT_TYPESA ,					  					
+				GROUP_CONCAT( DISTINCT  CONVERT( od.ARTISTS_INTRODUCED USING utf8) )   as ORDER_ARTISTS_INTRODUCED ,						 
+				GROUP_CONCAT( DISTINCT od.pro_city)  as ORDER_PRODUCT_CITYS,
+				( SELECT
+						if (IFNULL(count(1),0)>0 ,1, 0)
+					FROM
+						t_orders_info oinfo1
+					WHERE
+						oinfo1.CUSTOMERSID = c.PWSYSID    and oinfo1.pay_status='已支付' 
+						and  ISCUMPUTING=0   and   id  <= #{orderIdMax}
+				 )  as VIP_STATUS  ,
+					
+				(SELECT
+					IFNULL(sum(oinfo1.ORDER_SUMPRICE),0)
+				FROM
+					t_orders_info oinfo1
+				WHERE
+					oinfo1.CUSTOMERSID = c.PWSYSID   and oinfo1.pay_status='已支付'
+					and  ISCUMPUTING=0   and   id  <= #{orderIdMax}
+				) as PAY_TOTAL_PRICE ,
+
+				(SELECT
+					IFNULL(sum(oinfo1.ORDER_SUMPRICE),0)
+				FROM
+					t_orders_info oinfo1
+				WHERE
+					oinfo1.CUSTOMERSID = c.PWSYSID    and oinfo1.pay_status='已支付' 
+					and  ISCUMPUTING=0   and   id  <= #{orderIdMax}
+				) as TRADER_TOTAL_PRICE,	
+
+				(SELECT
+					IFNULL(sum(oinfo1.PROS_Num),0)
+				FROM
+					t_orders_info oinfo1
+				WHERE
+					oinfo1.CUSTOMERSID = c.PWSYSID    and oinfo1.pay_status='已支付'
+					and  ISCUMPUTING=0   and   id  <= #{orderIdMax}
+				) as BUY_PRODUCT_TOTAL_COUNT,
+					
+			  (SELECT
+					IFNULL(count(1),0)
+				FROM
+					t_orders_info oinfo1
+				WHERE
+					oinfo1.CUSTOMERSID = c.PWSYSID    and oinfo1.pay_status='已支付'
+					and  ISCUMPUTING=0   and   id  <= #{orderIdMax}
+				) as PAYCOUNT ,
+
+				(SELECT
+					IFNULL(count(1),0)
+				FROM
+					t_orders_info oinfo1
+				WHERE
+					oinfo1.CUSTOMERSID = c.PWSYSID   and   LOCATE('已退票', oinfo1.ORDER_STATUS ) >0 
+					and  ISCUMPUTING=0   and   id  <= #{orderIdMax}
+				) as REF_COUNT ,
+
+				(SELECT
+					 oinfo1.PAY_TIME
+				FROM
+					t_orders_info oinfo1  
+				WHERE
+					oinfo1.CUSTOMERSID = c.PWSYSID and oinfo1.pay_status='已支付'  
+					and  ISCUMPUTING=0  and   id  <= #{orderIdMax}
+					
+				order by oinfo1.PAY_TIME desc    LIMIT 0,1  ) as LAST_PAY_DATE ,
+					
+
+				(SELECT
+					IFNULL(sum(oinfo1.ORDER_SUMPRICE),0)
+				FROM
+					t_orders_info oinfo1
+				WHERE
+					oinfo1.CUSTOMERSID = c.PWSYSID    and oinfo1.pay_status='已支付' 
+					and  ISCUMPUTING=0 and   id  <= #{orderIdMax}
+				and  oinfo1.CREATE_TIME >= CONCAT(DATE_FORMAT( current_timestamp(),'%Y' ),'-01-01 00:00:00')  
+				and  oinfo1.CREATE_TIME <= CONCAT(DATE_FORMAT( current_timestamp(),'%Y' )+1,'-01-01 00:00:00')  
+				) as TRADER_TOTAL_PRICE_IN_YEAR ,
+				
+					
+				(SELECT
+					IFNULL(sum(1),0)
+				FROM
+					t_orders_info oinfo1
+				WHERE
+					oinfo1.CUSTOMERSID = c.PWSYSID    and oinfo1.pay_status='已支付'  
+					and  ISCUMPUTING=0  and   id  <= #{orderIdMax}
+				and  oinfo1.CREATE_TIME >= CONCAT(DATE_FORMAT( current_timestamp(),'%Y' ),'-01-01 00:00:00')  
+				and  oinfo1.CREATE_TIME <= CONCAT(DATE_FORMAT( current_timestamp(),'%Y' )+1,'-01-01 00:00:00')  
+				) as TRADER_TOTAL_COUNT_IN_YEAR ,
+
+											
+				(SELECT
+					IFNULL(count(oinfo1.ORDER_SUMPRICE),0)
+				FROM
+					t_orders_info oinfo1
+				WHERE
+					oinfo1.CUSTOMERSID = c.PWSYSID   and  LOCATE('已退票', oinfo1.ORDER_STATUS ) >0 
+					and  ISCUMPUTING=0  and   id  <= #{orderIdMax}  ) as FAILURE_TRANSACTION_TOTAL_PRICE ,
+				
+					(
+					 select  IFNULL( sum(od.REFUN_PRICE),0)    from t_orders_info od  where  od.PAY_STATUS='已退款'
+					 and  ISCUMPUTING=0   and   id  <= #{orderIdMax} 
+					 and  od.customersid = c.PWSYSID 
+					) as  REF_PRICE ,
+
+					(
+						select  IFNULL( count(od.id),0)    from t_orders_info od  where  od.PAY_STATUS!='已支付' 
+						and  ISCUMPUTING=0   and   id  <= #{orderIdMax} 
+						and  ( od.ORDER_STATUS ='用户已删除'   or  od.ORDER_STATUS ='无效' ) 
+						and  od.customersid =c.PWSYSID
+					) as  CANCEL_TOTAL 
+				]]>
+				 </if>
+				
+				<if test="ewalletIdMax !=null">
+					<![CDATA[	 ,
+						(select IFNULL(sum(PAY_PRICE),0) from t_ewallet  where customersid = c.PWSYSID 
+						  and  ISCUMPUTING=0    and   id  <= #{ewalletIdMax}
+						) as  EWALLET_TOTAL_PRICE 
+					]]>	
+				</if>
+				
+				
+		FROM
+			t_customers c  left  join  t_orders_info od  on c.PWSYSID = od.CUSTOMERSID 
+			where 1=1 
+			<!-- <if test="orderIdMax != null" >
+				<![CDATA[
+				  and od.ISCUMPUTING=0  and  od.ID  <= #{orderIdMax}
+				]]>	  
+			</if> -->
+		    <if test="customerIds != null" >
+			  and  c.id in
+		        <foreach item="id" collection="customerIds" open="(" separator="," close=")">
+		            #{id}
+		        </foreach>
+        	</if>
+			group by c.ID,				
+			    c.SHIELD,
+				c.CREATETIME,				
+				c.PWSYSID,
+				c.GRADE_ID,
+				c.TRUENAME   , 
+				c.USERNAME   , 
+				c.SYS_SOURCE,
+				c.PHONE , c.EMAIL ,
+				c.BIRTHDAY  ,
+				c.PWSYSID ,
+				c.SEX  ,c.CARD , c.CARDTYPE  ,c.USERTYPE ,c.NICKNAME 
+				order by  c.id asc  
+				
+  </select>
+  
+  <select id="findUsersByNormalGroup" resultType="java.util.Map" parameterType="java.util.Map">
+	  	select  id,pwsysid from t_customers cu   where 1=1
+	  	<if test="customerids != null" >
+	  		and cu.ID in
+	  		 <foreach item="customerid" collection="customerids" open="(" separator="," close=")">
+				 #{customerid}
+			</foreach>
+	  	</if>
+	  	<if test="customerGradeID != null" >
+			and  cu.GRADE_ID    = #{customerGradeID}
+		</if>
+		
+		<if test="cityids != null" >
+			and cu.CITYID in 
+			<foreach item="cid" collection="cityids" open="(" separator="," close=")">
+				 #{cid}
+			</foreach>
+		</if>
+		<if test="searchOrder != null" >
+			 and  cu.PWSYSID in (
+				select  od.CUSTOMERSID  from t_orders_info od
+				where 1=1  
+				<if test="orderSource!= null" >
+					and od.ORDER_SOURCE  in 
+					<foreach item="os" collection="orderSource" open="(" separator="," close=")">
+			            #{os}
+			        </foreach>
+				</if>
+				<if test="pronum != null" >
+					and  od.PROS_NUM  =  #{pronum}
+				</if>
+			)
+	  	</if>
+  </select>
+  
+   <update id="updateCustomerIndexs" parameterType="cn.com.ylpw.web.crm.entity.customer.TCustomers" >
+   		update t_customers set 
+   		<if test="activeIndex != null" >
+   			 ACTIVE_INDEX = #{activeIndex} ,
+   		</if>
+   		<if test="rfmIndex != null" >
+   			 RFM_INDEX = #{rfmIndex} ,
+   		</if>
+   		<if test="recencyIndex != null" >
+   			 RECENCY_INDEX = RECENCY_INDEX + #{recencyIndex} , 
+   		</if>
+   		 CINDEX =  ACTIVE_INDEX + RECENCY_INDEX  +RFM_INDEX  
+   		 where  PWSYSID = #{pwsysId}
+    </update>
+    
+    <select id="findCustomerIdsByMaxId" resultType="java.lang.Long" parameterType="java.util.Map">
+    		select id from t_customers where   id >#{maxid}    order by id asc 
+    </select>
+    
+    <select id="findCustomerIdsByMaxIdTwo" resultType="java.lang.Long" parameterType="java.util.Map">
+    		select PWSYSID AS id from t_customers where   PWSYSID >#{maxid}    order by id asc 
+    </select>
+    
+     <select id="findExistsGradeForUpdate" resultType="java.lang.Long" parameterType="java.util.Map">
+	     <![CDATA[
+	    		select    count(cus.ID) as size from t_customers cus  where  GRADE_ID != #{gradeId}   and cus.cindex  >= #{ibegin}  and cus.cindex  <= #{iend}
+	      ]]>	
+    </select>
+    
+     <update id="updateGradeByIndex"   parameterType="java.util.Map">
+    	 <![CDATA[
+			update t_customers set GRADE_ID = #{gradeId}  , GRAGE_UPDATE_LAST = SYSDATE() , GRADE_NAME=#{gradeName}
+			where    GRADE_ID != #{gradeId}  
+			and  cindex  >= #{ibegin}   and  cindex  <= #{iend} 
+		  ]]>
+    </update>
+    
+    
+    <select id="findUsersByLableGroup" resultType="java.util.Map" parameterType="java.util.Map">
+    	
+	  	select  id ,pwsysid from t_customers cu   where 1=1
+	  	
+	  	<if test="customerids != null" >
+	  		and cu.ID in 
+	  		 <foreach item="customerid" collection="customerids" open="(" separator="," close=")">
+				 #{customerid}
+			</foreach>
+	  	</if>
+	  	<!-- 会员等级 -->
+	  	<if test="meMembershipLevel != null and  meMembershipLevel != '' " >
+			and  cu.GRADE_ID   in 
+			 <foreach item="id" collection="meMembershipLevel" open="(" separator="," close=")">
+				 #{id}
+			</foreach>
+		</if>
+		<!-- 性别 -->
+	  	<if test="sex != null" >
+			and  cu.SEX   in 
+			 <foreach item="id" collection="sex" open="(" separator="," close=")">
+				 #{id}
+			</foreach>
+		</if>
+		<!-- 学历 -->
+	  	<if test="education != null" >
+			and  cu.EDUCATION   in 
+			 <foreach item="id" collection="education" open="(" separator="," close=")">
+				 #{id}
+			</foreach>
+		</if>
+		
+		<!-- 区域 -->
+	  	<if test="bacityids != null" >
+			and  cu.CUSTOMERCITY   in 
+			 <foreach item="id" collection="bacityids" open="(" separator="," close=")">
+				 #{id}
+			</foreach>
+		</if>
+		
+		<!-- 收入水平 -->
+	  	<if test="baIncomeLevelSearchSql != null" >
+	  		 <![CDATA[
+				 ${baIncomeLevelSearchSql}
+			  ]]>
+		</if>
+		
+		
+		<!-- 婚姻状况 -->
+	  	<if test="maritalStatus != null" >
+			and  cu.MARITALSTATUS   in 
+			 <foreach item="id" collection="maritalStatus" open="(" separator="," close=")">
+				 #{id}
+			</foreach>
+		</if>
+		
+		<!-- 有无子女 -->
+	  	<if test="bachildren != null" >
+			and  cu.ISCHILDREN   in 
+			 <foreach item="id" collection="bachildren" open="(" separator="," close=")">
+				 #{id}
+			</foreach>
+		</if>
+		
+		<!-- 注册时间 -->
+	  	<if test="baRegTimeStart != null" >
+	  		<![CDATA[
+				and  cu.CREATETIME >=   #{baRegTimeStart}
+			]]>	
+		</if>
+		
+		<!-- 注册时间 -->
+	  	<if test="baRegTimeEnd != null" >
+	  		<![CDATA[
+				and  cu.CREATETIME <=   #{baRegTimeEnd}
+			]]>
+		</if>
+		
+		<!-- 注册来源渠道 -->
+	  	<if test="regSourceChannel != null" >
+			and  cu.CUSTOMERSOURCE   in 
+			 <foreach item="id" collection="regSourceChannel" open="(" separator="," close=")">
+				 #{id}
+			</foreach>
+		</if>
+		
+		<!-- 注册平台 -->
+	  	<if test="baRegistrationPlatform != null" >
+			and  cu.REGISTEREDSOURCE   in 
+			 <foreach item="id" collection="baRegistrationPlatform" open="(" separator="," close=")">
+				 #{id}
+			</foreach>
+		</if>
+		
+		
+		<!-- 会员来源 -->
+	  	<if test="meMemberSource != null" >
+			and  cu.SYS_SOURCE  in 
+			 <foreach item="id" collection="meMemberSource" open="(" separator="," close=")">
+				 #{id}
+			</foreach>
+		</if>
+		
+		<!-- 现有积分 -->
+		<if test="meExistingIntegral != null" >
+			and ( 1=2    
+			<foreach item="i" collection="meExistingIntegral"  >
+				 <choose>
+		                <when test="i == 'lt300'" >
+		                   <![CDATA[  or  (cu.CRM_INTEGRAL_USABLE<=300 ) ]]>	
+		                </when>
+		                 <when test="i == '300-800'" >
+		                   <![CDATA[  or  (cu.CRM_INTEGRAL_USABLE >=300 and cu.CRM_INTEGRAL_USABLE <=800  ) ]]>	
+		                </when>
+		                 <when test="i == '800-1200'" >
+		                   <![CDATA[  or  (cu.CRM_INTEGRAL_USABLE >=800 and cu.CRM_INTEGRAL_USABLE <=1200  ) ]]>	
+		                </when>
+		                 <when test="i == '1200-2000'" >
+		                   <![CDATA[  or  (cu.CRM_INTEGRAL_USABLE >=1200 and cu.CRM_INTEGRAL_USABLE <=2000  ) ]]>	
+		                </when>
+		                 <when test="i == '2000-3000'" >
+		                   <![CDATA[  or  (cu.CRM_INTEGRAL_USABLE >=2000 and cu.CRM_INTEGRAL_USABLE <=3000  ) ]]>	
+		                </when>
+		                 <when test="i == 'gt3000'" >
+		                   <![CDATA[  or  (cu.CRM_INTEGRAL_USABLE >3000 ) ]]>	
+		                </when>
+		                <otherwise>
+		                 </otherwise>
+		         </choose>
+	        </foreach>
+	        )
+		</if>
+				
+		<!-- 成长值 -->
+		<if test="meGrowthValue != null" >
+			and ( 1=2    
+			<foreach item="i" collection="meGrowthValue"  >
+				 <choose>
+		                <when test="i == '1-100'" >
+		                    <![CDATA[  or  (cu.CINDEX >=300 and cu.CINDEX <=800  )  ]]>	
+		                </when>
+		                 <when test="i == '100-300'" >
+		                     <![CDATA[ or  (cu.CINDEX >=100 and cu.CINDEX <=300  )  ]]>	
+		                </when>
+		                 <when test="i == '300-500'" >
+		                    <![CDATA[  or  (cu.CINDEX >=300 and cu.CINDEX <=500  )  ]]>	
+		                </when>
+		                 <when test="i == 'gt500'" >
+		                     <![CDATA[  or  (cu.CINDEX >500 ) ]]>	
+		                </when>
+		                <otherwise>
+		                 </otherwise>
+		         </choose>
+	        </foreach>
+	        )
+		</if>			
+		
+		
+		<!-- 上一次升级时间 -->
+	  	<if test="meUpgradeTimeStart != null" >
+			<![CDATA[  and  cu.GRAGE_UPDATE_LAST >=   #{meUpgradeTimeStart} ]]>	
+		</if>
+		
+		<!-- 上一次升级时间 -->
+	  	<if test="meUpgradeTimeEnd != null" >
+			<![CDATA[  and  cu.GRAGE_UPDATE_LAST <=   #{meUpgradeTimeEnd} ]]>	
+		</if>
+		
+		
+		<if test="excuteOrderSearch" >
+			 and  cu.PWSYSID in (
+				select  od.CUSTOMERSID  from t_orders_info od
+				where 1=1  
+				<!-- 订单来源 -->
+				<if test="paOrderSource != null" >
+					and od.ORDER_SOURCE  in 
+					<foreach item="os" collection="paOrderSource" open="(" separator="," close=")">
+			            #{os}
+			        </foreach>
+				</if>
+				
+				<!-- 订单状态 -->
+				<if test="paOrderStatus != null" >
+					and od.ORDER_STATUS  in 
+					<foreach item="os" collection="paOrderStatus" open="(" separator="," close=")">
+			            #{os}
+			        </foreach>
+				</if>
+				
+				
+				<!-- 异常状态 -->
+				<if test="paAbnormalState != null" >
+					and od.ORDER_STATUS  in 
+					<foreach item="os" collection="paAbnormalState" open="(" separator="," close=")">
+			            #{os}
+			        </foreach>
+				</if>
+				
+				<!-- 支付时间 -->
+			  	<if test="paPaymentStartTime != null" >
+					<![CDATA[ and  od.PAY_TIME >=   #{paPaymentStartTime} ]]>
+				</if>
+				
+				<!-- 支付时间 -->
+			  	<if test="paPaymentEndTime != null" >
+					<![CDATA[ 	and  od.PAY_TIME <=   #{paPaymentEndTime} ]]>
+				</if>
+			)
+			
+			<!-- 交易关闭金额 -->
+			<if test="failureTransactionTotalPrice != null" >
+				and  cu.PWSYSID in (
+					<![CDATA[ select  od.CUSTOMERSID  from t_orders_info od
+					where od.PAY_STATUS = "未支付" GROUP BY od.CUSTOMERSID 
+					HAVING ( 1=2    ]]>
+					<foreach item="i" collection="failureTransactionTotalPrice"  >
+						 <choose>
+				                <when test="i == 'lt300'" >
+				                   <![CDATA[  or  (SUM(od.ORDER_SUMPRICE)<=300 ) ]]>	
+				                </when>
+				                 <when test="i == '300-800'" >
+				                   <![CDATA[  or  (SUM(od.ORDER_SUMPRICE) >=300 and SUM(od.ORDER_SUMPRICE) <=800  ) ]]>	
+				                </when>
+				                 <when test="i == '800-1500'" >
+				                   <![CDATA[  or  (SUM(od.ORDER_SUMPRICE) >=800 and SUM(od.ORDER_SUMPRICE) <=1500  ) ]]>	
+				                </when>
+				                 <when test="i == '1500-3000'" >
+				                   <![CDATA[  or  (SUM(od.ORDER_SUMPRICE) >=1500 and SUM(od.ORDER_SUMPRICE) <=3000  ) ]]>	
+				                </when>
+				                 <when test="i == '3000-5000'" >
+				                   <![CDATA[  or  (SUM(od.ORDER_SUMPRICE) >=3000 and SUM(od.ORDER_SUMPRICE) <=5000  ) ]]>	
+				                </when>
+				                 <when test="i == 'gt5000'" >
+				                   <![CDATA[  or  (SUM(od.ORDER_SUMPRICE) >5000 ) ]]>	
+				                </when>
+				                <otherwise>
+				                 </otherwise>
+				         </choose>
+			        </foreach>
+			        )
+					) 
+			</if>
+			
+			<!-- 本年度交易次数 -->
+		  	<if test="traderTotalCountInYear != null" >
+				and  cu.PWSYSID in (
+					<![CDATA[ select  od.CUSTOMERSID  from t_orders_info od
+					where od.ORDER_STATUS = '已完成' GROUP BY od.CUSTOMERSID 
+					HAVING ( 1=2    ]]>
+					<foreach item="i" collection="traderTotalCountInYear"  >
+						 <choose>
+				                <when test="i == '1-3'" >
+				                   <![CDATA[  or  ( COUNT(od.ID) >= 1 and COUNT(od.ID) <= 3 ) ]]>	
+				                </when>
+				                 <when test="i == '3-5'" >
+				                   <![CDATA[  or  ( COUNT(od.ID) >=3 and COUNT(od.ID) <= 5  ) ]]>	
+				                </when>
+				                 <when test="i == '5-10'" >
+				                   <![CDATA[  or  ( COUNT(od.ID) >=5 and COUNT(od.ID) <= 10  ) ]]>	
+				                </when>
+				                 <when test="i == 'gt10'" >
+				                   <![CDATA[  or  ( COUNT(od.ID) > 10 ) ]]>	
+				                </when>
+				                <otherwise>
+				                 </otherwise>
+				         </choose>
+			        </foreach>
+			        )
+					) 
+			</if>	
+			
+			<!-- 商品分类b -->
+			<if test="null != paCommodityClassb">
+				and  cu.PWSYSID in ( 
+					<![CDATA[ select  od.CUSTOMERSID  from t_orders_info od WHERE od.PRO_TYPES = #{paCommodityClassb} ]]>
+				) 
+			</if>
+			<!-- 商品分类a -->
+			<if test="null != paCommodityClassa">
+				and  cu.PWSYSID in ( 
+					<![CDATA[ select  od.CUSTOMERSID  from t_orders_info od WHERE od.PRO_TYPESA = #{paCommodityClassa} ]]>
+				) 
+			</if>
+			
+			<!-- 会员属性 - 最近一次交易时间 -->
+			<if test="null != meLastTradingStart or null != meLastTradingEnd">
+				and  cu.PWSYSID in ( select  od.CUSTOMERSID  from t_orders_info od WHERE od.PAY_STATUS = '已支付' 
+					<if test="null != meLastTradingStart">
+						<![CDATA[ and od.PAY_TIME >= #{meLastTradingStart} ]]>
+					</if>
+					<if test="null != meLastTradingEnd">
+						<![CDATA[ and od.PAY_TIME <= #{meLastTradingEnd} AND PWSYSID NOT IN (
+							SELECT
+								CUSTOMERSID
+							FROM
+								t_orders_info
+							WHERE
+								PAY_STATUS = '已支付'
+							AND PAY_TIME > #{meLastTradingEnd} 
+						]]>
+						)
+					</if>
+				) 
+			</if>
+			
+	  	</if>
+	  	
+	  	<!-- 会员状态 -->
+		<if test="null != meMemberStatus">
+			<if test="0 == meMemberStatus">
+				and  cu.PWSYSID not in ( <![CDATA[ SELECT CUSTOMERSID FROM t_orders_info WHERE PAY_STATUS = '已支付'  ]]> )
+			</if>
+			<if test="1 == meMemberStatus">
+				and  cu.PWSYSID in ( <![CDATA[ SELECT CUSTOMERSID FROM t_orders_info WHERE PAY_STATUS = '已支付'  ]]> )
+			</if>
+		</if>
+	  	
+	  	<if test="excuteAddressSearch" >
+	  	 	and  cu.PWSYSID in (
+	  	 		
+	  	 		SELECT
+				ad.CUSTOMERSID
+				FROM
+				T_ADDRESS ad left join t_orders_info od  on ad.ID = od.ADDRESSID 
+				where  od.ORDER_STATUS ='已完成' and  ad.cityid IN
+				
+				 <foreach item="id" collection="pacityids" open="(" separator="," close=")">
+			            #{id}
+			     </foreach>
+			       	 
+				group by ad.CUSTOMERSID  
+				<!--配送地累计次数 -->
+				<if test="paDisCount != null" >
+					having  ( 1=2    
+							<foreach item="discount" collection="paDisCount"  >
+								 <choose>
+						                <when test="discount == '1-3'">
+						                    <![CDATA[  or  (count(1) >=1 and count(1) <=3  ) ]]>
+						                </when>
+						                <when test="discount == '3-5'">
+						                   <![CDATA[  or  (count(1) >=3 and count(1) <=5  ) ]]>
+						                </when>
+						                <when test="discount == '5-10'">
+						                   <![CDATA[  or  (count(1) >=5 and count(1) <=10  ) ]]>
+						                </when>
+					                   <when test="discount == 'gt10'">
+						                  <![CDATA[   or  (count(1) >10  ) ]]>
+						                </when>
+						                <otherwise>
+						                 </otherwise>
+						         </choose>
+								
+					        </foreach>
+				        )
+				</if>
+	  	 	)
+	  	</if>
+	  	
+	  	<if test="excuteEwalletSearch" >
+	  			and  cu.PWSYSID in (
+		  			select  ewallet.CUSTOMERSID from t_ewallet  ewallet  where ewallet.CREATE_TIME   and  ewallet.PAY_PRICE > 0 AND ewallet.FLAG = 0 
+		  			  
+		  			 <!-- 电子钱包充值时间 -->
+				  	<if test="paEwalletRechargeStart != null" >
+						 <![CDATA[ and  ewallet.CREATE_TIME >=    #{paEwalletRechargeStart} ]]>
+					</if>
+					
+					<!-- 电子钱包充值时间 -->
+				  	<if test="paEwalletRechargeEnd != null" >
+						 <![CDATA[ and  ewallet.CREATE_TIME <=   #{paEwalletRechargeEnd} ]]>
+					</if>
+					
+					 
+				)
+	  	</if>
+	  	
+  </select>
+  
+  
+   <select id="findByTest" resultType="java.util.HashMap" parameterType="cn.com.ylpw.web.crm.form.TCustomerForm">
+   			 <![CDATA[	select ID  from t_customers  cus  where id   <425368]]>
+   </select>
+    
+    
+    
+    
+    <select id="findIntegralByParamsCount" resultType="long"  parameterType="java.util.HashMap">
+    	SELECT count(1) FROM T_CUSTOMERS cus   
+    	<include refid="where_findIntegralByParams" />
+    </select>
+    
+    <select id="findIntegralByParams" resultType="java.util.HashMap" >
+		  select  cus.ID , cus.PHONE ,CONVERT(cus.TRUENAME USING utf8) as TRUENAME   ,
+		  cus.EMAIL  ,
+		 ifnull( cus.CRM_INTEGRAL_OPT  ,0) as CRM_INTEGRAL_OPT, 
+		   ifnull(cus.CRM_INTEGRAL_SYS,0 ) as CRM_INTEGRAL_SYS,
+		    ifnull( cus.CRM_INTEGRAL_CONSUME,0 ) as CRM_INTEGRAL_CONSUME , 
+		    ifnull(cus.CRM_INTEGRAL_USABLE,0)  as CRM_INTEGRAL_USABLE ,cus.CRM_INTEGRAL_STATUS ,cus.INTEGRAL
+		  from t_customers cus  
+		  <include refid="where_findIntegralByParams" />
+		  order by id asc 
+  	</select>  	  	
+  	
+	<sql id="where_findIntegralByParams" >
+	    <where>
+	    	 <if test="si != null and si != ''" >
+			  	<![CDATA[
+					  and  cus.CRM_INTEGRAL_USABLE >=#{si}
+				]]>
+			  </if>
+			  
+			  <if test="ei != null and ei != ''" >
+					<![CDATA[
+					  and cus.CRM_INTEGRAL_USABLE  <=#{ei}  
+					]]>
+			  </if>
+			  
+			  <if test="(stime != null and stime !='' )or (etime != null and etime !='' )" >
+			  	and cus.id in  (
+			  			select integral.CUSTOMER_ID from t_customer_integral integral where  1=1
+			  			<if test="stime != null" >
+			  				 <![CDATA[ and integral.CREATE_TIME >= #{stime}  ]]>
+			  			</if>
+			  			<if test="etime != null" >
+			  				<![CDATA[  and integral.CREATE_TIME <= #{etime} ]]>
+			  			</if>
+			  		)
+			  </if>
+			  
+			 <if test="( ids != null   ) ">
+			 	and cus.id in 
+				 <foreach item="id" collection="ids" open="(" separator="," close=")">
+		            #{id}
+		        </foreach>
+	        </if>
+	    </where>
+    </sql>
+    
+    
+ <!-- 批量积分禁用 start-->
+  
+  <update id="updIntegral2Dis" parameterType="long" flushCache="true" >
+        update t_customers cus  set cus.CRM_INTEGRAL_STATUS=#{status}  where id in
+        <foreach item="id" collection="ids" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+   </update>
+  <!--批量积分禁用 end -->
+  
+  
+  <!-- 批量积分清零 start-->
+  <update id="updIntegral2Clear" parameterType="long" flushCache="true" >
+         update t_customers cus  set cus.CRM_INTEGRAL_USABLE=0 , cus.CRM_INTEGRAL_SYS=0 where id in
+        <foreach item="id" collection="ids" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+   </update>
+  <!--批量积分清零 end -->
+  
+  
+  <select  id="findCustomerIntegralByPwIds" parameterType="java.util.HashMap" resultType="java.util.HashMap" >
+  		
+		SELECT C.ID  ,C.CRM_INTEGRAL_CONSUME , C.CRM_INTEGRAL_SYS , C.CRM_INTEGRAL_USABLE  ,
+		 GRADE.GNAME  ,  IFNULL(GRADE.INTEGRAL_MULTIPLE,1)  AS INTEGRAL_MULTIPLE  , C.ACTIVE_INDEX ,
+		 C.RECENCY_INDEX  FROM T_CUSTOMERS C
+		LEFT  JOIN  T_CUSTOMER_GRADE  GRADE   ON  
+		C.GRADE_ID = GRADE.ID 
+		WHERE C.PWSYSID IN  
+        <foreach item="id" collection="ids" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+   </select>
+   
+   
+    
+  <update id="updateIntegral2minus" parameterType="cn.com.ylpw.web.crm.entity.customer.TCustomers" >
+     UPDATE T_CUSTOMERS SET CRM_INTEGRAL_SYS=CRM_INTEGRAL_SYS-#{crmIntegralSys} , 
+     CRM_INTEGRAL_USABLE = CRM_INTEGRAL_SYS-CRM_INTEGRAL_CONSUME ,
+     LASTTIME = #{lasttime}
+     where  ID = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="findIdByPageNo" resultType="long"   parameterType="java.util.HashMap"  >
+  	select   id  from t_customers  order by id asc    limit  #{pageNo},#{pageSize}
+  </select>
+  
+  <select id="findIdsByPwCustomerIds" resultType="long"  parameterType="java.util.List"  >
+  	select   id  from t_customers  
+  	WHERE PWSYSID IN  
+     <foreach item="id" collection="list" open="(" separator="," close=")">
+         #{id}
+     </foreach>
+  </select>
+
+
+  <update id="updateByPwId" parameterType="cn.com.ylpw.web.crm.entity.customer.TCustomers" >
+    update t_customers
+    <set>
+      <if test="truename != null" >
+        TRUENAME = #{truename,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        PASSWORD = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        SEX = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="regdate != null" >
+        REGDATE = #{regdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nickname != null" >
+        NICKNAME = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="cardtype != null" >
+        CARDTYPE = #{cardtype,jdbcType=DECIMAL},
+      </if>
+      <if test="card != null" >
+        CARD = #{card,jdbcType=VARCHAR},
+      </if>
+      <if test="usertype != null" >
+        USERTYPE = #{usertype,jdbcType=DECIMAL},
+      </if>
+      <if test="discountdetailid != null" >
+        DISCOUNTDETAILID = #{discountdetailid,jdbcType=BIGINT},
+      </if>
+      <if test="ip != null" >
+        IP = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="regemail != null" >
+        REGEMAIL = #{regemail,jdbcType=DECIMAL},
+      </if>
+      <if test="phone != null" >
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        TEL = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="integral != null" >
+        INTEGRAL = #{integral,jdbcType=DECIMAL},
+      </if>
+      <if test="num != null" >
+        NUM = #{num,jdbcType=DECIMAL},
+      </if>
+      <if test="buynum != null" >
+        BUYNUM = #{buynum,jdbcType=DECIMAL},
+      </if>
+      <if test="malice != null" >
+        MALICE = #{malice,jdbcType=DECIMAL},
+      </if>
+      <if test="info != null" >
+        INFO = #{info,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null" >
+        CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lasttime != null" >
+        LASTTIME = #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastuser != null" >
+        LASTUSER = #{lastuser,jdbcType=VARCHAR},
+      </if>
+      <if test="discountid != null" >
+        DISCOUNTID = #{discountid,jdbcType=DECIMAL},
+      </if>
+      <if test="renewal != null" >
+        RENEWAL = #{renewal,jdbcType=DECIMAL},
+      </if>
+      <if test="renewalpwd != null" >
+        RENEWALPWD = #{renewalpwd,jdbcType=VARCHAR},
+      </if>
+      <if test="olduserid != null" >
+        OLDUSERID = #{olduserid,jdbcType=VARCHAR},
+      </if>
+      <if test="oldmark != null" >
+        OLDMARK = #{oldmark,jdbcType=VARCHAR},
+      </if>
+      <if test="unionuserid != null" >
+        UNIONUSERID = #{unionuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="fconfigid != null" >
+        FCONFIGID = #{fconfigid,jdbcType=DECIMAL},
+      </if>
+      <if test="tnumber != null" >
+        TNUMBER = #{tnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="levels != null" >
+        LEVELS = #{levels,jdbcType=DECIMAL},
+      </if>
+      <if test="amount != null" >
+        AMOUNT = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="lname != null" >
+        LNAME = #{lname,jdbcType=VARCHAR},
+      </if>
+      <if test="adress != null" >
+        ADRESS = #{adress,jdbcType=VARCHAR},
+      </if>
+      <if test="effect != null" >
+        EFFECT = #{effect,jdbcType=DECIMAL},
+      </if>
+      <if test="code != null" >
+        CODE = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="uniondiscount != null" >
+        UNIONDISCOUNT = #{uniondiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="thirddiscount != null" >
+        THIRDDISCOUNT = #{thirddiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="userdiscount != null" >
+        USERDISCOUNT = #{userdiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="cityid != null" >
+        CITYID = #{cityid,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=DECIMAL},
+      </if>
+      <if test="legalperson != null" >
+        LEGALPERSON = #{legalperson,jdbcType=VARCHAR},
+      </if>
+      <if test="businessdate != null" >
+        BUSINESSDATE = #{businessdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="starcapital != null" >
+        STARCAPITAL = #{starcapital,jdbcType=DECIMAL},
+      </if>
+      <if test="employeenum != null" >
+        EMPLOYEENUM = #{employeenum,jdbcType=DECIMAL},
+      </if>
+      <if test="asset != null" >
+        ASSET = #{asset,jdbcType=DECIMAL},
+      </if>
+      <if test="yyzzurl != null" >
+        YYZZURL = #{yyzzurl,jdbcType=VARCHAR},
+      </if>
+      <if test="sfzurl != null" >
+        SFZURL = #{sfzurl,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        USERNAME = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="nativeplace != null" >
+        NATIVEPLACE = #{nativeplace,jdbcType=VARCHAR},
+      </if>
+      <if test="customercity != null" >
+        CUSTOMERCITY = #{customercity,jdbcType=VARCHAR},
+      </if>
+      <if test="datasource != null" >
+        DATASOURCE = #{datasource,jdbcType=VARCHAR},
+      </if>
+      <if test="customersource != null" >
+        CUSTOMERSOURCE = #{customersource,jdbcType=DECIMAL},
+      </if>
+      <if test="industry != null" >
+        INDUSTRY = #{industry,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        POSITION = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="incomelevels != null" >
+        INCOMELEVELS = #{incomelevels,jdbcType=VARCHAR},
+      </if>
+      <if test="incomerange != null" >
+        INCOMERANGE = #{incomerange,jdbcType=VARCHAR},
+      </if>
+      <if test="buypurpose != null" >
+        BUYPURPOSE = #{buypurpose,jdbcType=DECIMAL},
+      </if>
+      <if test="buyfrequency != null" >
+        BUYFREQUENCY = #{buyfrequency,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketprice != null" >
+        TICKETPRICE = #{ticketprice,jdbcType=VARCHAR},
+      </if>
+      <if test="attentionstar != null" >
+        ATTENTIONSTAR = #{attentionstar,jdbcType=VARCHAR},
+      </if>
+      <if test="maritalstatus != null" >
+        MARITALSTATUS = #{maritalstatus,jdbcType=DECIMAL},
+      </if>
+      <if test="ischildren != null" >
+        ISCHILDREN = #{ischildren,jdbcType=DECIMAL},
+      </if>
+      <if test="childrenbirthday != null" >
+        CHILDRENBIRTHDAY = #{childrenbirthday,jdbcType=VARCHAR},
+      </if>
+      <if test="isinternet != null" >
+        ISINTERNET = #{isinternet,jdbcType=DECIMAL},
+      </if>
+      <if test="attentiontype != null" >
+        ATTENTIONTYPE = #{attentiontype,jdbcType=VARCHAR},
+      </if>
+      <if test="interests != null" >
+        INTERESTS = #{interests,jdbcType=VARCHAR},
+      </if>
+      <if test="interestsother != null" >
+        INTERESTSOTHER = #{interestsother,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        BIRTHDAY = #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="currentamount != null" >
+        CURRENTAMOUNT = #{currentamount,jdbcType=DECIMAL},
+      </if>
+      <if test="education != null" >
+        EDUCATION = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="unionsettlementdiscount != null" >
+        UNIONSETTLEMENTDISCOUNT = #{unionsettlementdiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="isrenewal != null" >
+        ISRENEWAL = #{isrenewal,jdbcType=DECIMAL},
+      </if>
+      <if test="regphone != null" >
+        REGPHONE = #{regphone,jdbcType=DECIMAL},
+      </if>
+      <if test="regsafetyinfo != null" >
+        REGSAFETYINFO = #{regsafetyinfo,jdbcType=DECIMAL},
+      </if>
+      <if test="lastlogintime != null" >
+        LASTLOGINTIME = #{lastlogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uniontype != null" >
+        UNIONTYPE = #{uniontype,jdbcType=VARCHAR},
+      </if>
+      <if test="discounttype != null" >
+        DISCOUNTTYPE = #{discounttype,jdbcType=VARCHAR},
+      </if>
+      <if test="limitstarttime != null" >
+        LIMITSTARTTIME = #{limitstarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="limitendtime != null" >
+        LIMITENDTIME = #{limitendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="spreadtypeid != null" >
+        SPREADTYPEID = #{spreadtypeid,jdbcType=DECIMAL},
+      </if>
+      <if test="registeredsource != null" >
+        REGISTEREDSOURCE = #{registeredsource,jdbcType=DECIMAL},
+      </if>
+      <if test="phoneSys != null" >
+        PHONE_SYS = #{phoneSys,jdbcType=DECIMAL},
+      </if>
+      <if test="phoneModel != null" >
+        PHONE_MODEL = #{phoneModel,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneVersion != null" >
+        PHONE_VERSION = #{phoneVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="clientVersion != null" >
+        CLIENT_VERSION = #{clientVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="channelId != null" >
+        CHANNEL_ID = #{channelId,jdbcType=BIGINT},
+      </if>
+      <if test="headimg != null" >
+        HEADIMG = #{headimg,jdbcType=VARCHAR},
+      </if>
+      <if test="devicetoken != null" >
+        DEVICETOKEN = #{devicetoken,jdbcType=VARCHAR},
+      </if>
+      <if test="lastloginphonetype != null" >
+        LASTLOGINPHONETYPE = #{lastloginphonetype,jdbcType=DECIMAL},
+      </if>
+      <if test="accsFlag != null" >
+        ACCS_FLAG = #{accsFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="unionkey != null" >
+        UNIONKEY = #{unionkey,jdbcType=VARCHAR},
+      </if>
+      <if test="errorChannelName != null" >
+        ERROR_CHANNEL_NAME = #{errorChannelName,jdbcType=VARCHAR},
+      </if>
+      <if test="iosIdfa != null" >
+        IOS_IDFA = #{iosIdfa,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginChannel != null" >
+        LAST_LOGIN_CHANNEL = #{lastLoginChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="ifalipay != null" >
+        IFALIPAY = #{ifalipay,jdbcType=DECIMAL},
+      </if>
+      <if test="spreadway != null" >
+        SPREADWAY = #{spreadway,jdbcType=DECIMAL},
+      </if>
+      <if test="gradeName != null" >
+        GRADE_NAME = #{gradeName,jdbcType=VARCHAR},
+      </if>
+      <if test="gradeId != null" >
+        GRADE_ID = #{gradeId,jdbcType=BIGINT},
+      </if>
+      <if test="cindex != null" >
+        CINDEX = #{cindex},
+      </if>
+      <if test="cindexUpddate != null" >
+        CINDEX_UPDDATE = #{cindexUpddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shield != null" >
+        SHIELD=#{shield,jdbcType=DECIMAL},
+      </if>
+      <if test="sysSource != null" >
+        SYS_SOURCE=#{sysSource,jdbcType=VARCHAR},
+      </if>
+      <if test="weiboNo != null" >
+        WEIBO_NO=#{weiboNo,jdbcType=VARCHAR},
+      </if>
+      <if test="weixinNo != null" >
+        WEIXIN_NO=#{weixinNo,jdbcType=VARCHAR},
+      </if>
+      <if test="crmIntegralSys != null" >
+        CRM_INTEGRAL_SYS=#{crmIntegralSys},
+      </if>
+      <if test="crmIntegralOpt != null" >
+        CRM_INTEGRAL_OPT=#{crmIntegralOpt},
+      </if>
+      <if test="crmIntegralStatus != null" >
+        CRM_INTEGRAL_STATUS=#{crmIntegralStatus},
+      </if>
+      <if test="crmIntegralConsume != null" >
+        CRM_INTEGRAL_CONSUME=#{crmIntegralConsume},
+      </if>
+      <if test="crmIntegralUsable != null" >
+        CRM_INTEGRAL_USABLE=#{crmIntegralUsable},
+      </if>
+      <if test="qqNum != null" >
+        QQNUM=#{qqNum},
+      </if>
+      <if test="constellation != null" >
+        CONSTELLATION=#{constellation},
+      </if>
+    </set>
+    where PWSYSID = #{pwsysId,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByPwsysid" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from t_customers
+    where PWSYSID = #{pwsysid,jdbcType=BIGINT}
+  </select>
+   
+   
+  <select id="findLastDayUpdateByGradeId" resultType="long"   >
+  	<![CDATA[
+  			select ifnull( min(id) , 0 )  as LASTMINID    from t_customers where GRADE_ID=#{gradeId}
+			and  GRAGE_UPDATE_LAST  >     date_sub(curdate(),interval 0 day)  
+ 	 ]]>
+  </select>
+  
+   
+  <select id="findCustomerIdByGradeId" resultType="long"   >
+  	<![CDATA[
+ 	 	select id from t_customers where GRADE_ID=#{gradeid} and id >#{maxid}  and  GRAGE_UPDATE_LAST  >  date_sub(curdate(),interval 0 day)   order by id
+ 	 ]]>
+  </select>
+  
+  <select id="findCustomersSizeByGradeId" resultType="long"   >
+  	<![CDATA[
+ 		 select count(1) from t_customers where GRADE_ID =  #{gradeid} and id >#{maxid}
+ 	]]>
+  </select>
+  
+   <select id="selectByPwId" resultType="long"  parameterType="java.lang.Long"  >
+  	<![CDATA[
+ 		 select id from t_customers where PWSYSID = #{pwSysid}
+ 	]]>
+  </select>
+  
+  
+  <select id="findComputingOrdersSection" resultType="java.util.HashMap"  parameterType="java.lang.Long"  >
+  	<![CDATA[
+ 		select min(o.ID) as MIN   ,  max(o.ID) as MAX  from t_orders_info o where o.ISCUMPUTING =0
+		and  CUSTOMERSID in
+ 	]]>
+		<foreach item="id" collection="customerIds" open="(" separator="," close=")">
+         #{id}
+       </foreach>
+  </select>
+  <select id="findComputingEwalletSection" resultType="java.util.HashMap"   parameterType="java.lang.Long"  >
+  	<![CDATA[
+ 		select min(e.ID) as MIN   ,  max(e.ID) as MAX  from t_ewallet e where e.ISCUMPUTING =0
+ 		and  CUSTOMERSID in
+ 	]]>
+ 	<foreach item="id" collection="customerIds" open="(" separator="," close=")">
+          #{id}
+    </foreach> 
+  </select>
+  <select id="findComputingPaymentTypesSection" resultType="java.util.HashMap"  parameterType="java.lang.Long"  >
+  	<![CDATA[
+ 		select min(p.ID) as MIN   ,  max(p.ID) as MAX  from t_payment_types  p where p.ISCUMPUTING =0
+ 		and  CUSTOMERSID in
+      	
+ 	]]>
+ 	<foreach item="id" collection="customerIds" open="(" separator="," close=")">
+          #{id}
+    </foreach> 
+  </select>
+  
+   <update id="updateEwalletSection"    parameterType="java.lang.Long"  >
+		  	<![CDATA[
+		 		update t_ewallet  set ISCUMPUTING = 1  where  id >=#{min} and  id <=#{max} and ISCUMPUTING=0
+		 		and  CUSTOMERSID in
+		      
+		 	]]>
+			<foreach item="id" collection="customerIds" open="(" separator="," close=")">
+		        #{id}
+		    </foreach>
+  </update>
+  
+   <update id="updateOrdersSection"    parameterType="java.lang.Long"  >
+		  	<![CDATA[
+		 		update t_orders_info  set ISCUMPUTING = 1  where  id >=#{min} and  id <=#{max} and ISCUMPUTING=0
+		 		and  CUSTOMERSID in
+		 	]]>
+		 	<foreach item="id" collection="customerIds" open="(" separator="," close=")">
+		          #{id}
+		    </foreach>
+  </update>
+  
+   <update id="updatePaymentTypesSection"  parameterType="java.lang.Long"  >
+		  	<![CDATA[
+		 		update t_payment_types  set ISCUMPUTING = 1  where  id >=#{min} and  id <=#{max} and ISCUMPUTING=0
+		 		and  CUSTOMERSID in
+		 	]]>
+		 	<foreach item="id" collection="customerIds" open="(" separator="," close=")">
+		          #{id}
+		    </foreach>
+  </update>
+  
+  
+  <select id="findPwidsByIds" resultType="long"  parameterType="java.util.List"  >
+  	select PWSYSID    from T_CUSTOMERS  
+  	WHERE ID IN  
+     <foreach item="id" collection="customerIds" open="(" separator="," close=")">
+         #{id}
+     </foreach>
+  </select>
+  
+  
+  <select id="findPaymentTypes" resultType="java.util.HashMap"  parameterType="java.util.List"  >
+	  
+	SELECT PAYTYPE.CUSTOMERSID ,  GROUP_CONCAT(DISTINCT PAYTYPE.TYPE) as  PAYTYPES
+								 FROM T_PAYMENT_TYPES PAYTYPE WHERE PAYTYPE.CUSTOMERSID IN
+								 
+	<foreach item="id" collection="customerIds" open="(" separator="," close=")">
+         #{id}
+     </foreach>
+	<![CDATA[
+	 AND PAYTYPE.TYPE IS NOT NULL 
+	 AND  ISCUMPUTING=0  AND   ID  <= #{max}
+	 GROUP BY  PAYTYPE.CUSTOMERSID  
+  	]]>
+     
+  </select>
+  
+  
+</mapper>

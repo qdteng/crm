@@ -1,0 +1,256 @@
+<!DOCTYPE html>  
+<html xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorator="layouts/index">  
+    <head>
+    	<meta charset="utf-8"></meta>
+        <title>数据字典-列表页</title>
+        <style type="text/css">
+        		
+				.tree-folder-open {
+				    background: url(/images/tree_icons.png) no-repeat -224px 0;
+				}
+
+        		.tree-folder, .tree-file, .tree-checkbox, .tree-indent {
+				    display: inline-block;
+				    width: 16px;
+				    height: 18px;
+				    vertical-align: top;
+				    overflow: hidden;
+				}
+				
+				.tree-expanded, .tree-collapsed, .tree-folder, .tree-file, .tree-checkbox, .tree-indent {
+				    display: inline-block;
+				    width: 16px;
+				    height: 18px;
+				    vertical-align: top;
+				    overflow: hidden;
+				}
+
+		        .tree-file {
+				    background: url(/images/tree_icons.png) no-repeat -240px 0;
+				}
+				
+				.tree-expanded {
+				    background: url(/images/tree_icons.png) no-repeat -18px 0px;
+				}
+				
+				.tree-expanded-empt {
+				    display: inline-block;
+				    width: 16px;
+				    height: 18px;
+				    vertical-align: top;
+				    overflow: hidden;
+				}
+				.tree-expanded, .tree-collapsed, .tree-folder, .tree-file, .tree-checkbox, .tree-indent {
+				    display: inline-block;
+				    width: 16px;
+				    height: 18px;
+				    vertical-align: top;
+				    overflow: hidden;
+				}
+				.tree-hit {
+				}
+
+        </style>
+    </head>  
+    <body>
+	    <div layout:fragment="content">
+	    	
+			<div class="container">
+			    <section class="col-lg-12 ui-content ui-shadow">
+			      
+					<!-- 列表页头（标题、操作按钮） -->
+					<h3>
+						数据字典管理
+					</h3>
+				    
+				    
+				    <!-- 列表主体 -->
+					<div class="search-form cl mt15 mb10" style="overflow-x:auto;">
+						<!-- 列表主体（查询区域） -->
+						<form name="myform" id="searchForm" action="/dictionarie/list" method="post">
+							<input  type="hidden"  id="pageNo" name="pageNo"  th:value="${page.pageNo}" value=""  />
+							<input  type="hidden" name="pageSize"  id="pageSize" th:value="${page.pageSize}" value=""  />
+							<div class=" bg-gray border-gray pb10 pl15">
+								<div class="cl">
+							    	<div class="form-group mr10 mt15">
+										<label for="">目录名称:</label>
+										<input type="text" autocomplete ="off" name="name" placeholder="请输入查询参数" th:value="${dic.name}" value="" />
+									</div>
+									<div class="form-group mr10 mt15">
+										<label for="">目录编号:</label>
+										<input type="text" autocomplete ="off" name="code" placeholder="请输入查询参数" th:value="${dic.code}"  value="" />
+									</div>
+								    <button class="fl yl-btn yl-btn-blue-shadow query mt15 queryBtn">查询</button>
+								</div>
+							</div>
+						</form>
+						<div th:if="${#lists.size(dateList) > 0}">
+							<div class="pt10">
+								<input type="button" style="margin-left:1%;"  class="yl-btn yl-btn-blue-shadow" id="add" value="添加字典" /> 
+								<input type="button" class="yl-btn yl-btn-blue-shadow yl-btn-disabled" id="delBatchBtn" value="批量删除" />
+							</div>
+							<!-- 列表主体（搜索结果） -->
+							<table  class="table table-bordered mt15">
+								<tr>
+								  <th width="20" style="text-align:left;"><input type="checkbox" id="checkAll" style=" width:20px;" /></th>
+								  <th style="text-align:center;">字典id</th>
+								  <th style="text-align:center;">字典名称</th>
+								  <th style="text-align:center;">字典编号</th>
+								  <th style="text-align:center;">字典排序</th>
+								  <th style="text-align:center;">字典描述</th>
+								  <th  style="text-align:center;">操作</th>
+								</tr>
+								<tr th:each="obj,indexStat:${dateList}">
+									<td><input name="ids" type="checkbox" th:attr="pid=${obj.PID}" th:value="${obj.ID}" value="${obj.ID}" style="width: 20px" /></td>
+									<td style="text-align:center; line-height: 20px;" > 
+									
+									<span  th:class="${obj.PID==0} ? 'tree-hit tree-expanded' :'tree-hit tree-expanded-empt' "  ></span> 
+									<span th:text="${obj.PID==0} ? '' :'&nbsp;&nbsp;'"  
+									th:class="${obj.PID==0} ? 'tree-icon tree-folder tree-folder-open' :'tree-icon tree-file' " 
+									class="tree-icon tree-folder tree-folder-open" > </span> 
+									<span th:text="${obj.ID}"></span>
+									
+									</td>
+									<td style="text-align:center;" th:text="${obj.NAME}">...</td>
+									<td style="text-align:center;" th:text="${obj.CODE}">...</td>
+									<td style="text-align:center;" th:text="${obj.ORDER_NUM}">...</td>
+									<td style="width:10px;text-align:center;overflow: hidden;
+									text-overflow:ellipsis;white-space: nowrap;" th:text="${obj.REMARK}">...</td>
+									<td style="text-align:center;" >
+										<a href="###" class="a-view mr10 updateBtn" th:attr="obj_id=${obj.ID}">修改</a>|&nbsp;
+										<a href="###" class="a-view mr10 deleteBtn" th:attr="obj_id=${obj.ID}">删除</a>
+										<!-- <a href="###" class="mr10 f-gray">删除</a> -->
+									</td>
+								</tr>
+							</table>
+						</div>
+						<!-- 分页 -->
+			 			<div th:if="${#lists.size(dateList) > 0}" th:include="layouts/page:: page" th:attr="pageFormId=searchForm,pageNo=${page.pageNo},pageSize=${page.pageSize},total=${page.total}">...</div>
+					</div>
+
+			    </section>
+			</div>
+	    	
+	    	
+	    </div> 
+	</body>
+	
+	<!-- 脚本区域（弹框、脚本） -->
+	<div layout:fragment="javascript">
+	    <script type="text/javascript">
+	    $(function (){
+	    	//批量删除选中、启用按钮
+	    	$("input[type='checkbox']").click(function (){
+	    		if ($(this).attr("id")=="checkAll"){//全选
+	    			if ($(this).prop("checked")){
+	    				$("input[type='checkbox']").prop("checked",true);	
+	    			}else{
+	    				$("input[type='checkbox']").prop("checked",false);
+	    			}
+	    		}
+	    		
+	    		if($("input[type='checkbox']:checked").length>0){
+	    				$("#delBatchBtn").removeClass("yl-btn-disabled");
+	    				
+	    		}else {
+	    			$("#delBatchBtn").addClass("yl-btn-disabled");
+	    		}
+	    		
+	    	});
+	    });
+	    //添加操作
+		    $('#add').click(function() {
+		    	
+		    	var $ckObj = $(" table .on").find("input[type='checkbox']") ,  pid = $ckObj.val();
+		    	
+		    	pid = pid==undefined?0:pid;
+		    	
+				if ($ckObj.attr("pid")!="0"){
+					pid = 0 ;
+		    	}
+		    	
+		    	 layer.open({
+		    		 title:"添加字典",
+		    		  type: 2, 
+		    		  btn: ['确定', '取消'],
+		    		  area:['310px','370px'],
+		    		  yes: function(index, layero){
+		    			  
+		    			  var body = layer.getChildFrame('body', index);
+                          var iframeWin = window[layero.find('iframe')[0]['name']];
+                          iframeWin.subForm(document);
+		    			    //按钮【按钮一】的回调
+	    			  },
+	    			  btn2: function(index, layero){
+		    			    //按钮【按钮一】的回调
+	    			  },
+		    		  content: '/dictionarie/showDetail?pid='+pid
+		    		}); 
+		    });
+	    
+	    
+		 //修改操作   
+		    $('.updateBtn').click(function() {
+		    	var  id = $(this).attr("obj_id");
+		    	 layer.open({
+		    		 title:"修改字典",
+		    		  type: 2, 
+		    		  btn: ['确定', '取消'],
+		    		  area:['310px','370px'],
+		    		  yes: function(index, layero){
+		    			  
+		    			  var body = layer.getChildFrame('body', index);
+                         var iframeWin = window[layero.find('iframe')[0]['name']];
+                         iframeWin.subForm(document);
+		    			    //按钮【按钮一】的回调
+	    			  },
+	    			  btn2: function(index, layero){
+		    			    //按钮【按钮一】的回调
+	    			  },
+		    		  content: '/dictionarie/showDetail?id='+id
+		    		}); 
+	        });
+		    
+		    //删除操作
+	        $('.deleteBtn').click(function() {
+	        	var $this = $(this) , id =  $this.attr("obj_id");
+	        	confirm(function(){
+	        		 $.getJSON("/dictionarie/delete",{ ids: id }, function(entry){
+	        			 	if(entry.code=="success"){
+	        					//layer.load(2);
+		        				$(document).find("#searchForm").submit();
+		        			}
+							layer.msg(entry.message,{time: 2000} ,function (){
+		        				
+		        			}); 
+							
+						});
+                });
+	        });
+		    //批量删除
+	        $('#delBatchBtn').click(function() {
+	        	
+	        	if ($(this).attr("class").indexOf("yl-btn-disabled")==-1){
+	        		var ids = new Array();
+	        		$("input[name='ids']:checked").each(function (){
+		        			ids.push($(this).val());
+	        		});
+	        		ids= ids.join(",");
+	        		confirm(function(){
+		        		 $.getJSON("/dictionarie/delete",{ ids:ids  }, function(entry){
+		        			 if(entry.code=="success"){
+		        					layer.load(2);
+			        				$(document).find("#searchForm").submit();
+			        			}
+								layer.msg(entry.message,{time: 2000} ,function (){
+			        			}); 
+							});
+	                });
+	        	}
+	        	 
+	        });
+	    </script>
+    </div>
+</html>

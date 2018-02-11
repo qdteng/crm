@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layouts/index">
+<head>
+<meta charset="utf-8"></meta>
+<title>会员体系-等级设置</title>
+</head>
+<body>
+	<div layout:fragment="content">
+
+
+
+		<div class="container">
+			<section class="col-lg-12 ui-content ui-shadow">
+
+				<!-- 列表页头（标题、操作按钮） -->
+				<h3>
+					等级设置 
+				</h3>
+
+
+				<!-- 列表主体 -->
+				<div class="cl mt15 mb10" style="overflow-x: auto;">
+
+					<!-- 列表主体（查询区域） -->
+					<form name="myform" id="searchForm" action="/customers/grade/list"
+						method="post">
+						<input type="hidden" id="pageNo" name="pageNo"
+							th:value="${page.pageNo}" value="" /> <input type="hidden"
+							name="pageSize" id="pageSize" th:value="${page.pageSize}"
+							value="" />
+					</form>
+					<div class="pt10">
+						<input type="button"  class="yl-btn yl-btn-blue-shadow"
+							id="add" value="新建会员等级" />
+					</div>
+
+
+					<div th:if="${#lists.size(dateList) > 0}">
+						<!-- 列表主体（搜索结果） -->
+						<table class="table table-bordered mt15">
+							<tr>
+								<th width="20" style="text-align: center;">会员等级</th>
+								<th style="text-align: center;">成长值范围</th>
+								<th style="text-align: center;">有效期</th>
+								<th style="text-align: center;">会员权益</th>
+								<th style="text-align: center;">状态</th>
+								<th width="200" style="text-align: center;">操作</th>
+							</tr>
+							<tr th:each="obj,indexStat:${dateList}">
+								<td style="text-align: center;" th:text="${obj.GNAME}">...</td>
+								<td style="text-align: center;"
+									th:text="${obj.IBEGIN}+'-'+${obj.IEND}"></td>
+								<td style="text-align: center;" th:text="${obj.GTYPESTR}">...</td>
+								<td style="text-align: center;" th:text="${obj.RIGHT_NAME}">...</td>
+								<td style="text-align: center;"
+									th:text="${obj.IS_ENABLE eq 1 ? '开' :'关' }">...</td>
+								<td style="text-align: center;"><a href="###"
+									class="a-view mr10 upen"
+									th:text="${obj.IS_ENABLE eq 0 ?'开':'关'}"
+									th:attr="obj_id=${obj.ID},obj_IS_ENABLE=${obj.IS_ENABLE}"></a>
+
+									<a href="###" class="a-view mr10 edit"
+									th:attr="obj_id=${obj.ID}">编辑</a> <a href="###" th:if="${#lists.size(dateList) > 1}"
+									class="a-view mr10 del" th:attr="obj_id=${obj.ID}">删除</a> <!-- <a href="###" class="mr10 f-gray">删除</a> -->
+								</td>
+							</tr>
+						</table>
+					</div>
+					<!-- 分页 -->
+					<div th:if="${#lists.size(dateList) > 0}"
+						th:include="layouts/page:: page"
+						th:attr="pageFormId=searchForm,pageNo=${page.pageNo},pageSize=${page.pageSize},total=${page.total}">...</div>
+				</div>
+			</section>
+		</div>
+
+	</div>
+</body>
+
+<!-- 脚本区域（弹框、脚本） -->
+<div layout:fragment="javascript">
+
+	<script type="text/javascript">
+		$(function() {
+			//打开新建会员等级页面
+			$('#add').click(
+					function() {
+
+						layer
+								.open({
+									title : "添加会员等级",
+									type : 2,
+									btn : [ '保存', '取消' ],
+									area : [ '560px', '480px' ],
+									yes : function(index, layero) {
+										var body = layer.getChildFrame('body',
+												index);
+										var iframeWin = window[layero
+												.find('iframe')[0]['name']];
+										iframeWin.subForm(document);
+										//按钮【按钮一】的回调
+									},
+									btn2 : function(index, layero) {
+										//按钮【按钮一】的回调
+									},
+									content : '/customers/grade/showDetail'
+								});
+						/////////////////////////
+						//$("#customerGradeForm").attr("action", "/customers/grade/save");
+						//$("#customerGradeForm")[0].reset();
+						//$("#customerGradeFormWin").minInBox({
+						//	"boxHeight": 510,
+						//    "boxWidth": 680,
+						//    "boxName": "新建会员等级",
+						//    "iSubmitHander": userSubmitHander,
+						//   "iCancelHander":function(){
+						//取消
+						//    },
+						//    "iCloseHander": function(){
+						//右上角
+						//    }
+						//});
+					});
+		});
+
+		//打开编辑会员等级页面
+		$('.edit').click(function() {
+			var id = $(this).attr("obj_id");
+			layer.open({
+				title : "编辑会员等级",
+				type : 2,
+				btn : [ '保存', '取消' ],
+				area : [ '510px', '480px' ],
+				yes : function(index, layero) {
+					var body = layer.getChildFrame('body', index);
+					var iframeWin = window[layero.find('iframe')[0]['name']];
+					iframeWin.subForm(document);
+					//按钮【按钮一】的回调
+				},
+				btn2 : function(index, layero) {
+					//按钮【按钮一】的回调
+				},
+				content : '/customers/grade/showDetail?id=' + id
+			});
+		});
+
+		//删除
+		$('.del').click(function() {
+			var id = $(this).attr("obj_id");
+			confirm(function() {
+				$.getJSON("/customers/grade/delCustomerGrade", {
+					id : id
+				}, function(entry) {
+					if (entry.code == "success") {
+						//layer.load(2);
+						$(document).find("#searchForm").submit();
+					}
+					layer.msg(entry.message, {
+						time : 2000
+					}, function() {
+					});
+
+				});
+			});
+		});
+		//状态开关
+		$('.upen').click(function() {
+			var id = $(this).attr("obj_id");
+			var enable = $(this).attr("obj_IS_ENABLE");
+			confirm(function() {
+				$.getJSON("/customers/grade/updateEnable", {
+					id : id,
+					enable : enable
+				}, function(entry) {
+					if (entry.code == "success") {
+						//layer.load(2);
+						$(document).find("#searchForm").submit();
+					}
+					layer.msg(entry.message, {
+						time : 2000
+					}, function() {
+					});
+
+				});
+			});
+		});
+
+		/* function userSubmitHander() {
+			//1.启用表单验证。
+			var validateWidget = $("#customerGradeForm").validate({ parentPromptWinId:"customerGradeForm" });
+			if (!validateWidget.check()) {//1.基础样式校验。
+				return false;
+			}
+			//2.
+			var formAction = $("#customerGradeForm").attr("action");
+			if (formAction == "/customers/grade/save") {
+				//成长值校验
+				var growValStart = $('#growValStart').val();
+				var growValEnd = $('#growValEnd').val();
+				if (growValStart >= growValEnd) {
+					validateWidget.addPrompt("growValEnd","成长值后一项应大于前一项输入值！");
+					return false;
+				}
+				//有效期校验
+				var visibleStatus = $("input[name='visibleStatus']:checked").val();
+				if(2 == visibleStatus){
+					var visibleTwo = $('#visibleTwo').val();
+					if(null == visibleTwo || '' == visibleTwo){
+						validateWidget.addPrompt("visibleTwo","不能为空！");
+						return false;
+					}
+				}
+				if(3 == visibleStatus){
+					var visibleThree = $('#visibleThree').val();
+					if(null == visibleThree || '' == visibleThree){
+						validateWidget.addPrompt("visibleThree","不能为空！");
+						return false;
+					}
+				}
+				//会员权益校验
+				var quanyi = $("input[name='QUANYI']:checked").length;
+				if(0 == quanyi){
+					validateWidget.addPrompt("quyi","请勾选会员权益！");
+					return false;
+				}
+			}
+			$("#customerGradeForm").submit();
+		} */
+	</script>
+</div>
+
+</html>

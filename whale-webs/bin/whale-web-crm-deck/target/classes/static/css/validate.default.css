@@ -1,0 +1,111 @@
+
+/*--- prompts/notifications ---*/
+.formError{z-index:5000}
+.formErrorContent{
+	width:100%;
+	/*background:#da4141;*/
+	background-color: rgba(35, 51, 66, 0.8);
+	color:#fff;
+	font-size:12px;
+	line-height:14px;
+	/*border:2px solid #ddd;*/
+	-webkit-box-shadow:0px 0px 2px #ccc;
+	-moz-box-shadow:0px 0px 2px #ccc;
+	box-shadow:0px 0px 2px #ccc;
+	-webkit-border-radius:2px;
+	-moz-border-radius:2px;
+	border-radius:2px;
+	padding:5px;
+}
+.formErrorArrow{
+	width:15px;
+	margin:-2px 0 0 13px;
+	z-index:5001
+}
+.formError .formErrorArrowBottom{
+	top:0;
+	margin:-6px
+}
+.formError .formErrorArrow div{
+	border-left:2px solid #ddd;
+	border-right:2px solid #ddd;
+	box-shadow:0px 2px 3px #444;
+	-moz-box-shadow:0px 2px 3px #444;
+	-webkit-box-shadow:0px 2px 3px #444;
+	font-size:0px;
+	height:1px;
+	background:#da4141;
+	margin:0 auto;
+	line-height:0px;
+	font-size:0px;
+	display:block
+}
+.formError .formErrorArrow .line10{width:15px;border:none} 
+.formError .formErrorArrow .line9{width:13px;border:none} 
+.formError .formErrorArrow .line8{width:11px} 
+.formError .formErrorArrow .line7{width:9px} 
+.formError .formErrorArrow .line6{width:7px} 
+.formError .formErrorArrow .line5{width:5px} 
+.formError .formErrorArrow .line4{width:3px} 
+.formError .formErrorArrow .line3{width:1px;border-left:2px solid #ddd;border-right:2px solid #ddd;border-bottom:0px solid #ddd} 
+.formError .formErrorArrow .line2{width:3px;border:none;background:#ddd}
+.formError .formErrorArrow .line1{width:1px;border:none;background:#ddd}
+
+/** 弹出层样式 */
+.msgbox_layer_wrap {
+    left: 0;
+    position: fixed;
+    text-align: center;
+    top: 46%;
+    width: 100%;
+    z-index: 65533;
+}
+
+.msgbox_layer, .msgbox_layer .gtl_ico_succ, .msgbox_layer .gtl_ico_fail, .msgbox_layer .gtl_ico_hits, .msgbox_layer .gtl_ico_clear, .msgbox_layer .gtl_end {
+    background-image: url(/images/gb_tip_layer.png);
+    background-repeat: no-repeat;
+    color: #606060;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: bold;
+    height: 54px;
+    line-height: 54px;
+}
+.msgbox_layer {
+    background-position: 0 -161px;
+    background-repeat: repeat-x;
+    margin: 0 auto;
+    padding: 0 18px 0 9px;
+    position: relative;
+}
+.msgbox_layer .gtl_ico_succ {
+    background-position: -6px 0;
+    left: -45px;
+    position: absolute;
+    top: 0;
+    width: 45px;
+}
+
+
+.msgbox_layer .gtl_ico_hits {
+    background-position: -6px -54px;
+    left: -45px;
+    position: absolute;
+    top: 0;
+    width: 45px;
+}
+.msgbox_layer .gtl_ico_fail {
+    background-position: -6px -108px;
+    left: -45px;
+    position: absolute;
+    top: 0;
+    width: 45px;
+}
+.msgbox_layer .gtl_end {
+    background-position: 0 0;
+    position: absolute;
+    right: -6px;
+    top: 0;
+    width: 6px;
+}  
+

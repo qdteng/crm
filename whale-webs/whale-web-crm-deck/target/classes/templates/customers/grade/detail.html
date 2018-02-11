@@ -1,0 +1,150 @@
+<!DOCTYPE html>  
+<html xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layouts/dialog" >  
+	
+	
+    <head>
+    	<meta charset="utf-8"></meta>
+        <title>详情</title>
+    </head>  
+    <body style="text-align:center;" >
+    
+    	 <!-- 添加/编辑会员等级窗口 -->
+		<div layout:fragment="content" >
+    		<div style="margin-top: 20px; text-align:left;">
+			     <form id="customerGradeForm" action="/customers/grade/saveOrUpdate" method="post" class="form-horizontal">
+			     	<input id="customerGradeForm_id" name="id" type="hidden" th:value="${detail}? ${detail.id} : ''" value="" />
+			     	
+				    <style>
+				    	.addhy{margin-left:20px;margin-right:20px;}
+				    	.addhy p label{width:120px;display:block;float:left;height:32px;}
+				    	.addhy p span{float:left;}
+				    </style>
+			     	<div class="cl mb5 addhy">
+			     		<p>
+			     			<label><i class="f-red">* </i>等级名称：</label>
+			     			<span><input class="w200 c_required c_maxlength_32" id="gname" name="gname" type="text" th:value="${detail}? ${detail.gname} : ''" placeholder="请输入" /></span>
+			     		</p>
+			     	</div>
+			     	<div class="cl mb5 addhy">
+			     		<p>
+			     			<label><i id="customerGradeForm_pwd_fred" class="f-red">* </i>成长值范围：</label>
+			     			<span><input class="w100 c_required c_positive" id="ibegin" name="ibegin" type="text" th:value="${detail}? ${detail.ibegin} : ''" placeholder="请输入" />-
+			     			<input class="w100 c_required c_positive" id="iend" name="iend" type="text" th:value="${detail}? ${detail.iend} : ''" placeholder="请输入" /></span>
+			     		</p>
+			     	</div>
+			     	<div class="cl mb5 addhy">
+			     		<p class="cl mb5">
+			     			<label><i class="f-red">* </i>有效期：</label>
+			     			<span><input type="radio" name="gtype" value="1" th:checked="${#null==detail ?true:1==detail.gtype }" />&nbsp;永久有效&nbsp;&nbsp;</span>
+			     		</p>
+			     		<p class="cl mb5">
+			     			<label></label>
+			     			<span><input type="radio" name="gtype" value="2" th:checked="${#null==detail ?false:2==detail.gtype }" />&nbsp;每<input class="c_positive wh60" id="visibleTwo" name="visibleTwo" type="text" th:value="${detail}? (${detail.gtype==2}? ${detail.gnum} : '') : ''" placeholder="请输入" />个月全部重置&nbsp;&nbsp;</span>
+			     		</p>
+			     		<p class="cl mt5">
+			     			<label></label>
+			     			<span><input type="radio" name="gtype" value="3" th:checked="${#null==detail ?false:3==detail.gtype }" />升降<input class="c_positive  wh60" id="visibleThree" name="visibleThree" type="text" th:value="${detail}? (${detail.gtype==3}? ${detail.gnum} : '') : ''" placeholder="请输入" />天级后</span>
+			     		</p>
+			     	</div>
+			     	<div class="cl mb5 addhy">
+			     		<p>
+			     			<label id="quyi" name="quyi" for=""><i class="f-red">* </i>会员权益：</label>
+			     			<span style="width:340px;">
+							<span  th:each="obj,indexStat:${T(cn.com.ylpw.web.crm.util.Contact).getAllDictionarie().get('QUANYI')}"   >
+								<input class="wh20 radio" type="checkbox" th:value="${obj.value.id}"  name="QUANYI" 
+								th:id="${obj.value.id+'QUANYI'}" id="QUANYI" value="1" 
+								th:attr="a=${searchParam['QUANYI']}"
+								 th:checked="${#null==searchParam['QUANYI'] ?false:#lists.contains(searchParam['QUANYI'], obj.value.code ) }" />
+								<i class="mr10" th:for="${obj.value.id+'QUANYI'}" th:text="${obj.value.name}"></i>
+							</span>
+							</span>
+			     		</p>
+			     	</div>
+			     	<div class="cl mb5 addhy">
+			     		<p>
+			     			<label><i class="f-red">* </i>状态：</label>
+			     			<span>
+			     				<input type="radio" name="isEnable" value="1" th:checked="${#null==detail ?true:1==detail.isEnable }" />&nbsp;开&nbsp;&nbsp;
+			     				<input type="radio" name="isEnable" value="0" th:checked="${#null==detail ?false:0==detail.isEnable }" />&nbsp;关
+			     			</span>	
+			     		</p>
+			     	</div>
+		    	</form>
+			</div>
+		</div>
+		  
+		    <!-- 脚本区域（弹框、脚本） -->
+			<div layout:fragment="javascript">
+			    <script type="text/javascript">
+			  	//<![CDATA[
+			    	//重复提交
+			   		var repeat =  true ;
+			    	function subForm(parentWin){
+			    		if (!repeat){
+			    			return ;
+			    		}
+			    		$frm = $("#customerGradeForm");
+					    var validateWidget = $frm.validate();
+			    		//1.启用表单验证。
+			    		if (!validateWidget.check()) {//1.基础样式校验。
+			    			repeat=true; 
+			    			return false;
+			    		}
+			    		
+			    		repeat = false;
+			    		//成长值校验
+						var ibegin = parseInt($('#ibegin').val());
+						var iend = parseInt($('#iend').val());
+						if (ibegin >= iend) {
+							validateWidget.addPrompt("iend","成长值后一项应大于前一项输入值！");
+							repeat=true; 
+							return false;
+						}
+						//有效期校验
+						var gtype = $("input[name='gtype']:checked").val();
+						if(2 == gtype){
+							var visibleTwo = $('#visibleTwo').val();
+							if(null == visibleTwo || '' == visibleTwo){
+								validateWidget.addPrompt("visibleTwo","不能为空！");
+								repeat=true; 
+								return false;
+							}
+						}
+						if(3 == gtype){
+							var visibleThree = $('#visibleThree').val();
+							if(null == visibleThree || '' == visibleThree){
+								validateWidget.addPrompt("visibleThree","不能为空！");
+								repeat=true; 
+								return false;
+							}
+						}
+						//会员权益校验
+						var quanyi = $("input[name='QUANYI']:checked").length;
+						if(0 == quanyi){
+							validateWidget.addPrompt("quyi","请勾选会员权益！");
+							repeat=true; 
+							return false;
+						}
+			    		//提交表单
+		        		$frm.ajaxSubmit({success: function(entry, statusText, xhr, $form){
+		        			
+		        			if(entry.code=="success"){
+		        				$(parentWin).find("#searchForm").submit();
+		        			}
+	        				repeat=true; 
+	        				
+		        			layer.msg(entry.message,{time: 2000} ,function (){
+		        			}); 
+		        			 
+						}});
+			    	}
+			    //]]>
+			    </script>
+		    </div>
+		    
+	</body>
+	
+	
+</html>
